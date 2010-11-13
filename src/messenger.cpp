@@ -1,7 +1,8 @@
 #include "messenger.h"
+#include "version.h"
 
 Messenger::Messenger(QObject *parent): QObject(parent) {
-    settings = new QSettings("SmartCommunity", "ACId", this);
+    settings = new QSettings(APP_COMPANY, APP_NAME, this);
     client = new QXmppClient(this);
     window = new MainWindow();
     login = new LoginForm();
