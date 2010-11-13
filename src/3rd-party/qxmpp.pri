@@ -1,3 +1,5 @@
+QT      += network xml
+
 INCLUDEPATH += \
            $$PWD/qxmpp/src
 
@@ -41,10 +43,8 @@ HEADERS += $$PWD/qxmpp/src/QXmppUtils.h \
            $$PWD/qxmpp/src/QXmppRosterIq.h \
            $$PWD/qxmpp/src/QXmppRosterManager.h \
            $$PWD/qxmpp/src/QXmppSaslAuth.h \
-           $$PWD/qxmpp/src/QXmppServer.h \
-           $$PWD/qxmpp/src/QXmppServerExtension.h \
-           $$PWD/qxmpp/src/QXmppServerPlugin.h \
            $$PWD/qxmpp/src/QXmppSrvInfo.h \
+		   $$PWD/qxmpp/src/QXmppSrvInfo_p.h \
            $$PWD/qxmpp/src/QXmppSessionIq.h \
            $$PWD/qxmpp/src/QXmppSocks.h \
            $$PWD/qxmpp/src/QXmppStanza.h \
@@ -101,7 +101,7 @@ SOURCES += $$PWD/qxmpp/src/QXmppUtils.cpp \
            $$PWD/qxmpp/src/QXmppRosterIq.cpp \
            $$PWD/qxmpp/src/QXmppRosterManager.cpp \
            $$PWD/qxmpp/src/QXmppSaslAuth.cpp \
-           $$PWD/qxmpp/src/QXmppSrvInfo.cpp \
+		   $$PWD/qxmpp/src/QXmppSrvInfo.cpp \
            $$PWD/qxmpp/src/QXmppSessionIq.cpp \
            $$PWD/qxmpp/src/QXmppSocks.cpp \
            $$PWD/qxmpp/src/QXmppStanza.cpp \
