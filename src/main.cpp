@@ -1,6 +1,6 @@
 #include <QtGui>
 
-#include "mainwindow.h"
+#include "messenger.h"
 #include "../version.h"
 
 int main(int argc, char *argv[])
@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
         app.setOrganizationName(APP_COMPANY);
         app.setOrganizationDomain(APP_SITE);
 
-    MainWindow w;
-    w.show();
+    Messenger m;
+    m.launch();
 
     return app.exec();
 }
