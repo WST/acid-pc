@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginForm</class>
+ <widget class="QWidget" name="LoginForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>240</width>
+    <height>320</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>LoginForm</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="Logo_label">
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../res/app.qrc">:/login_form/small_logo.png</pixmap>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="UserName_label">
+       <property name="text">
+        <string>Username:</string>
+       </property>
+       <property name="buddy">
+        <cstring>UserName_lineEdit</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="UserName_lineEdit"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="Server_label">
+       <property name="text">
+        <string>Server:</string>
+       </property>
+       <property name="buddy">
+        <cstring>Server_comboBox</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="Server_comboBox">
+       <property name="contextMenuPolicy">
+        <enum>Qt::NoContextMenu</enum>
+       </property>
+       <item>
+        <property name="text">
+         <string notr="true">jsmart.web.id</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string notr="true">jabberid.org</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string notr="true">jabber.web.id</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="Password_label">
+       <property name="text">
+        <string>Password:</string>
+       </property>
+       <property name="buddy">
+        <cstring>Password_lineEdit</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="Password_lineEdit">
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QCheckBox" name="SavePassword_checkBox">
+       <property name="text">
+        <string>Save password?</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QCheckBox" name="LogInAutomatically_checkBox">
+       <property name="text">
+        <string>Log in automatically?</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QPushButton" name="SignIn_pushButton">
+     <property name="text">
+      <string>Sign in</string>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>UserName_lineEdit</tabstop>
+  <tabstop>Server_comboBox</tabstop>
+  <tabstop>Password_lineEdit</tabstop>
+  <tabstop>SavePassword_checkBox</tabstop>
+  <tabstop>LogInAutomatically_checkBox</tabstop>
+  <tabstop>SignIn_pushButton</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../res/app.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>SavePassword_checkBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>LogInAutomatically_checkBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>109</x>
+     <y>232</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>128</x>
+     <y>253</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
