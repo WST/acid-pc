@@ -4,14 +4,14 @@ Messenger::Messenger(QObject *parent): QObject(parent) {
     settings = new QSettings("SmartCommunity", "ACId", this);
     client = new QXmppClient(this);
     window = new MainWindow();
-    login = new LoginForm(window);
+    login = new LoginForm();
 
     createConnections();
 }
 
 Messenger::~Messenger() {
-    delete window;
     delete login;
+    delete window;
     delete client;
     delete settings;
 }
