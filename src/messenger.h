@@ -19,11 +19,15 @@ class Messenger: public QObject {
 		QSettings *settings; // запоминалка настроек
 		MainWindow *window; // окошко с ростером
 		LoginForm *login; // окошко ввода информации об учётной записи
+		void createConnections();
 
 	public:
 		Messenger(QObject *parent = 0);
 		~Messenger();
 		void launch();
+
+	private slots:
+		void activate();
 };
 
 #endif // MESSENGER_H

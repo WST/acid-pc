@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::LoginForm *ui;
+
+signals:
+    void finished();
 };
 
 #endif // LOGINFORM_H

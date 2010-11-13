@@ -3,15 +3,30 @@
 Messenger::Messenger(QObject *parent): QObject(parent) {
     settings = new QSettings("SmartCommunity", "ACId", this);
     client = new QXmppClient(this);
-    login = new LoginForm();
     window = new MainWindow();
+    login = new LoginForm(window);
+
+    createConnections();
 }
 
 Messenger::~Messenger() {
+    delete window;
+    delete login;
     delete client;
     delete settings;
 }
 
+void Messenger::createConnections() {
+    // здесь соединять сигналы и слоты…
+    connect(login, SIGNAL(finished()), this, SLOT(activate()));
+}
+
 void Messenger::launch() {
     login->show();
+}
+
+void Messenger::activate() {
+    // получен сигнал об успешном вводе информации об учётной записи, можно пытаться подключить клиента…
+    // если подключение успешно — скрыть окошко входа и отобразить главное окошко.
+
 }
