@@ -14,17 +14,17 @@ UI_DIR      = build/ui
 
 SOURCES    += src/main.cpp \
               src/mainwindow.cpp \
-              src/messanger.cpp \
+              src/messenger.cpp \
               src/loginform.cpp
 HEADERS    += version.h \
               src/mainwindow.h \
-              src/messanger.h \
+              src/messenger.h \
               src/loginform.h
 FORMS      += ui/mainwindow.ui \
               ui/loginform.ui
 RESOURCES  += res/app.qrc
-	
+
+include(src/3rd-party/qxmpp.pri)
+
 win32:RC_FILE = \
               res/win32/app.rc
-
-
