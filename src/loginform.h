@@ -14,6 +14,11 @@ class LoginForm: public QWidget
 public:
     explicit LoginForm(QWidget *parent = 0);
     ~LoginForm();
+    const QString username();
+    const QString password();
+    const QString domain();
+    bool autoLogin();
+    bool savePassword();
 
 private:
     Ui::LoginForm *ui;
