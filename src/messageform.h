@@ -20,6 +20,10 @@ public:
 private:
     Ui::MessageForm *ui;
 
+public slots:
+    void enableSendButton();
+    void disableSendButton();
+
 private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_clicked();

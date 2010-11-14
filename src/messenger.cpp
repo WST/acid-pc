@@ -132,6 +132,8 @@ void Messenger::createNewMessage() {
     MessageForm *message = new MessageForm(window);
     // TODO: передавать сообщение через слот…
     connect(message, SIGNAL(readyToSend(MessageForm *)), this, SLOT(sendMessage(MessageForm *)));
+    connect(client, SIGNAL(disconnected()), message, SLOT(disableSendButton()));
+    connect(client, SIGNAL(connected()), message, SLOT(enableSendButton()));
     message->show();
 }
 

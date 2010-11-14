@@ -25,3 +25,11 @@ const QString MessageForm::jid() {
 const QString MessageForm::body() {
     return ui->body->toPlainText();
 }
+
+void MessageForm::enableSendButton() {
+    ui->pushButton->setEnabled(true);
+}
+
+void MessageForm::disableSendButton() {
+    ui->pushButton->setEnabled(false);
+}
