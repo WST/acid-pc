@@ -96,14 +96,12 @@ void Messenger::handleSuccessfulConnection() {
     login->hide();
     window->show();
     tray->setOnline();
-    tray->contextMenu()->setEnabled(true);
 }
 
 void Messenger::handleDisconnection() {
     // мы отключились от сервера. Успешно или в результате ошибки — об этом говорит то, был и перед этим error().
     window->hide();
     tray->setOffline();
-    tray->contextMenu()->setEnabled(false);
     login->setEnabled(true);
     login->show();
 }
@@ -132,7 +130,10 @@ void Messenger::iconClicked(QSystemTrayIcon::ActivationReason reason) {
 
 void Messenger::createNewMessage() {
     MessageForm *message = new MessageForm(window);
-    // TODO: передавать сообщение через слот…
+    if(!client->isConnected()) {
+	// если клиент не подключён, выключить кнопку отправки сообщения…
+	message->disableSendButton();
+    }
     connect(message, SIGNAL(readyToSend(MessageForm *)), this, SLOT(sendMessage(MessageForm *)));
     connect(client, SIGNAL(disconnected()), message, SLOT(disableSendButton()));
     connect(client, SIGNAL(connected()), message, SLOT(enableSendButton()));
