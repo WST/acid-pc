@@ -16,6 +16,7 @@
 #include "loginform.h"
 #include "trayicon.h"
 #include "messageform.h"
+#include "chatwindow.h"
 
 class Messenger: public QObject {
 	Q_OBJECT
@@ -26,6 +27,7 @@ class Messenger: public QObject {
 		MainWindow *window; // окошко с ростером
 		LoginForm *login; // окошко ввода информации об учётной записи
 		TrayIcon *tray; // значок приложения в трее
+		ChatWindow *chat; // окошко чатов
 		void createConnections();
 		void createMenus();
 

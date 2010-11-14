@@ -8,6 +8,7 @@ Messenger::Messenger(QObject *parent): QObject(parent) {
     client = new QXmppClient(this);
     window = new MainWindow(APP_NAME);
     login = new LoginForm(APP_NAME);
+    chat = new ChatWindow(window);
     tray = new TrayIcon();
     tray->show();
 
@@ -17,6 +18,7 @@ Messenger::Messenger(QObject *parent): QObject(parent) {
 
 Messenger::~Messenger() {
     delete tray;
+    delete chat;
     delete login;
     delete window;
     delete client;
@@ -159,4 +161,9 @@ void Messenger::gotIQ(QXmppIq iq) {
 void Messenger::gotMessage(QXmppMessage message) {
     // Входящее сообщение. Его по идее нужно отобразить особым значком возле элемента ростера и сохранить или,
     // если открыт чат, вхуячить туда…
+    // пока что просто отобразим его.
+    if(!chat->adaTabForJid(message.from())) {
+	chat->openTab(message.from());
+    }
+    chat->displayMessage(message);
 }

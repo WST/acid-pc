@@ -20,16 +20,24 @@ SOURCES    += src/main.cpp \
               src/messenger.cpp \
               src/loginform.cpp \
     src/trayicon.cpp \
-    src/messageform.cpp
+    src/messageform.cpp \
+    src/chatwidget.cpp \
+    src/chatwindow.cpp \
+    src/tabwidget.cpp
 HEADERS    += version.h \
               src/mainwindow.h \
               src/messenger.h \
               src/loginform.h \
     src/trayicon.h \
-    src/messageform.h
+    src/messageform.h \
+    src/chatwidget.h \
+    src/chatwindow.h \
+    src/tabwidget.h
 FORMS      += \
               ui/loginform.ui \
-    ui/messageform.ui
+    ui/messageform.ui \
+    ui/chatwidget.ui \
+    ui/chatwindow.ui
 RESOURCES  += res/app.qrc
 
 include(src/3rd-party/qxmpp.pri)
