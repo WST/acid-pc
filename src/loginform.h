@@ -12,7 +12,7 @@ class LoginForm: public QWidget
     Q_OBJECT
 
 public:
-    explicit LoginForm(QWidget *parent = 0);
+    explicit LoginForm(QString title, QWidget *parent = 0);
     ~LoginForm();
     const QString username();
     const QString password();
@@ -22,9 +22,16 @@ public:
 
 private:
     Ui::LoginForm *ui;
+    bool username_valid;
+    bool password_valid;
 
 signals:
     void finished();
+
+private slots:
+    void validateUsername(QString username);
+    void validatePassword(QString password);
+    void refreshButton();
 };
 
 #endif // LOGINFORM_H

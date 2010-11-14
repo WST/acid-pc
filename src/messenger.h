@@ -11,14 +11,18 @@
 // ACId
 #include "mainwindow.h"
 #include "loginform.h"
+#include "trayicon.h"
+#include "messageform.h"
 
 class Messenger: public QObject {
 	Q_OBJECT
 	private:
 		QXmppClient *client; // клиент
+		QXmppConfiguration *client_settings; // настройки клиента
 		QSettings *settings; // запоминалка настроек
 		MainWindow *window; // окошко с ростером
 		LoginForm *login; // окошко ввода информации об учётной записи
+		TrayIcon *tray; // значок приложения в трее
 		void createConnections();
 
 	public:
@@ -28,6 +32,13 @@ class Messenger: public QObject {
 
 	private slots:
 		void activate();
+		void handleSuccessfulConnection();
+		void handleConnectionError(QXmppClient::Error error);
+		void handleDisconnection();
+		void disconnect();
+		void iconClicked(QSystemTrayIcon::ActivationReason reason);
+		void createNewMessage();
+		void sendMessage(MessageForm *);
 };
 
 #endif // MESSENGER_H

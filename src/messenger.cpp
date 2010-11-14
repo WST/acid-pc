@@ -3,23 +3,38 @@
 
 Messenger::Messenger(QObject *parent): QObject(parent) {
     settings = new QSettings(APP_COMPANY, APP_NAME, this);
+    client_settings = new QXmppConfiguration();
     client = new QXmppClient(this);
-    window = new MainWindow();
-    login = new LoginForm();
+    window = new MainWindow(APP_NAME);
+    login = new LoginForm(APP_NAME);
+    tray = new TrayIcon();
+    tray->show();
 
     createConnections();
 }
 
 Messenger::~Messenger() {
+    delete tray;
     delete login;
     delete window;
     delete client;
+    delete client_settings;
     delete settings;
 }
 
 void Messenger::createConnections() {
     // здесь соединять сигналы и слоты…
     connect(login, SIGNAL(finished()), this, SLOT(activate()));
+    connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
+
+    // сигналы клиента
+    connect(client, SIGNAL(connected()), this, SLOT(handleSuccessfulConnection()));
+    connect(client, SIGNAL(disconnected()), this, SLOT(handleDisconnection()));
+    connect(client, SIGNAL(error(QXmppClient::Error)), this, SLOT(handleConnectionError(QXmppClient::Error)));
+
+    // сигналы главного окошка, их в силу разделения окошка и кода будет много…
+    connect(window, SIGNAL(wantOffline()), this, SLOT(disconnect()));
+    connect(window->newMessageAction(), SIGNAL(triggered()), this, SLOT(createNewMessage()));
 }
 
 void Messenger::launch() {
@@ -31,5 +46,62 @@ void Messenger::activate() {
     // получен сигнал об успешном вводе информации об учётной записи, можно пытаться подключить клиента…
     // если подключение успешно — скрыть окошко входа и отобразить главное окошко.
     login->setEnabled(false);
-    client->connectToServer(login->domain(), login->username(), login->password(), login->domain());
+
+    client_settings->setDomain(login->domain());
+    client_settings->setUser(login->username());
+    client_settings->setPassword(login->password());
+    client_settings->setResource(APP_NAME);
+    client_settings->setIgnoreSslErrors(true);
+    client_settings->setKeepAliveInterval(60);
+    client_settings->setKeepAliveTimeout(30);
+    client->connectToServer(*client_settings);
+}
+
+void Messenger::handleSuccessfulConnection() {
+    // клиент сообщает нам об успешном подключении
+    login->hide();
+    window->show();
+    tray->setOnline();
+}
+
+void Messenger::handleDisconnection() {
+    // мы отключились от сервера. Успешно или в результате ошибки — об этом говорит то, был и перед этим error().
+    window->hide();
+    tray->setOffline();
+    login->setEnabled(true);
+    login->show();
+}
+
+void Messenger::handleConnectionError(QXmppClient::Error error) {
+    // получена ошибка. После этого сигнала будет тутже испущен disconnected().
+    // тут можно передать окошку входа сообщение об ошибке для отображения в нём
+    // но можно сделать это и в трее…
+    if(client->isConnected()) {
+	// перед ошибкой клиент был онлайн
+    } else {
+	tray->debugMessage("Failed to connect to the server. Ensure that you’ve entered valid username/password.");
+    }
+}
+
+void Messenger::disconnect() {
+    // Могли бы и сделать этот метод слотом в клиенте… :can't see:
+    client->disconnectFromServer();
+}
+
+void Messenger::iconClicked(QSystemTrayIcon::ActivationReason reason) {
+    if(reason == QSystemTrayIcon::Trigger && client->isConnected()) {
+	window->setVisible(!window->isVisible());
+    }
+}
+
+void Messenger::createNewMessage() {
+    MessageForm *message = new MessageForm(window);
+    // TODO: передавать сообщение через слот…
+    connect(message, SIGNAL(readyToSend(MessageForm *)), this, SLOT(sendMessage(MessageForm *)));
+    message->show();
+}
+
+void Messenger::sendMessage(MessageForm *message) {
+    client->sendMessage(message->jid(), message->body());
+    delete message;
 }

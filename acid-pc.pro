@@ -15,13 +15,18 @@ UI_DIR      = build/ui
 SOURCES    += src/main.cpp \
               src/mainwindow.cpp \
               src/messenger.cpp \
-              src/loginform.cpp
+              src/loginform.cpp \
+    src/trayicon.cpp \
+    src/messageform.cpp
 HEADERS    += version.h \
               src/mainwindow.h \
               src/messenger.h \
-              src/loginform.h
+              src/loginform.h \
+    src/trayicon.h \
+    src/messageform.h
 FORMS      += ui/mainwindow.ui \
-              ui/loginform.ui
+              ui/loginform.ui \
+    ui/messageform.ui
 RESOURCES  += res/app.qrc
 
 include(src/3rd-party/qxmpp.pri)
