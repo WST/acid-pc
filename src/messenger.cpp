@@ -1,6 +1,6 @@
 // ACId
 #include "messenger.h"
-#include "version.h"
+#include <version.h>
 
 Messenger::Messenger(QObject *parent): QObject(parent) {
     settings = new QSettings(APP_COMPANY, APP_NAME, this);

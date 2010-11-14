@@ -12,6 +12,9 @@ OBJECTS_DIR = build/obj
 RCC_DIR     = build/rcc
 UI_DIR      = build/ui
 
+INCLUDEPATH += \
+              $$PWD
+
 SOURCES    += src/main.cpp \
               src/mainwindow.cpp \
               src/messenger.cpp \
