@@ -1,3 +1,4 @@
+// ACId
 #include "messenger.h"
 #include "version.h"
 
@@ -32,6 +33,9 @@ void Messenger::createConnections() {
     connect(client, SIGNAL(connected()), this, SLOT(handleSuccessfulConnection()));
     connect(client, SIGNAL(disconnected()), this, SLOT(handleDisconnection()));
     connect(client, SIGNAL(error(QXmppClient::Error)), this, SLOT(handleConnectionError(QXmppClient::Error)));
+    connect(& client->callManager(), SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
+    connect(client, SIGNAL(iqReceived(QXmppIq)), this, SLOT(gotIQ(QXmppIq)));
+    connect(client, SIGNAL(messageReceived(QXmppMessage)), this, SLOT(gotMessage(QXmppMessage)));
 }
 
 void Messenger::createMenus() {
@@ -56,6 +60,12 @@ void Messenger::createMenus() {
     connect(action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
     connect(action_status_dc, SIGNAL(triggered()), this, SLOT(disconnect()));
+
+    QMenu *traymenu = new QMenu();
+    traymenu->insertAction(0, action_new_message);
+    traymenu->insertAction(0, action_quit);
+    traymenu->insertSeparator(action_quit);
+    tray->setContextMenu(traymenu);
 }
 
 void Messenger::launch() {
@@ -75,7 +85,10 @@ void Messenger::activate() {
     client_settings->setIgnoreSslErrors(true);
     client_settings->setKeepAliveInterval(60);
     client_settings->setKeepAliveTimeout(30);
+    client_settings->setAutoReconnectionEnabled(false);
+
     client->connectToServer(*client_settings);
+    client->transferManager().setProxy(PROXY65_JID);
 }
 
 void Messenger::handleSuccessfulConnection() {
@@ -125,4 +138,20 @@ void Messenger::createNewMessage() {
 void Messenger::sendMessage(MessageForm *message) {
     client->sendMessage(message->jid(), message->body());
     delete message;
+}
+
+void Messenger::gotVoiceCall(QXmppCall *call) {
+    // входящий голосовой вызов.
+    // знаю, что начинать надо с текстовой функциональности, но голосовая просто гораздо проще.
+    // пока примем вызов как есть, потом надо сделать подтверждение… (TODO)
+    call->accept();
+}
+
+void Messenger::gotIQ(QXmppIq iq) {
+    // Входящая станза IQ (возможно, запрос версии или last activity).
+}
+
+void Messenger::gotMessage(QXmppMessage message) {
+    // Входящее сообщение. Его по идее нужно отобразить особым значком возле элемента ростера и сохранить или,
+    // если открыт чат, вхуячить туда…
 }

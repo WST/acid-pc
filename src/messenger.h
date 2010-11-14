@@ -7,6 +7,9 @@
 
 // qxmpp
 #include <QXmppClient.h>
+#include <QXmppTransferManager.h>
+#include <QXmppCallManager.h>
+#include <QXmppMessage.h>
 
 // ACId
 #include "mainwindow.h"
@@ -39,7 +42,10 @@ class Messenger: public QObject {
 		void disconnect();
 		void iconClicked(QSystemTrayIcon::ActivationReason reason);
 		void createNewMessage();
-		void sendMessage(MessageForm *);
+		void sendMessage(MessageForm *message);
+		void gotVoiceCall(QXmppCall *call);
+		void gotIQ(QXmppIq message);
+		void gotMessage(QXmppMessage message);
 };
 
 #endif // MESSENGER_H

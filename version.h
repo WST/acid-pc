@@ -8,4 +8,6 @@
 #define APP_VERSION "0.1.0.0"
 #define APP_VERSION_WIN32 0,1,0,0
 
+#define PROXY65_JID "proxy.jsmart.web.id"
+
 #endif // VERSION_H
