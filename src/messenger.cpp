@@ -96,12 +96,14 @@ void Messenger::handleSuccessfulConnection() {
     login->hide();
     window->show();
     tray->setOnline();
+    tray->contextMenu()->setEnabled(true);
 }
 
 void Messenger::handleDisconnection() {
     // мы отключились от сервера. Успешно или в результате ошибки — об этом говорит то, был и перед этим error().
     window->hide();
     tray->setOffline();
+    tray->contextMenu()->setEnabled(false);
     login->setEnabled(true);
     login->show();
 }

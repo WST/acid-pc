@@ -5,8 +5,7 @@ MessageForm::MessageForm(QWidget *parent): QDialog(parent), ui(new Ui::MessageFo
     ui->setupUi(this);
 }
 
-MessageForm::~MessageForm()
-{
+MessageForm::~MessageForm() {
     delete ui;
 }
 
