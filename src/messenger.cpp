@@ -11,6 +11,7 @@ Messenger::Messenger(QObject *parent): QObject(parent) {
     tray->show();
 
     createConnections();
+    createMenus();
 }
 
 Messenger::~Messenger() {
@@ -31,10 +32,30 @@ void Messenger::createConnections() {
     connect(client, SIGNAL(connected()), this, SLOT(handleSuccessfulConnection()));
     connect(client, SIGNAL(disconnected()), this, SLOT(handleDisconnection()));
     connect(client, SIGNAL(error(QXmppClient::Error)), this, SLOT(handleConnectionError(QXmppClient::Error)));
+}
 
-    // сигналы главного окошка, их в силу разделения окошка и кода будет много…
-    connect(window, SIGNAL(wantOffline()), this, SLOT(disconnect()));
-    connect(window->newMessageAction(), SIGNAL(triggered()), this, SLOT(createNewMessage()));
+void Messenger::createMenus() {
+    QMenu *im_menu = window->menuBar()->addMenu("IM");
+    QMenu *status_menu = window->menuBar()->addMenu("Status");
+    QMenu *help_menu = window->menuBar()->addMenu("Help");
+
+    QAction *action_new_message = im_menu->addAction("New message...");
+    QAction *action_quit = im_menu->addAction("Quit");
+    QAction *action_about_app = help_menu->addAction("About " APP_NAME "...");
+    QAction *action_about_qt = help_menu->addAction("About Qt...");
+
+    QAction *action_status_available = status_menu->addAction("Available");
+    QAction *action_status_f4c = status_menu->addAction("Free for chat");
+    QAction *action_status_away = status_menu->addAction("Away");
+    QAction *action_status_xa = status_menu->addAction("Extended away");
+    QAction *action_status_dnd = status_menu->addAction("Do not disturb");
+    status_menu->addSeparator();
+    QAction *action_status_dc = status_menu->addAction("Offline");
+
+    connect(action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
+    connect(action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+    connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
+    connect(action_status_dc, SIGNAL(triggered()), this, SLOT(disconnect()));
 }
 
 void Messenger::launch() {

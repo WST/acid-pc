@@ -24,6 +24,7 @@ class Messenger: public QObject {
 		LoginForm *login; // окошко ввода информации об учётной записи
 		TrayIcon *tray; // значок приложения в трее
 		void createConnections();
+		void createMenus();
 
 	public:
 		Messenger(QObject *parent = 0);

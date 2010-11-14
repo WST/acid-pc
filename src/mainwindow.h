@@ -14,17 +14,9 @@ class MainWindow: public QMainWindow
 public:
     MainWindow(QString title, QWidget *parent = 0);
     ~MainWindow();
-    QAction *newMessageAction();
 
 private:
-    Ui::MainWindow *ui;
 
-private slots:
-    void on_actionQuit_triggered();
-    void on_actionAbout_Qt_triggered();
-
-signals:
-    void wantOffline();
 };
 
 #endif // MAINWINDOW_H

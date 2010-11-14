@@ -24,7 +24,7 @@ HEADERS    += version.h \
               src/loginform.h \
     src/trayicon.h \
     src/messageform.h
-FORMS      += ui/mainwindow.ui \
+FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui
 RESOURCES  += res/app.qrc
