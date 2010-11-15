@@ -1,8 +1,10 @@
 #include "chatwindow.h"
 #include "ui_chatwindow.h"
 
-ChatWindow::ChatWindow(QWidget *parent): QDialog(parent), ui(new Ui::ChatWindow) {
+ChatWindow::ChatWindow(MainWindow *parent): QDialog(parent), ui(new Ui::ChatWindow) {
+    main = parent;
     ui->setupUi(this);
+    setWindowIcon(QIcon(":/acid_16.png"));
 }
 
 ChatWindow::~ChatWindow() {
@@ -10,6 +12,9 @@ ChatWindow::~ChatWindow() {
 }
 
 void ChatWindow::displayMessage(QXmppMessage &message) {
+    if(!isVisible()) {
+	show();
+    }
     TabWidget *widget;
     for(int i = 0; i < ui->tabWidget->count(); i ++) {
 	if((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == message.from()) {
@@ -37,9 +42,6 @@ bool ChatWindow::adaTabForJid(QString fulljid) {
 }
 
 void ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
-    if(!isVisible()) {
-	show();
-    }
     switch(type) {
 	case TabWidget::Chat: {
 		ChatWidget *widget = new ChatWidget(fulljid);
@@ -49,6 +51,7 @@ void ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
 	} break;
 	case TabWidget::MUC: {
 		// TODO
+		// NOTE: сюда передаётся JID вида комната@сервер/ник
 	} break;
     }
 }

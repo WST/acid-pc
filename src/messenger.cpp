@@ -50,6 +50,8 @@ void Messenger::createMenus() {
     im_menu->addSeparator();
     QMenu *style_menu = im_menu->addMenu("Style");
     QAction *action_quit = im_menu->addAction("Quit");
+
+    QAction *action_support_room = help_menu->addAction("Support chat");
     QAction *action_about_app = help_menu->addAction("About " APP_NAME "...");
     QAction *action_about_qt = help_menu->addAction("About Qt...");
 
@@ -66,9 +68,11 @@ void Messenger::createMenus() {
     // TODO: отображать все доступные стили
 
     connect(action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
+    connect(action_support_room, SIGNAL(triggered()), this, SLOT(joinSupportRoom()));
     connect(action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
     connect(action_status_dc, SIGNAL(triggered()), this, SLOT(disconnect()));
+
     connect(action_plastique_style, SIGNAL(triggered()), this, SLOT(setPlastiqueStyle()));
     connect(action_cleanlooks_style, SIGNAL(triggered()), this, SLOT(setCleanlooksStyle()));
 
@@ -184,4 +188,8 @@ void Messenger::setPlastiqueStyle() {
 
 void Messenger::setCleanlooksStyle() {
     qApp->setStyle("cleanlooks");
+}
+
+void Messenger::joinSupportRoom() {
+    chat->openTab(SUPPORT_JID "/" + login->username(), TabWidget::MUC);
 }

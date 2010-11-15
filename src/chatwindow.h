@@ -11,6 +11,7 @@
 #include "tabwidget.h"
 #include "chatwidget.h"
 #include "mucwidget.h"
+#include "mainwindow.h"
 
 namespace Ui {
     class ChatWindow;
@@ -21,7 +22,7 @@ class ChatWindow: public QDialog
     Q_OBJECT
 
 public:
-    explicit ChatWindow(QWidget *parent = 0);
+    explicit ChatWindow(MainWindow *parent);
     ~ChatWindow();
     void displayMessage(QXmppMessage &message);
     bool adaTabForJid(QString fulljid);
@@ -30,6 +31,7 @@ public:
 private:
     Ui::ChatWindow *ui;
     bool online;
+    MainWindow *main;
 
 signals:
     void aboutToSend(QString to, QString message);

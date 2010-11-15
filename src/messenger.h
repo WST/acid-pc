@@ -50,6 +50,7 @@ class Messenger: public QObject {
 		void gotMessage(QXmppMessage message);
 		void setPlastiqueStyle();
 		void setCleanlooksStyle();
+		void joinSupportRoom();
 };
 
 #endif // MESSENGER_H

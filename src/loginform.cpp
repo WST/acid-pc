@@ -10,6 +10,7 @@ LoginForm::LoginForm(QString title, QWidget *parent): QWidget(parent), ui(new Ui
     username_valid = false;
     password_valid = false;
     ui->SignIn_pushButton->setEnabled(false);
+    setWindowIcon(QIcon(":/acid_16.png"));
 }
 
 const QString LoginForm::username() {
