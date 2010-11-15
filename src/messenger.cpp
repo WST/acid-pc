@@ -124,8 +124,8 @@ void Messenger::disconnect() {
 }
 
 void Messenger::iconClicked(QSystemTrayIcon::ActivationReason reason) {
-    if(reason == QSystemTrayIcon::Trigger && client->isConnected()) {
-	window->setVisible(!window->isVisible());
+    if(reason == QSystemTrayIcon::Trigger) {
+	client->isConnected() ? window->setVisible(!window->isVisible()) : login->setVisible(!login->isVisible());
     }
 }
 
