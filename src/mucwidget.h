@@ -23,6 +23,9 @@ public:
 
 private:
     Ui::MUCWidget *ui;
+
+private slots:
+    void on_message_textChanged();
 };
 
 #endif // MUCWIDGET_H

@@ -24,7 +24,8 @@ SOURCES    += src/main.cpp \
     src/chatwidget.cpp \
     src/chatwindow.cpp \
     src/tabwidget.cpp \
-    src/mucwidget.cpp
+    src/mucwidget.cpp \
+    src/functions.cpp
 HEADERS    += version.h \
               src/mainwindow.h \
               src/messenger.h \
@@ -34,7 +35,8 @@ HEADERS    += version.h \
     src/chatwidget.h \
     src/chatwindow.h \
     src/tabwidget.h \
-    src/mucwidget.h
+    src/mucwidget.h \
+    src/functions.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \

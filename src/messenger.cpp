@@ -52,16 +52,16 @@ void Messenger::createMenus() {
     QAction *action_quit = im_menu->addAction("Quit");
 
     QAction *action_support_room = help_menu->addAction("Support chat");
-    QAction *action_about_app = help_menu->addAction("About " APP_NAME "...");
+    QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), "About " APP_NAME "...");
     QAction *action_about_qt = help_menu->addAction("About Qt...");
 
-    QAction *action_status_available = status_menu->addAction("Available");
+    QAction *action_status_available = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Available");
     QAction *action_status_f4c = status_menu->addAction("Free for chat");
     QAction *action_status_away = status_menu->addAction("Away");
     QAction *action_status_xa = status_menu->addAction("Extended away");
     QAction *action_status_dnd = status_menu->addAction("Do not disturb");
     status_menu->addSeparator();
-    QAction *action_status_dc = status_menu->addAction("Offline");
+    QAction *action_status_dc = status_menu->addAction(QIcon(":/trayicon/offline-16px.png"), "Offline");
 
     QAction *action_plastique_style = style_menu->addAction("Plastique");
     QAction *action_cleanlooks_style = style_menu->addAction("Cleanlooks");
