@@ -112,12 +112,8 @@ void Messenger::handleDisconnection() {
 void Messenger::handleConnectionError(QXmppClient::Error error) {
     // получена ошибка. После этого сигнала будет тутже испущен disconnected().
     // тут можно передать окошку входа сообщение об ошибке для отображения в нём
-    // но можно сделать это и в трее…
-    if(client->isConnected()) {
-	// перед ошибкой клиент был онлайн
-    } else {
-	tray->debugMessage("Failed to connect to the server. Ensure that you’ve entered valid username/password.");
-    }
+    // но можно сделать это и в трее… Также желательно смотреть, что за ошибка произошла.
+    tray->debugMessage("Failed to connect to the server. Ensure that you’ve entered valid username/password.");
 }
 
 void Messenger::disconnect() {
@@ -152,11 +148,13 @@ void Messenger::gotVoiceCall(QXmppCall *call) {
     // входящий голосовой вызов.
     // знаю, что начинать надо с текстовой функциональности, но голосовая просто гораздо проще.
     // пока примем вызов как есть, потом надо сделать подтверждение… (TODO)
+    tray->debugMessage("Got a voice call, accepting");
     call->accept();
 }
 
 void Messenger::gotIQ(QXmppIq iq) {
     // Входящая станза IQ (возможно, запрос версии или last activity).
+    tray->debugMessage("Got an incoming IQ");
 }
 
 void Messenger::gotMessage(QXmppMessage message) {
