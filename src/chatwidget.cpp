@@ -19,5 +19,13 @@ void ChatWidget::on_send_clicked() {
     QString message = ui->message->toPlainText();
     ui->message->clear();
     ui->chatview->append("<me> " + message);
-    emit aboutToSend(getJid(), message);
+    emit aboutToSend(jid, message);
+}
+
+void ChatWidget::on_message_textChanged() {
+    ui->send->setEnabled(online && !ui->message->toPlainText().isEmpty());
+}
+
+void ChatWidget::setOnline(bool is_online) {
+    ui->send->setEnabled(online = is_online);
 }

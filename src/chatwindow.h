@@ -10,6 +10,7 @@
 // ACId
 #include "tabwidget.h"
 #include "chatwidget.h"
+#include "mucwidget.h"
 
 namespace Ui {
     class ChatWindow;

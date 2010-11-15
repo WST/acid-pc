@@ -10,9 +10,11 @@ public:
     QString &getJid();
     enum Type {Chat, MUC};
     Type getType();
+    virtual void setOnline(bool is_online) = 0;
     void setType(Type newtype);
 
-private:
+protected:
+    bool online;
     QString jid;
     Type type;
 };

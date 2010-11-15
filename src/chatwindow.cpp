@@ -15,7 +15,15 @@ void ChatWindow::displayMessage(QXmppMessage &message) {
 	if((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == message.from()) {
 	    // дальше зависит от типа виджета, который можно сохранять в некоторой переменной класса TabWidget
 	    // Это как бэ тоже TODO.
-	    ((ChatWidget *) widget)->insertMessage(message);
+	    TabWidget::Type type = widget->getType();
+	    switch(type) {
+		case TabWidget::MUC: {
+			((MUCWidget *) widget)->insertMessage(message);
+		} break;
+		case TabWidget::Chat: {
+			((ChatWidget *) widget)->insertMessage(message);
+		} break;
+	    }
 	}
     }
 }

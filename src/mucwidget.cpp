@@ -9,3 +9,11 @@ MUCWidget::MUCWidget(QString with, QWidget *parent): TabWidget(with, parent), ui
 MUCWidget::~MUCWidget() {
     delete ui;
 }
+
+void MUCWidget::insertMessage(QXmppMessage &message) {
+    // TODO
+}
+
+void MUCWidget::setOnline(bool is_online) {
+    online = is_online;
+}
