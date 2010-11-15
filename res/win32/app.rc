@@ -1,6 +1,6 @@
 #include "winver.h"
 
-#include <version.h>
+#include "..\..\version.h"
 
 IDI_ICON1		ICON		DISCARDABLE	"app.ico"
 
@@ -18,8 +18,8 @@ BEGIN
         BLOCK "000004b0"
         BEGIN
             VALUE "CompanyName", APP_COMPANY
-            VALUE "FileDescription", APP_COMPANY " " APP_NAME_FULL
-            VALUE "FileVersion", APP_VERSION_WIN32
+            VALUE "FileDescription", APP_NAME_FULL
+//            VALUE "FileVersion", APP_VERSION_WIN32
             VALUE "LegalCopyright", "Copyright (C) 2010 " APP_COMPANY
             VALUE "InternalName", "acid-pc.exe"
             VALUE "OriginalFilename", "acid-pc.exe"
