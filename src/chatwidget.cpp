@@ -4,6 +4,7 @@
 ChatWidget::ChatWidget(QString with, QWidget *parent): TabWidget(with, parent), ui(new Ui::ChatWidget) {
     ui->setupUi(this);
     ui->jid->setText(with);
+    TabWidget::setType(TabWidget::Chat);
 }
 
 ChatWidget::~ChatWidget() {
