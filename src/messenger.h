@@ -17,6 +17,7 @@
 #include "trayicon.h"
 #include "messageform.h"
 #include "chatwindow.h"
+#include "aboutwindow.h"
 
 class Messenger: public QObject {
 	Q_OBJECT
@@ -28,6 +29,7 @@ class Messenger: public QObject {
 		LoginForm *login; // окошко ввода информации об учётной записи
 		TrayIcon *tray; // значок приложения в трее
 		ChatWindow *chat; // окошко чатов
+		AboutWindow *about;
 		void createConnections();
 		void createMenus();
 
@@ -51,6 +53,7 @@ class Messenger: public QObject {
 		void setPlastiqueStyle();
 		void setCleanlooksStyle();
 		void joinSupportRoom();
+		void showApplicationInfo();
 };
 
 #endif // MESSENGER_H

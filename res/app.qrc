@@ -6,5 +6,6 @@
         <file>trayicon/online-16px.png</file>
         <file>trayicon/online-22px.png</file>
         <file>acid_16.png</file>
+        <file>about/about.png</file>
     </qresource>
 </RCC>

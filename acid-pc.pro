@@ -25,7 +25,8 @@ SOURCES    += src/main.cpp \
     src/chatwindow.cpp \
     src/tabwidget.cpp \
     src/mucwidget.cpp \
-    src/functions.cpp
+    src/functions.cpp \
+    src/aboutwindow.cpp
 HEADERS    += version.h \
               src/mainwindow.h \
               src/messenger.h \
@@ -36,13 +37,15 @@ HEADERS    += version.h \
     src/chatwindow.h \
     src/tabwidget.h \
     src/mucwidget.h \
-    src/functions.h
+    src/functions.h \
+    src/aboutwindow.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \
     ui/chatwidget.ui \
     ui/chatwindow.ui \
-    ui/mucwidget.ui
+    ui/mucwidget.ui \
+    ui/aboutwindow.ui
 RESOURCES  += res/app.qrc
 
 include(src/3rd-party/qxmpp.pri)

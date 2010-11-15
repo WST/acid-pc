@@ -9,6 +9,7 @@ Messenger::Messenger(QObject *parent): QObject(parent) {
     window = new MainWindow(APP_NAME);
     login = new LoginForm(APP_NAME);
     chat = new ChatWindow(window);
+    about = new AboutWindow(window);
     tray = new TrayIcon();
     tray->show();
 
@@ -17,6 +18,7 @@ Messenger::Messenger(QObject *parent): QObject(parent) {
 }
 
 Messenger::~Messenger() {
+    delete about;
     delete tray;
     delete chat;
     delete login;
@@ -70,6 +72,7 @@ void Messenger::createMenus() {
     connect(action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(action_support_room, SIGNAL(triggered()), this, SLOT(joinSupportRoom()));
     connect(action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+    connect(action_about_app, SIGNAL(triggered()), this, SLOT(showApplicationInfo()));
     connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
     connect(action_status_dc, SIGNAL(triggered()), this, SLOT(disconnect()));
 
@@ -192,4 +195,8 @@ void Messenger::setCleanlooksStyle() {
 
 void Messenger::joinSupportRoom() {
     chat->openTab(SUPPORT_JID "/" + login->username(), TabWidget::MUC);
+}
+
+void Messenger::showApplicationInfo() {
+    about->show();
 }
