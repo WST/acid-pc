@@ -48,6 +48,8 @@ class Messenger: public QObject {
 		void gotVoiceCall(QXmppCall *call);
 		void gotIQ(QXmppIq message);
 		void gotMessage(QXmppMessage message);
+		void setPlastiqueStyle();
+		void setCleanlooksStyle();
 };
 
 #endif // MESSENGER_H

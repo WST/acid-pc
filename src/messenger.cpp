@@ -42,11 +42,13 @@ void Messenger::createConnections() {
 }
 
 void Messenger::createMenus() {
-    QMenu *im_menu = window->menuBar()->addMenu("IM");
+    QMenu *im_menu = window->menuBar()->addMenu("Program");
     QMenu *status_menu = window->menuBar()->addMenu("Status");
     QMenu *help_menu = window->menuBar()->addMenu("Help");
 
     QAction *action_new_message = im_menu->addAction("New message...");
+    im_menu->addSeparator();
+    QMenu *style_menu = im_menu->addMenu("Style");
     QAction *action_quit = im_menu->addAction("Quit");
     QAction *action_about_app = help_menu->addAction("About " APP_NAME "...");
     QAction *action_about_qt = help_menu->addAction("About Qt...");
@@ -59,10 +61,16 @@ void Messenger::createMenus() {
     status_menu->addSeparator();
     QAction *action_status_dc = status_menu->addAction("Offline");
 
+    QAction *action_plastique_style = style_menu->addAction("Plastique");
+    QAction *action_cleanlooks_style = style_menu->addAction("Cleanlooks");
+    // TODO: отображать все доступные стили
+
     connect(action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
     connect(action_status_dc, SIGNAL(triggered()), this, SLOT(disconnect()));
+    connect(action_plastique_style, SIGNAL(triggered()), this, SLOT(setPlastiqueStyle()));
+    connect(action_cleanlooks_style, SIGNAL(triggered()), this, SLOT(setCleanlooksStyle()));
 
     QMenu *traymenu = new QMenu();
     traymenu->insertAction(0, action_new_message);
@@ -168,4 +176,12 @@ void Messenger::gotMessage(QXmppMessage message) {
 	chat->openTab(message.from(), TabWidget::Chat);
     }
     chat->displayMessage(message);
+}
+
+void Messenger::setPlastiqueStyle() {
+    qApp->setStyle("plastique");
+}
+
+void Messenger::setCleanlooksStyle() {
+    qApp->setStyle("cleanlooks");
 }
