@@ -29,9 +29,13 @@ public:
 
 private:
     Ui::ChatWindow *ui;
+    bool online;
 
 signals:
     void aboutToSend(QString to, QString message);
+
+public slots:
+    void setOnline(bool is_online);
 };
 
 #endif // CHATWINDOW_H

@@ -27,5 +27,5 @@ void ChatWidget::on_message_textChanged() {
 }
 
 void ChatWidget::setOnline(bool is_online) {
-    ui->send->setEnabled(online = is_online);
+    ui->send->setEnabled((online = is_online) && !ui->message->toPlainText().isEmpty());
 }

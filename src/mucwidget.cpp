@@ -15,5 +15,5 @@ void MUCWidget::insertMessage(QXmppMessage &message) {
 }
 
 void MUCWidget::setOnline(bool is_online) {
-    online = is_online;
+    // TODO
 }

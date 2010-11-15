@@ -14,9 +14,9 @@ public:
     void setType(Type newtype);
 
 protected:
-    bool online;
     QString jid;
     Type type;
+    bool online;
 };
 
 #endif // TABWIDGET_H

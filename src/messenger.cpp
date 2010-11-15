@@ -99,6 +99,7 @@ void Messenger::handleSuccessfulConnection() {
     login->hide();
     window->show();
     tray->setOnline();
+    chat->setOnline(true);
 }
 
 void Messenger::handleDisconnection() {
@@ -107,6 +108,7 @@ void Messenger::handleDisconnection() {
     tray->setOffline();
     login->setEnabled(true);
     login->show();
+    chat->setOnline(false);
 }
 
 void Messenger::handleConnectionError(QXmppClient::Error error) {

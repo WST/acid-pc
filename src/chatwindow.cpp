@@ -47,9 +47,26 @@ void ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
 		ChatWidget *widget = new ChatWidget(fulljid);
 		connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
 		ui->tabWidget->addTab(widget, "tab");
+		widget->setOnline(online);
 	} break;
 	case TabWidget::MUC: {
 		// TODO
 	} break;
+    }
+}
+
+void ChatWindow::setOnline(bool is_online) {
+    online = is_online;
+    TabWidget *widget;
+    for(int i = 0; i < ui->tabWidget->count(); i ++) {
+	widget = (TabWidget *) ui->tabWidget->widget(i);
+	switch(widget->getType()) {
+	    case TabWidget::Chat: {
+		    ((ChatWidget *) widget)->setOnline(is_online);
+	    } break;
+	    case TabWidget::MUC: {
+		    ((MUCWidget *) widget)->setOnline(is_online);
+	    } break;
+	}
     }
 }
