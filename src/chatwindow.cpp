@@ -30,11 +30,18 @@ bool ChatWindow::adaTabForJid(QString fulljid) {
     return false;
 }
 
-void ChatWindow::openTab(QString fulljid) {
+void ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
     if(!isVisible()) {
 	show();
     }
-    ChatWidget *widget = new ChatWidget(fulljid);
-    connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
-    ui->tabWidget->addTab(widget, "tab");
+    switch(type) {
+	case TabWidget::Chat: {
+		ChatWidget *widget = new ChatWidget(fulljid);
+		connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
+		ui->tabWidget->addTab(widget, "tab");
+	} break;
+	case TabWidget::MUC: {
+		// TODO
+	} break;
+    }
 }

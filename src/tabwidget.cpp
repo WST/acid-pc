@@ -2,8 +2,17 @@
 
 TabWidget::TabWidget(QString with, QWidget *parent): QWidget(parent) {
     jid = with;
+    type = Chat;
 }
 
 QString &TabWidget::getJid() {
     return jid;
+}
+
+TabWidget::Type TabWidget::getType() {
+    return type;
+}
+
+void TabWidget::setType(TabWidget::Type newtype) {
+    type = newtype;
 }

@@ -161,8 +161,9 @@ void Messenger::gotMessage(QXmppMessage message) {
     // Входящее сообщение. Его по идее нужно отобразить особым значком возле элемента ростера и сохранить или,
     // если открыт чат, вхуячить туда…
     // пока что просто отобразим его.
+    // TODO: приём MUC-сообщений
     if(!chat->adaTabForJid(message.from())) {
-	chat->openTab(message.from());
+	chat->openTab(message.from(), TabWidget::Chat);
     }
     chat->displayMessage(message);
 }

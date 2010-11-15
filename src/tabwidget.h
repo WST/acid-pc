@@ -5,12 +5,16 @@
 
 class TabWidget: public QWidget
 {
-private:
-    QString jid;
-
 public:
     TabWidget(QString with, QWidget *parent = 0);
     QString &getJid();
+    enum Type {Chat, MUC};
+    Type getType();
+    void setType(Type newtype);
+
+private:
+    QString jid;
+    Type type;
 };
 
 #endif // TABWIDGET_H

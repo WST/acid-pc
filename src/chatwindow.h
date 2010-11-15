@@ -24,7 +24,7 @@ public:
     ~ChatWindow();
     void displayMessage(QXmppMessage &message);
     bool adaTabForJid(QString fulljid);
-    void openTab(QString fulljid);
+    void openTab(QString fulljid, TabWidget::Type type);
 
 private:
     Ui::ChatWindow *ui;
