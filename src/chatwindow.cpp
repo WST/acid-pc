@@ -34,5 +34,7 @@ void ChatWindow::openTab(QString fulljid) {
     if(!isVisible()) {
 	show();
     }
-    ui->tabWidget->addTab(new ChatWidget(fulljid), "tab title");
+    ChatWidget *widget = new ChatWidget(fulljid);
+    connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
+    ui->tabWidget->addTab(widget, "tab");
 }

@@ -28,6 +28,9 @@ public:
 
 private:
     Ui::ChatWindow *ui;
+
+signals:
+    void aboutToSend(QString to, QString message);
 };
 
 #endif // CHATWINDOW_H

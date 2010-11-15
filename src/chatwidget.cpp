@@ -13,3 +13,10 @@ ChatWidget::~ChatWidget() {
 void ChatWidget::insertMessage(QXmppMessage &message) {
     ui->chatview->append("<" + message.from() + "> " + message.body());
 }
+
+void ChatWidget::on_send_clicked() {
+    QString message = ui->message->toPlainText();
+    ui->message->clear();
+    ui->chatview->append("<me> " + message);
+    emit aboutToSend(getJid(), message);
+}

@@ -25,6 +25,12 @@ public:
 
 private:
     Ui::ChatWidget *ui;
+
+signals:
+    void aboutToSend(QString to, QString message);
+
+private slots:
+    void on_send_clicked();
 };
 
 #endif // CHATWIDGET_H

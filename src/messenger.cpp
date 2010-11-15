@@ -30,6 +30,7 @@ void Messenger::createConnections() {
     // здесь соединять сигналы и слоты…
     connect(login, SIGNAL(finished()), this, SLOT(activate()));
     connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
+    connect(chat, SIGNAL(aboutToSend(QString, QString)), client, SLOT(sendMessage(QString, QString)));
 
     // сигналы клиента
     connect(client, SIGNAL(connected()), this, SLOT(handleSuccessfulConnection()));
