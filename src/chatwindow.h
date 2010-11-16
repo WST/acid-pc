@@ -38,6 +38,9 @@ signals:
 
 public slots:
     void setOnline(bool is_online);
+
+private slots:
+    void on_tabWidget_tabCloseRequested(int index);
 };
 
 #endif // CHATWINDOW_H
