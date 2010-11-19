@@ -32,6 +32,8 @@ class Messenger: public QObject {
 		AboutWindow *about;
 		void createConnections();
 		void createMenus();
+		void loadSettings();
+		void saveSettings();
 
 	public:
 		Messenger(QObject *parent = 0);

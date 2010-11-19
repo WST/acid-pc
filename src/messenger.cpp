@@ -15,9 +15,11 @@ Messenger::Messenger(QObject *parent): QObject(parent) {
 
     createConnections();
     createMenus();
+    loadSettings();
 }
 
 Messenger::~Messenger() {
+    saveSettings();
     delete about;
     delete tray;
     delete chat;
@@ -26,6 +28,20 @@ Messenger::~Messenger() {
     delete client;
     delete client_settings;
     delete settings;
+}
+
+void Messenger::saveSettings() {
+    settings->setValue("main/geometry", window->saveGeometry());
+    settings->setValue("login/geometry", login->saveGeometry());
+    settings->setValue("chat/geometry", chat->saveGeometry());
+    settings->setValue("about/geometry", about->saveGeometry());
+}
+
+void Messenger::loadSettings() {
+    if(settings->contains("main/geometry")) window->restoreGeometry(settings->value("main/geometry").toByteArray());
+    if(settings->contains("login/geometry")) login->restoreGeometry(settings->value("login/geometry").toByteArray());
+    if(settings->contains("chat/geometry")) chat->restoreGeometry(settings->value("chat/geometry").toByteArray());
+    if(settings->contains("about/geometry")) chat->restoreGeometry(settings->value("about/geometry").toByteArray());
 }
 
 void Messenger::createConnections() {
