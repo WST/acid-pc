@@ -42,6 +42,7 @@ HEADERS += $$PWD/qxmpp/src/QXmppUtils.h \
            $$PWD/qxmpp/src/QXmppRoster.h \
            $$PWD/qxmpp/src/QXmppRosterIq.h \
            $$PWD/qxmpp/src/QXmppRosterManager.h \
+		   $$PWD/qxmpp/src/QXmppRtpChannel.h \
            $$PWD/qxmpp/src/QXmppSaslAuth.h \
            $$PWD/qxmpp/src/QXmppSrvInfo.h \
 		   $$PWD/qxmpp/src/QXmppSrvInfo_p.h \
@@ -100,6 +101,7 @@ SOURCES += $$PWD/qxmpp/src/QXmppUtils.cpp \
            $$PWD/qxmpp/src/QXmppPubSubIq.cpp \
            $$PWD/qxmpp/src/QXmppRosterIq.cpp \
            $$PWD/qxmpp/src/QXmppRosterManager.cpp \
+		   $$PWD/qxmpp/src/QXmppRtpChannel.cpp \
            $$PWD/qxmpp/src/QXmppSaslAuth.cpp \
 		   $$PWD/qxmpp/src/QXmppSrvInfo.cpp \
            $$PWD/qxmpp/src/QXmppSessionIq.cpp \
