@@ -64,24 +64,25 @@ void Messenger::createConnections() {
 }
 
 void Messenger::createMenus() {
+    // TODO: расположить нормально, соответственно реальной структуре меню
     QMenu *im_menu = window->menuBar()->addMenu("Program");
     QMenu *status_menu = window->menuBar()->addMenu("Status");
     QMenu *help_menu = window->menuBar()->addMenu("Help");
 
-    QAction *action_new_message = im_menu->addAction("New message...");
+    QAction *action_new_message = im_menu->addAction(QIcon(":/menu/document.png"), "New message...");
     im_menu->addSeparator();
-    QMenu *style_menu = im_menu->addMenu("Style");
+    QMenu *style_menu = im_menu->addMenu(QIcon(":/menu/t-shirt.png"), "Style");
     QAction *action_quit = im_menu->addAction("Quit");
 
-    QAction *action_support_room = help_menu->addAction("Support chat");
+    QAction *action_support_room = help_menu->addAction(QIcon(":/menu/users.png"), "Support chat");
     QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), "About " APP_NAME "...");
     QAction *action_about_qt = help_menu->addAction("About Qt...");
 
     QAction *action_status_available = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Available");
-    QAction *action_status_f4c = status_menu->addAction("Free for chat");
-    QAction *action_status_away = status_menu->addAction("Away");
-    QAction *action_status_xa = status_menu->addAction("Extended away");
-    QAction *action_status_dnd = status_menu->addAction("Do not disturb");
+    QAction *action_status_f4c = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Free for chat");
+    QAction *action_status_away = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Away");
+    QAction *action_status_xa = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Extended away");
+    QAction *action_status_dnd = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Do not disturb");
     status_menu->addSeparator();
     QAction *action_status_dc = status_menu->addAction(QIcon(":/trayicon/offline-16px.png"), "Offline");
 

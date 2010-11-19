@@ -77,13 +77,23 @@
           <bool>false</bool>
          </property>
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-           <horstretch>0</horstretch>
+          <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+           <horstretch>32</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
-          <string>Send</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../res/app.qrc">
+           <normaloff>:/chat/paper-plane.png</normaloff>:/chat/paper-plane.png</iconset>
          </property>
          <property name="shortcut">
           <string>Ctrl+Return</string>
@@ -99,6 +109,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/app.qrc"/>
+ </resources>
  <connections/>
 </ui>

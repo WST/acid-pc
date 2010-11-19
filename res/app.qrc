@@ -7,5 +7,9 @@
         <file>trayicon/online-22px.png</file>
         <file>acid_16.png</file>
         <file>about/about.png</file>
+        <file>menu/t-shirt.png</file>
+        <file>menu/document.png</file>
+        <file>menu/users.png</file>
+        <file>chat/paper-plane.png</file>
     </qresource>
 </RCC>
