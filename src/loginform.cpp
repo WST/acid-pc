@@ -48,6 +48,26 @@ void LoginForm::refreshButton() {
     ui->SignIn_pushButton->setEnabled(username_valid && password_valid);
 }
 
+void LoginForm::setUsername(QString username) {
+    ui->UserName_lineEdit->setText(username);
+}
+
+void LoginForm::setPassword(QString password) {
+    ui->Password_lineEdit->setText(password);
+}
+
+void LoginForm::setAutoLogin(bool autologin) {
+    ui->LogInAutomatically_checkBox->setChecked(autologin);
+}
+
+void LoginForm::setSavePassword(bool save) {
+    ui->SavePassword_checkBox->setChecked(save);
+}
+
+void LoginForm::emitFinished() {
+    emit finished();
+}
+
 LoginForm::~LoginForm() {
     delete ui;
 }

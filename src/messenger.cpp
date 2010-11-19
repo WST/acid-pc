@@ -42,6 +42,10 @@ void Messenger::loadSettings() {
     if(settings->contains("login/geometry")) login->restoreGeometry(settings->value("login/geometry").toByteArray());
     if(settings->contains("chat/geometry")) chat->restoreGeometry(settings->value("chat/geometry").toByteArray());
     if(settings->contains("about/geometry")) chat->restoreGeometry(settings->value("about/geometry").toByteArray());
+
+    if(settings->contains("login/password")) login->setPassword(settings->value("login/password").toString());
+    if(settings->contains("login/username")) login->setUsername(settings->value("login/username").toString());
+    if(settings->contains("login/auto")) login->setAutoLogin(settings->value("login/auto").toBool());
 }
 
 void Messenger::createConnections() {
@@ -105,6 +109,9 @@ void Messenger::createMenus() {
 void Messenger::launch() {
     // Загрузить имя пользователя, сервер и пароль (если пароль сохранён из настроек) и показать окошко входа
     login->show();
+    if(settings->value("login/auto", false).toBool()) {
+	login->emitFinished();
+    }
 }
 
 void Messenger::activate() {
@@ -120,6 +127,15 @@ void Messenger::activate() {
     client_settings->setKeepAliveInterval(60);
     client_settings->setKeepAliveTimeout(30);
     client_settings->setAutoReconnectionEnabled(false);
+
+    // Сохранить пароль, если нужно
+    if(login->savePassword()) {
+	settings->setValue("login/password", login->password());
+    } else {
+	settings->remove("login/password");
+    }
+    settings->setValue("login/auto", login->autoLogin());
+    settings->setValue("login/username", login->username());
 
     client->connectToServer(*client_settings);
     client->transferManager().setProxy(PROXY65_JID);

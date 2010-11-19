@@ -1,7 +1,8 @@
 #ifndef LOGINFORM_H
 #define LOGINFORM_H
 
-#include <QWidget>
+#include <QtGui>
+#include <QtCore>
 
 namespace Ui {
     class LoginForm;
@@ -19,6 +20,11 @@ public:
     const QString domain();
     bool autoLogin();
     bool savePassword();
+    void setPassword(QString password);
+    void setUsername(QString username);
+    void setSavePassword(bool save);
+    void setAutoLogin(bool autologin);
+    void emitFinished();
 
 private:
     Ui::LoginForm *ui;
