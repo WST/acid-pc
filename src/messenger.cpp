@@ -41,7 +41,7 @@ void Messenger::loadSettings() {
     if(settings->contains("main/geometry")) window->restoreGeometry(settings->value("main/geometry").toByteArray());
     if(settings->contains("login/geometry")) login->restoreGeometry(settings->value("login/geometry").toByteArray());
     if(settings->contains("chat/geometry")) chat->restoreGeometry(settings->value("chat/geometry").toByteArray());
-    if(settings->contains("about/geometry")) chat->restoreGeometry(settings->value("about/geometry").toByteArray());
+    if(settings->contains("about/geometry")) about->restoreGeometry(settings->value("about/geometry").toByteArray());
 
     if(settings->contains("login/password")) login->setPassword(settings->value("login/password").toString());
     if(settings->contains("login/username")) login->setUsername(settings->value("login/username").toString());
@@ -124,8 +124,8 @@ void Messenger::activate() {
     client_settings->setPassword(login->password());
     client_settings->setResource(APP_NAME);
     client_settings->setIgnoreSslErrors(true);
-    client_settings->setKeepAliveInterval(60);
-    client_settings->setKeepAliveTimeout(30);
+    client_settings->setKeepAliveInterval(60); // пинговать раз в минуту — чтобы в случае косяка быстрее спалить.
+    client_settings->setKeepAliveTimeout(30); // таймаут пинга 30 секунд. Если ответ не пришёл, переходить в оффлайн.
     client_settings->setAutoReconnectionEnabled(false);
 
     // Сохранить пароль, если нужно

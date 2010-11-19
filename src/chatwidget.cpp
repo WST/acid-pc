@@ -19,6 +19,7 @@ void ChatWidget::on_send_clicked() {
     QString message = ui->message->toPlainText();
     ui->message->clear();
     ui->chatview->append("<me> " + message);
+    ui->message->setFocus();
     emit aboutToSend(jid, message);
 }
 
