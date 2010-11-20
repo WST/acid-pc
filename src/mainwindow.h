@@ -18,9 +18,10 @@ class MainWindow: public QMainWindow
 		MainWindow(QString title, QWidget *parent = 0);
 		~MainWindow();
 		RosterItemModel *model();
+		RosterListView *roster();
 
 	private:
-		RosterListView roster;
+		RosterListView roster_widget;
 		RosterItemModel roster_model;
 
 	signals:

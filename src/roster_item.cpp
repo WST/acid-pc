@@ -69,22 +69,18 @@ void RosterItem::setStatusType(QXmppPresence::Status::Type type)
     {
     case QXmppPresence::Status::Online:
     case QXmppPresence::Status::Chat:
-        icon = "green";
-        break;
     case QXmppPresence::Status::Away:
     case QXmppPresence::Status::XA:
-        icon = "orange";
-        break;
     case QXmppPresence::Status::DND:
-        icon = "red";
+	icon = "online";
         break;
     case QXmppPresence::Status::Invisible:
     case QXmppPresence::Status::Offline:
-        icon = "gray";
+	icon = "offline";
         break;
     }
     if(!icon.isEmpty())
-        setIcon(QIcon(":/icons/resource/"+icon+".png"));
+	setIcon(QIcon(":/trayicon/"+icon+"-16px.png"));
 }
 
 QXmppPresence::Status::Type RosterItem::getStatusType()
@@ -101,7 +97,7 @@ void RosterItem::setPresenceType(QXmppPresence::Type type)
     case QXmppPresence::Available:
         break;
     case QXmppPresence::Unavailable:
-        icon = "gray";
+	icon = "offline";
         break;
     case QXmppPresence::Error:
     case QXmppPresence::Subscribe:
@@ -112,7 +108,7 @@ void RosterItem::setPresenceType(QXmppPresence::Type type)
         break;
     }
     if(!icon.isEmpty())
-        setIcon(QIcon(":/icons/resource/"+icon+".png"));
+	setIcon(QIcon(":/trayicon/"+icon+"-16px.png"));
 }
 
 QXmppPresence::Type RosterItem::getPresenceType()
