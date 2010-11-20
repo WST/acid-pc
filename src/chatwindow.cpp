@@ -103,9 +103,12 @@ void ChatWindow::setOnline(bool is_online) {
 }
 
 void ChatWindow::on_tabWidget_tabCloseRequested(int index) {
-    // TODO выход из комнаты, если ето MUC
-    delete ui->tabWidget->widget(index);
-    ui->tabWidget->removeTab(index);
+
+    if(((TabWidget *) ui->tabWidget->widget(index))->getType() == TabWidget::MUC) {
+	// TODO выход из комнаты
+    }
+
+    delete ui->tabWidget->widget(index); // таб при этом удаляется сам, во как хитро
 
     if(ui->tabWidget->count() == 0) {
 	hide();

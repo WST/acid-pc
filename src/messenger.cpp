@@ -65,6 +65,8 @@ void Messenger::createConnections() {
 	connect(& client->rosterManager(), SIGNAL(rosterReceived()), this, SLOT(rosterReceived()));
 	connect(& client->rosterManager(), SIGNAL(rosterChanged(const QString&)), this, SLOT(rosterChanged(const QString&)));
 	connect(& client->rosterManager(), SIGNAL(presenceChanged(const QString&, const QString&)), this, SLOT(presenceChanged(const QString&, const QString&)));
+
+	connect(window, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
 }
 
 void Messenger::createMenus() {
@@ -262,5 +264,10 @@ void Messenger::presenceChanged(const QString& bare_jid, const QString& resource
 	QString jid = bare_jid + "/" + resource;
 	QMap<QString, QXmppPresence> presences = client->rosterManager().getAllPresencesForBareJid(bare_jid);
 	window->model()->updatePresence(bare_jid, presences);
-	QXmppPresence& pre = presences[resource];
+}
+
+void Messenger::openChat(const QString &full_jid) {
+    if(!chat->adaTabForJid(full_jid)) {
+	chat->openTab(full_jid, TabWidget::Chat);
+    }
 }

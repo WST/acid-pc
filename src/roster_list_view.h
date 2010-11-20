@@ -34,6 +34,7 @@ class RosterListView : public QListView
 
 public:
     RosterListView(QWidget* parent = 0);
+    ~RosterListView();
     bool event(QEvent* e);
 
 public slots:
@@ -58,9 +59,9 @@ private:
     QString selectedBareJid();
 
 private:
-    QAction m_chat;
-    QAction m_profile;
-    QAction m_removeContact;
+    QAction *action_chat;
+    QAction *action_profile;
+    QAction *action_remove;
 };
 
 #endif // ROSTERLISTVIEW_H

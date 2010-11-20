@@ -56,9 +56,10 @@ class Messenger: public QObject {
 		void setCleanlooksStyle();
 		void joinSupportRoom();
 		void showApplicationInfo();
-		void presenceChanged(const QString& bare_jid, const QString& resource);
+		void presenceChanged(const QString &bare_jid, const QString &resource);
 		void rosterReceived();
 		void rosterChanged(const QString& bare_jid);
+		void openChat(const QString &full_jid);
 };
 
 #endif // MESSENGER_H

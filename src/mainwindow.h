@@ -22,6 +22,11 @@ class MainWindow: public QMainWindow
 	private:
 		RosterListView roster;
 		RosterItemModel roster_model;
+
+	signals:
+		void showChatDialog(const QString& bareJid);
+		void showProfile(const QString& bareJid);
+		void removeContact(const QString& bareJid);
 };
 
 #endif // MAINWINDOW_H
