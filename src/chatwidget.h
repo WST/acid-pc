@@ -23,14 +23,18 @@ public:
     ~ChatWidget();
     void insertMessage(QXmppMessage &message);
     void setOnline(bool is_online);
+    void activate();
+    void setChatGeometry(QByteArray geometry);
 
 private:
     Ui::ChatWidget *ui;
 
 signals:
     void aboutToSend(QString to, QString message);
+    void chatGeometryChanged(QByteArray state);
 
 private slots:
+    void on_splitter_splitterMoved(int pos, int index);
     void on_message_textChanged();
     void on_send_clicked();
 };

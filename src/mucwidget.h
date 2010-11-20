@@ -20,6 +20,7 @@ public:
     ~MUCWidget();
     void insertMessage(QXmppMessage &message);
     void setOnline(bool is_online);
+    void activate();
 
 private:
     Ui::MUCWidget *ui;

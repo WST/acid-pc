@@ -22,3 +22,8 @@ void MUCWidget::setOnline(bool is_online) {
 void MUCWidget::on_message_textChanged() {
     ui->send->setEnabled(online && !ui->message->toPlainText().isEmpty());
 }
+
+void MUCWidget::activate() {
+    ui->message->setFocus();
+}
+

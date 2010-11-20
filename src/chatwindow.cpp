@@ -8,7 +8,8 @@
 Можно оставить как TODO на этап декостылизации.
 */
 
-ChatWindow::ChatWindow(MainWindow *parent): QDialog(parent), ui(new Ui::ChatWindow) {
+ChatWindow::ChatWindow(MainWindow *parent, QSettings *settings): QDialog(parent), ui(new Ui::ChatWindow) {
+    this->settings = settings;
     main = parent;
     ui->setupUi(this);
     setWindowIcon(QIcon(":/acid_16.png"));
@@ -73,8 +74,11 @@ void ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
 	case TabWidget::Chat: {
 		ChatWidget *widget = new ChatWidget(fulljid);
 		connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
+		connect(widget, SIGNAL(chatGeometryChanged(QByteArray)), this, SLOT(chatGeometryChanged(QByteArray)));
 		ui->tabWidget->addTab(widget, "tab");
 		widget->setOnline(online);
+		ui->tabWidget->setCurrentWidget(widget);
+		widget->activate();
 	} break;
 	case TabWidget::MUC: {
 		QStringList jid = parseJid(fulljid);
@@ -82,6 +86,8 @@ void ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
 		// TODO: connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSendMUC(QString, QString)));
 		ui->tabWidget->addTab(widget, "MUC");
 		widget->setOnline(online);
+		ui->tabWidget->setCurrentWidget(widget);
+		widget->activate();
 	} break;
     }
 }
@@ -113,4 +119,27 @@ void ChatWindow::on_tabWidget_tabCloseRequested(int index) {
     if(ui->tabWidget->count() == 0) {
 	hide();
     }
+}
+
+void ChatWindow::on_tabWidget_currentChanged(int index) {
+    if(ui->tabWidget->count() == 0) {
+	return;
+    }
+
+    TabWidget *widget = (TabWidget *) ui->tabWidget->widget(index);
+    switch(widget->getType()) {
+	case TabWidget::Chat: {
+		    if(settings->contains("chat/geometry")) {
+			((ChatWidget *) widget)->setChatGeometry(settings->value("chat/geometry").toByteArray());
+		    }
+		    ((ChatWidget *) widget)->activate();
+	    } break;
+	    case TabWidget::MUC: {
+		    ((MUCWidget *) widget)->activate();
+	    } break;
+    }
+}
+
+void ChatWindow::chatGeometryChanged(QByteArray geometry) {
+    settings->setValue("chat/geometry", geometry);
 }

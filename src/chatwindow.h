@@ -22,16 +22,18 @@ class ChatWindow: public QDialog
     Q_OBJECT
 
 public:
-    explicit ChatWindow(MainWindow *parent);
+    explicit ChatWindow(MainWindow *parent, QSettings *settings);
     ~ChatWindow();
     void displayMessage(QXmppMessage &message);
     bool adaTabForJid(QString fulljid);
     void openTab(QString fulljid, TabWidget::Type type);
+    void reloadGeometry(QSettings *settings);
 
 private:
     Ui::ChatWindow *ui;
     bool online;
     MainWindow *main;
+    QSettings *settings;
 
 signals:
     void aboutToSend(QString to, QString message);
@@ -40,7 +42,9 @@ public slots:
     void setOnline(bool is_online);
 
 private slots:
+    void on_tabWidget_currentChanged(int index);
     void on_tabWidget_tabCloseRequested(int index);
+    void chatGeometryChanged(QByteArray);
 };
 
 #endif // CHATWINDOW_H

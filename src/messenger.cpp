@@ -8,7 +8,7 @@ Messenger::Messenger(QObject *parent): QObject(parent) {
     client = new QXmppClient(this);
     window = new MainWindow(APP_NAME);
     login = new LoginForm(APP_NAME);
-    chat = new ChatWindow(window);
+    chat = new ChatWindow(window, settings);
     about = new AboutWindow(window);
     tray = new TrayIcon();
     tray->show();
@@ -35,6 +35,8 @@ void Messenger::saveSettings() {
     settings->setValue("login/geometry", login->saveGeometry());
     settings->setValue("chat/geometry", chat->saveGeometry());
     settings->setValue("about/geometry", about->saveGeometry());
+
+    settings->sync();
 }
 
 void Messenger::loadSettings() {
@@ -209,8 +211,8 @@ void Messenger::gotVoiceCall(QXmppCall *call) {
 }
 
 void Messenger::gotIQ(QXmppIq iq) {
-    // Входящая станза IQ (возможно, запрос версии или last activity).
-    tray->debugMessage("Got an incoming IQ");
+    // Входящая станза IQ (возможно, запрос версии или last activity). TODO.
+
 }
 
 void Messenger::gotMessage(QXmppMessage message) {

@@ -135,8 +135,8 @@ QSize RosterItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QMo
     return QSize(44, 36);
 }
 
-void RosterItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
-{
+void RosterItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
+    // Здесь определяется отрисовка элемента ростера
     painter->save();
     painter->setRenderHint(QPainter::TextAntialiasing);
     QVariant value = index.data(Qt::DecorationRole);
@@ -156,14 +156,12 @@ void RosterItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& op
     }
 
     QPen penDivision;
-//        if(index.row() % 2)
-//            painter->fillRect(option.rect, alternateBg);
+	if(index.row() % 2)
+	    painter->fillRect(option.rect, alternateBg);
 
     if (option.state & QStyle::State_Selected)
     {
         painter->fillRect(option.rect, selectedBg);
-//            painter->fillRect(option.rect, option.palette.highlight());
-//            penDivision.setColor(option.palette.highlight().color());
         penDivision.setColor(selectedBg);
         nameTextColor = selectedText;
         statusTextColor = selectedText;

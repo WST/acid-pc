@@ -31,3 +31,16 @@ void ChatWidget::setOnline(bool is_online) {
     ui->send->setEnabled((online = is_online) && !ui->message->toPlainText().isEmpty());
     ui->send->setToolTip(online ? "Send the message" : "This button is not available because you are not connected");
 }
+
+void ChatWidget::activate() {
+    // просто активирует поле ввода для удобства
+    ui->message->setFocus();
+}
+
+void ChatWidget::setChatGeometry(QByteArray state) {
+    ui->splitter->restoreState(state);
+}
+
+void ChatWidget::on_splitter_splitterMoved(int pos, int index) {
+    emit chatGeometryChanged(ui->splitter->saveState());
+}
