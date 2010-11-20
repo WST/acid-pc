@@ -61,6 +61,10 @@ void Messenger::createConnections() {
     connect(& client->callManager(), SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
     connect(client, SIGNAL(iqReceived(QXmppIq)), this, SLOT(gotIQ(QXmppIq)));
     connect(client, SIGNAL(messageReceived(QXmppMessage)), this, SLOT(gotMessage(QXmppMessage)));
+	
+	connect(& client->rosterManager(), SIGNAL(rosterReceived()), this, SLOT(rosterReceived()));
+	connect(& client->rosterManager(), SIGNAL(rosterChanged(const QString&)), this, SLOT(rosterChanged(const QString&)));
+	connect(& client->rosterManager(), SIGNAL(presenceChanged(const QString&, const QString&)), this, SLOT(presenceChanged(const QString&, const QString&)));
 }
 
 void Messenger::createMenus() {
@@ -232,4 +236,31 @@ void Messenger::joinSupportRoom() {
 
 void Messenger::showApplicationInfo() {
     about->show();
+}
+
+void Messenger::rosterChanged(const QString& bare_jid) {
+	window->model()->updateRosterEntry(bare_jid, client->rosterManager().getRosterEntry(bare_jid));
+}
+
+void Messenger::rosterReceived() {
+	QStringList list = client->rosterManager().getRosterBareJids();
+	QString bare_jid;
+	foreach(bare_jid, list) {
+		rosterChanged(bare_jid);
+	}
+}
+
+void Messenger::presenceChanged(const QString& bare_jid, const QString& resource) {
+	if(bare_jid == client_settings->jidBare()) {
+		return;
+	}
+
+	if(!window->model()->getRosterItemFromBareJid(bare_jid)) {
+		return;
+	}
+
+	QString jid = bare_jid + "/" + resource;
+	QMap<QString, QXmppPresence> presences = client->rosterManager().getAllPresencesForBareJid(bare_jid);
+	window->model()->updatePresence(bare_jid, presences);
+	QXmppPresence& pre = presences[resource];
 }

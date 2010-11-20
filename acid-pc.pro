@@ -26,7 +26,10 @@ SOURCES    += src/main.cpp \
     src/tabwidget.cpp \
     src/mucwidget.cpp \
     src/functions.cpp \
-    src/aboutwindow.cpp
+    src/aboutwindow.cpp \
+	 src/roster_list_view.cpp \
+	 src/roster_item_model.cpp \
+	 src/roster_item.cpp
 HEADERS    += version.h \
               src/mainwindow.h \
               src/messenger.h \
@@ -38,7 +41,10 @@ HEADERS    += version.h \
     src/tabwidget.h \
     src/mucwidget.h \
     src/functions.h \
-    src/aboutwindow.h
+    src/aboutwindow.h \
+	 src/roster_list_view.h \
+	 src/roster_item_model.h \
+	 src/roster_item.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \
