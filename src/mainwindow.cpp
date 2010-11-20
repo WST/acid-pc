@@ -8,6 +8,9 @@ MainWindow::MainWindow(QString title, QWidget *parent): QMainWindow(parent), ros
 	roster_widget.setModel(& roster_model);
 	setCentralWidget(& roster_widget);
 
+	RosterItemDelegate *delegate = new RosterItemDelegate();
+	roster_widget.setItemDelegate(delegate);
+
 	connect(& roster_widget, SIGNAL(showChatDialog(QString)), this, SIGNAL(showChatDialog(QString)));
 	connect(& roster_widget, SIGNAL(showProfile(QString)), this, SIGNAL(showProfile(QString)));
 	connect(& roster_widget, SIGNAL(removeContact(QString)), this, SIGNAL(removeContact(QString)));
