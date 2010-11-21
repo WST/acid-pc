@@ -1,5 +1,6 @@
 // ACId
 #include "messenger.h"
+#include "functions.h"
 #include <version.h>
 
 Messenger::Messenger(QObject *parent): QObject(parent) {
@@ -55,6 +56,7 @@ void Messenger::createConnections() {
     connect(login, SIGNAL(finished()), this, SLOT(activate()));
     connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
     connect(chat, SIGNAL(aboutToSend(QString, QString)), client, SLOT(sendMessage(QString, QString)));
+    connect(chat, SIGNAL(aboutToSendMUC(QString, QString)), this, SLOT(sendMUCMessage(QString, QString)));
 
     // сигналы клиента
     connect(client, SIGNAL(connected()), this, SLOT(handleSuccessfulConnection()));
@@ -223,11 +225,17 @@ void Messenger::gotMessage(QXmppMessage message) {
     // Входящее сообщение. Его по идее нужно отобразить особым значком возле элемента ростера и сохранить или,
     // если открыт чат, вхуячить туда…
     // пока что просто отобразим его.
-    // TODO: приём MUC-сообщений
-    if(!chat->adaTabForJid(message.from())) {
-	chat->openTab(message.from(), TabWidget::Chat);
+    // TODO: сохранение сообщений до тех пор, пока пользователь сам не решит прочитать
+    switch(message.type()) {
+	case QXmppMessage::GroupChat: {
+		chat->displayMUCMessage(message);
+	} break;
+	case QXmppMessage::Composing: break;
+	case QXmppMessage::Chat:
+	default:
+	    chat->displayMessage(message);
+	break;
     }
-    chat->displayMessage(message);
 }
 
 void Messenger::setPlastiqueStyle() {
@@ -239,7 +247,7 @@ void Messenger::setCleanlooksStyle() {
 }
 
 void Messenger::joinSupportRoom() {
-    chat->openTab(SUPPORT_JID "/" + login->username(), TabWidget::MUC);
+    joinRoom(SUPPORT_JID, login->username());
 }
 
 void Messenger::showApplicationInfo() {
@@ -273,7 +281,14 @@ void Messenger::presenceChanged(const QString& bare_jid, const QString& resource
 }
 
 void Messenger::openChat(const QString &full_jid) {
-    if(!chat->adaTabForJid(full_jid)) {
-	chat->openTab(full_jid, TabWidget::Chat);
-    }
+    chat->openTab(full_jid, TabWidget::Chat);
+}
+
+void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
+    client->mucManager().joinRoom(room_jid, nick);
+    chat->openTab(room_jid, TabWidget::MUC);
+}
+
+void Messenger::sendMUCMessage(QString room, QString message) {
+    client->mucManager().sendMessage(room, message); // могли бы ето и слотом сделать…
 }

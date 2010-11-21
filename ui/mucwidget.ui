@@ -23,10 +23,18 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QTextBrowser" name="chatview"/>
-      <widget class="QListWidget" name="chatters"/>
+      <widget class="QTextBrowser" name="chatview">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+      </widget>
+      <widget class="QListWidget" name="chatters">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+      </widget>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QTextEdit" name="message">
@@ -49,8 +57,14 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
          <property name="text">
           <string>Send</string>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+Return</string>
          </property>
         </widget>
        </item>

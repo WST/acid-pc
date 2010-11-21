@@ -25,6 +25,7 @@ public:
     void setOnline(bool is_online);
     void activate();
     void setChatGeometry(QByteArray geometry);
+    void appendResource(QString resource);
 
 private:
     Ui::ChatWidget *ui;

@@ -9,6 +9,7 @@
 #include <QXmppClient.h>
 #include <QXmppTransferManager.h>
 #include <QXmppCallManager.h>
+#include <QXmppMucManager.h>
 #include <QXmppMessage.h>
 
 // ACId
@@ -48,7 +49,8 @@ class Messenger: public QObject {
 		void disconnect();
 		void iconClicked(QSystemTrayIcon::ActivationReason reason);
 		void createNewMessage();
-		void sendMessage(MessageForm *message);
+		void sendMessage(MessageForm *message); // слот с аргументами to, message уже есть в клиенте (qxmpp)
+		void sendMUCMessage(QString, QString);
 		void gotVoiceCall(QXmppCall *call);
 		void gotIQ(QXmppIq message);
 		void gotMessage(QXmppMessage message);
@@ -60,6 +62,7 @@ class Messenger: public QObject {
 		void rosterReceived();
 		void rosterChanged(const QString& bare_jid);
 		void openChat(const QString &full_jid);
+		void joinRoom(const QString &room_jid, const QString &nick); // в qxmpp ето есть, но этот метод ещё и открывает таб
 };
 
 #endif // MESSENGER_H

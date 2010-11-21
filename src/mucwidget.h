@@ -22,10 +22,14 @@ public:
     void setOnline(bool is_online);
     void activate();
 
+signals:
+    void aboutToSend(QString to, QString message);
+
 private:
     Ui::MUCWidget *ui;
 
 private slots:
+    void on_send_clicked();
     void on_message_textChanged();
 };
 

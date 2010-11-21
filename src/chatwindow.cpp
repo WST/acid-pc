@@ -23,38 +23,45 @@ void ChatWindow::displayMessage(QXmppMessage &message) {
     if(!isVisible()) {
 	show();
     }
-    TabWidget *widget;
-    for(int i = 0; i < ui->tabWidget->count(); i ++) {
-	if((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == message.from()) {
-	    TabWidget::Type type = widget->getType();
-	    switch(type) {
-		case TabWidget::MUC: {
-			((MUCWidget *) widget)->insertMessage(message);
-		} break;
-		case TabWidget::Chat: {
-			((ChatWidget *) widget)->insertMessage(message);
-		} break;
-	    }
-	}
+
+    TabWidget *widget = getWidgetByJid(message.from());
+    if(widget) {
+	return ((ChatWidget *) widget)->insertMessage(message);
+    }
+
+    QStringList jid = parseJid(message.from());
+
+    if(((widget = getWidgetByJid(jid[1])) != 0) && !jid[5].isEmpty()) {
+	((ChatWidget *) widget)->appendResource(jid[5]);
+	return displayMessage(message); // NOTE: рекурсия
+    }
+
+    return openTab(message.from(), TabWidget::Chat);
+}
+
+void ChatWindow::displayMUCMessage(QXmppMessage &message) {
+    QStringList jid = parseJid(message.from());
+    TabWidget *widget = getWidgetByJid(jid[1]);
+    if(widget && widget->getType() == TabWidget::MUC) {
+	((MUCWidget *) widget)->insertMessage(message);
     }
 }
 
-bool ChatWindow::adaTabForJid(QString fulljid) {
+TabWidget *ChatWindow::getWidgetByJid(QString jid) {
     TabWidget *widget;
     for(int i = 0; i < ui->tabWidget->count(); i ++) {
-	widget = (TabWidget *) ui->tabWidget->widget(i);
-	switch(widget->getType()) {
-	    case TabWidget::Chat: {
-		    if(widget->getJid() == fulljid) {
-			return true;
-		    }
-	    } break;
-	    case TabWidget::MUC: {
-		    QStringList jid = parseJid(fulljid);
-		    if(widget->getJid() == jid[1]) {
-			return true;
-		    }
-	    } break;
+	if((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid) {
+	    return widget;
+	}
+    }
+    return 0;
+}
+
+bool ChatWindow::adaTabForJid(QString jid) {
+    TabWidget *widget;
+    for(int i = 0; i < ui->tabWidget->count(); i ++) {
+	if(((TabWidget *) ui->tabWidget->widget(i))->getJid() == jid) {
+	    return (bool) getWidgetByJid(jid);
 	}
     }
     return false;
@@ -76,17 +83,17 @@ void ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
 		connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
 		connect(widget, SIGNAL(chatGeometryChanged(QByteArray)), this, SLOT(chatGeometryChanged(QByteArray)));
 		ui->tabWidget->addTab(widget, "tab");
-		widget->setOnline(online);
 		ui->tabWidget->setCurrentWidget(widget);
+		widget->setOnline(online);
 		widget->activate();
 	} break;
 	case TabWidget::MUC: {
-		QStringList jid = parseJid(fulljid);
-		MUCWidget *widget = new MUCWidget(jid[1]);
-		// TODO: connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSendMUC(QString, QString)));
+		// NOTE: при входе в MUC fulljid является bare JID комнаты!
+		MUCWidget *widget = new MUCWidget(fulljid);
+		connect(widget, SIGNAL(aboutToSend(QString, QString)), this, SIGNAL(aboutToSendMUC(QString, QString)));
 		ui->tabWidget->addTab(widget, "MUC");
-		widget->setOnline(online);
 		ui->tabWidget->setCurrentWidget(widget);
+		widget->setOnline(online);
 		widget->activate();
 	} break;
     }

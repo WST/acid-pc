@@ -25,9 +25,11 @@ public:
     explicit ChatWindow(MainWindow *parent, QSettings *settings);
     ~ChatWindow();
     void displayMessage(QXmppMessage &message);
+    void displayMUCMessage(QXmppMessage &message);
     bool adaTabForJid(QString fulljid);
     void openTab(QString fulljid, TabWidget::Type type);
     void reloadGeometry(QSettings *settings);
+    TabWidget *getWidgetByJid(QString jid);
 
 private:
     Ui::ChatWindow *ui;
@@ -37,6 +39,7 @@ private:
 
 signals:
     void aboutToSend(QString to, QString message);
+    void aboutToSendMUC(QString room, QString message);
 
 public slots:
     void setOnline(bool is_online);

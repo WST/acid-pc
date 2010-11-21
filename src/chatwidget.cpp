@@ -12,7 +12,7 @@ ChatWidget::~ChatWidget() {
 }
 
 void ChatWidget::insertMessage(QXmppMessage &message) {
-    ui->chatview->append("<" + message.from() + "> " + message.body());
+    ui->chatview->append("<font color=\"#AA0000\">&lt;" + message.from() + "&gt;</font>" + message.body());
 }
 
 void ChatWidget::on_send_clicked() {
@@ -35,6 +35,12 @@ void ChatWidget::setOnline(bool is_online) {
 void ChatWidget::activate() {
     // просто активирует поле ввода для удобства
     ui->message->setFocus();
+}
+
+void ChatWidget::appendResource(QString resource) {
+    jid += "/";
+    jid += resource;
+    ui->jid->setText(ui->jid->text() + "/" + resource);
 }
 
 void ChatWidget::setChatGeometry(QByteArray state) {
