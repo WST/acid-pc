@@ -57,6 +57,7 @@ void Messenger::createConnections() {
     connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
     connect(chat, SIGNAL(aboutToSend(QString, QString)), client, SLOT(sendMessage(QString, QString)));
     connect(chat, SIGNAL(aboutToSendMUC(QString, QString)), this, SLOT(sendMUCMessage(QString, QString)));
+    connect(chat, SIGNAL(mucTabClosed(QString)), this, SLOT(leaveRoom(QString)));
 
     // сигналы клиента
     connect(client, SIGNAL(connected()), this, SLOT(handleSuccessfulConnection()));
@@ -287,6 +288,10 @@ void Messenger::openChat(const QString &full_jid) {
 void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
     client->mucManager().joinRoom(room_jid, nick);
     chat->openTab(room_jid, TabWidget::MUC);
+}
+
+void Messenger::leaveRoom(const QString &room_jid) {
+    client->mucManager().leaveRoom(room_jid);
 }
 
 void Messenger::sendMUCMessage(QString room, QString message) {

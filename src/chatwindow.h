@@ -30,6 +30,7 @@ public:
     void openTab(QString fulljid, TabWidget::Type type);
     void reloadGeometry(QSettings *settings);
     TabWidget *getWidgetByJid(QString jid);
+    TabWidget *getWidgetByIndex(int index);
 
 private:
     Ui::ChatWindow *ui;
@@ -40,6 +41,7 @@ private:
 signals:
     void aboutToSend(QString to, QString message);
     void aboutToSendMUC(QString room, QString message);
+    void mucTabClosed(QString room);
 
 public slots:
     void setOnline(bool is_online);

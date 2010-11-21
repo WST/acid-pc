@@ -29,11 +29,11 @@
 #include <QKeyEvent>
 
 RosterListView::RosterListView(QWidget* parent):QListView(parent) {
-    action_chat = new QAction("Chat", this);
-    action_profile = new QAction("View profile", this);
-    action_remove = new QAction("Remove contact", this);
-    action_send_file = new QAction("Send a file", this);
-    action_call = new QAction("Make a voice call", this);
+    action_chat = new QAction(QIcon(":/menu/balloons.png"), "Chat", this);
+    action_profile = new QAction(QIcon(":/menu/card-address.png"), "View profile", this);
+    action_remove = new QAction(QIcon(":/menu/cross.png"), "Remove contact", this);
+    action_send_file = new QAction(QIcon(":/menu/disk.png"), "Send a file", this);
+    action_call = new QAction(QIcon(":/menu/mobile-phone.png"), "Make a voice call", this);
 
     connect(this, SIGNAL(pressed(const QModelIndex&)), this, SLOT(mousePressed(const QModelIndex&)));
     connect(this, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(doubleClicked(const QModelIndex&)));

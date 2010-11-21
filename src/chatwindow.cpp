@@ -47,6 +47,10 @@ void ChatWindow::displayMUCMessage(QXmppMessage &message) {
     }
 }
 
+TabWidget *ChatWindow::getWidgetByIndex(int index) {
+    return (TabWidget *) ui->tabWidget->widget(index);
+}
+
 TabWidget *ChatWindow::getWidgetByJid(QString jid) {
     TabWidget *widget;
     for(int i = 0; i < ui->tabWidget->count(); i ++) {
@@ -117,11 +121,17 @@ void ChatWindow::setOnline(bool is_online) {
 
 void ChatWindow::on_tabWidget_tabCloseRequested(int index) {
 
-    if(((TabWidget *) ui->tabWidget->widget(index))->getType() == TabWidget::MUC) {
-	// TODO выход из комнаты
-    }
+    TabWidget *widget = getWidgetByIndex(index);
 
-    delete ui->tabWidget->widget(index); // таб при этом удаляется сам, во как хитро
+    switch(widget->getType()) {
+	case TabWidget::MUC: {
+		emit mucTabClosed(widget->getJid());
+		delete (MUCWidget *) widget;
+	} break;
+	case TabWidget::Chat: {
+		delete (TabWidget *) widget;
+	} break;
+    }
 
     if(ui->tabWidget->count() == 0) {
 	hide();

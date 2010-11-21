@@ -12,5 +12,10 @@
         <file>menu/users.png</file>
         <file>chat/paper-plane.png</file>
         <file>menu/smartcomm.png</file>
+        <file>menu/balloons.png</file>
+        <file>menu/card-address.png</file>
+        <file>menu/cross.png</file>
+        <file>menu/disk.png</file>
+        <file>menu/mobile-phone.png</file>
     </qresource>
 </RCC>
