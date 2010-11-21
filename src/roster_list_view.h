@@ -62,6 +62,8 @@ private:
     QAction *action_chat;
     QAction *action_profile;
     QAction *action_remove;
+    QAction *action_send_file;
+    QAction *action_call;
 };
 
 #endif // ROSTERLISTVIEW_H

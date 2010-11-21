@@ -32,6 +32,8 @@ RosterListView::RosterListView(QWidget* parent):QListView(parent) {
     action_chat = new QAction("Chat", this);
     action_profile = new QAction("View profile", this);
     action_remove = new QAction("Remove contact", this);
+    action_send_file = new QAction("Send a file", this);
+    action_call = new QAction("Make a voice call", this);
 
     connect(this, SIGNAL(pressed(const QModelIndex&)), this, SLOT(mousePressed(const QModelIndex&)));
     connect(this, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(doubleClicked(const QModelIndex&)));
@@ -45,6 +47,8 @@ RosterListView::~RosterListView() {
     delete action_chat;
     delete action_profile;
     delete action_remove;
+    delete action_send_file;
+    delete action_call;
 }
 
 bool RosterListView::event(QEvent* e) {
@@ -57,6 +61,10 @@ void RosterListView::mousePressed(const QModelIndex& index) {
         QMenu menu(this);
 	menu.addAction(action_chat);
 	menu.setDefaultAction(action_chat);
+	menu.addSeparator();
+	menu.addAction(action_call);
+	menu.addAction(action_send_file);
+	menu.addSeparator();
 	menu.addAction(action_profile);
 	menu.addAction(action_remove);
         menu.exec(QCursor::pos());

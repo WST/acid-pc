@@ -83,6 +83,10 @@ void Messenger::createMenus() {
     QAction *action_quit = im_menu->addAction("Quit");
 
     QAction *action_support_room = help_menu->addAction(QIcon(":/menu/users.png"), "Support chat");
+    help_menu->addSeparator();
+    QAction *action_official_site = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "SmartCommunity site");
+    QAction *action_official_forum = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "Support forum");
+    help_menu->addSeparator();
     QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), "About " APP_NAME "...");
     QAction *action_about_qt = help_menu->addAction("About Qt...");
 

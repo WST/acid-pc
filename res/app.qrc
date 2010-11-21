@@ -11,5 +11,6 @@
         <file>menu/document.png</file>
         <file>menu/users.png</file>
         <file>chat/paper-plane.png</file>
+        <file>menu/smartcomm.png</file>
     </qresource>
 </RCC>
