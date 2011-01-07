@@ -35,6 +35,8 @@ class Messenger: public QObject {
 		void createMenus();
 		void loadSettings();
 		void saveSettings();
+		QXmppCallManager *call_manager;
+		QXmppMucManager *muc_manager;
 
 	public:
 		Messenger(QObject *parent = 0);

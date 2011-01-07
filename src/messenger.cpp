@@ -7,6 +7,10 @@ Messenger::Messenger(QObject *parent): QObject(parent) {
     settings = new QSettings(APP_COMPANY, APP_NAME, this);
     client_settings = new QXmppConfiguration();
     client = new QXmppClient(this);
+	 call_manager = new QXmppCallManager();
+	 muc_manager = new QXmppMucManager();
+	 client->addExtension(call_manager);
+	 client->addExtension(muc_manager);
     window = new MainWindow(APP_NAME);
     login = new LoginForm(APP_NAME);
     chat = new ChatWindow(window, settings);
@@ -26,6 +30,8 @@ Messenger::~Messenger() {
     delete chat;
     delete login;
     delete window;
+	 delete call_manager;
+	delete muc_manager;
     delete client;
     delete client_settings;
     delete settings;
@@ -63,7 +69,7 @@ void Messenger::createConnections() {
     connect(client, SIGNAL(connected()), this, SLOT(handleSuccessfulConnection()));
     connect(client, SIGNAL(disconnected()), this, SLOT(handleDisconnection()));
     connect(client, SIGNAL(error(QXmppClient::Error)), this, SLOT(handleConnectionError(QXmppClient::Error)));
-    connect(& client->callManager(), SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
+    connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
     connect(client, SIGNAL(iqReceived(QXmppIq)), this, SLOT(gotIQ(QXmppIq)));
     connect(client, SIGNAL(messageReceived(QXmppMessage)), this, SLOT(gotMessage(QXmppMessage)));
 	
@@ -286,14 +292,14 @@ void Messenger::openChat(const QString &full_jid) {
 }
 
 void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
-    client->mucManager().joinRoom(room_jid, nick);
+    muc_manager->joinRoom(room_jid, nick);
     chat->openTab(room_jid, TabWidget::MUC);
 }
 
 void Messenger::leaveRoom(const QString &room_jid) {
-    client->mucManager().leaveRoom(room_jid);
+    muc_manager->leaveRoom(room_jid);
 }
 
 void Messenger::sendMUCMessage(QString room, QString message) {
-    client->mucManager().sendMessage(room, message); // могли бы ето и слотом сделать…
+    muc_manager->sendMessage(room, message); // могли бы ето и слотом сделать…
 }
