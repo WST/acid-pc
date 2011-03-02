@@ -160,7 +160,7 @@ void Messenger::activate() {
     settings->setValue("login/username", login->username());
 
     client->connectToServer(*client_settings);
-    client->transferManager().setProxy(PROXY65_JID);
+    //client->transferManager().setProxy(PROXY65_JID);
 }
 
 void Messenger::handleSuccessfulConnection() {
