@@ -55,13 +55,7 @@ TabWidget *ChatWindow::getWidgetByJid(QString jid) {
 }
 
 bool ChatWindow::adaTabForJid(QString jid) {
-	//TabWidget *widget;
-	//for(int i = 0; i < ui->tabWidget->count(); i ++) {
-		//if(((TabWidget *) ui->tabWidget->widget(i))->getJid() == jid) {
-			return (bool) getWidgetByJid(jid);
-		//}
-	//}
-	//return false;
+	return (bool) getWidgetByJid(jid);
 }
 
 void ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
