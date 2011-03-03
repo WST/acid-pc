@@ -16,7 +16,6 @@ INCLUDEPATH += \
               $$PWD
 
 SOURCES    += src/main.cpp \
-              src/mainwindow.cpp \
               src/messenger.cpp \
               src/loginform.cpp \
     src/trayicon.cpp \
@@ -31,7 +30,6 @@ SOURCES    += src/main.cpp \
 	 src/roster_item_model.cpp \
 	 src/roster_item.cpp
 HEADERS    += version.h \
-              src/mainwindow.h \
               src/messenger.h \
               src/loginform.h \
     src/trayicon.h \

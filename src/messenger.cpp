@@ -3,28 +3,42 @@
 #include "functions.h"
 #include <version.h>
 
-Messenger::Messenger(QObject *parent): QObject(parent) {
-    settings = new QSettings(APP_COMPANY, APP_NAME, this);
-    client_settings = new QXmppConfiguration();
-    client = new QXmppClient(this);
-	 call_manager = new QXmppCallManager();
-	 muc_manager = new QXmppMucManager();
-	 client->addExtension(call_manager);
-	 client->addExtension(muc_manager);
-    window = new MainWindow(APP_NAME);
-    login = new LoginForm(APP_NAME);
-    chat = new ChatWindow(window, settings);
-    about = new AboutWindow(window);
-    tray = new TrayIcon();
-    tray->show();
+Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this), roster_model(this) {
+	settings = new QSettings(APP_COMPANY, APP_NAME, this);
+	client_settings = new QXmppConfiguration();
+	client = new QXmppClient(this);
+	call_manager = new QXmppCallManager();
+	muc_manager = new QXmppMucManager();
+	client->addExtension(call_manager);
+	client->addExtension(muc_manager);
+	//window = new MainWindow(APP_NAME);
+	login = new LoginForm(APP_NAME);
+	chat = new ChatWindow(this);
+	about = new AboutWindow(this);
+	tray = new TrayIcon();
+	tray->show();
 
-    createConnections();
-    createMenus();
-    loadSettings();
+	createConnections();
+	createMenus();
+	loadSettings();
+	
+	setWindowTitle(APP_NAME);
+	setWindowIcon(QIcon(":/acid_16.png"));
+	
+	roster_widget.setModel(& roster_model);
+	setCentralWidget(& roster_widget);
+	
+	RosterItemDelegate *delegate = new RosterItemDelegate();
+	roster_widget.setItemDelegate(delegate);
+	
+	connect(& roster_widget, SIGNAL(showChatDialog(QString)), this, SIGNAL(openChat(QString)));
+	//connect(& roster_widget, SIGNAL(showProfile(QString)), this, SIGNAL(showProfile(QString)));
+	//connect(& roster_widget, SIGNAL(removeContact(QString)), this, SIGNAL(removeContact(QString)));
 }
 
 Messenger::~Messenger() {
     saveSettings();
+	/*
     delete about;
     delete tray;
     delete chat;
@@ -35,10 +49,11 @@ Messenger::~Messenger() {
     delete client;
     delete client_settings;
     delete settings;
+	*/
 }
 
 void Messenger::saveSettings() {
-    settings->setValue("main/geometry", window->saveGeometry());
+    settings->setValue("main/geometry", this->saveGeometry());
     settings->setValue("login/geometry", login->saveGeometry());
     settings->setValue("chat/geometry", chat->saveGeometry());
     settings->setValue("about/geometry", about->saveGeometry());
@@ -47,7 +62,7 @@ void Messenger::saveSettings() {
 }
 
 void Messenger::loadSettings() {
-    if(settings->contains("main/geometry")) window->restoreGeometry(settings->value("main/geometry").toByteArray());
+    if(settings->contains("main/geometry")) this->restoreGeometry(settings->value("main/geometry").toByteArray());
     if(settings->contains("login/geometry")) login->restoreGeometry(settings->value("login/geometry").toByteArray());
     if(settings->contains("chat/geometry")) chat->restoreGeometry(settings->value("chat/geometry").toByteArray());
     if(settings->contains("about/geometry")) about->restoreGeometry(settings->value("about/geometry").toByteArray());
@@ -77,14 +92,14 @@ void Messenger::createConnections() {
 	connect(& client->rosterManager(), SIGNAL(rosterChanged(const QString&)), this, SLOT(rosterChanged(const QString&)));
 	connect(& client->rosterManager(), SIGNAL(presenceChanged(const QString&, const QString&)), this, SLOT(presenceChanged(const QString&, const QString&)));
 
-	connect(window, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
+	connect(this, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
 }
 
 void Messenger::createMenus() {
     // TODO: расположить нормально, соответственно реальной структуре меню
-    QMenu *im_menu = window->menuBar()->addMenu("Program");
-    QMenu *status_menu = window->menuBar()->addMenu("Status");
-    QMenu *help_menu = window->menuBar()->addMenu("Help");
+    QMenu *im_menu = menuBar()->addMenu("Program");
+    QMenu *status_menu = menuBar()->addMenu("Status");
+    QMenu *help_menu = menuBar()->addMenu("Help");
 
     QAction *action_new_message = im_menu->addAction(QIcon(":/menu/document.png"), "New message...");
     im_menu->addSeparator();
@@ -166,14 +181,14 @@ void Messenger::activate() {
 void Messenger::handleSuccessfulConnection() {
     // клиент сообщает нам об успешном подключении
     login->hide();
-    window->show();
+    this->show();
     tray->setOnline();
     chat->setOnline(true);
 }
 
 void Messenger::handleDisconnection() {
     // мы отключились от сервера. Успешно или в результате ошибки — об этом говорит то, был и перед этим error().
-    window->hide();
+    this->hide();
     tray->setOffline();
     login->setEnabled(true);
     login->show();
@@ -194,12 +209,12 @@ void Messenger::disconnect() {
 
 void Messenger::iconClicked(QSystemTrayIcon::ActivationReason reason) {
     if(reason == QSystemTrayIcon::Trigger) {
-	client->isConnected() ? window->setVisible(!window->isVisible()) : login->setVisible(!login->isVisible());
+	client->isConnected() ? this->setVisible(!this->isVisible()) : login->setVisible(!login->isVisible());
     }
 }
 
 void Messenger::createNewMessage() {
-    MessageForm *message = new MessageForm(window);
+    MessageForm *message = new MessageForm(this);
     if(!client->isConnected()) {
 	// если клиент не подключён, выключить кнопку отправки сообщения…
 	message->disableSendButton();
@@ -262,7 +277,7 @@ void Messenger::showApplicationInfo() {
 }
 
 void Messenger::rosterChanged(const QString& bare_jid) {
-	window->model()->updateRosterEntry(bare_jid, client->rosterManager().getRosterEntry(bare_jid));
+	roster_model.updateRosterEntry(bare_jid, client->rosterManager().getRosterEntry(bare_jid));
 }
 
 void Messenger::rosterReceived() {
@@ -278,13 +293,13 @@ void Messenger::presenceChanged(const QString& bare_jid, const QString& resource
 		return;
 	}
 
-	if(!window->model()->getRosterItemFromBareJid(bare_jid)) {
+	if(!roster_model.getRosterItemFromBareJid(bare_jid)) {
 		return;
 	}
 
 	QString jid = bare_jid + "/" + resource;
 	QMap<QString, QXmppPresence> presences = client->rosterManager().getAllPresencesForBareJid(bare_jid);
-	window->model()->updatePresence(bare_jid, presences);
+	roster_model.updatePresence(bare_jid, presences);
 }
 
 void Messenger::openChat(const QString &full_jid) {
@@ -302,4 +317,8 @@ void Messenger::leaveRoom(const QString &room_jid) {
 
 void Messenger::sendMUCMessage(QString room, QString message) {
     muc_manager->sendMessage(room, message); // могли бы ето и слотом сделать…
+}
+
+QSettings *Messenger::settingsManager() {
+	return settings;
 }

@@ -2,7 +2,7 @@
 #define CHATWINDOW_H
 
 // Qt
-#include <QWidget>
+#include <QtGui>
 
 // qxmpp
 #include <QXmppMessage.h>
@@ -11,18 +11,20 @@
 #include "tabwidget.h"
 #include "chatwidget.h"
 #include "mucwidget.h"
-#include "mainwindow.h"
+#include "messenger.h"
 
 namespace Ui {
-    class ChatWindow;
+	class ChatWindow;
 }
+
+class Messenger;
 
 class ChatWindow: public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit ChatWindow(MainWindow *parent, QSettings *settings);
+    explicit ChatWindow(Messenger *parent);
     ~ChatWindow();
     void displayMessage(QXmppMessage &message);
     void displayMUCMessage(QXmppMessage &message);
@@ -35,7 +37,6 @@ public:
 private:
     Ui::ChatWindow *ui;
     bool online;
-    MainWindow *main;
     QSettings *settings;
 
 signals:

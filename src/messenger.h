@@ -2,8 +2,7 @@
 #define MESSENGER_H
 
 // Qt
-#include <QObject>
-#include <QSettings>
+#include <QtGui>
 
 // qxmpp
 #include <QXmppClient.h>
@@ -13,20 +12,23 @@
 #include <QXmppMessage.h>
 
 // ACId
-#include "mainwindow.h"
 #include "loginform.h"
 #include "trayicon.h"
 #include "messageform.h"
 #include "chatwindow.h"
 #include "aboutwindow.h"
+#include "roster_list_view.h"
+#include "roster_item_model.h"
 
-class Messenger: public QObject {
+class Messenger;
+class ChatWindow;
+
+class Messenger: public QMainWindow {
 	Q_OBJECT
 	private:
 		QXmppClient *client; // клиент
 		QXmppConfiguration *client_settings; // настройки клиента
 		QSettings *settings; // запоминалка настроек
-		MainWindow *window; // окошко с ростером
 		LoginForm *login; // окошко ввода информации об учётной записи
 		TrayIcon *tray; // значок приложения в трее
 		ChatWindow *chat; // окошко чатов
@@ -37,11 +39,15 @@ class Messenger: public QObject {
 		void saveSettings();
 		QXmppCallManager *call_manager;
 		QXmppMucManager *muc_manager;
+	
+		RosterListView roster_widget; // виджет ростера
+		RosterItemModel roster_model; // модель элемента ростера
 
 	public:
-		Messenger(QObject *parent = 0);
+		Messenger(QWidget *parent = 0);
 		~Messenger();
 		void launch();
+		QSettings *settingsManager();
 
 	private slots:
 		void activate();
