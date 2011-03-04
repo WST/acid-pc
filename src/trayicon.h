@@ -9,6 +9,7 @@ class TrayIcon: public QSystemTrayIcon
 	public:
 		TrayIcon();
 		void debugMessage(QString msg);
+		void notify(const QString &title, const QString &message);
 		void setOnline();
 		void setOffline();
 };

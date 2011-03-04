@@ -16,12 +16,15 @@
 #include "trayicon.h"
 #include "messageform.h"
 #include "chatwindow.h"
+#include "settingswindow.h"
 #include "aboutwindow.h"
+#include "vcardwindow.h"
 #include "roster_list_view.h"
 #include "roster_item_model.h"
 
 class Messenger;
 class ChatWindow;
+class SettingsWindow;
 
 class Messenger: public QMainWindow {
 	Q_OBJECT
@@ -32,6 +35,7 @@ class Messenger: public QMainWindow {
 		LoginForm *login; // окошко ввода информации об учётной записи
 		TrayIcon *tray; // значок приложения в трее
 		ChatWindow *chat; // окошко чатов
+		SettingsWindow *settings_window; // редактор настроек
 		AboutWindow *about;
 		void createConnections();
 		void createMenus();
@@ -51,6 +55,7 @@ class Messenger: public QMainWindow {
 
 	private slots:
 		void activate();
+		void manageSettings();
 		void handleSuccessfulConnection();
 		void handleConnectionError(QXmppClient::Error error);
 		void handleDisconnection();
@@ -62,8 +67,6 @@ class Messenger: public QMainWindow {
 		void gotVoiceCall(QXmppCall *call);
 		void gotIQ(QXmppIq message);
 		void gotMessage(QXmppMessage message);
-		void setPlastiqueStyle();
-		void setCleanlooksStyle();
 		void joinSupportRoom();
 		void showApplicationInfo();
 		void presenceChanged(const QString &bare_jid, const QString &resource);
@@ -72,6 +75,7 @@ class Messenger: public QMainWindow {
 		void openChat(const QString &full_jid);
 		void joinRoom(const QString &room_jid, const QString &nick); // в qxmpp ето есть, но этот метод ещё и открывает таб
 		void leaveRoom(const QString &room_jid);
+		void showProfile(QString bare_jid);
 };
 
 #endif // MESSENGER_H

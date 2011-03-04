@@ -17,6 +17,10 @@ void TrayIcon::debugMessage(QString msg) {
 	showMessage("Debug message", msg);
 }
 
+void TrayIcon::notify(const QString &title, const QString &message) {
+	showMessage(title, message);
+}
+
 void TrayIcon::setOnline() {
 	setIcon(TRAYICON_ONLINE);
 }

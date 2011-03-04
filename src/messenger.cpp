@@ -15,6 +15,7 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 	login = new LoginForm(APP_NAME);
 	chat = new ChatWindow(this);
 	about = new AboutWindow(this);
+	settings_window = 0;
 	tray = new TrayIcon();
 	tray->show();
 
@@ -30,10 +31,6 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 	
 	RosterItemDelegate *delegate = new RosterItemDelegate();
 	roster_widget.setItemDelegate(delegate);
-	
-	connect(& roster_widget, SIGNAL(showChatDialog(QString)), this, SIGNAL(openChat(QString)));
-	//connect(& roster_widget, SIGNAL(showProfile(QString)), this, SIGNAL(showProfile(QString)));
-	//connect(& roster_widget, SIGNAL(removeContact(QString)), this, SIGNAL(removeContact(QString)));
 }
 
 Messenger::~Messenger() {
@@ -93,48 +90,46 @@ void Messenger::createConnections() {
 	connect(& client->rosterManager(), SIGNAL(presenceChanged(const QString&, const QString&)), this, SLOT(presenceChanged(const QString&, const QString&)));
 
 	connect(this, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
+	
+	connect(& roster_widget, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
+	connect(& roster_widget, SIGNAL(showProfile(QString)), this, SLOT(showProfile(QString)));
+	connect(& roster_widget, SIGNAL(removeContact(QString)), this, SLOT(removeContact(QString)));
 }
 
 void Messenger::createMenus() {
 	// TODO: расположить нормально, соответственно реальной структуре меню
 	QMenu *im_menu = menuBar()->addMenu("Program");
+		QAction *action_new_message = im_menu->addAction(QIcon(":/menu/document.png"), "New message...");
+		im_menu->addSeparator();
+		QAction *action_settings = im_menu->addAction(QIcon(":/menu/document.png"), "Settings");
+		im_menu->addSeparator();
+		QAction *action_quit = im_menu->addAction("Quit");
+	
 	QMenu *status_menu = menuBar()->addMenu("Status");
+		QAction *action_status_available = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Available");
+		QAction *action_status_f4c = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Free for chat");
+		QAction *action_status_away = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Away");
+		QAction *action_status_xa = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Extended away");
+		QAction *action_status_dnd = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Do not disturb");
+		status_menu->addSeparator();
+		QAction *action_status_dc = status_menu->addAction(QIcon(":/trayicon/offline-16px.png"), "Offline");
+	
 	QMenu *help_menu = menuBar()->addMenu("Help");
-
-	QAction *action_new_message = im_menu->addAction(QIcon(":/menu/document.png"), "New message...");
-	im_menu->addSeparator();
-	QMenu *style_menu = im_menu->addMenu(QIcon(":/menu/t-shirt.png"), "Style");
-	QAction *action_quit = im_menu->addAction("Quit");
-
-	QAction *action_support_room = help_menu->addAction(QIcon(":/menu/users.png"), "Support chat");
-	help_menu->addSeparator();
-	QAction *action_official_site = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "SmartCommunity site");
-	QAction *action_official_forum = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "Support forum");
-	help_menu->addSeparator();
-	QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), "About " APP_NAME "...");
-	QAction *action_about_qt = help_menu->addAction("About Qt...");
-
-	QAction *action_status_available = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Available");
-	QAction *action_status_f4c = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Free for chat");
-	QAction *action_status_away = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Away");
-	QAction *action_status_xa = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Extended away");
-	QAction *action_status_dnd = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Do not disturb");
-	status_menu->addSeparator();
-	QAction *action_status_dc = status_menu->addAction(QIcon(":/trayicon/offline-16px.png"), "Offline");
-
-	QAction *action_plastique_style = style_menu->addAction("Plastique");
-	QAction *action_cleanlooks_style = style_menu->addAction("Cleanlooks");
-	// TODO: отображать все доступные стили
+		QAction *action_support_room = help_menu->addAction(QIcon(":/menu/users.png"), "Support chat");
+		help_menu->addSeparator();
+		QAction *action_official_site = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "SmartCommunity site");
+		QAction *action_official_forum = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "Support forum");
+		help_menu->addSeparator();
+		QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), "About " APP_NAME "...");
+		QAction *action_about_qt = help_menu->addAction("About Qt...");
 
 	connect(action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
+	connect(action_settings, SIGNAL(triggered()), this, SLOT(manageSettings()));
 	connect(action_support_room, SIGNAL(triggered()), this, SLOT(joinSupportRoom()));
 	connect(action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 	connect(action_about_app, SIGNAL(triggered()), this, SLOT(showApplicationInfo()));
 	connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
 	connect(action_status_dc, SIGNAL(triggered()), this, SLOT(disconnect()));
-
-	connect(action_plastique_style, SIGNAL(triggered()), this, SLOT(setPlastiqueStyle()));
-	connect(action_cleanlooks_style, SIGNAL(triggered()), this, SLOT(setCleanlooksStyle()));
 
 	QMenu *traymenu = new QMenu();
 	traymenu->insertAction(0, action_new_message);
@@ -259,14 +254,6 @@ void Messenger::gotMessage(QXmppMessage message) {
 	}
 }
 
-void Messenger::setPlastiqueStyle() {
-	qApp->setStyle("plastique");
-}
-
-void Messenger::setCleanlooksStyle() {
-	qApp->setStyle("cleanlooks");
-}
-
 void Messenger::joinSupportRoom() {
 	joinRoom(SUPPORT_JID, login->username());
 }
@@ -320,4 +307,15 @@ void Messenger::sendMUCMessage(QString room, QString message) {
 
 QSettings *Messenger::settingsManager() {
 	return settings;
+}
+
+void Messenger::manageSettings() {
+	if(!settings_window) {
+		settings_window = new SettingsWindow(this);
+	}
+	settings_window->show();
+}
+
+void Messenger::showProfile(QString bare_jid) {
+	(new VcardWindow(this, bare_jid))->show();
 }

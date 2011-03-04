@@ -28,7 +28,9 @@ SOURCES    += src/main.cpp \
     src/aboutwindow.cpp \
 	 src/roster_list_view.cpp \
 	 src/roster_item_model.cpp \
-	 src/roster_item.cpp
+	 src/roster_item.cpp \
+    src/settingswindow.cpp \
+    src/vcardwindow.cpp
 HEADERS    += version.h \
               src/messenger.h \
               src/loginform.h \
@@ -42,14 +44,18 @@ HEADERS    += version.h \
     src/aboutwindow.h \
 	 src/roster_list_view.h \
 	 src/roster_item_model.h \
-	 src/roster_item.h
+	 src/roster_item.h \
+    src/settingswindow.h \
+    src/vcardwindow.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \
     ui/chatwidget.ui \
     ui/chatwindow.ui \
     ui/mucwidget.ui \
-    ui/aboutwindow.ui
+    ui/aboutwindow.ui \
+    ui/settingswindow.ui \
+    ui/vcardwindow.ui
 RESOURCES  += res/app.qrc
 
 include(src/3rd-party/qxmpp.pri)
