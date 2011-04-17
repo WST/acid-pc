@@ -29,7 +29,7 @@ public:
     void displayMessage(QXmppMessage &message);
     void displayMUCMessage(QXmppMessage &message);
     bool adaTabForJid(QString fulljid);
-    void openTab(QString fulljid, TabWidget::Type type);
+	TabWidget *openTab(QString fulljid, TabWidget::Type type);
     void reloadGeometry(QSettings *settings);
     TabWidget *getWidgetByJid(QString jid);
     TabWidget *getWidgetByIndex(int index);

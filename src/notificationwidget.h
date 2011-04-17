@@ -30,9 +30,9 @@ class NotificationWidget: public QWidget
     Q_OBJECT
 
 public:
-    NotificationWidget(QWidget *parent = 0);
+	NotificationWidget(QWidget *parent = 0, unsigned short int timeout = 5);
     ~NotificationWidget();
-    void showMessage(const QPixmap &icon, const QString &message, const bool &waitForUser = false);
+	void showMessage(const QPixmap &icon, QWidget *widget, const bool &waitForUser = false);
 
 signals:
     void hidden();

@@ -3,7 +3,7 @@
 #include "functions.h"
 #include <version.h>
 
-Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this), roster_model(this) {
+Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this), roster_model(this), messages() {
 	settings = new QSettings(APP_COMPANY, APP_NAME, this);
 	client_settings = new QXmppConfiguration();
 	client = new QXmppClient(this);
@@ -86,7 +86,8 @@ void Messenger::loadSettings() {
 	if(settings->contains("login/domain")) login->setDomain(settings->value("login/domain").toString());
 	if(settings->contains("login/auto")) login->setAutoLogin(settings->value("login/auto").toBool());
 
-	if(settings->contains("settings/roster_opacity")) setWindowOpacity(settings->value("settings/roster_opacity").toFloat());
+	if(settings->contains("settings/roster_opacity")) setWindowOpacity(settings->value("settings/roster_opacity").toFloat() / 100);
+	if(settings->value("settings/roster_on_the_top", false).toBool()) setWindowFlags(windowFlags() | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
 
 	if(settings->contains("settings/gui_style")) {
 		const char *styles[] = {0, "plastique", "cleanlooks"};
@@ -107,13 +108,15 @@ void Messenger::createConnections() {
 	connect(client, SIGNAL(connected()), this, SLOT(handleSuccessfulConnection()));
 	connect(client, SIGNAL(disconnected()), this, SLOT(handleDisconnection()));
 	connect(client, SIGNAL(error(QXmppClient::Error)), this, SLOT(handleConnectionError(QXmppClient::Error)));
-	connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
 	connect(client, SIGNAL(iqReceived(QXmppIq)), this, SLOT(gotIQ(QXmppIq)));
 	connect(client, SIGNAL(messageReceived(QXmppMessage)), this, SLOT(gotMessage(QXmppMessage)));
 	
 	connect(& client->rosterManager(), SIGNAL(rosterReceived()), this, SLOT(rosterReceived()));
 	connect(& client->rosterManager(), SIGNAL(rosterChanged(const QString&)), this, SLOT(rosterChanged(const QString&)));
 	connect(& client->rosterManager(), SIGNAL(presenceChanged(const QString&, const QString&)), this, SLOT(presenceChanged(const QString&, const QString&)));
+
+	connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
+	connect(muc_manager, SIGNAL(roomParticipantChanged(QString,QString)), this, SLOT(roomParticipantChanged(QString, QString)));
 
 	connect(this, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
 	
@@ -179,13 +182,15 @@ void Messenger::activate() {
 	// если подключение успешно — скрыть окошко входа и отобразить главное окошко.
 	login->setEnabled(false);
 
+	if(!settings->contains("settings/muc_nickname")) settings->setValue("settings/muc_nickname", login->username()); // умолчальный ник в MUC — левая часть Jabber ID
+
 	client_settings->setDomain(login->domain());
 	client_settings->setUser(login->username());
 	client_settings->setPassword(login->password());
 	client_settings->setResource(APP_NAME);
 	client_settings->setIgnoreSslErrors(true);
-	client_settings->setKeepAliveInterval(settings->value("settings/keepalive_interval", 60).toInt()); // пинговать раз в минуту — чтобы в случае косяка быстрее спалить.
-	client_settings->setKeepAliveTimeout(settings->value("settings/keepalive_timeout", 30).toInt()); // таймаут пинга 30 секунд. Если ответ не пришёл, переходить в оффлайн.
+	client_settings->setKeepAliveInterval(settings->value("settings/keepalive_interval", KEEPALIVE_INTERVAL).toInt()); // пинговать раз в минуту — чтобы в случае косяка быстрее спалить.
+	client_settings->setKeepAliveTimeout(settings->value("settings/keepalive_timeout", KEEPALIVE_TIMEOUT).toInt()); // таймаут пинга 30 секунд. Если ответ не пришёл, переходить в оффлайн.
 	client_settings->setAutoReconnectionEnabled(false);
 
 	transfer_manager->setProxy(settings->value("settings/file_transfer_proxy", PROXY65_JID).toString());
@@ -282,20 +287,33 @@ void Messenger::gotMessage(QXmppMessage message) {
 			if(message.body().isEmpty()) {
 				return;
 			}
-			chat->displayMessage(message);
+			if(settings->value("settings/automatically_open_new_tabs", false).toBool()) {
+				chat->displayMessage(message);
+				return;
+			}
+			if(!chat->adaTabForJid(message.from())) {
+				// Сюда мы попадаем, если надо сохранить сообщение и показать уведомление…
+				// TODO
+				// NewMessageNotifier *notifier = new NewMessageNotifier(& message);
+				// connect(notifier, SIGNAL(accepted(QString)), this, SLOT(acceptConversation(QString)));
+				messages[message.id()] = message;
+				//tray->popupMessage("New incoming message!");
+			} else {
+				chat->displayMessage(message);
+			}
 		break;
 	}
 }
 
 void Messenger::joinSupportRoom() {
-	joinRoom(SUPPORT_JID, login->username());
+	joinRoom(SUPPORT_JID, settings->value("settings/muc_nickname", login->username()).toString());
 }
 
 void Messenger::showApplicationInfo() {
 	about->show();
 }
 
-void Messenger::rosterChanged(const QString& bare_jid) {
+void Messenger::rosterChanged(const QString &bare_jid) {
 	roster_model.updateRosterEntry(bare_jid, client->rosterManager().getRosterEntry(bare_jid));
 }
 
@@ -332,6 +350,12 @@ void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
 
 void Messenger::leaveRoom(const QString &room_jid) {
 	muc_manager->leaveRoom(room_jid);
+}
+
+void Messenger::roomParticipantChanged(QString room_jid, QString nick) {
+	// TODO: при получении чьего-то presence уведомить об этом таб; при получении кика закрыть таб
+	MUCWidget *widget = (MUCWidget *) chat->getWidgetByJid(room_jid);
+	//widget->presenceFrom(nick);
 }
 
 void Messenger::sendMUCMessage(QString room, QString message) {

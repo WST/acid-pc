@@ -11,5 +11,7 @@
 #define PROXY65_JID "proxy.jsmart.web.id"
 #define SUPPORT_JID "support@conference.jsmart.web.id"
 #define APP_CAPSNODE "http://acid-im.net/caps"
+#define KEEPALIVE_INTERVAL 60
+#define KEEPALIVE_TIMEOUT 30
 
 #endif // VERSION_H

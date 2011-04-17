@@ -21,6 +21,13 @@ void TrayIcon::notify(const QString &title, const QString &message) {
 	showMessage(title, message);
 }
 
+void TrayIcon::popup(QWidget *message, unsigned short int timeout) {
+	NotificationWidget *widget = new NotificationWidget(0, timeout);
+	widget->showMessage(QPixmap(), message, true);
+	connect(widget, SIGNAL(hidden()), widget, SLOT(deleteLater()));
+	connect(widget, SIGNAL(hidden()), message, SLOT(deleteLater()));
+}
+
 void TrayIcon::setOnline() {
 	setIcon(TRAYICON_ONLINE);
 }

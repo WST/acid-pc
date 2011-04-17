@@ -53,6 +53,8 @@ class Messenger: public QMainWindow {
 		RosterListView roster_widget; // виджет ростера
 		RosterItemModel roster_model; // модель элемента ростера
 
+		QMap<QString, QXmppMessage> messages; // буфер принятых сообщений
+
 	public:
 		Messenger(QWidget *parent = 0);
 		~Messenger();
@@ -83,6 +85,7 @@ class Messenger: public QMainWindow {
 		void leaveRoom(const QString &room_jid);
 		void showProfile(QString bare_jid);
 		void loadSettings();
+		void roomParticipantChanged(QString room_jid, QString nick);
 };
 
 #endif // MESSENGER_H

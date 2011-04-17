@@ -12,7 +12,7 @@ ChatWidget::~ChatWidget() {
 }
 
 void ChatWidget::insertMessage(QXmppMessage &message) {
-    ui->chatview->append("<font color=\"#AA0000\">&lt;" + message.from() + "&gt;</font>" + message.body());
+	ui->chatview->append("<font color=\"#AA0000\">&lt;" + message.from() + "&gt;</font> " + message.body());
 }
 
 void ChatWidget::on_send_clicked() {

@@ -24,24 +24,14 @@
 
 // PUBLIC
 
-NotificationWidget::NotificationWidget(QWidget *parent): QWidget(parent)
+NotificationWidget::NotificationWidget(QWidget *parent, unsigned short int timeout): QWidget(parent)
 {
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     setFixedWidth(500);
     setGeometry(0, 0, 500, 1000);
 
-    iconLabel = new QLabel(this);
-        iconLabel->setAlignment(Qt::AlignLeading | Qt::AlignLeft | Qt::AlignTop);
-
-    messageLabel = new QLabel(this);
-        messageLabel->setTextFormat(Qt::RichText);
-        messageLabel->setOpenExternalLinks(true);
-        messageLabel->setWordWrap(true);
-
-    QHBoxLayout *layout = new QHBoxLayout(this);
-        layout->addWidget(iconLabel);
-        layout->addWidget(messageLabel);
-        layout->setStretch(1, 1);
+	iconLabel = new QLabel(this);
+		iconLabel->setAlignment(Qt::AlignLeading | Qt::AlignLeft | Qt::AlignTop);
 
     setWindowFlags(Qt::ToolTip | Qt::X11BypassWindowManagerHint | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Desktop);
 
@@ -57,7 +47,7 @@ NotificationWidget::NotificationWidget(QWidget *parent): QWidget(parent)
 
     waitingTimer = new QTimer(this);
         waitingTimer->setSingleShot(true);
-        waitingTimer->setInterval(5000);
+		waitingTimer->setInterval(1000 * timeout);
         connect(waitingTimer, SIGNAL(timeout()), this, SLOT(hideMe()));
 
     showing = false;
@@ -67,15 +57,19 @@ NotificationWidget::~NotificationWidget()
 {
 }
 
-void NotificationWidget::showMessage(const QPixmap &icon, const QString &message, const bool &waitForUser)
+void NotificationWidget::showMessage(const QPixmap &icon, QWidget *widget, const bool &waitForUser)
 {
     if (showing)
         return;
 
+	QHBoxLayout *layout = new QHBoxLayout(this);
+		layout->addWidget(iconLabel);
+		layout->addWidget(widget);
+		layout->setStretch(1, 1);
+
     iconLabel->setPixmap(icon);
-    messageLabel->setText(message);
-    layout()->invalidate();
-    layout()->activate();
+	layout->invalidate();
+	layout->activate();
     adjustSize();
 
     showing = true;

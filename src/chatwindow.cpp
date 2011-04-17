@@ -23,13 +23,12 @@ void ChatWindow::displayMessage(QXmppMessage &message) {
 	}
 
 	QStringList jid = parseJid(message.from());
-
 	if(((widget = getWidgetByJid(jid[1])) != 0) && !jid[5].isEmpty()) {
 		((ChatWidget *) widget)->appendResource(jid[5]);
-		return displayMessage(message); // NOTE: рекурсия
+		return displayMessage(message);
+	} else {
+		return ((ChatWidget *) openTab(message.from(), TabWidget::Chat))->insertMessage(message);
 	}
-
-	return openTab(message.from(), TabWidget::Chat);
 }
 
 void ChatWindow::displayMUCMessage(QXmppMessage &message) {
@@ -58,14 +57,15 @@ bool ChatWindow::adaTabForJid(QString jid) {
 	return (bool) getWidgetByJid(jid);
 }
 
-void ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
+TabWidget *ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
 	if(!isVisible()) {
 		show();
 	}
 
-	if(adaTabForJid(fulljid)) {
+	TabWidget *sudah_ada = getWidgetByJid(fulljid);
+	if(sudah_ada) {
 		// TODO: активировать требуемую вкладку, она уже открыта
-		return;
+		return sudah_ada;
 	}
 
 	switch(type) {
@@ -77,6 +77,7 @@ void ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
 			ui->tabWidget->setCurrentWidget(widget);
 			widget->setOnline(online);
 			widget->activate();
+			return widget;
 		} break;
 		case TabWidget::MUC: {
 			// NOTE: при входе в MUC fulljid является bare JID комнаты!
@@ -86,6 +87,7 @@ void ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
 			ui->tabWidget->setCurrentWidget(widget);
 			widget->setOnline(online);
 			widget->activate();
+			return widget;
 		} break;
 	}
 }
