@@ -85,6 +85,14 @@ void Messenger::loadSettings() {
 	if(settings->contains("login/username")) login->setUsername(settings->value("login/username").toString());
 	if(settings->contains("login/domain")) login->setDomain(settings->value("login/domain").toString());
 	if(settings->contains("login/auto")) login->setAutoLogin(settings->value("login/auto").toBool());
+
+	if(settings->contains("settings/roster_opacity")) setWindowOpacity(settings->value("settings/roster_opacity").toFloat());
+
+	if(settings->contains("settings/gui_style")) {
+		const char *styles[] = {0, "plastique", "cleanlooks"};
+		const char *active_style = styles[settings->value("settings/gui_style").toInt()];
+		qApp->setStyle(active_style);
+	}
 }
 
 void Messenger::createConnections() {

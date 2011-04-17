@@ -30,7 +30,8 @@ SOURCES    += src/main.cpp \
 	 src/roster_item_model.cpp \
 	 src/roster_item.cpp \
     src/settingswindow.cpp \
-    src/vcardwindow.cpp
+    src/vcardwindow.cpp \
+    src/notificationwidget.cpp
 HEADERS    += version.h \
               src/messenger.h \
               src/loginform.h \
@@ -46,7 +47,8 @@ HEADERS    += version.h \
 	 src/roster_item_model.h \
 	 src/roster_item.h \
     src/settingswindow.h \
-    src/vcardwindow.h
+    src/vcardwindow.h \
+    src/notificationwidget.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \
