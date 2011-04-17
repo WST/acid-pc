@@ -29,18 +29,18 @@
 #include <QKeyEvent>
 
 RosterListView::RosterListView(QWidget* parent):QListView(parent) {
-    action_chat = new QAction(QIcon(":/menu/balloons.png"), "Chat", this);
-    action_profile = new QAction(QIcon(":/menu/card-address.png"), "View profile", this);
-    action_remove = new QAction(QIcon(":/menu/cross.png"), "Remove contact", this);
-    action_send_file = new QAction(QIcon(":/menu/disk.png"), "Send a file", this);
-    action_call = new QAction(QIcon(":/menu/mobile-phone.png"), "Make a voice call", this);
+	action_chat = new QAction(QIcon(":/menu/balloons.png"), "Chat", this);
+	action_profile = new QAction(QIcon(":/menu/card-address.png"), "View profile", this);
+	action_remove = new QAction(QIcon(":/menu/cross.png"), "Remove contact", this);
+	action_send_file = new QAction(QIcon(":/menu/disk.png"), "Send a file", this);
+	action_call = new QAction(QIcon(":/menu/mobile-phone.png"), "Make a voice call", this);
 
-    connect(this, SIGNAL(pressed(const QModelIndex&)), this, SLOT(mousePressed(const QModelIndex&)));
-    connect(this, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(doubleClicked(const QModelIndex&)));
-    connect(this, SIGNAL(clicked(const QModelIndex&)), this, SLOT(clicked(const QModelIndex&)));
-    connect(action_chat, SIGNAL(triggered()), this, SLOT(showChatDialog_helper()));
-    connect(action_profile, SIGNAL(triggered()), this, SLOT(showProfile_helper()));
-    connect(action_remove, SIGNAL(triggered()), this, SLOT(removeContact_helper()));
+	connect(this, SIGNAL(pressed(const QModelIndex&)), this, SLOT(mousePressed(const QModelIndex&)));
+	connect(this, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(doubleClicked(const QModelIndex&)));
+	connect(this, SIGNAL(clicked(const QModelIndex&)), this, SLOT(clicked(const QModelIndex&)));
+	connect(action_chat, SIGNAL(triggered()), this, SLOT(showChatDialog_helper()));
+	connect(action_profile, SIGNAL(triggered()), this, SLOT(showProfile_helper()));
+	connect(action_remove, SIGNAL(triggered()), this, SLOT(removeContact_helper()));
 }
 
 RosterListView::~RosterListView() {

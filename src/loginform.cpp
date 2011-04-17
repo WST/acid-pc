@@ -56,6 +56,10 @@ void LoginForm::setPassword(QString password) {
 	ui->Password_lineEdit->setText(password);
 }
 
+void LoginForm::setDomain(QString domain) {
+	ui->Server_comboBox->setCurrentIndex(ui->Server_comboBox->findText(domain));
+}
+
 void LoginForm::setAutoLogin(bool autologin) {
 	ui->LogInAutomatically_checkBox->setChecked(autologin);
 }

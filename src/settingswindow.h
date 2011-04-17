@@ -20,6 +20,16 @@ class SettingsWindow: public QDialog
 
 	private:
 		Ui::SettingsWindow *ui;
+		QSettings *settings;
+		void loadCurrentSettings();
+
+private slots:
+	void on_muc_nickname_textChanged(QString );
+ void on_button_box_rejected();
+ void on_button_box_accepted();
+ void on_file_transfer_mode_currentIndexChanged(int index);
+	signals:
+		void modified();
 };
 
 #endif // SETTINGSWINDOW_H

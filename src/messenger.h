@@ -9,6 +9,9 @@
 #include <QXmppTransferManager.h>
 #include <QXmppCallManager.h>
 #include <QXmppMucManager.h>
+#include <QXmppVCardManager.h>
+#include <QXmppVersionManager.h>
+#include <QXmppDiscoveryManager.h>
 #include <QXmppMessage.h>
 
 // ACId
@@ -39,10 +42,13 @@ class Messenger: public QMainWindow {
 		AboutWindow *about;
 		void createConnections();
 		void createMenus();
-		void loadSettings();
 		void saveSettings();
 		QXmppCallManager *call_manager;
 		QXmppMucManager *muc_manager;
+		QXmppTransferManager *transfer_manager;
+		QXmppVersionManager *version_manager;
+		QXmppVCardManager *vcard_manager;
+		QXmppDiscoveryManager *disco_manager;
 	
 		RosterListView roster_widget; // виджет ростера
 		RosterItemModel roster_model; // модель элемента ростера
@@ -76,6 +82,7 @@ class Messenger: public QMainWindow {
 		void joinRoom(const QString &room_jid, const QString &nick); // в qxmpp ето есть, но этот метод ещё и открывает таб
 		void leaveRoom(const QString &room_jid);
 		void showProfile(QString bare_jid);
+		void loadSettings();
 };
 
 #endif // MESSENGER_H

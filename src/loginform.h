@@ -22,6 +22,7 @@ public:
     bool savePassword();
     void setPassword(QString password);
     void setUsername(QString username);
+	void setDomain(QString domain);
     void setSavePassword(bool save);
     void setAutoLogin(bool autologin);
     void emitFinished();

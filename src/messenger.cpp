@@ -7,15 +7,32 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 	settings = new QSettings(APP_COMPANY, APP_NAME, this);
 	client_settings = new QXmppConfiguration();
 	client = new QXmppClient(this);
+
+	transfer_manager = new QXmppTransferManager();
 	call_manager = new QXmppCallManager();
 	muc_manager = new QXmppMucManager();
+	vcard_manager = new QXmppVCardManager();
+	version_manager = new QXmppVersionManager();
+	disco_manager = new QXmppDiscoveryManager();
 	client->addExtension(call_manager);
 	client->addExtension(muc_manager);
-	//window = new MainWindow(APP_NAME);
+	client->addExtension(transfer_manager);
+	client->addExtension(vcard_manager);
+	client->addExtension(version_manager);
+	client->addExtension(disco_manager);
+
+	version_manager->setClientName(APP_NAME);
+	version_manager->setClientVersion(APP_VERSION);
+
+	disco_manager->setClientCategory("client");
+	disco_manager->setClientType("pc");
+	disco_manager->setClientName(APP_NAME);
+	disco_manager->setClientCapabilitiesNode(APP_CAPSNODE);
+
 	login = new LoginForm(APP_NAME);
 	chat = new ChatWindow(this);
 	about = new AboutWindow(this);
-	settings_window = 0;
+	settings_window = new SettingsWindow(this);
 	tray = new TrayIcon();
 	tray->show();
 
@@ -66,6 +83,7 @@ void Messenger::loadSettings() {
 
 	if(settings->contains("login/password")) login->setPassword(settings->value("login/password").toString());
 	if(settings->contains("login/username")) login->setUsername(settings->value("login/username").toString());
+	if(settings->contains("login/domain")) login->setDomain(settings->value("login/domain").toString());
 	if(settings->contains("login/auto")) login->setAutoLogin(settings->value("login/auto").toBool());
 }
 
@@ -94,6 +112,8 @@ void Messenger::createConnections() {
 	connect(& roster_widget, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
 	connect(& roster_widget, SIGNAL(showProfile(QString)), this, SLOT(showProfile(QString)));
 	connect(& roster_widget, SIGNAL(removeContact(QString)), this, SLOT(removeContact(QString)));
+
+	connect(settings_window, SIGNAL(modified()), this, SLOT(loadSettings()));
 }
 
 void Messenger::createMenus() {
@@ -156,9 +176,12 @@ void Messenger::activate() {
 	client_settings->setPassword(login->password());
 	client_settings->setResource(APP_NAME);
 	client_settings->setIgnoreSslErrors(true);
-	client_settings->setKeepAliveInterval(60); // пинговать раз в минуту — чтобы в случае косяка быстрее спалить.
-	client_settings->setKeepAliveTimeout(30); // таймаут пинга 30 секунд. Если ответ не пришёл, переходить в оффлайн.
+	client_settings->setKeepAliveInterval(settings->value("settings/keepalive_interval", 60).toInt()); // пинговать раз в минуту — чтобы в случае косяка быстрее спалить.
+	client_settings->setKeepAliveTimeout(settings->value("settings/keepalive_timeout", 30).toInt()); // таймаут пинга 30 секунд. Если ответ не пришёл, переходить в оффлайн.
 	client_settings->setAutoReconnectionEnabled(false);
+
+	transfer_manager->setProxy(settings->value("settings/file_transfer_proxy", PROXY65_JID).toString());
+	transfer_manager->setProxyOnly(true);
 
 	// Сохранить пароль, если нужно
 	if(login->savePassword()) {
@@ -170,7 +193,6 @@ void Messenger::activate() {
 	settings->setValue("login/username", login->username());
 
 	client->connectToServer(*client_settings);
-	//client->transferManager().setProxy(PROXY65_JID); // TODO
 }
 
 void Messenger::handleSuccessfulConnection() {
@@ -249,6 +271,9 @@ void Messenger::gotMessage(QXmppMessage message) {
 		case QXmppMessage::Composing: break;
 		case QXmppMessage::Chat:
 		default:
+			if(message.body().isEmpty()) {
+				return;
+			}
 			chat->displayMessage(message);
 		break;
 	}
@@ -310,9 +335,6 @@ QSettings *Messenger::settingsManager() {
 }
 
 void Messenger::manageSettings() {
-	if(!settings_window) {
-		settings_window = new SettingsWindow(this);
-	}
 	settings_window->show();
 }
 
