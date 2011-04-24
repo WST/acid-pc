@@ -72,6 +72,9 @@
             </item>
             <item row="3" column="0" colspan="2">
              <widget class="QCheckBox" name="automatically_open_new_tabs">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="whatsThis">
                <string>If enabled, the tabs for new conversations will be opened automatically every time when you receive a message from a new JID.</string>
               </property>
@@ -243,7 +246,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_4">
          <property name="title">
-          <string>Main window</string>
+          <string>Application</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
@@ -309,6 +312,16 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="ctrl_enter">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Use ctrl-enter to send messages</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -329,6 +342,9 @@
             </item>
             <item row="0" column="1">
              <widget class="QSpinBox" name="notification_display_time">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="minimum">
                <number>1</number>
               </property>

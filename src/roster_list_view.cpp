@@ -41,6 +41,8 @@ RosterListView::RosterListView(QWidget* parent):QTreeView(parent) {
 	connect(action_chat, SIGNAL(triggered()), this, SLOT(showChatDialog_helper()));
 	connect(action_profile, SIGNAL(triggered()), this, SLOT(showProfile_helper()));
 	connect(action_remove, SIGNAL(triggered()), this, SLOT(removeContact_helper()));
+
+	setHeaderHidden(true);
 }
 
 RosterListView::~RosterListView() {
