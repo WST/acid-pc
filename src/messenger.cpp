@@ -117,7 +117,7 @@ void Messenger::createConnections() {
 
 	connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
 	connect(muc_manager, SIGNAL(roomParticipantChanged(QString,QString)), this, SLOT(roomParticipantChanged(QString, QString)));
-	connect(vcard_manager, SIGNAL(vCardReceived(const QXmppVCard &)), this, SLOT(showProfile(const QXmppVCard &)));
+	connect(vcard_manager, SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
 
 	connect(this, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
 	
@@ -371,7 +371,7 @@ void Messenger::manageSettings() {
 	settings_window->show();
 }
 
-void Messenger::showProfile(const QXmppVCard &whose) {
+void Messenger::showProfile(const QXmppVCardIq &whose) {
 	tray->debugMessage("got a vcard!");
 	(new VcardWindow(this, & whose))->show();
 }
