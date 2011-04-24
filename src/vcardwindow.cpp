@@ -6,6 +6,8 @@ VcardWindow::VcardWindow(Messenger *parent, const QXmppVCardIq *whose): QDialog(
 	connect(this, SIGNAL(accepted()), this, SLOT(destroy()));
 
 	ui->fullname->setText(whose->fullName());
+	ui->nickname->setText(whose->nickName());
+	setWindowTitle(whose->fullName().isEmpty() ? "Viewing profile" : whose->fullName());
 }
 
 VcardWindow::~VcardWindow() {

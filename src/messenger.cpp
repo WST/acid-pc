@@ -117,7 +117,8 @@ void Messenger::createConnections() {
 
 	connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
 	connect(muc_manager, SIGNAL(roomParticipantChanged(QString,QString)), this, SLOT(roomParticipantChanged(QString, QString)));
-	connect(vcard_manager, SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
+	// Следующая строка — реальный кошмар. Почему одни менеджеры надо вызывать напрямую, а этот через метод?
+	connect(& client->vCardManager(), SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
 
 	connect(this, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
 	
@@ -372,7 +373,6 @@ void Messenger::manageSettings() {
 }
 
 void Messenger::showProfile(const QXmppVCardIq &whose) {
-	tray->debugMessage("got a vcard!");
 	(new VcardWindow(this, & whose))->show();
 }
 
