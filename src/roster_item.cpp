@@ -130,9 +130,8 @@ RosterItemDelegate::RosterItemDelegate()
 {
 }
 
-QSize RosterItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex & index) const
-{
-    return QSize(44, 36);
+QSize RosterItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex & index) const {
+	return QSize(44, 20);
 }
 
 void RosterItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
@@ -165,9 +164,7 @@ void RosterItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& op
         penDivision.setColor(selectedBg);
         nameTextColor = selectedText;
         statusTextColor = selectedText;
-    }
-    else
-    {
+	} else {
         penDivision.setColor(QColor(244, 244, 244));
     }
 
@@ -192,10 +189,10 @@ void RosterItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& op
     painter->setPen(statusTextColor);
     rect.setTop(rect.y() + rect.height()/2);
     rect.moveTop(rect.y() - 3);
-    QString statusText = index.data(RosterItem::StatusText).toString();
-    QFontMetrics fontMetrics(font);
-    statusText = fontMetrics.elidedText(statusText, Qt::ElideRight, rect.width() - 34);
-    painter->drawText(rect, statusText);
+	//QString statusText = index.data(RosterItem::StatusText).toString();
+	//QFontMetrics fontMetrics(font);
+	//statusText = fontMetrics.elidedText(statusText, Qt::ElideRight, rect.width() - 34);
+	//painter->drawText(rect, statusText);
 
     penDivision.setWidth(0);
     painter->setPen(penDivision);
