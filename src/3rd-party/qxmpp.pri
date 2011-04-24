@@ -61,7 +61,8 @@ HEADERS += $$PWD/qxmpp/src/QXmppUtils.h \
            $$PWD/qxmpp/src/QXmppVCardIq.h \
            $$PWD/qxmpp/src/QXmppVCard.h \
            $$PWD/qxmpp/src/QXmppVersionIq.h\
-           $$PWD/qxmpp/src/QXmppVersionManager.h
+           $$PWD/qxmpp/src/QXmppVersionManager.h \
+			  $$PWD/qxmpp/src/QXmppPasswordChecker.h
 
 SOURCES += $$PWD/qxmpp/src/QXmppUtils.cpp \
            $$PWD/qxmpp/src/QXmppArchiveIq.cpp \
@@ -118,4 +119,5 @@ SOURCES += $$PWD/qxmpp/src/QXmppUtils.cpp \
            $$PWD/qxmpp/src/QXmppVCardManager.cpp \
            $$PWD/qxmpp/src/QXmppVCardIq.cpp \
            $$PWD/qxmpp/src/QXmppVersionIq.cpp \
-           $$PWD/qxmpp/src/QXmppVersionManager.cpp
+           $$PWD/qxmpp/src/QXmppVersionManager.cpp \
+			  $$PWD/qxmpp/src/QXmppPasswordChecker.cpp

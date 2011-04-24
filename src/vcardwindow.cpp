@@ -1,10 +1,11 @@
 #include "vcardwindow.h"
 #include "ui_vcardwindow.h"
 
-VcardWindow::VcardWindow(Messenger *parent, QString bare_jid): QDialog(parent), ui(new Ui::VcardWindow) {
+VcardWindow::VcardWindow(Messenger *parent, const QXmppVCard *whose): QDialog(parent), ui(new Ui::VcardWindow) {
 	ui->setupUi(this);
 	connect(this, SIGNAL(accepted()), this, SLOT(destroy()));
-	// TODO: разрушать по другим сигналам, потом как-то прикрутить правку собственной vCard
+
+	ui->fullname->setText(whose->fullName());
 }
 
 VcardWindow::~VcardWindow() {

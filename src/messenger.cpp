@@ -117,11 +117,12 @@ void Messenger::createConnections() {
 
 	connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
 	connect(muc_manager, SIGNAL(roomParticipantChanged(QString,QString)), this, SLOT(roomParticipantChanged(QString, QString)));
+	connect(vcard_manager, SIGNAL(vCardReceived(const QXmppVCard &)), this, SLOT(showProfile(const QXmppVCard &)));
 
 	connect(this, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
 	
 	connect(& roster_widget, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
-	connect(& roster_widget, SIGNAL(showProfile(QString)), this, SLOT(showProfile(QString)));
+	connect(& roster_widget, SIGNAL(showProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
 	connect(& roster_widget, SIGNAL(removeContact(QString)), this, SLOT(removeContact(QString)));
 
 	connect(settings_window, SIGNAL(modified()), this, SLOT(loadSettings()));
@@ -370,6 +371,12 @@ void Messenger::manageSettings() {
 	settings_window->show();
 }
 
-void Messenger::showProfile(QString bare_jid) {
-	(new VcardWindow(this, bare_jid))->show();
+void Messenger::showProfile(const QXmppVCard &whose) {
+	tray->debugMessage("got a vcard!");
+	(new VcardWindow(this, & whose))->show();
 }
+
+void Messenger::requestProfile(const QString &bare_jid) {
+	vcard_manager->requestVCard(bare_jid); // Могли бы и слотом сделать, странные какие-то эти ваши девелоперы qxmpp…
+}
+

@@ -3,8 +3,13 @@
 #include "messenger.h"
 #include <version.h>
 
+#include <QXmppLogger.h>
+
 int main(int argc, char *argv[])
 {
+	QXmppLogger *logger = QXmppLogger::getLogger();
+	logger->setLoggingType(QXmppLogger::STDOUT);
+
     QApplication app(argc, argv);
         app.setApplicationName(APP_NAME);
         app.setApplicationVersion(APP_VERSION);

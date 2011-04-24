@@ -16,7 +16,7 @@ class VcardWindow: public QDialog
 	Q_OBJECT
 
 	public:
-		explicit VcardWindow(Messenger *parent, QString bare_jid);
+		explicit VcardWindow(Messenger *parent,  const QXmppVCard *whose);
 		~VcardWindow();
 
 	private:
