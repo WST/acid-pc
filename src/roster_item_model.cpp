@@ -24,6 +24,8 @@
 
 #include "roster_item_model.h"
 
+#include <QDebug>
+
 RosterItemModel::RosterItemModel(QObject* parent): QStandardItemModel(parent) {
 
 }
@@ -36,81 +38,76 @@ RosterItem* RosterItemModel::getRosterItemFromBareJid(const QString& bareJid)
         return 0;
 }
 
-void RosterItemModel::addRosterItemIfDontExist(const QString& bareJid)
-{
-    if(!m_jidRosterItemMap.contains(bareJid))
-    {
-        RosterItem* item = new RosterItem(bareJid);
-        m_jidRosterItemMap[bareJid] = item;
-        appendRow(item);
-        item->setStatusText("Offline");
-        item->setBareJid(bareJid);
-    }
+
+RosterItem *RosterItemModel::addRosterItemIfDontExist(const QString &bare_jid, const QString &nick, const QString &group) {
+	if(!m_jidRosterItemMap.contains(bare_jid)) {
+		RosterItem* item = new RosterItem(bare_jid);
+		m_jidRosterItemMap[bare_jid] = item;
+		appendRow(item); // adding a new row
+		item->setBareJid(bare_jid);
+		item->setName(nick);
+		return item;
+	} else {
+		RosterItem *item = getRosterItemFromBareJid(bare_jid);
+		item->setName(nick);
+		return item;
+	}
 }
 
-void RosterItemModel::updatePresence(const QString& bareJid, const QMap<QString, QXmppPresence>& presences)
-{
-    addRosterItemIfDontExist(bareJid);
+void RosterItemModel::updatePresence(const QString& bare_jid, const QMap<QString, QXmppPresence>& presences) {
+	RosterItem *item = getRosterItemFromBareJid(bare_jid);
+	if(item == 0) {
+		return;
+	}
 
-    if(presences.count() > 0)
-    {
+	if(presences.count() > 0) {
         QString statusText = presences.begin().value().status().statusText();
         QXmppPresence::Status::Type statusType = presences.begin().value().status().type();
         QXmppPresence::Type presenceType = presences.begin().value().type();
 
-        if(statusText.isEmpty())
-        {
-            if(presenceType == QXmppPresence::Available)
-                statusText = "Available";
-            else if(presenceType == QXmppPresence::Unavailable)
-                statusText = "Offline";
-        }
-        getRosterItemFromBareJid(bareJid)->setStatusText(statusText);
-        getRosterItemFromBareJid(bareJid)->setStatusType(statusType);
-        getRosterItemFromBareJid(bareJid)->setPresenceType(presenceType);
+		item->setStatusText(statusText);
+		item->setStatusType(statusType);
+		item->setPresenceType(presenceType);
     }
 }
 
-void RosterItemModel::updateRosterEntry(const QString& bareJid, const QXmppRosterIq::Item& rosterEntry)
-{
-    addRosterItemIfDontExist(bareJid);
+void RosterItemModel::updateRosterEntry(const QString& bareJid, const QXmppRosterIq::Item& rosterEntry) {
+	QString name = rosterEntry.name();
 
-    QString name = rosterEntry.name();
-    if(getRosterItemFromBareJid(bareJid))
-        getRosterItemFromBareJid(bareJid)->setName(name);
+	RosterItem *item = addRosterItemIfDontExist(bareJid, name, "foo_group");
+	item->setName(name);
+	// TODO другое (status, client, etc)
 }
 
-void RosterItemModel::updateAvatar(const QString& bareJid, const QImage& image)
-{
-    addRosterItemIfDontExist(bareJid);
-
-//    if(image.isNull())
-//        return;
-
-    getRosterItemFromBareJid(bareJid)->setAvatar(image);
+void RosterItemModel::updateAvatar(const QString& bareJid, const QImage& image) {
+	RosterItem *item = getRosterItemFromBareJid(bareJid);
+	if(item == 0) {
+		return;
+	}
+	item->setAvatar(image);
 }
 
-void RosterItemModel::updateName(const QString& bareJid, const QString& name)
-{
-    addRosterItemIfDontExist(bareJid);
+void RosterItemModel::updateName(const QString& bareJid, const QString& name) {
+	RosterItem *item = getRosterItemFromBareJid(bareJid);
+	if(item == 0) {
+		return;
+	}
 
-    if(name.isEmpty())
+	if(name.isEmpty()) {
         return;
+	}
 
-    getRosterItemFromBareJid(bareJid)->setName(name);
+	item->setName(name);
 }
 
-void RosterItemModel::clear()
-{
+void RosterItemModel::clear() {
     QStandardItemModel::clear();
     m_jidRosterItemMap.clear();
 }
 
-void RosterItemModel::removeRosterEntry(const QString& bareJid)
-{
+void RosterItemModel::removeRosterEntry(const QString& bareJid) {
     RosterItem* item = getRosterItemFromBareJid(bareJid);
-    if(item)
-    {
+	if(item) {
         removeRow(item->row());
     }
 }

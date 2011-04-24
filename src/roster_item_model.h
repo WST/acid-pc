@@ -36,7 +36,7 @@ public:
     RosterItemModel(QObject* parent);
     RosterItem* getRosterItemFromBareJid(const QString& bareJid);
 
-    void updatePresence(const QString& bareJid, const QMap<QString, QXmppPresence>& presences);
+	void updatePresence(const QString &bare_jid, const QMap<QString, QXmppPresence>& presences);
     void updateRosterEntry(const QString& bareJid, const QXmppRosterIq::Item& rosterEntry);
     void updateAvatar(const QString& bareJid, const QImage& image);
     void updateName(const QString& bareJid, const QString& name);
@@ -47,7 +47,7 @@ public:
 
 private:
     QMap<QString, RosterItem*> m_jidRosterItemMap;
-    void addRosterItemIfDontExist(const QString& bareJid);
+	RosterItem *addRosterItemIfDontExist(const QString &bare_jid, const QString &nick, const QString &group);
 };
 
 #endif // ROSTERITEMMODEL_H
