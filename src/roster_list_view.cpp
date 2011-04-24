@@ -52,7 +52,7 @@ RosterListView::~RosterListView() {
 }
 
 bool RosterListView::event(QEvent* e) {
-	return event(e);
+	return QTreeView::event(e);
 }
 
 void RosterListView::mousePressed(const QModelIndex& index) {
@@ -98,7 +98,7 @@ void RosterListView::keyPressEvent(QKeyEvent* event1) {
     if(event1->key() == Qt::Key_Return) {
         showChatDialog_helper();
     }
-	keyPressEvent(event1);
+	QTreeView::keyPressEvent(event1);
 }
 
 void RosterListView::removeContact_helper() {
