@@ -28,7 +28,7 @@
 #include <QMenu>
 #include <QKeyEvent>
 
-RosterListView::RosterListView(QWidget* parent):QListView(parent) {
+RosterListView::RosterListView(QWidget* parent):QTreeView(parent) {
 	action_chat = new QAction(QIcon(":/menu/balloons.png"), "Chat", this);
 	action_profile = new QAction(QIcon(":/menu/card-address.png"), "View profile", this);
 	action_remove = new QAction(QIcon(":/menu/cross.png"), "Remove contact", this);
@@ -52,7 +52,7 @@ RosterListView::~RosterListView() {
 }
 
 bool RosterListView::event(QEvent* e) {
-    return QListView::event(e);
+	return event(e);
 }
 
 void RosterListView::mousePressed(const QModelIndex& index) {
@@ -98,7 +98,7 @@ void RosterListView::keyPressEvent(QKeyEvent* event1) {
     if(event1->key() == Qt::Key_Return) {
         showChatDialog_helper();
     }
-    QListView::keyPressEvent(event1);
+	keyPressEvent(event1);
 }
 
 void RosterListView::removeContact_helper() {

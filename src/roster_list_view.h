@@ -25,10 +25,9 @@
 #ifndef ROSTERLISTVIEW_H
 #define ROSTERLISTVIEW_H
 
-#include <QListView>
-#include <QAction>
+#include <QtGui>
 
-class RosterListView : public QListView
+class RosterListView : public QTreeView
 {
     Q_OBJECT
 
