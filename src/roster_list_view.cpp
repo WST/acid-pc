@@ -41,6 +41,7 @@ RosterListView::RosterListView(QWidget* parent):QTreeView(parent) {
 	connect(action_chat, SIGNAL(triggered()), this, SLOT(showChatDialog_helper()));
 	connect(action_profile, SIGNAL(triggered()), this, SLOT(showProfile_helper()));
 	connect(action_remove, SIGNAL(triggered()), this, SLOT(removeContact_helper()));
+	connect(action_call, SIGNAL(triggered()), this, SLOT(callHelper()));
 
 	setHeaderHidden(true);
 }
@@ -107,4 +108,10 @@ void RosterListView::removeContact_helper() {
     QString bareJid = selectedBareJid();
     if(!bareJid.isEmpty())
         emit removeContact(bareJid);
+}
+
+void RosterListView::callHelper() {
+	QString bare_jid = selectedBareJid();
+	if(!bare_jid.isEmpty())
+		emit makeVoiceCall(bare_jid);
 }

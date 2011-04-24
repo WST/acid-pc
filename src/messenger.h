@@ -87,6 +87,7 @@ class Messenger: public QMainWindow {
 		void loadSettings();
 		void roomParticipantChanged(QString room_jid, QString nick);
 		void requestProfile(const QString &bare_jid);
+		void makeVoiceCall(const QString &bare_jid);
 };
 
 #endif // MESSENGER_H

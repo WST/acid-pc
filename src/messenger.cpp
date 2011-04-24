@@ -122,9 +122,10 @@ void Messenger::createConnections() {
 
 	connect(this, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
 	
-	connect(& roster_widget, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
+	connect(& roster_widget, SIGNAL(showChatDialog(const QString &)), this, SLOT(openChat(const QString &)));
 	connect(& roster_widget, SIGNAL(showProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
-	connect(& roster_widget, SIGNAL(removeContact(QString)), this, SLOT(removeContact(QString)));
+	connect(& roster_widget, SIGNAL(removeContact(const QString &)), this, SLOT(removeContact(const QString &)));
+	connect(& roster_widget, SIGNAL(makeVoiceCall(const QString &)), this, SLOT(makeVoiceCall(const QString &)));
 
 	connect(settings_window, SIGNAL(modified()), this, SLOT(loadSettings()));
 }
@@ -196,9 +197,10 @@ void Messenger::activate() {
 	client_settings->setAutoReconnectionEnabled(false);
 
 	transfer_manager->setProxy(settings->value("settings/file_transfer_proxy", PROXY65_JID).toString());
-	transfer_manager->setProxyOnly(true);
+	transfer_manager->setProxyOnly(false);
 
 	// Сохранить пароль, если нужно
+	// TODO: сохранять и восстанавливать сервер (домен)
 	if(login->savePassword()) {
 		settings->setValue("login/password", login->password());
 	} else {
@@ -380,3 +382,7 @@ void Messenger::requestProfile(const QString &bare_jid) {
 	vcard_manager->requestVCard(bare_jid); // Могли бы и слотом сделать, странные какие-то эти ваши девелоперы qxmpp…
 }
 
+void Messenger::makeVoiceCall(const QString &bare_jid) {
+	QXmppCall *call = call_manager->call(bare_jid);
+	// TODO: окошко со статусом вызова
+}

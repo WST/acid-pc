@@ -45,6 +45,7 @@ private slots:
     void showChatDialog_helper();
     void showProfile_helper();
     void removeContact_helper();
+	void callHelper();
 
 protected:
     void keyPressEvent(QKeyEvent*);
@@ -53,6 +54,7 @@ signals:
     void showChatDialog(const QString& bareJid);
     void showProfile(const QString& bareJid);
     void removeContact(const QString& bareJid);
+	void makeVoiceCall(const QString &bare_jid);
 
 private:
     QString selectedBareJid();
