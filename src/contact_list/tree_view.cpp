@@ -1,34 +1,13 @@
-/*
- * Copyright (C) 2008-2010 The QXmpp developers
- *
- * Author:
- *	Manjeet Dahiya
- *
- * Source:
- *	http://code.google.com/p/qxmpp
- *
- * This file is a part of QXmpp library.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- */
-
-
-#include "roster_list_view.h"
-#include "roster_item.h"
 #include <QApplication>
 #include <QMenu>
 #include <QKeyEvent>
 
-RosterListView::RosterListView(QWidget* parent):QTreeView(parent) {
+#include "contact_item.h"
+#include "tree_view.h"
+
+using namespace CL;
+
+TreeView::TreeView(QWidget* parent):QTreeView(parent) {
 	action_chat = new QAction(QIcon(":/menu/balloons.png"), "Chat", this);
 	action_profile = new QAction(QIcon(":/menu/card-address.png"), "View profile", this);
 	action_remove = new QAction(QIcon(":/menu/cross.png"), "Remove contact", this);
@@ -46,7 +25,7 @@ RosterListView::RosterListView(QWidget* parent):QTreeView(parent) {
 	setHeaderHidden(true);
 }
 
-RosterListView::~RosterListView() {
+TreeView::~TreeView() {
     delete action_chat;
     delete action_profile;
     delete action_remove;
@@ -54,11 +33,11 @@ RosterListView::~RosterListView() {
     delete action_call;
 }
 
-bool RosterListView::event(QEvent* e) {
+bool TreeView::event(QEvent* e) {
 	return QTreeView::event(e);
 }
 
-void RosterListView::mousePressed(const QModelIndex& index) {
+void TreeView::mousePressed(const QModelIndex& index) {
     if(QApplication::mouseButtons() == Qt::RightButton) {
         QString bareJid = index.data().toString();
         QMenu menu(this);
@@ -74,43 +53,43 @@ void RosterListView::mousePressed(const QModelIndex& index) {
     }
 }
 
-void RosterListView::doubleClicked(const QModelIndex& index) {
+void TreeView::doubleClicked(const QModelIndex& index) {
     action_chat->trigger();
 }
 
-void RosterListView::clicked(const QModelIndex& index) {
+void TreeView::clicked(const QModelIndex& index) {
 }
 
-QString RosterListView::selectedBareJid() {
-	return (selectedIndexes().size() > 0) ? selectedIndexes().at(0).data(RosterItem::BareJid).toString() : "";
+QString TreeView::selectedBareJid() {
+	return static_cast<CL::ContactItem *>(selectedIndexes().at(0).internalPointer())->getBareJid();
 }
 
-void RosterListView::showChatDialog_helper() {
+void TreeView::showChatDialog_helper() {
     QString bareJid = selectedBareJid();
     if(!bareJid.isEmpty())
         emit showChatDialog(bareJid);
 }
 
-void RosterListView::showProfile_helper() {
+void TreeView::showProfile_helper() {
     QString bareJid = selectedBareJid();
     if(!bareJid.isEmpty())
         emit showProfile(bareJid);
 }
 
-void RosterListView::keyPressEvent(QKeyEvent* event1) {
+void TreeView::keyPressEvent(QKeyEvent* event1) {
     if(event1->key() == Qt::Key_Return) {
         showChatDialog_helper();
     }
 	QTreeView::keyPressEvent(event1);
 }
 
-void RosterListView::removeContact_helper() {
+void TreeView::removeContact_helper() {
     QString bareJid = selectedBareJid();
     if(!bareJid.isEmpty())
         emit removeContact(bareJid);
 }
 
-void RosterListView::callHelper() {
+void TreeView::callHelper() {
 	QString bare_jid = selectedBareJid();
 	if(!bare_jid.isEmpty())
 		emit makeVoiceCall(bare_jid);

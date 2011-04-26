@@ -26,12 +26,15 @@ SOURCES    += src/main.cpp \
     src/mucwidget.cpp \
     src/functions.cpp \
     src/aboutwindow.cpp \
-	 src/roster_list_view.cpp \
-	 src/roster_item_model.cpp \
-	 src/roster_item.cpp \
     src/settingswindow.cpp \
     src/vcardwindow.cpp \
-    src/notificationwidget.cpp
+    src/notificationwidget.cpp \
+    src/contact_list/tree_view.cpp \
+    src/contact_list/item_model.cpp \
+    src/contact_list/group_item.cpp \
+    src/contact_list/contact_item.cpp \
+    src/contact_list/item.cpp \
+    src/contact_list/item_delegate.cpp
 HEADERS    += version.h \
               src/messenger.h \
               src/loginform.h \
@@ -43,12 +46,15 @@ HEADERS    += version.h \
     src/mucwidget.h \
     src/functions.h \
     src/aboutwindow.h \
-	 src/roster_list_view.h \
-	 src/roster_item_model.h \
-	 src/roster_item.h \
     src/settingswindow.h \
     src/vcardwindow.h \
-    src/notificationwidget.h
+    src/notificationwidget.h \
+    src/contact_list/tree_view.h \
+    src/contact_list/item_model.h \
+    src/contact_list/group_item.h \
+    src/contact_list/contact_item.h \
+    src/contact_list/item.h \
+    src/contact_list/item_delegate.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \

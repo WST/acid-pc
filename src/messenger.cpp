@@ -46,8 +46,7 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 	roster_widget.setModel(& roster_model);
 	setCentralWidget(& roster_widget);
 	
-	RosterItemDelegate *delegate = new RosterItemDelegate();
-	roster_widget.setItemDelegate(delegate);
+	roster_widget.setItemDelegate(new CL::ItemDelegate());
 }
 
 Messenger::~Messenger() {
@@ -318,7 +317,7 @@ void Messenger::showApplicationInfo() {
 }
 
 void Messenger::rosterChanged(const QString &bare_jid) {
-	roster_model.updateRosterEntry(bare_jid, client->rosterManager().getRosterEntry(bare_jid));
+	roster_model.setEntry(bare_jid, client->rosterManager().getRosterEntry(bare_jid));
 }
 
 void Messenger::rosterReceived() {
@@ -329,18 +328,17 @@ void Messenger::rosterReceived() {
 	}
 }
 
-void Messenger::presenceChanged(const QString& bare_jid, const QString& resource) {
+void Messenger::presenceChanged(const QString &bare_jid, const QString &resource) {
 	if(bare_jid == client_settings->jidBare()) {
 		return;
 	}
 
-	if(!roster_model.getRosterItemFromBareJid(bare_jid)) {
+/*	if(!roster_model.getRosterItemFromBareJid(bare_jid)) {
 		return;
-	}
+	}*/
 
-	QString jid = bare_jid + "/" + resource;
 	QMap<QString, QXmppPresence> presences = client->rosterManager().getAllPresencesForBareJid(bare_jid);
-	roster_model.updatePresence(bare_jid, presences);
+	roster_model.setPresence(QString("%1/%2").arg(bare_jid).arg(resource), presences[resource]);
 }
 
 void Messenger::openChat(const QString &full_jid) {
@@ -358,6 +356,7 @@ void Messenger::leaveRoom(const QString &room_jid) {
 
 void Messenger::roomParticipantChanged(QString room_jid, QString nick) {
 	// TODO: при получении чьего-то presence уведомить об этом таб; при получении кика закрыть таб
+	// не закрыть таб (это бесит), а подсветить его как offline
 	MUCWidget *widget = (MUCWidget *) chat->getWidgetByJid(room_jid);
 	//widget->presenceFrom(nick);
 }

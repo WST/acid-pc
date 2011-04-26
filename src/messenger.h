@@ -22,8 +22,9 @@
 #include "settingswindow.h"
 #include "aboutwindow.h"
 #include "vcardwindow.h"
-#include "roster_list_view.h"
-#include "roster_item_model.h"
+#include "contact_list/tree_view.h"
+#include "contact_list/item_model.h"
+#include "contact_list/item_delegate.h"
 
 class Messenger;
 class ChatWindow;
@@ -50,8 +51,8 @@ class Messenger: public QMainWindow {
 		QXmppVCardManager *vcard_manager;
 		QXmppDiscoveryManager *disco_manager;
 	
-		RosterListView roster_widget; // виджет ростера
-		RosterItemModel roster_model; // модель элемента ростера
+		CL::TreeView roster_widget; // виджет ростера
+		CL::ItemModel roster_model; // модель элемента ростера
 
 		QMap<QString, QXmppMessage> messages; // буфер принятых сообщений
 
