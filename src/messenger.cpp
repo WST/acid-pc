@@ -33,7 +33,7 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 	chat = new ChatWindow(this);
 	about = new AboutWindow(this);
 	settings_window = new SettingsWindow(this);
-        tray = new TrayIcon(this);
+	tray = new TrayIcon(this);
 
 	createConnections();
 	createMenus();
