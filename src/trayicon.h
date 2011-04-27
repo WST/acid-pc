@@ -9,7 +9,7 @@ class TrayIcon: public QSystemTrayIcon
 {
 	Q_OBJECT
 	public:
-		TrayIcon();
+                TrayIcon(QWidget *parent = 0);
 		void debugMessage(QString msg);
 		void notify(const QString &title, const QString &message);
 		void popup(QWidget *message, unsigned short int timeout = 5);

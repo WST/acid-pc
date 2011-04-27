@@ -9,7 +9,7 @@
 #define TRAYICON_ONLINE QIcon(":/trayicon/online-22px.png")
 #endif
 
-TrayIcon::TrayIcon(): QSystemTrayIcon(TRAYICON_OFFLINE) {
+TrayIcon::TrayIcon(QWidget *parent): QSystemTrayIcon(TRAYICON_OFFLINE, parent) {
 	setVisible(true);
 }
 
