@@ -13,3 +13,11 @@ bool GroupItem::addContact(ContactItem *item) {
 bool GroupItem::removeContact(ContactItem *item) {
 	return m_contacts.removeOne(item);
 }
+
+QString GroupItem::getSubText() const {
+	int online_count = 0;
+	foreach (const ContactItem *contact, m_contacts)
+		if (contact->isOnline())
+			++online_count;
+	return QString("%1 / %2").arg(online_count).arg(m_contacts.size());
+}

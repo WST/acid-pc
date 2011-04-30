@@ -2,7 +2,7 @@
 #include <QMenu>
 #include <QKeyEvent>
 
-#include "contact_item.h"
+#include "item_model.h".h"
 #include "tree_view.h"
 
 using namespace CL;
@@ -61,7 +61,7 @@ void TreeView::clicked(const QModelIndex& index) {
 }
 
 QString TreeView::selectedBareJid() {
-	return static_cast<CL::ContactItem *>(selectedIndexes().at(0).internalPointer())->getBareJid();
+	return selectedIndexes().at(0).data(ItemModel::BareJid).toString();
 }
 
 void TreeView::showChatDialog_helper() {

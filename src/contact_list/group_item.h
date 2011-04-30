@@ -19,10 +19,12 @@ namespace CL {
 		/*!
 		  Returns user-friendly group name
 		  */
-		// TODO: add text: "(online_items / total_items)" or smth
-		virtual QString getText() const { return m_groupName; }
+		virtual QString getText() const { return QString("%1 (%2)").arg(m_groupName).arg(m_contacts.size()); }
 
-		virtual QString getSubText() const { return QString(); }
+		/*!
+		  Provides some detail about group items
+		  */
+		virtual QString getSubText() const;
 
 		/*!
 		  Basically, this should return icon '+' or '-'
@@ -44,7 +46,7 @@ namespace CL {
 		  */
 		bool removeContact(ContactItem *item);
 
-		const QList<ContactItem *> getContacts() const { return m_contacts; }
+		const QList<ContactItem *> &getContacts() const { return m_contacts; }
 
 	private:
 		QString m_groupName;

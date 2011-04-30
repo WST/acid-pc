@@ -16,7 +16,7 @@ namespace CL {
 		virtual QString getText() const = 0;
 
 		/*!
-		  Sub-text of an item (to be displayed as grayed or small text).
+		  Sub-text of an item (to be displayed as a tooltip or smth).
 		  Usually status message
 		  */
 		virtual QString getSubText() const = 0;
@@ -27,7 +27,9 @@ namespace CL {
 		virtual const QIcon &getIcon() const = 0;
 
 		/*!
-		  Counts item children
+		  Counts item children.
+		  This is always non-zero for group (because empty groups do not exist)
+		  and always zero for contacts (because contacts can't have groups)
 		  */
 		virtual int childCount() const { return 0; }
 	};

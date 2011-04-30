@@ -34,7 +34,8 @@ SOURCES    += src/main.cpp \
     src/contact_list/group_item.cpp \
     src/contact_list/contact_item.cpp \
     src/contact_list/item.cpp \
-    src/contact_list/item_delegate.cpp
+    src/contact_list/item_delegate.cpp \
+    src/contact_list/qxmpp_bridge.cpp
 HEADERS    += version.h \
               src/messenger.h \
               src/loginform.h \
@@ -54,7 +55,8 @@ HEADERS    += version.h \
     src/contact_list/group_item.h \
     src/contact_list/contact_item.h \
     src/contact_list/item.h \
-    src/contact_list/item_delegate.h
+    src/contact_list/item_delegate.h \
+    src/contact_list/qxmpp_bridge.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \

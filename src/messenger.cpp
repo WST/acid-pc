@@ -1,6 +1,9 @@
 // ACId
+#include "QXmppRosterManager.h"
+
 #include "messenger.h"
 #include "functions.h"
+#include "contact_list/qxmpp_bridge.h"
 #include <version.h>
 
 Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this), roster_model(this), messages() {
@@ -317,13 +320,13 @@ void Messenger::showApplicationInfo() {
 }
 
 void Messenger::rosterChanged(const QString &bare_jid) {
-	roster_model.setEntry(bare_jid, client->rosterManager().getRosterEntry(bare_jid));
+	QXmppRosterIq::Item item = client->rosterManager().getRosterEntry(bare_jid);
+	roster_model.addEntry(bare_jid, item.name(), item.groups());
 }
 
 void Messenger::rosterReceived() {
 	QStringList list = client->rosterManager().getRosterBareJids();
-	QString bare_jid;
-	foreach(bare_jid, list) {
+	foreach(QString bare_jid, list) {
 		rosterChanged(bare_jid);
 	}
 }
@@ -338,7 +341,10 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 	}*/
 
 	QMap<QString, QXmppPresence> presences = client->rosterManager().getAllPresencesForBareJid(bare_jid);
-	roster_model.setPresence(QString("%1/%2").arg(bare_jid).arg(resource), presences[resource]);
+	CL::ContactItem::Status status;
+	if (presences.contains(resource))
+		status = CL::QXmppBridge::qxmpp2cl(presences[resource]);
+	roster_model.setStatus(QString("%1/%2").arg(bare_jid).arg(resource), status);
 }
 
 void Messenger::openChat(const QString &full_jid) {

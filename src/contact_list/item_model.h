@@ -1,30 +1,36 @@
 #ifndef CL_ITEMMODEL_H
 #define CL_ITEMMODEL_H
 
-#include <QStandardItemModel>
-#include "QXmppRosterManager.h"
-#include "QXmppPresence.h"
+#include <QAbstractItemModel>
 
 #include "contact_item.h"
 #include "group_item.h"
 
 namespace CL {
-	class ItemModel : public QAbstractItemModel {
+	class ItemModel: public QAbstractItemModel {
+		Q_OBJECT
+
 	public:
-		ItemModel(QObject* parent): QAbstractItemModel(parent), notInRosterGroupName("Not-in-roster"), noGroupName("General") {}
+		explicit ItemModel(QObject* parent): QAbstractItemModel(parent), notInRosterGroupName("Not-in-roster"), noGroupName("General") {}
 
 		ContactItem *getItemByJid(const QString &jid);
 
 		/*!
-		  Changes the presence of an item with full jid JID
+		  Changes the status of an item with full jid JID
 		  If an item does not exist, adds it to not-in-roster group (unless notInRosterGroupName is empty)
 		  */
-		void setPresence(const QString &jid, const QXmppPresence &_value);
+		void setStatus(const QString &jid, const ContactItem::Status &_value);
 
 		/*!
-		  Adds or removes an entry for jid, updating it's state if needed
+		  Adds an entry for jid, updating it's groups as needed
 		  */
-		void setEntry(const QString &jid, const QXmppRosterIq::Item &_value);
+		ContactItem *addEntry(const QString &jid, const QString &nick, const QSet<QString> &groups);
+
+		/*!
+		  Removes and entry for jid, updating groups as needed
+		  */
+		void removeEntry(const QString &jid, const QSet<QString> &groups);
+
 
 		void setAvatar(const QString &jid, const QImage &_value);
 		void setNick(const QString &jid, const QString &_value);
@@ -41,6 +47,10 @@ namespace CL {
 		QString noGroupName;
 
 	public:
+		enum SpecificRole {
+			BareJid = Qt::UserRole + 2
+		};
+
 		virtual QModelIndex index(int row, int column, const QModelIndex &parent) const;
 		virtual QModelIndex parent(const QModelIndex &child) const;
 		virtual int rowCount(const QModelIndex &parent) const;
@@ -52,9 +62,12 @@ namespace CL {
 		QMap<QString, ContactItem*> m_contacts;
 		QList<GroupItem *> m_groups;
 
-		struct TreeItem {
-			GroupItem *group;
-			ContactItem *contact;
+		union ItemID {
+			struct {
+				unsigned short group;
+				unsigned short contact;
+			};
+			unsigned int id;
 		};
 
 		/*!

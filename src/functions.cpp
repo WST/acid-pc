@@ -9,13 +9,7 @@ QStringList parseJid(QString jid) {
 #define JID_RESOURCE_SEPARATOR '/'
 void split_jid(const QString &jid, QString *bare, QString *resource) {
 	int sep = jid.indexOf(JID_RESOURCE_SEPARATOR);
-	if (sep >= 0) {
-		if (resource)
-			resource->operator=(QString(jid.mid(sep + 1)));
-	} else {
-		sep = -1;
-		if (resource)
-			resource->operator=(QString());
-	}
-	bare->operator=(QString(jid.mid(0, sep)));
+	if (resource)
+		*resource = sep >= 0 ? jid.mid(sep+1) : "";
+	*bare = jid.mid(0, sep);
 }
