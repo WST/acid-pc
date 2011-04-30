@@ -296,6 +296,7 @@ void Messenger::gotMessage(QXmppMessage message) {
 			if(!chat->adaTabForJid(message.from())) {
 				// Сюда мы попадаем, если надо сохранить сообщение и показать уведомление…
 				// TODO
+				// Кстати, QMessageBox ещё по одной причине не подходит — конкретный экземпляр QMessageBox не свяжешь с конкретным сообщением…
 				QMessageBox *notifier = new QMessageBox(QMessageBox::Question, "foo", "some message", QMessageBox::Ok | QMessageBox::Cancel);
 				// connect(notifier, SIGNAL(accepted(QString)), this, SLOT(acceptConversation(QString)));
 				messages[message.id()] = message;
