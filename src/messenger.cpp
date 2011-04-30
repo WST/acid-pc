@@ -271,7 +271,7 @@ void Messenger::gotVoiceCall(QXmppCall *call) {
 }
 
 void Messenger::gotIQ(QXmppIq iq) {
-	// Входящая станза IQ (возможно, запрос версии или last activity). TODO.
+	// Входящая станза IQ. TODO.
 }
 
 void Messenger::gotMessage(QXmppMessage message) {
@@ -296,10 +296,10 @@ void Messenger::gotMessage(QXmppMessage message) {
 			if(!chat->adaTabForJid(message.from())) {
 				// Сюда мы попадаем, если надо сохранить сообщение и показать уведомление…
 				// TODO
-				// NewMessageNotifier *notifier = new NewMessageNotifier(& message);
+				QMessageBox *notifier = new QMessageBox(QMessageBox::Question, "foo", "some message", QMessageBox::Ok | QMessageBox::Cancel);
 				// connect(notifier, SIGNAL(accepted(QString)), this, SLOT(acceptConversation(QString)));
 				messages[message.id()] = message;
-				//tray->popupMessage("New incoming message!");
+				tray->popup(notifier, 5);
 			} else {
 				chat->displayMessage(message);
 			}
@@ -345,12 +345,15 @@ void Messenger::openChat(const QString &full_jid) {
 }
 
 void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
-	muc_manager->joinRoom(room_jid, nick);
+	QXmppMucRoom *room = muc_manager->addRoom(room_jid);
+	room->setNickName(nick);
+	room->join();
+	rooms[room_jid] = room;
 	chat->openTab(room_jid, TabWidget::MUC);
 }
 
 void Messenger::leaveRoom(const QString &room_jid) {
-	muc_manager->leaveRoom(room_jid);
+	rooms[room_jid]->leave();
 }
 
 void Messenger::roomParticipantChanged(QString room_jid, QString nick) {
@@ -361,7 +364,7 @@ void Messenger::roomParticipantChanged(QString room_jid, QString nick) {
 }
 
 void Messenger::sendMUCMessage(QString room, QString message) {
-	muc_manager->sendMessage(room, message); // могли бы ето и слотом сделать…
+	rooms[room]->sendMessage(message);
 }
 
 QSettings *Messenger::settingsManager() {

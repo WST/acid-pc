@@ -72,9 +72,6 @@
             </item>
             <item row="3" column="0" colspan="2">
              <widget class="QCheckBox" name="automatically_open_new_tabs">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
               <property name="whatsThis">
                <string>If enabled, the tabs for new conversations will be opened automatically every time when you receive a message from a new JID.</string>
               </property>
