@@ -296,10 +296,6 @@ void Messenger::gotIQ(QXmppIq iq) {
 }
 
 void Messenger::gotMessage(QXmppMessage message) {
-	// Входящее сообщение. Его по идее нужно отобразить особым значком возле элемента ростера и сохранить или,
-	// если открыт чат, вхуячить туда…
-	// пока что просто отобразим его.
-	// TODO: сохранение сообщений до тех пор, пока пользователь сам не решит прочитать
 	switch(message.type()) {
 		case QXmppMessage::GroupChat: {
 			chat->displayMUCMessage(message);
@@ -316,7 +312,7 @@ void Messenger::gotMessage(QXmppMessage message) {
 			}
 			if(!chat->adaTabForJid(message.from())) {
 				messages[message.id()] = message;
-				connect(ConfirmationWindow::newMessage(& messages[message.id()], settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(QXmppMessage *, bool)), this, SLOT(confirmedMessage(QXmppMessage *, bool)));
+				connect(ConfirmationWindow::newMessage(& messages[message.id()], settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
 			} else {
 				chat->displayMessage(message);
 			}
@@ -324,20 +320,16 @@ void Messenger::gotMessage(QXmppMessage message) {
 	}
 }
 
-void Messenger::confirmedMessage(QXmppMessage *message, bool confirmed) {
-	// TODO: здесь присутствует бага следующего рода: когда юзер принимает сообщение от некоторого JID,
-	// его очередь сообщений опустошается и, если сразу после этого нажать “accept” на некотором
-	// другом уведомлении о сообщении от этого JID, указатель будет указывать никуда и программа сегфолтнется.
-	if(confirmed) {
-		//chat->displayMessage(* message);
-		for(QMap<QString, QXmppMessage>::iterator i = messages.begin(); i != messages.end(); ++ i) {
-			if(i.value().from() == message->from()) {
-				chat->displayMessage(i.value());
-				messages.erase(i);
-			}
+void Messenger::confirmedMessage(const QString &message_id) {
+	if(!messages.contains(message_id)) {
+		return;
+	}
+	QXmppMessage message = messages.find(message_id).value();
+	for(QMap<QString, QXmppMessage>::iterator i = messages.begin(); i != messages.end(); ++ i) {
+		if(i.value().from() == message.from()) {
+			chat->displayMessage(i.value());
+			messages.erase(i);
 		}
-	} else {
-		messages.erase(messages.find(message->id()));
 	}
 }
 

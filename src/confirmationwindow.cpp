@@ -46,6 +46,10 @@ void ConfirmationWindow::setTimeout(unsigned short int seconds) {
 	timer->start();
 }
 
+void ConfirmationWindow::setMessageId(const QString &new_id) {
+	message_id = new_id;
+}
+
 void ConfirmationWindow::disableDeclineButton() {
 	ui->decline_button->setVisible(false);
 }
@@ -56,7 +60,7 @@ ConfirmationWindow *ConfirmationWindow::newMessage(QXmppMessage *message, int ti
 	window->setEventDescription(message->from());
 	window->setType(Message);
 	window->show();
-	window->setPointer((QObject *) message);
+	window->setMessageId(message->id());
 	window->setTimeout(timeout);
 	window->disableDeclineButton(); // неактуально для сообщений, т/к они «уже» пришли
 	return window;
@@ -73,7 +77,7 @@ ConfirmationWindow *ConfirmationWindow::newCall(QXmppCall *call, int timeout) {
 void ConfirmationWindow::on_accept_button_clicked() {
 	switch(type) {
 		case Message:
-			emit confirmedMessage((QXmppMessage *) pointer, true);
+			emit confirmedMessage(message_id);
 		break;
 	}
 	hide();
@@ -82,9 +86,7 @@ void ConfirmationWindow::on_accept_button_clicked() {
 
 void ConfirmationWindow::on_decline_button_clicked() {
 	switch(type) {
-		case Message:
-			emit confirmedMessage((QXmppMessage *) pointer, false);
-		break;
+		// TODO
 	}
 	hide();
 	delete this;

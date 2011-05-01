@@ -94,7 +94,7 @@ class Messenger: public QMainWindow {
 		void makeVoiceCall(const QString &bare_jid);
 		void openOfficialSite();
 		void endCall();
-		void confirmedMessage(QXmppMessage *message, bool confirmed);
+		void confirmedMessage(const QString &message_id);
 };
 
 #endif // MESSENGER_H

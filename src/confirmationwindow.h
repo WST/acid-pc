@@ -30,6 +30,7 @@ public:
 	void setPointer(QObject *newpointer);
 	void setTimeout(unsigned short int seconds);
 	void disableDeclineButton();
+	void setMessageId(const QString &new_id);
 
 	static ConfirmationWindow *newMessage(QXmppMessage *message, int timeout = 5);
 	static ConfirmationWindow *newFile(QXmppTransferJob *job, int timeout = 5);
@@ -40,10 +41,11 @@ private:
 	Type type;
 	QObject *pointer;
 	QTimer *timer;
+	QString message_id;
 
 signals:
 	void confirmedFile(QXmppTransferJob *job, bool accepted);
-	void confirmedMessage(QXmppMessage *message, bool accepted);
+	void confirmedMessage(const QString &message_id);
 	void confirmedCall(QXmppCall *call, bool accepted);
 
 private slots:
