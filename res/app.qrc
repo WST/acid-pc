@@ -17,5 +17,13 @@
         <file>menu/cross.png</file>
         <file>menu/disk.png</file>
         <file>menu/mobile-phone.png</file>
+        <file>menu/plug.png</file>
+        <file>menu/plus.png</file>
+        <file>menu/question.png</file>
+        <file>menu/toolbox.png</file>
+        <file>menu/bookmarks.png</file>
+        <file>menu/yahoo.png</file>
+        <file>menu/msn.png</file>
+        <file>menu/icq.png</file>
     </qresource>
 </RCC>

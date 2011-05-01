@@ -90,6 +90,7 @@ class Messenger: public QMainWindow {
 		void roomParticipantChanged(QString room_jid, QString nick);
 		void requestProfile(const QString &bare_jid);
 		void makeVoiceCall(const QString &bare_jid);
+		void openOfficialSite();
 };
 
 #endif // MESSENGER_H

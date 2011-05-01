@@ -135,8 +135,18 @@ void Messenger::createMenus() {
 	// TODO: расположить нормально, соответственно реальной структуре меню
 	QMenu *im_menu = menuBar()->addMenu("Program");
 		QAction *action_new_message = im_menu->addAction(QIcon(":/menu/document.png"), "New message...");
+		QMenu *join_room_menu = im_menu->addMenu(QIcon(":/menu/users.png"), "Join a room");
+			QAction *action_join_new_room = join_room_menu->addAction(QIcon(":/menu/users.png"), "Join new room...");
+			QMenu *action_room_bookmarks = join_room_menu->addMenu(QIcon(":/menu/bookmarks.png"), "Bookmarks");
+		QAction *action_new_contact = im_menu->addAction(QIcon(":/menu/plus.png"), "Add contact");
+		QMenu *connect_service_menu = im_menu->addMenu(QIcon(":/menu/plug.png"), "Connect service");
+			QAction *action_connect_yahoo = connect_service_menu->addAction(QIcon(":/menu/yahoo.png"), "Yahoo! Messenger");
+			QAction *action_connect_msn = connect_service_menu->addAction(QIcon(":/menu/msn.png"), "MSN (Windows Live)");
+			QAction *action_connect_icq = connect_service_menu->addAction(QIcon(":/menu/icq.png"), "ICQ");
+			connect_service_menu->addSeparator();
+			QAction *action_connect_lopbox = connect_service_menu->addAction(QIcon(), "Lopbox microblog");
 		im_menu->addSeparator();
-		QAction *action_settings = im_menu->addAction(QIcon(":/menu/document.png"), "Settings");
+		QAction *action_settings = im_menu->addAction(QIcon(":/menu/toolbox.png"), "Settings");
 		im_menu->addSeparator();
 		QAction *action_quit = im_menu->addAction("Quit");
 	
@@ -150,10 +160,8 @@ void Messenger::createMenus() {
 		QAction *action_status_dc = status_menu->addAction(QIcon(":/trayicon/offline-16px.png"), "Offline");
 	
 	QMenu *help_menu = menuBar()->addMenu("Help");
-		QAction *action_support_room = help_menu->addAction(QIcon(":/menu/users.png"), "Support chat");
-		help_menu->addSeparator();
+		QAction *action_support_room = help_menu->addAction(QIcon(":/menu/question.png"), "Support chat");
 		QAction *action_official_site = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "SmartCommunity site");
-		QAction *action_official_forum = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "Support forum");
 		help_menu->addSeparator();
 		QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), "About " APP_NAME "...");
 		QAction *action_about_qt = help_menu->addAction("About Qt...");
@@ -165,6 +173,8 @@ void Messenger::createMenus() {
 	connect(action_about_app, SIGNAL(triggered()), this, SLOT(showApplicationInfo()));
 	connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
 	connect(action_status_dc, SIGNAL(triggered()), this, SLOT(disconnect()));
+
+	connect(action_official_site, SIGNAL(triggered()), this, SLOT(openOfficialSite()));
 
 	QMenu *traymenu = new QMenu();
 	traymenu->insertAction(0, action_new_message);
@@ -394,3 +404,8 @@ void Messenger::makeVoiceCall(const QString &bare_jid) {
 	QXmppCall *call = call_manager->call(bare_jid);
 	// TODO: окошко со статусом вызова
 }
+
+void Messenger::openOfficialSite() {
+	// TODO
+}
+
