@@ -29,6 +29,7 @@ public:
 	void setType(Type newtype);
 	void setPointer(QObject *newpointer);
 	void setTimeout(unsigned short int seconds);
+	void disableDeclineButton();
 
 	static ConfirmationWindow *newMessage(QXmppMessage *message, int timeout = 5);
 	static ConfirmationWindow *newFile(QXmppTransferJob *job, int timeout = 5);

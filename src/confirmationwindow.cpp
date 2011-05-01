@@ -10,6 +10,7 @@ ConfirmationWindow::ConfirmationWindow(QWidget *parent): QWidget(parent), ui(new
 
 ConfirmationWindow::~ConfirmationWindow() {
     delete ui;
+	delete timer;
 }
 
 void ConfirmationWindow::show() {
@@ -45,6 +46,10 @@ void ConfirmationWindow::setTimeout(unsigned short int seconds) {
 	timer->start();
 }
 
+void ConfirmationWindow::disableDeclineButton() {
+	ui->decline_button->setVisible(false);
+}
+
 ConfirmationWindow *ConfirmationWindow::newMessage(QXmppMessage *message, int timeout) {
 	ConfirmationWindow *window = new ConfirmationWindow();
 	window->setEventTitle("New chat message");
@@ -53,6 +58,7 @@ ConfirmationWindow *ConfirmationWindow::newMessage(QXmppMessage *message, int ti
 	window->show();
 	window->setPointer((QObject *) message);
 	window->setTimeout(timeout);
+	window->disableDeclineButton(); // неактуально для сообщений, т/к они «уже» пришли
 	return window;
 }
 
