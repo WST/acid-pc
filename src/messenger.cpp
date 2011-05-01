@@ -161,7 +161,7 @@ void Messenger::createMenus() {
 	
 	QMenu *help_menu = menuBar()->addMenu("Help");
 		QAction *action_support_room = help_menu->addAction(QIcon(":/menu/question.png"), "Support chat");
-		QAction *action_official_site = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "SmartCommunity site");
+		QAction *action_official_site = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "Official site");
 		help_menu->addSeparator();
 		QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), "About " APP_NAME "...");
 		QAction *action_about_qt = help_menu->addAction("About Qt...");
@@ -406,6 +406,5 @@ void Messenger::makeVoiceCall(const QString &bare_jid) {
 }
 
 void Messenger::openOfficialSite() {
-	// TODO
+	QDesktopServices::openUrl(QUrl("http://acid-im.net/"));
 }
-
