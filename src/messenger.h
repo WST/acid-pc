@@ -36,6 +36,7 @@ class Messenger: public QMainWindow {
 	private:
 		QXmppClient *client; // клиент
 		QXmppConfiguration *client_settings; // настройки клиента
+		QXmppPresence *client_presence; // присутствие клиента
 		QSettings *settings; // запоминалка настроек
 		LoginForm *login; // окошко ввода информации об учётной записи
 		TrayIcon *tray; // значок приложения в трее
@@ -95,6 +96,11 @@ class Messenger: public QMainWindow {
 		void openOfficialSite();
 		void endCall();
 		void confirmedMessage(const QString &message_id);
+		void setOnlineStatus();
+		void setAwayStatus();
+		void setXAStatus();
+		void setF4CStatus();
+		void setDNDStatus();
 };
 
 #endif // MESSENGER_H

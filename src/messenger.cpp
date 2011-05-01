@@ -9,6 +9,7 @@
 Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this), roster_model(this), messages() {
 	settings = new QSettings(APP_COMPANY, APP_NAME, this);
 	client_settings = new QXmppConfiguration();
+	client_presence = new QXmppPresence();
 	client = new QXmppClient(this);
 
 	transfer_manager = new QXmppTransferManager();
@@ -176,6 +177,11 @@ void Messenger::createMenus() {
 	connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
 
 	// Меню статуса
+	connect(action_status_available, SIGNAL(triggered()), this, SLOT(setOnlineStatus()));
+	connect(action_status_f4c, SIGNAL(triggered()), this, SLOT(setF4CStatus()));
+	connect(action_status_away, SIGNAL(triggered()), this, SLOT(setAwayStatus()));
+	connect(action_status_xa, SIGNAL(triggered()), this, SLOT(setXAStatus()));
+	connect(action_status_dnd, SIGNAL(triggered()), this, SLOT(setDNDStatus()));
 	connect(action_status_dc, SIGNAL(triggered()), this, SLOT(disconnect()));
 
 	// Меню Help
@@ -189,6 +195,36 @@ void Messenger::createMenus() {
 	traymenu->insertAction(0, action_quit);
 	traymenu->insertSeparator(action_quit);
 	tray->setContextMenu(traymenu);
+}
+
+void Messenger::setOnlineStatus() {
+	client_presence->setStatus(QXmppPresence::Status::Online);
+	tray->setStatus(QXmppPresence::Status::Online);
+	client->setClientPresence(* client_presence);
+}
+
+void Messenger::setDNDStatus() {
+	client_presence->setStatus(QXmppPresence::Status::DND);
+	tray->setStatus(QXmppPresence::Status::DND);
+	client->setClientPresence(* client_presence);
+}
+
+void Messenger::setAwayStatus() {
+	client_presence->setStatus(QXmppPresence::Status::Away);
+	tray->setStatus(QXmppPresence::Status::Away);
+	client->setClientPresence(* client_presence);
+}
+
+void Messenger::setXAStatus() {
+	client_presence->setStatus(QXmppPresence::Status::XA);
+	tray->setStatus(QXmppPresence::Status::XA);
+	client->setClientPresence(* client_presence);
+}
+
+void Messenger::setF4CStatus() {
+	client_presence->setStatus(QXmppPresence::Status::Chat);
+	tray->setStatus(QXmppPresence::Status::Chat);
+	client->setClientPresence(* client_presence);
 }
 
 void Messenger::launch() {
@@ -235,7 +271,7 @@ void Messenger::handleSuccessfulConnection() {
 	// клиент сообщает нам об успешном подключении
 	login->hide();
 	this->show();
-	tray->setStatus(QXmppPresence::Status::Online); // TODO: ставить тот статус, который реально был задан
+	tray->setStatus(QXmppPresence::Status::Online);
 	chat->setOnline(true);
 }
 
@@ -252,6 +288,7 @@ void Messenger::handleConnectionError(QXmppClient::Error error) {
 	// получена ошибка. После этого сигнала будет тутже испущен disconnected().
 	// тут можно передать окошку входа сообщение об ошибке для отображения в нём
 	// но можно сделать это и в трее… Также желательно смотреть, что за ошибка произошла.
+	Q_UNUSED(error);
 	tray->debugMessage("Failed to connect to the server. Ensure that you’ve entered valid username/password.");
 }
 
@@ -293,6 +330,7 @@ void Messenger::gotVoiceCall(QXmppCall *call) {
 
 void Messenger::gotIQ(QXmppIq iq) {
 	// Входящая станза IQ. TODO.
+	Q_UNUSED(iq);
 }
 
 void Messenger::gotMessage(QXmppMessage message) {
@@ -388,7 +426,9 @@ void Messenger::leaveRoom(const QString &room_jid) {
 void Messenger::roomParticipantChanged(QString room_jid, QString nick) {
 	// TODO: при получении чьего-то presence уведомить об этом таб; при получении кика закрыть таб
 	// не закрыть таб (это бесит), а подсветить его как offline
+	Q_UNUSED(nick);
 	MUCWidget *widget = (MUCWidget *) chat->getWidgetByJid(room_jid);
+	Q_UNUSED(widget);
 	//widget->presenceFrom(nick);
 }
 
