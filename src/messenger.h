@@ -22,6 +22,7 @@
 #include "settingswindow.h"
 #include "aboutwindow.h"
 #include "vcardwindow.h"
+#include "voicecallwindow.h"
 #include "contact_list/tree_view.h"
 #include "contact_list/item_model.h"
 #include "contact_list/item_delegate.h"
@@ -40,6 +41,7 @@ class Messenger: public QMainWindow {
 		TrayIcon *tray; // значок приложения в трее
 		ChatWindow *chat; // окошко чатов
 		SettingsWindow *settings_window; // редактор настроек
+		VoiceCallWindow *call_window; // Окошко голосового вызова
 		AboutWindow *about;
 		void createConnections();
 		void createMenus();
@@ -91,6 +93,7 @@ class Messenger: public QMainWindow {
 		void requestProfile(const QString &bare_jid);
 		void makeVoiceCall(const QString &bare_jid);
 		void openOfficialSite();
+		void endCall();
 };
 
 #endif // MESSENGER_H

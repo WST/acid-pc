@@ -36,6 +36,7 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 	chat = new ChatWindow(this);
 	about = new AboutWindow(this);
 	settings_window = new SettingsWindow(this);
+	call_window = 0;
 	tray = new TrayIcon(this);
 
 	createConnections();
@@ -406,8 +407,18 @@ void Messenger::requestProfile(const QString &bare_jid) {
 }
 
 void Messenger::makeVoiceCall(const QString &bare_jid) {
-	QXmppCall *call = call_manager->call(bare_jid);
-	// TODO: окошко со статусом вызова
+	if(call_window) {
+		call_window->activateWindow();
+		return;
+	}
+	call_window = new VoiceCallWindow(this, call_manager->call(bare_jid));
+	connect(call_window, SIGNAL(accepted()), this, SLOT(endCall()));
+	call_window->show();
+}
+
+void Messenger::endCall() {
+	delete call_window;
+	call_window = 0;
 }
 
 void Messenger::openOfficialSite() {

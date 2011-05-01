@@ -35,7 +35,8 @@ SOURCES    += src/main.cpp \
     src/contact_list/contact_item.cpp \
     src/contact_list/item.cpp \
     src/contact_list/item_delegate.cpp \
-    src/contact_list/qxmpp_bridge.cpp
+    src/contact_list/qxmpp_bridge.cpp \
+    src/voicecallwindow.cpp
 HEADERS    += version.h \
               src/messenger.h \
               src/loginform.h \
@@ -56,7 +57,8 @@ HEADERS    += version.h \
     src/contact_list/contact_item.h \
     src/contact_list/item.h \
     src/contact_list/item_delegate.h \
-    src/contact_list/qxmpp_bridge.h
+    src/contact_list/qxmpp_bridge.h \
+    src/voicecallwindow.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \
@@ -65,7 +67,8 @@ FORMS      += \
     ui/mucwidget.ui \
     ui/aboutwindow.ui \
     ui/settingswindow.ui \
-    ui/vcardwindow.ui
+    ui/vcardwindow.ui \
+    ui/voicecallwindow.ui
 RESOURCES  += res/app.qrc
 
 include(src/3rd-party/qxmpp.pri)
