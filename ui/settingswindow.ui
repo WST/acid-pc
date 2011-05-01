@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>Settings</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../res/app.qrc">
-    <normaloff>:/menu/smartcomm.png</normaloff>:/menu/smartcomm.png</iconset>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
@@ -387,9 +383,7 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../res/app.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>button_box</sender>

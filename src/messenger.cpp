@@ -49,6 +49,8 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 	setCentralWidget(& roster_widget);
 	
 	roster_widget.setItemDelegate(new CL::ItemDelegate());
+
+	QDesktopServices::setUrlHandler("xmpp", this, "handleLink");
 }
 
 Messenger::~Messenger() {
@@ -132,11 +134,10 @@ void Messenger::createConnections() {
 }
 
 void Messenger::createMenus() {
-	// TODO: расположить нормально, соответственно реальной структуре меню
 	QMenu *im_menu = menuBar()->addMenu("Program");
-		QAction *action_new_message = im_menu->addAction(QIcon(":/menu/document.png"), "New message...");
+		QAction *action_new_message = im_menu->addAction(QIcon(":/menu/document.png"), "New message");
 		QMenu *join_room_menu = im_menu->addMenu(QIcon(":/menu/users.png"), "Join a room");
-			QAction *action_join_new_room = join_room_menu->addAction(QIcon(":/menu/users.png"), "Join new room...");
+			QAction *action_join_new_room = join_room_menu->addAction(QIcon(":/menu/users.png"), "Join new room");
 			QMenu *action_room_bookmarks = join_room_menu->addMenu(QIcon(":/menu/bookmarks.png"), "Bookmarks");
 		QAction *action_new_contact = im_menu->addAction(QIcon(":/menu/plus.png"), "Add contact");
 		QMenu *connect_service_menu = im_menu->addMenu(QIcon(":/menu/plug.png"), "Connect service");
@@ -148,7 +149,7 @@ void Messenger::createMenus() {
 		im_menu->addSeparator();
 		QAction *action_settings = im_menu->addAction(QIcon(":/menu/toolbox.png"), "Settings");
 		im_menu->addSeparator();
-		QAction *action_quit = im_menu->addAction("Quit");
+		QAction *action_quit = im_menu->addAction(QIcon(":/menu/door.png"), "Quit");
 	
 	QMenu *status_menu = menuBar()->addMenu("Status");
 		QAction *action_status_available = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Available");
@@ -163,18 +164,22 @@ void Messenger::createMenus() {
 		QAction *action_support_room = help_menu->addAction(QIcon(":/menu/question.png"), "Support chat");
 		QAction *action_official_site = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "Official site");
 		help_menu->addSeparator();
-		QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), "About " APP_NAME "...");
-		QAction *action_about_qt = help_menu->addAction("About Qt...");
+		QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), "About " APP_NAME);
+		QAction *action_about_qt = help_menu->addAction("About Qt");
 
+	// Главное меню
 	connect(action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
 	connect(action_settings, SIGNAL(triggered()), this, SLOT(manageSettings()));
-	connect(action_support_room, SIGNAL(triggered()), this, SLOT(joinSupportRoom()));
-	connect(action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-	connect(action_about_app, SIGNAL(triggered()), this, SLOT(showApplicationInfo()));
 	connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
+
+	// Меню статуса
 	connect(action_status_dc, SIGNAL(triggered()), this, SLOT(disconnect()));
 
+	// Меню Help
 	connect(action_official_site, SIGNAL(triggered()), this, SLOT(openOfficialSite()));
+	connect(action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+	connect(action_about_app, SIGNAL(triggered()), this, SLOT(showApplicationInfo()));
+	connect(action_support_room, SIGNAL(triggered()), this, SLOT(joinSupportRoom()));
 
 	QMenu *traymenu = new QMenu();
 	traymenu->insertAction(0, action_new_message);

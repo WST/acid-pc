@@ -25,5 +25,6 @@
         <file>menu/yahoo.png</file>
         <file>menu/msn.png</file>
         <file>menu/icq.png</file>
+        <file>menu/door.png</file>
     </qresource>
 </RCC>
