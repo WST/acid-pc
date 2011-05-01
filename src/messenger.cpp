@@ -156,10 +156,10 @@ void Messenger::createMenus() {
 	
 	QMenu *status_menu = menuBar()->addMenu("Status");
 		QAction *action_status_available = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Available");
-		QAction *action_status_f4c = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Free for chat");
-		QAction *action_status_away = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Away");
-		QAction *action_status_xa = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Extended away");
-		QAction *action_status_dnd = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Do not disturb");
+		QAction *action_status_f4c = status_menu->addAction(QIcon(":/trayicon/f4c-16px.png"), "Free for chat");
+		QAction *action_status_away = status_menu->addAction(QIcon(":/trayicon/away-16px.png"), "Away");
+		QAction *action_status_xa = status_menu->addAction(QIcon(":/trayicon/xa-16px.png"), "Extended away");
+		QAction *action_status_dnd = status_menu->addAction(QIcon(":/trayicon/dnd-16px.png"), "Do not disturb");
 		status_menu->addSeparator();
 		QAction *action_status_dc = status_menu->addAction(QIcon(":/trayicon/offline-16px.png"), "Offline");
 	
@@ -235,14 +235,14 @@ void Messenger::handleSuccessfulConnection() {
 	// клиент сообщает нам об успешном подключении
 	login->hide();
 	this->show();
-	tray->setOnline();
+	tray->setStatus(QXmppPresence::Status::Online); // TODO: ставить тот статус, который реально был задан
 	chat->setOnline(true);
 }
 
 void Messenger::handleDisconnection() {
 	// мы отключились от сервера. Успешно или в результате ошибки — об этом говорит то, был и перед этим error().
 	this->hide();
-	tray->setOffline();
+	tray->setStatus(QXmppPresence::Status::Offline);
 	login->setEnabled(true);
 	login->show();
 	chat->setOnline(false);
@@ -317,11 +317,8 @@ void Messenger::gotMessage(QXmppMessage message) {
 			if(!chat->adaTabForJid(message.from())) {
 				// Сюда мы попадаем, если надо сохранить сообщение и показать уведомление…
 				// TODO
-				// Кстати, QMessageBox ещё по одной причине не подходит — конкретный экземпляр QMessageBox не свяжешь с конкретным сообщением…
-				QMessageBox *notifier = new QMessageBox(QMessageBox::Question, "foo", "some message", QMessageBox::Ok | QMessageBox::Cancel);
-				// connect(notifier, SIGNAL(accepted(QString)), this, SLOT(acceptConversation(QString)));
 				messages[message.id()] = message;
-				tray->popup(notifier, 5);
+				//NotificationWidget *confirm = tray->popup("some message", 5);
 			} else {
 				chat->displayMessage(message);
 			}

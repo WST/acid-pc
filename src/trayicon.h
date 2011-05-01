@@ -3,7 +3,7 @@
 
 #include <QtGui>
 
-#include "notificationwidget.h"
+#include <QXmppPresence.h>
 
 class TrayIcon: public QSystemTrayIcon
 {
@@ -12,9 +12,7 @@ class TrayIcon: public QSystemTrayIcon
                 TrayIcon(QWidget *parent = 0);
 		void debugMessage(QString msg);
 		void notify(const QString &title, const QString &message);
-		void popup(QWidget *message, unsigned short int timeout = 5);
-		void setOnline();
-		void setOffline();
+		void setStatus(QXmppPresence::Status::Type type);
 };
 
 #endif

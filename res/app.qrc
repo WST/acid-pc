@@ -26,5 +26,13 @@
         <file>menu/msn.png</file>
         <file>menu/icq.png</file>
         <file>menu/door.png</file>
+        <file>trayicon/away-16px.png</file>
+        <file>trayicon/away-22px.png</file>
+        <file>trayicon/dnd-16px.png</file>
+        <file>trayicon/dnd-22px.png</file>
+        <file>trayicon/f4c-16px.png</file>
+        <file>trayicon/f4c-22px.png</file>
+        <file>trayicon/xa-16px.png</file>
+        <file>trayicon/xa-22px.png</file>
     </qresource>
 </RCC>

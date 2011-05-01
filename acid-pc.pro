@@ -28,7 +28,6 @@ SOURCES    += src/main.cpp \
     src/aboutwindow.cpp \
     src/settingswindow.cpp \
     src/vcardwindow.cpp \
-    src/notificationwidget.cpp \
     src/contact_list/tree_view.cpp \
     src/contact_list/item_model.cpp \
     src/contact_list/group_item.cpp \
@@ -36,7 +35,8 @@ SOURCES    += src/main.cpp \
     src/contact_list/item.cpp \
     src/contact_list/item_delegate.cpp \
     src/contact_list/qxmpp_bridge.cpp \
-    src/voicecallwindow.cpp
+    src/voicecallwindow.cpp \
+    src/confirmationwindow.cpp
 HEADERS    += version.h \
               src/messenger.h \
               src/loginform.h \
@@ -50,7 +50,6 @@ HEADERS    += version.h \
     src/aboutwindow.h \
     src/settingswindow.h \
     src/vcardwindow.h \
-    src/notificationwidget.h \
     src/contact_list/tree_view.h \
     src/contact_list/item_model.h \
     src/contact_list/group_item.h \
@@ -58,7 +57,8 @@ HEADERS    += version.h \
     src/contact_list/item.h \
     src/contact_list/item_delegate.h \
     src/contact_list/qxmpp_bridge.h \
-    src/voicecallwindow.h
+    src/voicecallwindow.h \
+    src/confirmationwindow.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \
@@ -68,7 +68,8 @@ FORMS      += \
     ui/aboutwindow.ui \
     ui/settingswindow.ui \
     ui/vcardwindow.ui \
-    ui/voicecallwindow.ui
+    ui/voicecallwindow.ui \
+    ui/confirmationwindow.ui
 RESOURCES  += res/app.qrc
 
 include(src/3rd-party/qxmpp.pri)
