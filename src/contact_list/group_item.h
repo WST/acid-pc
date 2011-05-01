@@ -14,7 +14,7 @@ namespace CL {
 		explicit GroupItem(const QString &_groupName = "") : m_groupName(_groupName) {}
 
 		void setGroupName(const QString &_value) { m_groupName = _value; }
-		const QString &groupName() const { return m_groupName; }
+		const QString &getGroupName() const { return m_groupName; }
 
 		/*!
 		  Returns user-friendly group name
@@ -45,6 +45,11 @@ namespace CL {
 		  Removes a contact from group. Supposed to be used internally by ContactItem
 		  */
 		bool removeContact(ContactItem *item);
+
+		/*!
+		  Sorts items (experimental)
+		  */
+		void sort();
 
 		const QList<ContactItem *> &getContacts() const { return m_contacts; }
 

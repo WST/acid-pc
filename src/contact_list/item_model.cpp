@@ -13,14 +13,13 @@ int ItemModel::columnCount(const QModelIndex &parent) const {
 }
 
 int ItemModel::rowCount(const QModelIndex &parent) const {
-	if (parent.isValid()) {
+	if (parent.isValid())
 		if ((parent.internalId() & 0xFFFF) == 0xFFFF)
 			return m_groups.at(parent.internalId() >> 16)->childCount();
 		else
 			return 0;
-	} else {
+	else
 		return m_groups.size();
-	}
 }
 
 QVariant ItemModel::data(const QModelIndex &index, int role) const {
@@ -73,30 +72,35 @@ QModelIndex ItemModel::index(int row, int column, const QModelIndex &parent) con
 
 QModelIndex ItemModel::parent(const QModelIndex &child) const {
 	if ((child.internalId() & 0xFFFF) == 0xFFFF)
-		// child is a group, it's parent is root
+		// child is a group, its parent is root
 		return QModelIndex();
 	else
-		// child is a contact, it's parent is a group
+		// child is a contact, its parent is a group
 		return createIndex(child.internalId() >> 16, 0, static_cast<int>(child.internalId()) | 0xFFFF);
 }
-
 
 void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value) {
 	QString bare_jid, resource;
 	split_jid(jid, &bare_jid, &resource);
-	ContactItem *item = getItemByJid(jid);
-	if (!item) {
+	ContactItem *item = getContact(jid);
+
+	unless (item) {
+		if (throttleNotInRoster)
+			return;
 		QSet<QString> notInRosterGroups;
 		notInRosterGroups << notInRosterGroupName;
 		item = addEntry(jid, QString(), notInRosterGroups);
 	}
 
-	item->updatePresence(resource, _value);
+	item->setResourceStatus(resource, _value);
+
+	foreach (GroupItem *group, m_groups)
+		group->sort();
+
+	reset();
 }
 
 ContactItem *ItemModel::addEntry(const QString &jid, const QString &nick, const QSet<QString> &groups) {
-	qDebug() << "adding" << jid << nick;
-
 	ContactItem *new_item = new ContactItem(jid);
 	new_item->setNick(nick);
 
@@ -104,14 +108,14 @@ ContactItem *ItemModel::addEntry(const QString &jid, const QString &nick, const 
 	split_jid(jid, &bare_jid);
 	m_contacts[bare_jid] = new_item;
 
-	if (groups.empty()) {
-		qDebug() << noGroupName;
+	if (groups.empty())
 		new_item->addToGroup(getGroup(noGroupName));
-	} else
-		foreach (const QString &groupName, groups) {
-			qDebug() << groupName;
+	else
+		foreach (const QString &groupName, groups)
 			new_item->addToGroup(getGroup(groupName));
-		}
+
+	foreach (GroupItem *group, m_groups)
+		group->sort();
 
 	reset();
 	return new_item;
@@ -119,15 +123,15 @@ ContactItem *ItemModel::addEntry(const QString &jid, const QString &nick, const 
 
 GroupItem *ItemModel::getGroup(const QString &name) {
 	foreach (GroupItem *item, m_groups)
-		if (item->groupName() == name)
+		if (item->getGroupName() == name)
 			return item;
 	GroupItem *new_item = new GroupItem(name);
 	m_groups << new_item;
 	return new_item;
 }
 
-ContactItem *ItemModel::getItemByJid(const QString &jid) {
+ContactItem *ItemModel::getContact(const QString &jid) {
 	QString bare_jid;
 	split_jid(jid, &bare_jid);
-	return m_contacts[bare_jid];
+	return m_contacts.value(bare_jid);
 }

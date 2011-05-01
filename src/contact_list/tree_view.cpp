@@ -2,7 +2,7 @@
 #include <QMenu>
 #include <QKeyEvent>
 
-#include "item_model.h".h"
+#include "item_model.h"
 #include "tree_view.h"
 
 using namespace CL;
@@ -54,10 +54,12 @@ void TreeView::mousePressed(const QModelIndex& index) {
 }
 
 void TreeView::doubleClicked(const QModelIndex& index) {
+	Q_UNUSED(index);
     action_chat->trigger();
 }
 
 void TreeView::clicked(const QModelIndex& index) {
+	Q_UNUSED(index);
 }
 
 QString TreeView::selectedBareJid() {

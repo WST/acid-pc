@@ -11,9 +11,16 @@ namespace CL {
 		Q_OBJECT
 
 	public:
-		explicit ItemModel(QObject* parent): QAbstractItemModel(parent), notInRosterGroupName("Not-in-roster"), noGroupName("General") {}
+		explicit ItemModel(QObject* parent):
+			QAbstractItemModel(parent),
+			throttleNotInRoster(true),
+			notInRosterGroupName("Not-in-roster"),
+			noGroupName("General") {}
 
-		ContactItem *getItemByJid(const QString &jid);
+		/*!
+		  Returns a contact by it's JID
+		  */
+		ContactItem *getContact(const QString &jid);
 
 		/*!
 		  Changes the status of an item with full jid JID
@@ -27,9 +34,10 @@ namespace CL {
 		ContactItem *addEntry(const QString &jid, const QString &nick, const QSet<QString> &groups);
 
 		/*!
-		  Removes and entry for jid, updating groups as needed
+		  Removes an entry for jid, updating groups as needed
+		  Passing groups = NULL removes this entry from all groups
 		  */
-		void removeEntry(const QString &jid, const QSet<QString> &groups);
+		void removeEntry(const QString &jid, const QSet<QString> *groups = NULL);
 
 
 		void setAvatar(const QString &jid, const QImage &_value);
@@ -43,7 +51,19 @@ namespace CL {
 		  */
 		GroupItem *getGroup(const QString &name);
 
+		/*!
+		  Drop status if sender is not in roster
+		  */
+		bool throttleNotInRoster;
+
+		/*!
+		  Group name for new contacts not in roster
+		  */
 		QString notInRosterGroupName;
+
+		/*!
+		  Group name for new contacts without groups
+		  */
 		QString noGroupName;
 
 	public:

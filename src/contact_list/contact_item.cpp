@@ -6,24 +6,26 @@
 
 using namespace CL;
 
+const char *ContactItem::statusString[] = { "offline", "dnd", "xa", "away", "online", "f4c" };
+
 ContactItem::ContactItem(const QString &jid) {
 	split_jid(jid, &m_bareJid);
 	setOffline();
 }
 
-const ContactItem::Status *ContactItem::getResource(const QString &name) const {
-	if (name.isEmpty()) {
+const ContactItem::Status *ContactItem::getResourceStatus(const QString &resource) const {
+	if (resource.isEmpty()) {
 		if (m_resources.size() == 1) {
-			return m_resources.constBegin().value();
+			return *m_resources.constBegin();
 		} else {
 			const Status *highest = NULL;
 			foreach (const Status *r, m_resources)
-				if (!highest || r->priority > highest->priority)
+				if (!highest || *highest < *r)
 					highest = r;
 			return highest;
 		}
 	} else {
-		return m_resources[name];
+		return m_resources.value(resource);
 	}
 }
 
@@ -38,7 +40,7 @@ bool ContactItem::addToGroup(GroupItem *group) {
 bool ContactItem::removeFromGroup(const QString &group_name) {
 	GroupItem *found = NULL;
 	foreach (GroupItem *item, m_groups)
-		if (item->groupName() == group_name) {
+		if (item->getGroupName() == group_name) {
 			found = item;
 			break;
 		}
@@ -49,6 +51,8 @@ bool ContactItem::removeFromGroup(const QString &group_name) {
 }
 
 void ContactItem::setOffline() {
+	foreach (Status *status, m_resources)
+		delete status;
 	m_resources.clear();
 	updateIcon();
 }
@@ -66,24 +70,24 @@ QString ContactItem::getText() const {
 	return m_resources.size() > 1 ? (base_text + " (%1)").arg(m_resources.size()) : base_text;
 }
 
-void ContactItem::updatePresence(const QString &resource, const Status &status) {
-	if (status.type != Unchanged) {
-		Status *rcptr = m_resources[resource];
-		unless (rcptr || status.type == Offline)
+void ContactItem::setResourceStatus(const QString &resource, const Status &_value) {
+	unless (_value.type == Unchanged) {
+		Status *rcptr = m_resources.value(resource);
+		unless (rcptr || _value.type == Offline)
 			m_resources[resource] = rcptr = new Status();
-		if (status.type == Offline) {
+		if (_value.type == Offline) {
 			if (rcptr) {
 				delete rcptr;
 				m_resources.remove(resource);
 			}
 		} else {
-			*rcptr = status;
+			*rcptr = _value;
 		}
 		updateIcon();
 	}
 }
 
 void ContactItem::updateIcon() {
-	QString icon = isOnline() ? "online" : "offline";
-	m_icon = QIcon(":/trayicon/"+icon+"-16px.png");
+	QString icon_name = isOnline() ? statusString[getResourceStatus()->type] : "offline";
+	m_icon = QIcon(":/trayicon/"+icon_name+"-16px.png");
 }

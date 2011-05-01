@@ -2,6 +2,7 @@
 #define CL_CONTACTITEM_H
 
 #include <QMap>
+#include <QDebug>
 
 #include "item.h"
 #include "group_item.h"
@@ -26,12 +27,14 @@ namespace CL {
 		enum StatusType {
 			Unchanged = -1, /* This value is for internal usage only */
 			Offline,
-			Online,
-			Chat,
 			DND,
+			XA,
 			Away,
-			XA
+			Online,
+			Chat
 		};
+
+		static const char *statusString[];
 
 		struct Status {
 			StatusType type;
@@ -39,19 +42,32 @@ namespace CL {
 			int priority;
 
 			explicit Status(): type(Offline), text(""), priority(0) {}
+
+			/*!
+			  For suitable resource search
+			  */
+			bool operator<(const Status &_other) const {
+				return priority < _other.priority ? true :
+					type < _other.type;
+			}
 		};
 
 	public:
 		/*!
 		  Gets a list of all online resources. Empty list indicates no resources (basically, JID is offline)
 		  */
-		QList<QString> getResources() const { return m_resources.keys(); }
+		QList<QString> getResourceNames() const { return m_resources.keys(); }
 
 		/*!
-		  Gets the resource by it's name. For empty name returns a resource with the highest priority.
-		  If there are several resources with the same priority, may return any
+		  Gets the status by resource name. For empty name returns status with the highest priority.
+		  If there are several resources with the same priority, returns one with most available status
 		  */
-		const Status *getResource(const QString &name = "") const;
+		const Status *getResourceStatus(const QString &resource = "") const;
+
+		/*!
+		  Adds / removes / updates resources as needed
+		  */
+		void setResourceStatus(const QString &resource, const Status &_value);
 
 		const QString &getNick() const { return m_nick; }
 		void setNick(const QString &_value) { m_nick = _value; }
@@ -59,7 +75,7 @@ namespace CL {
 		/*!
 		  Returns true if at least one resource is not offline
 		  */
-		bool isOnline() const { return m_resources.size(); }
+		bool isOnline() const { return !m_resources.isEmpty(); }
 
 		/*!
 		  Sets internal state to 'offline', consequently removing all resources
@@ -81,9 +97,6 @@ namespace CL {
 		  */
 		bool removeFromGroup(const QString &group_name);
 
-		const QImage &getAvatar() const { return m_avatar; }
-		void setAvatar(const QImage& _value) { m_avatar = _value; }
-
 		/*!
 		  Returns user-friendly text string to display as a name
 		  */
@@ -92,24 +105,18 @@ namespace CL {
 		/*!
 		  In this case subtext is a status message
 		  */
-		virtual QString getSubText() const { return isOnline() ? getResource()->text : "offline"; }
+		virtual QString getSubText() const { return isOnline() ? getResourceStatus()->text : "offline"; }
 
 		/*!
 		  In this case icon normally indicates user status type
 		  */
 		virtual const QIcon &getIcon() const { return m_icon; }
 
-		/*!
-		  Adds / removes / updates resources as needed
-		  */
-		void updatePresence(const QString &resource, const Status &status);
-
 	private:
 		QMap<QString, Status *> m_resources;
+		QList<GroupItem *> m_groups;
 		QString m_bareJid;
 		QString m_nick;
-		QList<GroupItem *> m_groups;
-		QImage m_avatar;
 		QIcon m_icon;
 
 		void updateIcon();
