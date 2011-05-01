@@ -35,6 +35,9 @@ void SettingsWindow::on_button_box_accepted() {
 	settings->setValue("settings/notification_display_time", ui->notification_display_time->value());
 	settings->setValue("settings/roster_on_the_top", ui->roster_on_the_top->checkState());
 
+	// Четвёртый таб
+	settings->setValue("settings/savepath", ui->savepath->text());
+
 	emit modified();
 }
 
@@ -56,6 +59,8 @@ void SettingsWindow::loadCurrentSettings() {
 	ui->roster_on_the_top->setChecked(settings->value("settings/roster_on_the_top", false).toBool());
 	ui->notification_display_time->setValue(settings->value("settings/notification_display_time", 5).toInt());
 
+	// Четвёртый таб
+	ui->savepath->setText(settings->value("settings/savepath", QDesktopServices::storageLocation(QDesktopServices::DesktopLocation)).toString());
 }
 
 void SettingsWindow::on_button_box_rejected() {
@@ -65,4 +70,11 @@ void SettingsWindow::on_button_box_rejected() {
 void SettingsWindow::on_muc_nickname_textChanged(QString newtext) {
 	ui->button_box->buttons().at(0)->setEnabled(!newtext.isEmpty());
 	//ui->button_box->buttons().at(2)->setEnabled(!newtext.isEmpty());
+}
+
+void SettingsWindow::on_savepath_browse_button_clicked() {
+	QString dir = QFileDialog::getExistingDirectory(this, "Select a directory");
+	if(!dir.isNull()) {
+		ui->savepath->setText(dir);
+	}
 }

@@ -28,7 +28,9 @@ private slots:
  void on_button_box_rejected();
  void on_button_box_accepted();
  void on_file_transfer_mode_currentIndexChanged(int index);
-	signals:
+ void on_savepath_browse_button_clicked();
+
+signals:
 		void modified();
 };
 

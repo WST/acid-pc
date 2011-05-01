@@ -34,5 +34,6 @@
         <file>trayicon/f4c-22px.png</file>
         <file>trayicon/xa-16px.png</file>
         <file>trayicon/xa-22px.png</file>
+        <file>menu/folder.png</file>
     </qresource>
 </RCC>
