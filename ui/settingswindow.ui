@@ -335,9 +335,6 @@
             </item>
             <item row="0" column="1">
              <widget class="QSpinBox" name="notification_display_time">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
               <property name="minimum">
                <number>1</number>
               </property>

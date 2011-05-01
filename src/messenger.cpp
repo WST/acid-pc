@@ -1,8 +1,8 @@
 // ACId
 #include "QXmppRosterManager.h"
-
 #include "messenger.h"
 #include "functions.h"
+#include "confirmationwindow.h"
 #include "contact_list/qxmpp_bridge.h"
 #include <version.h>
 
@@ -315,14 +315,29 @@ void Messenger::gotMessage(QXmppMessage message) {
 				return;
 			}
 			if(!chat->adaTabForJid(message.from())) {
-				// Сюда мы попадаем, если надо сохранить сообщение и показать уведомление…
-				// TODO
 				messages[message.id()] = message;
-				//NotificationWidget *confirm = tray->popup("some message", 5);
+				connect(ConfirmationWindow::newMessage(& messages[message.id()], settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(QXmppMessage *, bool)), this, SLOT(confirmedMessage(QXmppMessage *, bool)));
 			} else {
 				chat->displayMessage(message);
 			}
 		break;
+	}
+}
+
+void Messenger::confirmedMessage(QXmppMessage *message, bool confirmed) {
+	// TODO: здесь присутствует бага следующего рода: когда юзер принимает сообщение от некоторого JID,
+	// его очередь сообщений опустошается и, если сразу после этого нажать “accept” на некотором
+	// другом уведомлении о сообщении от этого JID, указатель будет указывать никуда и программа сегфолтнется.
+	if(confirmed) {
+		//chat->displayMessage(* message);
+		for(QMap<QString, QXmppMessage>::iterator i = messages.begin(); i != messages.end(); ++ i) {
+			if(i.value().from() == message->from()) {
+				chat->displayMessage(i.value());
+				messages.erase(i);
+			}
+		}
+	} else {
+		messages.erase(messages.find(message->id()));
 	}
 }
 
