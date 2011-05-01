@@ -147,6 +147,8 @@ void Messenger::createMenus() {
 			QAction *action_connect_icq = connect_service_menu->addAction(QIcon(":/menu/icq.png"), "ICQ");
 			connect_service_menu->addSeparator();
 			QAction *action_connect_lopbox = connect_service_menu->addAction(QIcon(), "Lopbox microblog");
+			connect_service_menu->addSeparator();
+			QAction *action_browse_services = connect_service_menu->addAction(QIcon(":/menu/plug.png"), "Service discovery");
 		im_menu->addSeparator();
 		QAction *action_settings = im_menu->addAction(QIcon(":/menu/toolbox.png"), "Settings");
 		im_menu->addSeparator();
@@ -411,6 +413,7 @@ void Messenger::makeVoiceCall(const QString &bare_jid) {
 		call_window->activateWindow();
 		return;
 	}
+
 	call_window = new VoiceCallWindow(this, call_manager->call(bare_jid));
 	connect(call_window, SIGNAL(accepted()), this, SLOT(endCall()));
 	call_window->show();

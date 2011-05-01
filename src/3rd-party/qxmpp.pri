@@ -3,6 +3,10 @@ QT      += network xml
 INCLUDEPATH += \
            $$PWD/qxmpp/src
 
+#DEFINES += QXMPP_USE_SPEEX
+
+#LIBS += -lspeex
+
 HEADERS += $$PWD/qxmpp/src/QXmppUtils.h \
            $$PWD/qxmpp/src/QXmppArchiveIq.h \
            $$PWD/qxmpp/src/QXmppArchiveManager.h \
