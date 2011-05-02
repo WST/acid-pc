@@ -14,19 +14,22 @@ ContactItem::ContactItem(const QString &jid) {
 	setOffline();
 }
 
-const ContactItem::Status *ContactItem::getResourceStatus(const QString &resource) const {
+ContactItem::ResourceStatus ContactItem::getResource(const QString &resource) const {
 	if (resource.isEmpty()) {
 		if (m_resources.size() == 1) {
-			return m_resources.constBegin().value();
+			return ResourceStatus(m_resources.constBegin().key(), m_resources.constBegin().value());
 		} else {
-			const Status *highest = NULL;
-			foreach (const Status *status, m_resources)
-				if (!highest || *highest < *status)
-					highest = status;
-			return highest;
+			QString highestName;
+			const Status *highestStatus = NULL;
+			for (QMap<QString, Status *>::const_iterator i = m_resources.constBegin(); i != m_resources.constEnd(); ++i)
+				if (!highestStatus || *highestStatus < *i.value()) {
+					highestName = i.key();
+					highestStatus = i.value();
+				}
+			return ResourceStatus(highestName, highestStatus);
 		}
 	} else {
-		return m_resources.value(resource);
+		return ResourceStatus(resource, m_resources.value(resource));
 	}
 }
 
@@ -34,8 +37,8 @@ bool ContactItem::operator<(const ContactItem &_other) const {
 	if (isOnline() == _other.isOnline()) {
 		if (isOnline()) {
 			// Both are online, compare statuses
-			const Status *resource_status = getResourceStatus(),
-					*other_resource_status = _other.getResourceStatus();
+			const Status *resource_status = getResource().second,
+					*other_resource_status = _other.getResource().second;
 			if (*resource_status < *other_resource_status)
 				return true;
 			elsif (*other_resource_status < *resource_status)
@@ -94,10 +97,8 @@ QString ContactItem::getText() const {
 void ContactItem::setResourceStatus(const QString &resource, const Status &_value) {
 	unless (_value.type == Unchanged) {
 		Status *rcptr = m_resources.value(resource);
-		unless (rcptr || _value.type == Offline) {
+		unless (rcptr || _value.type == Offline)
 			m_resources[resource] = rcptr = new Status();
-			rcptr->resource = resource;
-		}
 		if (_value.type == Offline) {
 			if (rcptr) {
 				delete rcptr;
@@ -115,7 +116,7 @@ void ContactItem::setResourceStatus(const QString &resource, const Status &_valu
 }
 
 void ContactItem::updateIcon() {
-	QString icon_name = isOnline() ? statusString[getResourceStatus()->type] :
+	QString icon_name = isOnline() ? statusString[getResource().second->type] :
 									 statusString[Offline];
 	m_icon = QIcon(":/trayicon/"+icon_name+"-16px.png");
 }

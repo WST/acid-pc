@@ -49,11 +49,6 @@ namespace CL {
 				return priority < _other.priority ? true :
 					type < _other.type;
 			}
-
-			/*!
-			  This is only filled when getting resource status
-			  */
-			QString resource;
 		};
 
 		/*!
@@ -67,11 +62,14 @@ namespace CL {
 		  */
 		QList<QString> getResourceNames() const { return m_resources.keys(); }
 
+		typedef QPair<QString, const Status *> ResourceStatus;
+
 		/*!
-		  Gets the status by resource name.
-		  For empty name returns status of most online resource (highest priority, highest status)
+		  Gets the name and status by resource name.
+		  For empty name returns status of 'the most online' resource (highest priority, highest status).
+		  Returns NULL for non-existent resource
 		  */
-		const Status *getResourceStatus(const QString &resource = "") const;
+		ResourceStatus getResource(const QString &resource = "") const;
 
 		/*!
 		  Adds / removes / updates resources as needed
@@ -97,7 +95,7 @@ namespace CL {
 		bool addToGroup(GroupItem *group);
 
 		/*!
-		  Removes a group from internal groups list (if needed) and update group's children
+		  Removes a group from internal groups list (if needed) and updates group's children
 		  */
 		bool removeFromGroup(GroupItem *group);
 
@@ -119,7 +117,7 @@ namespace CL {
 		/*!
 		  In this case subtext is a status message
 		  */
-		virtual QString getSubText() const { return isOnline() ? getResourceStatus()->text : QString(); }
+		virtual QString getSubText() const { return isOnline() ? getResource().second->text : QString(); }
 
 		/*!
 		  In this case icon normally indicates user status type
