@@ -1,6 +1,7 @@
 #include <QImage>
 
 #include "../functions.h"
+#include "group_item.h"
 
 #include "contact_item.h"
 
@@ -14,18 +15,39 @@ ContactItem::ContactItem(const QString &jid) {
 }
 
 const ContactItem::Status *ContactItem::getResourceStatus(const QString &resource) const {
-	if (resource.isEmpty())
+	if (resource.isEmpty()) {
 		if (m_resources.size() == 1) {
-			return *m_resources.constBegin();
+			return m_resources.constBegin().value();
 		} else {
 			const Status *highest = NULL;
-			foreach (const Status *r, m_resources)
-				if (!highest || *highest < *r)
-					highest = r;
+			foreach (const Status *status, m_resources)
+				if (!highest || *highest < *status)
+					highest = status;
 			return highest;
 		}
-	else
+	} else {
 		return m_resources.value(resource);
+	}
+}
+
+bool ContactItem::operator<(const ContactItem &_other) const {
+	if (isOnline() == _other.isOnline()) {
+		if (isOnline()) {
+			// Both are online, compare statuses
+			const Status *resource_status = getResourceStatus(),
+					*other_resource_status = _other.getResourceStatus();
+			if (*resource_status < *other_resource_status)
+				return true;
+			elsif (*other_resource_status < *resource_status)
+				return false;
+		}
+
+		// Compare nicknames
+		return getText().compare(_other.getText(), Qt::CaseInsensitive) > 0;
+	} else {
+		// Compare 'online' to 'offline'
+		return isOnline() < _other.isOnline();
+	}
 }
 
 bool ContactItem::addToGroup(GroupItem *group) {
@@ -72,8 +94,10 @@ QString ContactItem::getText() const {
 void ContactItem::setResourceStatus(const QString &resource, const Status &_value) {
 	unless (_value.type == Unchanged) {
 		Status *rcptr = m_resources.value(resource);
-		unless (rcptr || _value.type == Offline)
+		unless (rcptr || _value.type == Offline) {
 			m_resources[resource] = rcptr = new Status();
+			rcptr->resource = resource;
+		}
 		if (_value.type == Offline) {
 			if (rcptr) {
 				delete rcptr;
@@ -82,6 +106,10 @@ void ContactItem::setResourceStatus(const QString &resource, const Status &_valu
 		} else {
 			*rcptr = _value;
 		}
+
+		foreach (GroupItem *group, m_groups)
+			group->statusChanged(this);
+
 		updateIcon();
 	}
 }

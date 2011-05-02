@@ -8,7 +8,7 @@ namespace CL {
 	/*!
 	  General item. This class must be inherited
 	  */
-	class Item {
+	class Item: public QObject {
 	public:
 		/*!
 		  Main display text of an item

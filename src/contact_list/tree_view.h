@@ -2,6 +2,8 @@
 #define CL_TREEVIEW_H
 
 #include <QtGui>
+#include "contact_item.h"
+#include "group_item.h"
 
 namespace CL {
 	class TreeView : public QTreeView {
@@ -33,8 +35,16 @@ namespace CL {
 		void removeContact(const QString& bareJid);
 		void makeVoiceCall(const QString &full_jid);
 
-	private:
-		QString selectedBareJid();
+	public:
+		/*!
+		  Returns selected roster item. NULL if it is a group. Use selectedGroup instead then.
+		  */
+		const ContactItem *selectedContact() const;
+
+		/*!
+		  Returns selected group item. NULL if it is a contact. Use selectedContact instead then.
+		  */
+		const GroupItem *selectedGroup() const;
 
 	private:
 		QAction *action_chat;

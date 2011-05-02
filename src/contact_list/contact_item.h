@@ -2,10 +2,9 @@
 #define CL_CONTACTITEM_H
 
 #include <QMap>
-#include <QDebug>
 
+#include "../functions.h"
 #include "item.h"
-#include "group_item.h"
 
 namespace CL {
 	class GroupItem;
@@ -41,7 +40,7 @@ namespace CL {
 			QString text;
 			int priority;
 
-			explicit Status(): type(Offline), text(""), priority(0) {}
+			explicit Status(): type(Offline), priority(0) {}
 
 			/*!
 			  For suitable resource search
@@ -50,7 +49,17 @@ namespace CL {
 				return priority < _other.priority ? true :
 					type < _other.type;
 			}
+
+			/*!
+			  This is only filled when getting resource status
+			  */
+			QString resource;
 		};
+
+		/*!
+		  Greater items are more attractive target for converstation
+		  */
+		bool operator<(const ContactItem &_other) const;
 
 	public:
 		/*!
@@ -59,8 +68,8 @@ namespace CL {
 		QList<QString> getResourceNames() const { return m_resources.keys(); }
 
 		/*!
-		  Gets the status by resource name. For empty name returns status with the highest priority.
-		  If there are several resources with the same priority, returns one with most available status
+		  Gets the status by resource name.
+		  For empty name returns status of most online resource (highest priority, highest status)
 		  */
 		const Status *getResourceStatus(const QString &resource = "") const;
 
@@ -126,6 +135,7 @@ namespace CL {
 
 		void updateIcon();
 	};
+
 };
 
 #endif // CL_CONTACTITEM_H

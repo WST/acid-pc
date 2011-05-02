@@ -3,9 +3,13 @@
 
 #include <QtCore>
 
+#define JID_RESOURCE_SEPARATOR "/"
+
 QStringList parseJid(QString jid);
+
 void split_jid(const QString &jid, QString *bare, QString *resource = NULL);
 
 #define unless(x) if (!(x))
+#define elsif else if
 
 #endif // FUNCTIONS_H

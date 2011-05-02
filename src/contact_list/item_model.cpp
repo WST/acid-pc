@@ -38,8 +38,10 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const {
 		return item->getIcon();
 	case Qt::ToolTipRole:
 		return item->getSubText();
-	case BareJid:
-		return static_cast<const ContactItem *>(item)->getBareJid();
+	case ContactItemRole:
+		return (int)(item->childCount() ? NULL : item);
+	case GroupItemRole:
+		return (int)(item->childCount() ? item : NULL);
 	default:
 		return QVariant();
 	}
@@ -93,10 +95,6 @@ void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value)
 	}
 
 	item->setResourceStatus(resource, _value);
-
-	foreach (GroupItem *group, m_groups)
-		group->sort();
-
 	reset();
 }
 
@@ -125,10 +123,6 @@ ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSe
 
 	unless (current_groups.size())
 		item->addToGroup(getGroup(noGroupName));
-
-	foreach (GroupItem *group, m_groups)
-		group->sort();
-
 	reset();
 	return item;
 }
@@ -138,7 +132,13 @@ GroupItem *ItemModel::getGroup(const QString &name) {
 		if (item->getGroupName() == name)
 			return item;
 	GroupItem *new_item = new GroupItem(name);
-	m_groups << new_item;
+
+	int i;
+	for (i = 0; i < m_groups.size(); ++i)
+		if (m_groups[i]->getGroupName().compare(name, Qt::CaseInsensitive) > 0)
+			break;
+	m_groups.insert(i, new_item);
+
 	return new_item;
 }
 

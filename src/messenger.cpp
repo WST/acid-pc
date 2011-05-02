@@ -466,7 +466,7 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 	CL::ContactItem::Status status;
 	if (presences.contains(resource))
 		status = CL::QXmppBridge::qxmpp2cl(presences[resource]);
-	roster_model.setStatus(QString("%1/%2").arg(bare_jid).arg(resource), status);
+	roster_model.setStatus(QString("%1" JID_RESOURCE_SEPARATOR "%2").arg(bare_jid).arg(resource), status);
 }
 
 void Messenger::openChat(const QString &full_jid) {

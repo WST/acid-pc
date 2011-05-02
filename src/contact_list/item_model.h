@@ -60,7 +60,8 @@ namespace CL {
 
 	public:
 		enum SpecificRole {
-			BareJid = Qt::UserRole + 2
+			ContactItemRole = Qt::UserRole + 2,
+			GroupItemRole = Qt::UserRole + 3
 		};
 
 		virtual QModelIndex index(int row, int column, const QModelIndex &parent) const;

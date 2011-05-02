@@ -6,7 +6,6 @@ QStringList parseJid(QString jid) {
 	return format.exactMatch(jid) ?  format.capturedTexts() : QStringList();
 }
 
-#define JID_RESOURCE_SEPARATOR '/'
 void split_jid(const QString &jid, QString *bare, QString *resource) {
 	if (bare || resource) {
 		int sep = jid.indexOf(JID_RESOURCE_SEPARATOR);

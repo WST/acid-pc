@@ -70,20 +70,30 @@ void TreeView::drawBranches(QPainter *painter, const QRect &rect, const QModelIn
 	}
 }
 
-QString TreeView::selectedBareJid() {
-	return selectedIndexes().at(0).data(ItemModel::BareJid).toString();
+const ContactItem *TreeView::selectedContact() const {
+	// a long long doomed chain
+	return reinterpret_cast<const ContactItem *>(qvariant_cast<int>(selectedIndexes().at(0).data(ItemModel::ContactItemRole)));
+}
+
+const GroupItem *TreeView::selectedGroup() const {
+	// fuck me gently with a chainsaw
+	return reinterpret_cast<const GroupItem *>(qvariant_cast<int>(selectedIndexes().at(0).data(ItemModel::GroupItemRole)));
 }
 
 void TreeView::showChatDialog_helper() {
-    QString bareJid = selectedBareJid();
-    if(!bareJid.isEmpty())
-        emit showChatDialog(bareJid);
+	if (selectedContact()) {
+		QString bareJid = selectedContact()->getBareJid();
+		if(!bareJid.isEmpty())
+			emit showChatDialog(bareJid);
+	}
 }
 
 void TreeView::showProfile_helper() {
-    QString bareJid = selectedBareJid();
-    if(!bareJid.isEmpty())
-        emit showProfile(bareJid);
+	if (selectedContact()) {
+		QString bareJid = selectedContact()->getBareJid();
+		if(!bareJid.isEmpty())
+			emit showProfile(bareJid);
+	}
 }
 
 void TreeView::keyPressEvent(QKeyEvent* event1) {
@@ -94,13 +104,17 @@ void TreeView::keyPressEvent(QKeyEvent* event1) {
 }
 
 void TreeView::removeContact_helper() {
-    QString bareJid = selectedBareJid();
-    if(!bareJid.isEmpty())
-        emit removeContact(bareJid);
+	if (selectedContact()) {
+		QString bareJid = selectedContact()->getBareJid();
+		if(!bareJid.isEmpty())
+			emit removeContact(bareJid);
+	}
 }
 
 void TreeView::callHelper() {
-	QString full_jid = selectedBareJid();
-	if(!full_jid.isEmpty())
-		emit makeVoiceCall(full_jid);
+	if (selectedContact()) {
+		QString bare_jid = selectedContact()->getBareJid();
+		if(!bare_jid.isEmpty())
+			emit makeVoiceCall(bare_jid);
+	}
 }

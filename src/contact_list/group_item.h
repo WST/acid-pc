@@ -1,9 +1,6 @@
 #ifndef CL_GROUPITEM_H
 #define CL_GROUPITEM_H
 
-#include <QObject>
-
-#include "contact_item.h"
 #include "item.h"
 
 namespace CL {
@@ -11,7 +8,7 @@ namespace CL {
 
 	class GroupItem: public Item {
 	public:
-		explicit GroupItem(const QString &_groupName = "") : m_groupName(_groupName) {}
+		explicit GroupItem(const QString &_groupName = ""): m_groupName(_groupName) {}
 
 		void setGroupName(const QString &_value) { m_groupName = _value; }
 		const QString &getGroupName() const { return m_groupName; }
@@ -46,12 +43,10 @@ namespace CL {
 		  */
 		bool removeContact(ContactItem *item);
 
-		/*!
-		  Sorts items (experimental)
-		  */
-		void sort();
-
 		const QList<ContactItem *> &getContacts() const { return m_contacts; }
+
+	public:
+		void statusChanged(ContactItem *item);
 
 	private:
 		QString m_groupName;
@@ -59,6 +54,7 @@ namespace CL {
 
 		QList<ContactItem *> m_contacts;
 	};
+
 };
 
 #endif // CL_GROUPITEM_H
