@@ -253,6 +253,9 @@ void Messenger::activate() {
 	client_settings->setKeepAliveTimeout(settings->value("settings/keepalive_timeout", KEEPALIVE_TIMEOUT).toInt()); // таймаут пинга 30 секунд. Если ответ не пришёл, переходить в оффлайн.
 	client_settings->setAutoReconnectionEnabled(false);
 
+	// debug:
+	client_settings->setStreamSecurityMode(QXmppConfiguration::TLSDisabled);
+
 	transfer_manager->setProxy(settings->value("settings/file_transfer_proxy", PROXY65_JID).toString());
 	transfer_manager->setProxyOnly(false);
 
