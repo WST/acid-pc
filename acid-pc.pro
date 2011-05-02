@@ -36,7 +36,8 @@ SOURCES    += src/main.cpp \
     src/contact_list/item_delegate.cpp \
     src/contact_list/qxmpp_bridge.cpp \
     src/voicecallwindow.cpp \
-    src/confirmationwindow.cpp
+    src/confirmationwindow.cpp \
+    src/joinroomwindow.cpp
 HEADERS    += version.h \
               src/messenger.h \
               src/loginform.h \
@@ -58,7 +59,8 @@ HEADERS    += version.h \
     src/contact_list/item_delegate.h \
     src/contact_list/qxmpp_bridge.h \
     src/voicecallwindow.h \
-    src/confirmationwindow.h
+    src/confirmationwindow.h \
+    src/joinroomwindow.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \
@@ -69,7 +71,8 @@ FORMS      += \
     ui/settingswindow.ui \
     ui/vcardwindow.ui \
     ui/voicecallwindow.ui \
-    ui/confirmationwindow.ui
+    ui/confirmationwindow.ui \
+    ui/joinroomwindow.ui
 RESOURCES  += res/app.qrc
 
 include(src/3rd-party/qxmpp.pri)

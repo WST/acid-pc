@@ -3,6 +3,7 @@
 #include "messenger.h"
 #include "functions.h"
 #include "confirmationwindow.h"
+#include "joinroomwindow.h"
 #include "contact_list/qxmpp_bridge.h"
 #include <version.h>
 
@@ -92,7 +93,7 @@ void Messenger::loadSettings() {
 	if(settings->contains("login/auto")) login->setAutoLogin(settings->value("login/auto").toBool());
 
 	if(settings->contains("settings/roster_opacity")) setWindowOpacity(settings->value("settings/roster_opacity").toFloat() / 100);
-	if(settings->contains("settings/roster_opacity")) roster_widget.setAnimated(settings->value("settings/animate_roster").toBool());
+	roster_widget.setAnimated(settings->value("settings/animate_roster", true).toBool());
 	if(settings->value("settings/roster_on_the_top", false).toBool()) setWindowFlags(windowFlags() | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
 
 	if(settings->contains("settings/gui_style")) {
@@ -178,6 +179,7 @@ void Messenger::createMenus() {
 	connect(action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
 	connect(action_settings, SIGNAL(triggered()), this, SLOT(manageSettings()));
 	connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
+	connect(action_join_new_room, SIGNAL(triggered()), this, SLOT(joinNewRoom()));
 
 	// Меню статуса
 	connect(action_status_available, SIGNAL(triggered()), this, SLOT(setOnlineStatus()));
@@ -422,6 +424,12 @@ void Messenger::confirmedMessage(const QString &message_id) {
 			messages.erase(i);
 		}
 	}
+}
+
+void Messenger::joinNewRoom() {
+	JoinRoomWindow *window = new JoinRoomWindow(this);
+	connect(window, SIGNAL(joinRequested(const QString &bare_jid)), this, SLOT(processJoinRequest(const QString &bare_jid)));
+	window->show();
 }
 
 void Messenger::joinSupportRoom() {

@@ -75,6 +75,7 @@ class Messenger: public QMainWindow {
 		void disconnect();
 		void iconClicked(QSystemTrayIcon::ActivationReason reason);
 		void createNewMessage();
+		void joinNewRoom();
 		void sendMessage(MessageForm *message); // слот с аргументами to, message уже есть в клиенте (qxmpp)
 		void sendMUCMessage(QString, QString);
 		void gotVoiceCall(QXmppCall *call);
