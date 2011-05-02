@@ -27,7 +27,7 @@ void ConfirmationWindow::setEventDescription(const QString &description) {
 	ui->event_description->setText(description);
 }
 
-void ConfirmationWindow::setEventIcon(QPixmap &icon) {
+void ConfirmationWindow::setEventIcon(QPixmap icon) {
 	ui->icon->setPixmap(icon);
 }
 
@@ -59,6 +59,7 @@ ConfirmationWindow *ConfirmationWindow::newMessage(QXmppMessage *message, int ti
 	window->setEventTitle("New chat message");
 	window->setEventDescription(message->from());
 	window->setType(Message);
+	window->setEventIcon(QPixmap(":/notifications/message.png"));
 	window->show();
 	window->setMessageId(message->id());
 	window->setTimeout(timeout);
@@ -67,7 +68,16 @@ ConfirmationWindow *ConfirmationWindow::newMessage(QXmppMessage *message, int ti
 }
 
 ConfirmationWindow *ConfirmationWindow::newFile(QXmppTransferJob *job, int timeout) {
-	// TODO
+	ConfirmationWindow *window = new ConfirmationWindow();
+	window->setEventTitle("New incoming file");
+	window->setEventDescription(QString("Name: ") + job->fileName() + QString(", size: ") + QString::number(job->fileSize()));
+	window->setType(Transfer);
+	window->setEventIcon(QPixmap(":/notifications/file.png"));
+	window->setPointer((QObject *) job);
+	window->show();
+	//window->setTimeout(timeout);
+	Q_UNUSED(timeout);
+	return window;
 }
 
 ConfirmationWindow *ConfirmationWindow::newCall(QXmppCall *call, int timeout) {
@@ -79,6 +89,12 @@ void ConfirmationWindow::on_accept_button_clicked() {
 		case Message:
 			emit confirmedMessage(message_id);
 		break;
+		case Transfer:
+			emit confirmedFile((QXmppTransferJob *) pointer, true);
+		break;
+		case MUCInvitation:
+			// TODO
+		break;
 	}
 	hide();
 	delete this;
@@ -86,7 +102,13 @@ void ConfirmationWindow::on_accept_button_clicked() {
 
 void ConfirmationWindow::on_decline_button_clicked() {
 	switch(type) {
-		// TODO
+		case Message: break;
+		case Transfer:
+			emit confirmedFile((QXmppTransferJob *) pointer, false);
+		break;
+		case MUCInvitation:
+			// TODO
+		break;
 	}
 	hide();
 	delete this;

@@ -98,6 +98,7 @@ class Messenger: public QMainWindow {
 		void openOfficialSite();
 		void endCall();
 		void confirmedMessage(const QString &message_id);
+		void confirmedFile(QXmppTransferJob *job, bool confirmed);
 		void setOnlineStatus();
 		void setAwayStatus();
 		void setXAStatus();

@@ -335,17 +335,24 @@ void Messenger::gotVoiceCall(QXmppCall *call) {
 }
 
 void Messenger::gotFile(QXmppTransferJob *job) {
-	qDebug() << "Got a file!";
 	if(settings->value("settings/automatically_accept_files", false).toBool()) {
-			QFile *target = new QFile(settings->value("settings/savepath", INCOMING_FILES_STORAGE).toString() + "/" + job->fileName());
-			if(target->open(QIODevice::ReadWrite)) {
-				job->accept(target);
-			} else {
-				tray->debugMessage("Cannot write to the target file! Check permissions.");
-				job->abort();
-			}
+		confirmedFile(job, true);
 	} else {
+		connect(ConfirmationWindow::newFile(job, settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedFile(QXmppTransferJob *, bool)), this, SLOT(confirmedFile(QXmppTransferJob *, bool)));
+	}
+}
 
+void Messenger::confirmedFile(QXmppTransferJob *job, bool confirmed) {
+	if(!confirmed) {
+		job->abort();
+		return;
+	}
+	QFile *target = new QFile(settings->value("settings/savepath", INCOMING_FILES_STORAGE).toString() + "/" + job->fileName());
+	if(target->open(QIODevice::ReadWrite)) {
+		job->accept(target);
+	} else {
+		tray->debugMessage("Cannot write to the target file! Check permissions.");
+		job->abort();
 	}
 }
 

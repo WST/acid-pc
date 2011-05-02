@@ -25,7 +25,7 @@ public:
 	void show();
 	void setEventTitle(const QString &title);
 	void setEventDescription(const QString &description);
-	void setEventIcon(QPixmap &icon);
+	void setEventIcon(QPixmap icon);
 	void setType(Type newtype);
 	void setPointer(QObject *newpointer);
 	void setTimeout(unsigned short int seconds);

@@ -37,5 +37,8 @@
         <file>menu/folder.png</file>
         <file>roster/minus.png</file>
         <file>roster/plus.png</file>
+        <file>notifications/file.png</file>
+        <file>notifications/message.png</file>
+        <file>notifications/muc.png</file>
     </qresource>
 </RCC>
