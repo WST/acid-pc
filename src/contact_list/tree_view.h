@@ -25,7 +25,7 @@ namespace CL {
 
 	protected:
 		void keyPressEvent(QKeyEvent*);
-		void drawBranches(QPainter *painter, const QRect &rect, const QModelIndex &index) const {}
+		void drawBranches(QPainter *painter, const QRect &rect, const QModelIndex &index) const;
 
 	signals:
 		void showChatDialog(const QString& bareJid);

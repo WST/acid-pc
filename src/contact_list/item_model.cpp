@@ -109,10 +109,11 @@ ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSe
 		m_contacts[bare_jid] = item;
 	}
 
-	item->setNick(nick);
+	if (item->getNick() != nick)
+		item->setNick(nick);
 
 	// Synchronize groups (note: due to performance impact, this code is made unportable through containers)
-	const QList<GroupItem *> current_groups = item->getGroups();
+	const QList<GroupItem *> &current_groups = item->getGroups();
 	for (int i = 0; i < current_groups.size(); ++i)
 		unless (groups.contains(current_groups[i]->getGroupName()))
 			item->removeFromGroup(current_groups[i--]);
@@ -121,6 +122,9 @@ ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSe
 
 	foreach (const QString &group, groups)
 		item->addToGroup(getGroup(group));
+
+	unless (current_groups.size())
+		item->addToGroup(getGroup(noGroupName));
 
 	foreach (GroupItem *group, m_groups)
 		group->sort();

@@ -2,6 +2,7 @@
 #include <QMenu>
 #include <QKeyEvent>
 
+#include "../functions.h"
 #include "item_model.h"
 #include "tree_view.h"
 
@@ -23,6 +24,7 @@ TreeView::TreeView(QWidget* parent):QTreeView(parent) {
 	connect(action_call, SIGNAL(triggered()), this, SLOT(callHelper()));
 
 	setHeaderHidden(true);
+	setAnimated(true);
 }
 
 TreeView::~TreeView() {
@@ -60,6 +62,13 @@ void TreeView::doubleClicked(const QModelIndex& index) {
 
 void TreeView::clicked(const QModelIndex& index) {
 	Q_UNUSED(index);
+}
+
+void TreeView::drawBranches(QPainter *painter, const QRect &rect, const QModelIndex &index) const {
+	unless (index.parent().isValid()) {
+		QImage plus(":/roster/plus.png"), minus(":/roster/minus.png");
+		painter->drawImage(rect, isExpanded(index) ? minus : plus);
+	}
 }
 
 QString TreeView::selectedBareJid() {

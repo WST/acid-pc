@@ -34,12 +34,9 @@ namespace CL {
 		ContactItem *updateEntry(const QString &jid, const QString &nick, QSet<QString> groups);
 
 		/*!
-		  Removes an entry for jid, updating groups as needed
-		  Passing groups = NULL removes this entry from all groups
+		  Removes an entry for jid from all groups
 		  */
-		void removeEntry(const QString &jid, const QSet<QString> *groups = NULL);
-
-		void clear();
+		void removeEntry(const QString &jid);
 
 		/*!
 		  Gets an existing group from list (by name) or creates a new group
