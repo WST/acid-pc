@@ -333,6 +333,7 @@ void Messenger::gotVoiceCall(QXmppCall *call) {
 	if(settings->value("settings/automatically_accept_calls", false).toBool()) {
 		call_window = new VoiceCallWindow(this, call);
 		connect(call_window, SIGNAL(accepted()), this, SLOT(endCall()));
+		call_window->show();
 	} else {
 		//
 	}

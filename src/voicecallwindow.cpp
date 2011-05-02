@@ -18,7 +18,7 @@ VoiceCallWindow::VoiceCallWindow(QWidget *parent, QXmppCall *call): QDialog(pare
 	if(call->direction() == QXmppCall::IncomingDirection) {
 		call->accept();
 	} else {
-		call->accept();
+		// ?
 	}
 }
 
@@ -76,4 +76,6 @@ void VoiceCallWindow::handleConnection() {
 	QAudioInput *audio_input = new QAudioInput(format, this);
 	audio_input->setBufferSize(buffer_size);
 	audio_input->start(channel);
+
+	qDebug() << "initialized call!";
 }
