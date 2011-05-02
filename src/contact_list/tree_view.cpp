@@ -100,7 +100,7 @@ void TreeView::removeContact_helper() {
 }
 
 void TreeView::callHelper() {
-	QString bare_jid = selectedBareJid();
-	if(!bare_jid.isEmpty())
-		emit makeVoiceCall(bare_jid);
+	QString full_jid = selectedBareJid();
+	if(!full_jid.isEmpty())
+		emit makeVoiceCall(full_jid);
 }

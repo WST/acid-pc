@@ -330,11 +330,12 @@ void Messenger::sendMessage(MessageForm *message) {
 }
 
 void Messenger::gotVoiceCall(QXmppCall *call) {
-	// входящий голосовой вызов.
-	// знаю, что начинать надо с текстовой функциональности, но голосовая просто гораздо проще.
-	// пока примем вызов как есть, потом надо сделать подтверждение… (TODO)
-	tray->debugMessage("Got a voice call, accepting");
-	call->accept();
+	if(settings->value("settings/automatically_accept_calls", false).toBool()) {
+		call_window = new VoiceCallWindow(this, call);
+		connect(call_window, SIGNAL(accepted()), this, SLOT(endCall()));
+	} else {
+		//
+	}
 }
 
 void Messenger::gotFile(QXmppTransferJob *job) {
@@ -513,13 +514,13 @@ void Messenger::requestProfile(const QString &bare_jid) {
 	vcard_manager->requestVCard(bare_jid); // Могли бы и слотом сделать, странные какие-то эти ваши девелоперы qxmpp…
 }
 
-void Messenger::makeVoiceCall(const QString &bare_jid) {
+void Messenger::makeVoiceCall(const QString &full_jid) {
 	if(call_window) {
 		call_window->activateWindow();
 		return;
 	}
 
-	call_window = new VoiceCallWindow(this, call_manager->call(bare_jid));
+	call_window = new VoiceCallWindow(this, call_manager->call(full_jid));
 	connect(call_window, SIGNAL(accepted()), this, SLOT(endCall()));
 	call_window->show();
 }

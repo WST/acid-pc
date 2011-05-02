@@ -20,6 +20,7 @@ public:
 private slots:
 	void on_hangup_button_clicked();
 	void callStateChanged(QXmppCall::State state);
+	void handleConnection();
 
 private:
     Ui::VoiceCallWindow *ui;

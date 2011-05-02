@@ -31,7 +31,7 @@ namespace CL {
 		void showChatDialog(const QString& bareJid);
 		void showProfile(const QString& bareJid);
 		void removeContact(const QString& bareJid);
-		void makeVoiceCall(const QString &bare_jid);
+		void makeVoiceCall(const QString &full_jid);
 
 	private:
 		QString selectedBareJid();
