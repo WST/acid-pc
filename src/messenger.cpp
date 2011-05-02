@@ -9,7 +9,7 @@
 Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this), roster_model(this), messages() {
 	settings = new QSettings(APP_COMPANY, APP_NAME, this);
 	client_settings = new QXmppConfiguration();
-	client_presence = new QXmppPresence();
+	client_presence = new QXmppPresence(QXmppPresence::Available);
 	client = new QXmppClient(this);
 
 	transfer_manager = new QXmppTransferManager();
@@ -278,6 +278,7 @@ void Messenger::handleSuccessfulConnection() {
 	this->show();
 	tray->setStatus(QXmppPresence::Status::Online);
 	chat->setOnline(true);
+	client->setClientPresence(* client_presence);
 }
 
 void Messenger::handleDisconnection() {
