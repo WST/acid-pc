@@ -9,7 +9,7 @@
 Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this), roster_model(this), messages() {
 	settings = new QSettings(APP_COMPANY, APP_NAME, this);
 	client_settings = new QXmppConfiguration();
-	client_presence = new QXmppPresence(QXmppPresence::Available);
+	client_presence = new QXmppPresence(QXmppPresence::Available, QXmppPresence::Status::Online);
 	client = new QXmppClient(this);
 
 	transfer_manager = new QXmppTransferManager();
