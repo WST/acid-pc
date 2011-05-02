@@ -35,5 +35,7 @@
         <file>trayicon/xa-16px.png</file>
         <file>trayicon/xa-22px.png</file>
         <file>menu/folder.png</file>
+        <file>roster/minus.png</file>
+        <file>roster/plus.png</file>
     </qresource>
 </RCC>
