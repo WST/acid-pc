@@ -24,7 +24,6 @@ TreeView::TreeView(QWidget* parent):QTreeView(parent) {
 	connect(action_call, SIGNAL(triggered()), this, SLOT(callHelper()));
 
 	setHeaderHidden(true);
-	setAnimated(true);
 }
 
 TreeView::~TreeView() {
