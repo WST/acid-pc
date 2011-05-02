@@ -34,6 +34,7 @@ void SettingsWindow::on_button_box_accepted() {
 	settings->setValue("settings/gui_style", ui->gui_style->currentIndex());
 	settings->setValue("settings/notification_display_time", ui->notification_display_time->value());
 	settings->setValue("settings/roster_on_the_top", ui->roster_on_the_top->checkState());
+	settings->setValue("settings/animate_roster", ui->animate_roster->checkState());
 
 	// Четвёртый таб
 	settings->setValue("settings/savepath", ui->savepath->text());
@@ -58,6 +59,7 @@ void SettingsWindow::loadCurrentSettings() {
 	ui->gui_style->setCurrentIndex(settings->value("settings/gui_style", 0).toInt());
 	ui->roster_on_the_top->setChecked(settings->value("settings/roster_on_the_top", false).toBool());
 	ui->notification_display_time->setValue(settings->value("settings/notification_display_time", 5).toInt());
+	ui->animate_roster->setChecked(settings->value("settings/animate_roster", true).toBool());
 
 	// Четвёртый таб
 	ui->savepath->setText(settings->value("settings/savepath", INCOMING_FILES_STORAGE).toString());

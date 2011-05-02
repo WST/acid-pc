@@ -92,6 +92,7 @@ void Messenger::loadSettings() {
 	if(settings->contains("login/auto")) login->setAutoLogin(settings->value("login/auto").toBool());
 
 	if(settings->contains("settings/roster_opacity")) setWindowOpacity(settings->value("settings/roster_opacity").toFloat() / 100);
+	if(settings->contains("settings/roster_opacity")) roster_widget.setAnimated(settings->value("settings/animate_roster").toBool());
 	if(settings->value("settings/roster_on_the_top", false).toBool()) setWindowFlags(windowFlags() | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
 
 	if(settings->contains("settings/gui_style")) {
