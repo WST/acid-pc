@@ -98,6 +98,11 @@ namespace CL {
 		bool removeFromGroup(const QString &group_name);
 
 		/*!
+		  Returns a list of all groups item is presented in
+		  */
+		const QList<GroupItem *> &getGroups() const { return m_groups; }
+
+		/*!
 		  Returns user-friendly text string to display as a name
 		  */
 		virtual QString getText() const;
@@ -105,7 +110,7 @@ namespace CL {
 		/*!
 		  In this case subtext is a status message
 		  */
-		virtual QString getSubText() const { return isOnline() ? getResourceStatus()->text : "offline"; }
+		virtual QString getSubText() const { return isOnline() ? getResourceStatus()->text : QString(); }
 
 		/*!
 		  In this case icon normally indicates user status type

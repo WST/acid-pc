@@ -14,7 +14,7 @@ ContactItem::ContactItem(const QString &jid) {
 }
 
 const ContactItem::Status *ContactItem::getResourceStatus(const QString &resource) const {
-	if (resource.isEmpty()) {
+	if (resource.isEmpty())
 		if (m_resources.size() == 1) {
 			return *m_resources.constBegin();
 		} else {
@@ -24,9 +24,8 @@ const ContactItem::Status *ContactItem::getResourceStatus(const QString &resourc
 					highest = r;
 			return highest;
 		}
-	} else {
+	else
 		return m_resources.value(resource);
-	}
 }
 
 bool ContactItem::addToGroup(GroupItem *group) {
@@ -88,6 +87,7 @@ void ContactItem::setResourceStatus(const QString &resource, const Status &_valu
 }
 
 void ContactItem::updateIcon() {
-	QString icon_name = isOnline() ? statusString[getResourceStatus()->type] : "offline";
+	QString icon_name = isOnline() ? statusString[getResourceStatus()->type] :
+									 statusString[Offline];
 	m_icon = QIcon(":/trayicon/"+icon_name+"-16px.png");
 }

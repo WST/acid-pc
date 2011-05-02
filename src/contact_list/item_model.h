@@ -31,7 +31,7 @@ namespace CL {
 		/*!
 		  Adds an entry for jid, updating it's groups as needed
 		  */
-		ContactItem *addEntry(const QString &jid, const QString &nick, const QSet<QString> &groups);
+		ContactItem *updateEntry(const QString &jid, const QString &nick, QSet<QString> groups);
 
 		/*!
 		  Removes an entry for jid, updating groups as needed
@@ -39,11 +39,6 @@ namespace CL {
 		  */
 		void removeEntry(const QString &jid, const QSet<QString> *groups = NULL);
 
-
-		void setAvatar(const QString &jid, const QImage &_value);
-		void setNick(const QString &jid, const QString &_value);
-
-		void removeEntry(const QString &jid);
 		void clear();
 
 		/*!
@@ -81,14 +76,6 @@ namespace CL {
 	private:
 		QMap<QString, ContactItem*> m_contacts;
 		QList<GroupItem *> m_groups;
-
-		union ItemID {
-			struct {
-				unsigned short group;
-				unsigned short contact;
-			};
-			unsigned int id;
-		};
 
 		/*!
 		  Adds non-existent item to roster

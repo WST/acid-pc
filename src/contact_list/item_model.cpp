@@ -80,8 +80,8 @@ QModelIndex ItemModel::parent(const QModelIndex &child) const {
 }
 
 void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value) {
-	QString bare_jid, resource;
-	split_jid(jid, &bare_jid, &resource);
+	QString resource;
+	split_jid(jid, NULL, &resource);
 	ContactItem *item = getContact(jid);
 
 	unless (item) {
@@ -89,7 +89,7 @@ void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value)
 			return;
 		QSet<QString> notInRosterGroups;
 		notInRosterGroups << notInRosterGroupName;
-		item = addEntry(jid, QString(), notInRosterGroups);
+		item = updateEntry(jid, QString(), notInRosterGroups);
 	}
 
 	item->setResourceStatus(resource, _value);
@@ -100,25 +100,33 @@ void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value)
 	reset();
 }
 
-ContactItem *ItemModel::addEntry(const QString &jid, const QString &nick, const QSet<QString> &groups) {
-	ContactItem *new_item = new ContactItem(jid);
-	new_item->setNick(nick);
+ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSet<QString> groups) {
+	ContactItem *item = getContact(jid);
+	unless (item) {
+		item = new ContactItem(jid);
+		QString bare_jid;
+		split_jid(jid, &bare_jid);
+		m_contacts[bare_jid] = item;
+	}
 
-	QString bare_jid;
-	split_jid(jid, &bare_jid);
-	m_contacts[bare_jid] = new_item;
+	item->setNick(nick);
 
-	if (groups.empty())
-		new_item->addToGroup(getGroup(noGroupName));
-	else
-		foreach (const QString &groupName, groups)
-			new_item->addToGroup(getGroup(groupName));
+	// Synchronize groups (note: due to performance impact, this code is made unportable through containers)
+	const QList<GroupItem *> current_groups = item->getGroups();
+	for (int i = 0; i < current_groups.size(); ++i)
+		unless (groups.contains(current_groups[i]->getGroupName()))
+			item->removeFromGroup(current_groups[i--]);
+		else
+			groups.remove(current_groups[i]->getGroupName());
+
+	foreach (const QString &group, groups)
+		item->addToGroup(getGroup(group));
 
 	foreach (GroupItem *group, m_groups)
 		group->sort();
 
 	reset();
-	return new_item;
+	return item;
 }
 
 GroupItem *ItemModel::getGroup(const QString &name) {

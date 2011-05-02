@@ -381,7 +381,7 @@ void Messenger::showApplicationInfo() {
 
 void Messenger::rosterChanged(const QString &bare_jid) {
 	QXmppRosterIq::Item item = client->rosterManager().getRosterEntry(bare_jid);
-	roster_model.addEntry(bare_jid, item.name(), item.groups());
+	roster_model.updateEntry(bare_jid, item.name(), item.groups());
 }
 
 void Messenger::rosterReceived() {
