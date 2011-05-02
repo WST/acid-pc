@@ -60,7 +60,10 @@ void SettingsWindow::loadCurrentSettings() {
 	ui->notification_display_time->setValue(settings->value("settings/notification_display_time", 5).toInt());
 
 	// Четвёртый таб
-	ui->savepath->setText(settings->value("settings/savepath", QDesktopServices::storageLocation(QDesktopServices::DesktopLocation)).toString());
+	ui->savepath->setText(settings->value("settings/savepath", INCOMING_FILES_STORAGE).toString());
+	ui->select_savepath_everytime->setChecked(settings->value("settings/select_savepath_everytime", false).toBool());
+	ui->savepath->setEnabled(!ui->select_savepath_everytime->checkState());
+	ui->savepath_browse_button->setEnabled(!ui->select_savepath_everytime->checkState());
 }
 
 void SettingsWindow::on_button_box_rejected() {
@@ -77,4 +80,9 @@ void SettingsWindow::on_savepath_browse_button_clicked() {
 	if(!dir.isNull()) {
 		ui->savepath->setText(dir);
 	}
+}
+
+void SettingsWindow::on_select_savepath_everytime_clicked(bool checked) {
+	ui->savepath->setEnabled(!checked);
+	ui->savepath_browse_button->setEnabled(!checked);
 }

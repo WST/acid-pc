@@ -4,6 +4,7 @@
 #include <QtGui/QDialog>
 
 #include "messenger.h"
+#include "version.h"
 
 namespace Ui {
 	class SettingsWindow;
@@ -29,6 +30,8 @@ private slots:
  void on_button_box_accepted();
  void on_file_transfer_mode_currentIndexChanged(int index);
  void on_savepath_browse_button_clicked();
+
+ void on_select_savepath_everytime_clicked(bool checked);
 
 signals:
 		void modified();

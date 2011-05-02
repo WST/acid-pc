@@ -122,6 +122,8 @@ void Messenger::createConnections() {
 
 	connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
 	connect(muc_manager, SIGNAL(roomParticipantChanged(QString,QString)), this, SLOT(roomParticipantChanged(QString, QString)));
+	connect(transfer_manager, SIGNAL(fileReceived(QXmppTransferJob *)), this, SLOT(gotFile(QXmppTransferJob *)));
+	connect(transfer_manager, SIGNAL(finished(QXmppTransferJob *)), this, SLOT(fileTransferFinished(QXmppTransferJob *)));
 	// Следующая строка — реальный кошмар. Почему одни менеджеры надо вызывать напрямую, а этот через метод?
 	connect(& client->vCardManager(), SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
 
@@ -326,6 +328,45 @@ void Messenger::gotVoiceCall(QXmppCall *call) {
 	// пока примем вызов как есть, потом надо сделать подтверждение… (TODO)
 	tray->debugMessage("Got a voice call, accepting");
 	call->accept();
+}
+
+void Messenger::gotFile(QXmppTransferJob *job) {
+	qDebug() << "Got a file!";
+	if(settings->value("settings/automatically_accept_files", false).toBool()) {
+			QFile *target = new QFile(settings->value("settings/savepath", INCOMING_FILES_STORAGE).toString() + "/" + job->fileName());
+			if(target->open(QIODevice::ReadWrite)) {
+				job->accept(target);
+			} else {
+				tray->debugMessage("Cannot write to the target file! Check permissions.");
+				job->abort();
+			}
+	} else {
+
+	}
+}
+
+void Messenger::fileTransferFinished(QXmppTransferJob *job) {
+	QXmppTransferJob::Error error = job->error();
+	switch(error) {
+		case QXmppTransferJob::NoError:
+			tray->debugMessage("File has been received successfully");
+		break;
+		case QXmppTransferJob::AbortError:
+			tray->debugMessage("File transfer has been aborted");
+		break;
+		case QXmppTransferJob::FileAccessError:
+			tray->debugMessage("Failed to write to the result file");
+		break;
+		case QXmppTransferJob::FileCorruptError:
+			tray->debugMessage("File transfer seems to have failed: checksum mismatch");
+		break;
+		case QXmppTransferJob::ProtocolError:
+			tray->debugMessage("File transfer failed: protocol error");
+		break;
+	}
+
+	job->deleteLater();
+	// QIODevice закрывает и удаляет сам QXmppTransferJob. Использование deleteLater() диктовано документацией.
 }
 
 void Messenger::gotIQ(QXmppIq iq) {

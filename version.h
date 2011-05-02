@@ -11,6 +11,7 @@
 #define PROXY65_JID "proxy.jsmart.web.id"
 #define SUPPORT_JID "support@conference.jsmart.web.id"
 #define APP_CAPSNODE "http://acid-im.net/caps"
+#define INCOMING_FILES_STORAGE QDesktopServices::storageLocation(QDesktopServices::DesktopLocation)
 #define KEEPALIVE_INTERVAL 60
 #define KEEPALIVE_TIMEOUT 30
 

@@ -412,6 +412,13 @@
             </item>
            </layout>
           </item>
+          <item>
+           <widget class="QCheckBox" name="select_savepath_everytime">
+            <property name="text">
+             <string>Ask me everytime</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

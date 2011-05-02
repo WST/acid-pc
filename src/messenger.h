@@ -80,6 +80,8 @@ class Messenger: public QMainWindow {
 		void gotVoiceCall(QXmppCall *call);
 		void gotIQ(QXmppIq message);
 		void gotMessage(QXmppMessage message);
+		void gotFile(QXmppTransferJob *job);
+		void fileTransferFinished(QXmppTransferJob *job);
 		void joinSupportRoom();
 		void showApplicationInfo();
 		void presenceChanged(const QString &bare_jid, const QString &resource);
