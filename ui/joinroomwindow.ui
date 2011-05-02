@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -104,7 +104,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="room_link"/>
          </item>
          <item row="1" column="0" colspan="2">
           <widget class="Line" name="line">
@@ -114,7 +114,7 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QLineEdit" name="lineEdit_2"/>
+          <widget class="QLineEdit" name="conference_server"/>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_2">
@@ -131,7 +131,7 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QLineEdit" name="lineEdit_3"/>
+          <widget class="QLineEdit" name="conference_name"/>
          </item>
         </layout>
        </item>

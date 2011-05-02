@@ -15,6 +15,11 @@ public:
     explicit JoinRoomWindow(QWidget *parent = 0);
     ~JoinRoomWindow();
 
+private slots:
+	void on_room_link_textChanged(QString );
+	void on_conference_server_textChanged(QString );
+	void on_conference_name_textChanged(QString );
+
 private:
     Ui::JoinRoomWindow *ui;
 };

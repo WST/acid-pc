@@ -454,6 +454,7 @@ void Messenger::rosterReceived() {
 }
 
 void Messenger::presenceChanged(const QString &bare_jid, const QString &resource) {
+	qDebug() << "presence" << bare_jid << resource;
 	if(bare_jid == client_settings->jidBare()) {
 		return;
 	}
@@ -519,6 +520,8 @@ void Messenger::makeVoiceCall(const QString &full_jid) {
 		call_window->activateWindow();
 		return;
 	}
+
+	qDebug() << "calling" << full_jid;
 
 	call_window = new VoiceCallWindow(this, call_manager->call(full_jid));
 	connect(call_window, SIGNAL(accepted()), this, SLOT(endCall()));

@@ -113,8 +113,10 @@ void TreeView::removeContact_helper() {
 
 void TreeView::callHelper() {
 	if (selectedContact()) {
-		QString bare_jid = selectedContact()->getBareJid();
-		if(!bare_jid.isEmpty())
-			emit makeVoiceCall(bare_jid);
+		ContactItem::ResourceStatus status = selectedContact()->getResource();
+		if(status.second) {
+			QString full_jid = selectedContact()->getBareJid() + "/" + status.first;
+			emit makeVoiceCall(full_jid);
+		}
 	}
 }
