@@ -23,6 +23,8 @@ ContactItem::Status QXmppBridge::qxmpp2cl(const QXmppPresence &presence) {
 		newStatus.type = parsedType;
 
 	newStatus.text = presence.status().statusText();
+	newStatus.priority = presence.status().priority();
+
 	return newStatus;
 }
 

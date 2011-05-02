@@ -1,6 +1,7 @@
 #ifndef CL_GROUPITEM_H
 #define CL_GROUPITEM_H
 
+#include <QMetaType>
 #include "item.h"
 
 namespace CL {
@@ -56,5 +57,7 @@ namespace CL {
 	};
 
 };
+
+Q_DECLARE_METATYPE(const CL::GroupItem *)
 
 #endif // CL_GROUPITEM_H

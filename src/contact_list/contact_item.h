@@ -2,6 +2,7 @@
 #define CL_CONTACTITEM_H
 
 #include <QMap>
+#include <QMetaType>
 
 #include "../functions.h"
 #include "item.h"
@@ -135,5 +136,7 @@ namespace CL {
 	};
 
 };
+
+Q_DECLARE_METATYPE(const CL::ContactItem *)
 
 #endif // CL_CONTACTITEM_H
