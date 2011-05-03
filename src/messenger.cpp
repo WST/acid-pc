@@ -271,6 +271,7 @@ void Messenger::activate() {
 	}
 	settings->setValue("login/auto", login->autoLogin());
 	settings->setValue("login/username", login->username());
+	settings->setValue("login/domain", login->domain());
 
 	client->connectToServer(*client_settings);
 }

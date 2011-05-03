@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>232</width>
+    <width>233</width>
     <height>304</height>
    </rect>
   </property>
@@ -92,6 +92,11 @@
        <item>
         <property name="text">
          <string notr="true">jabber.web.id</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>averkov.web.id</string>
         </property>
        </item>
       </widget>
