@@ -31,6 +31,7 @@ private:
 private slots:
     void on_send_clicked();
     void on_message_textChanged();
+	void openLink(const QUrl &link);
 };
 
 #endif // MUCWIDGET_H

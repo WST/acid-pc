@@ -5,21 +5,33 @@
 MUCWidget::MUCWidget(QString with, QWidget *parent): TabWidget(with, parent), ui(new Ui::MUCWidget) {
     ui->setupUi(this);
     TabWidget::setType(TabWidget::MUC);
+	connect(ui->chatview, SIGNAL(anchorClicked(const QUrl &)), this, SLOT(openLink(const QUrl &)));
+	ui->chatview->document()->setDefaultStyleSheet("a { text-decoration: none; color: #0000AA; }");
 }
 
 MUCWidget::~MUCWidget() {
     delete ui;
 }
 
+void MUCWidget::openLink(const QUrl &link) {
+	if(link.scheme() == "talkto") {
+		ui->message->setText(link.toString().remove("talkto:") + ", " + ui->message->document()->toPlainText());
+		QTextCursor cursor = ui->message->textCursor();
+		cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor, 1);
+		ui->message->setTextCursor(cursor);
+		ui->message->setFocus();
+	}
+}
+
 void MUCWidget::insertMessage(QXmppMessage &message) {
     if(message.body().isEmpty()) {
-	return;
+		return;
     }
     QStringList jid = parseJid(message.from());
     if(!jid[5].isEmpty()) {
-	ui->chatview->append("<font color=\"#0000AA\">&lt;" + jid[5] + "&gt;</font> " + message.body());
+		ui->chatview->append("<a href=\"talkto:" + jid[5] + "\">&lt;" + jid[5] + "&gt;</a> " + message.body());
     } else {
-	ui->chatview->append(message.body());
+		ui->chatview->append(message.body());
     }
 }
 
