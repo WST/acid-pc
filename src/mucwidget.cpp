@@ -1,6 +1,7 @@
 #include "mucwidget.h"
 #include "ui_mucwidget.h"
 #include "functions.h"
+#include "version.h"
 
 MUCWidget::MUCWidget(QString with, QWidget *parent): TabWidget(with, parent), ui(new Ui::MUCWidget) {
     ui->setupUi(this);
@@ -20,6 +21,8 @@ void MUCWidget::openLink(const QUrl &link) {
 		cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor, 1);
 		ui->message->setTextCursor(cursor);
 		ui->message->setFocus();
+	} else {
+		QDesktopServices::openUrl(link);
 	}
 }
 
@@ -27,11 +30,18 @@ void MUCWidget::insertMessage(QXmppMessage &message) {
     if(message.body().isEmpty()) {
 		return;
     }
+	QString text = message.body();
+	text.replace("&", "&amp;");
+	text.replace("<", "&lt;");
+	text.replace("<", "&gt;");
+	text.replace("\"", "&quot;");
+	text.replace("\n", "<br />");
+	text.replace(HYPERLINK_REPLACE_ARGS);
     QStringList jid = parseJid(message.from());
     if(!jid[5].isEmpty()) {
-		ui->chatview->append("<a href=\"talkto:" + jid[5] + "\">&lt;" + jid[5] + "&gt;</a> " + message.body());
+		ui->chatview->append("<div class=\"message\"><a href=\"talkto:" + jid[5] + "\">&lt;" + jid[5] + "&gt;</a> " + text + "</div>");
     } else {
-		ui->chatview->append(message.body());
+		ui->chatview->append("<div class=\"info\">" + text + "</div>");
     }
 }
 
