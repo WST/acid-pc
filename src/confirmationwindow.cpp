@@ -81,8 +81,18 @@ ConfirmationWindow *ConfirmationWindow::newFile(QXmppTransferJob *job, int timeo
 }
 
 ConfirmationWindow *ConfirmationWindow::newCall(QXmppCall *call, int timeout) {
-	// TODO
+	ConfirmationWindow *window = new ConfirmationWindow();
+	window->setEventTitle("New incoming voice call");
+	window->setEventDescription("foo bar");
+	window->setType(VoiceCall);
+	window->setEventIcon(QPixmap(":/notifications/call.png"));
+	window->setPointer((QObject *) call);
+	window->show();
+	//window->setTimeout(timeout);
+	Q_UNUSED(timeout);
+	return window;
 }
+
 
 void ConfirmationWindow::on_accept_button_clicked() {
 	switch(type) {
@@ -94,6 +104,9 @@ void ConfirmationWindow::on_accept_button_clicked() {
 		break;
 		case MUCInvitation:
 			// TODO
+		break;
+		case VoiceCall:
+			emit confirmedCall((QXmppCall *) pointer, false);
 		break;
 	}
 	hide();
@@ -108,6 +121,9 @@ void ConfirmationWindow::on_decline_button_clicked() {
 		break;
 		case MUCInvitation:
 			// TODO
+		break;
+		case VoiceCall:
+			emit confirmedCall((QXmppCall *) pointer, false);
 		break;
 	}
 	hide();

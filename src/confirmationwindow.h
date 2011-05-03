@@ -17,7 +17,7 @@ class ConfirmationWindow: public QWidget
 
 public:
 	enum Type {
-		File, Message, Transfer, MUCInvitation
+		File, Message, Transfer, MUCInvitation, VoiceCall
 	};
 
     explicit ConfirmationWindow(QWidget *parent = 0);

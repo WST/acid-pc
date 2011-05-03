@@ -331,12 +331,20 @@ void Messenger::sendMessage(MessageForm *message) {
 
 void Messenger::gotVoiceCall(QXmppCall *call) {
 	if(settings->value("settings/automatically_accept_calls", false).toBool()) {
-		call_window = new VoiceCallWindow(this, call);
-		connect(call_window, SIGNAL(accepted()), this, SLOT(endCall()));
-		call_window->show();
+		confirmedCall(call, true);
 	} else {
-		//
+		connect(ConfirmationWindow::newCall(call, settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedCall(QXmppCall *, bool)), this, SLOT(confirmedCall(QXmppCall *, bool)));
 	}
+}
+
+void Messenger::confirmedCall(QXmppCall *call, bool confirmed) {
+	if(!confirmed) {
+		call->hangup();
+		return;
+	}
+	call_window = new VoiceCallWindow(this, call);
+	connect(call_window, SIGNAL(accepted()), this, SLOT(endCall()));
+	call_window->show();
 }
 
 void Messenger::gotFile(QXmppTransferJob *job) {
