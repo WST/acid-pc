@@ -1,5 +1,6 @@
 #include "chatwidget.h"
 #include "ui_chatwidget.h"
+#include "version.h"
 
 ChatWidget::ChatWidget(QString with, QWidget *parent): TabWidget(with, parent), ui(new Ui::ChatWidget) {
     ui->setupUi(this);
@@ -12,15 +13,28 @@ ChatWidget::~ChatWidget() {
 }
 
 void ChatWidget::insertMessage(QXmppMessage &message) {
-	ui->chatview->append("<font color=\"#AA0000\">&lt;" + message.from() + "&gt;</font> " + message.body());
+	QString text = message.body();
+	text.replace("&", "&amp;");
+	text.replace("<", "&lt;");
+	text.replace("<", "&gt;");
+	text.replace("\"", "&quot;");
+	text.replace("\n", "<br />");
+	text.replace(HYPERLINK_REPLACE_ARGS);
+	ui->chatview->append("<font color=\"#AA0000\">&lt;" + message.from() + "&gt;</font> " + text);
 }
 
 void ChatWidget::on_send_clicked() {
-    QString message = ui->message->toPlainText();
+	QString text = ui->message->toPlainText();
+	text.replace("&", "&amp;");
+	text.replace("<", "&lt;");
+	text.replace("<", "&gt;");
+	text.replace("\"", "&quot;");
+	text.replace("\n", "<br />");
+	text.replace(HYPERLINK_REPLACE_ARGS);
     ui->message->clear();
-    ui->chatview->append("<me> " + message);
+	ui->chatview->append("<font color=\"#AA0000\">&lt;me&gt;</font> " + text);
     ui->message->setFocus();
-    emit aboutToSend(jid, message);
+	emit aboutToSend(jid, text);
 }
 
 void ChatWidget::on_message_textChanged() {
