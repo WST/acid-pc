@@ -32,6 +32,7 @@ void GroupItem::statusChanged(ContactItem *item) {
 	for (i = 0; i < m_contacts.size(); ++i)
 		if (*m_contacts[i] < *item)
 			break;
+
 	int item_index = m_contacts.indexOf(item);
 	if (i > item_index)
 		--i;
@@ -45,6 +46,7 @@ void GroupItem::statusChanged(ContactItem *item) {
 	foreach (ContactItem *contact, m_contacts)
 		if (contact->isOnline())
 			++online_count;
+
 	if (prev_online_count != online_count)
 		owner->groupChanged(this);
 }

@@ -6,6 +6,11 @@
 #include "contact_item.h"
 #include "group_item.h"
 
+/*!
+  This workaround makes changes of {begin,end}MoveRows manually, preventing crash in some cases
+  */
+#define MOVE_ROWS_WORKAROUND
+
 namespace CL {
 	class ItemModel: public QAbstractItemModel {
 		Q_OBJECT

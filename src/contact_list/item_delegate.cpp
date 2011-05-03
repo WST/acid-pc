@@ -17,15 +17,14 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
 	QIcon icon = qvariant_cast<QIcon>(index.data(Qt::DecorationRole));
 	QPixmap pixmap = icon.pixmap(QSize(16, 16), QIcon::Normal, QIcon::On);
 
-
-	QColor selected_bg(30, 30, 220);
+	QColor selected_bg(60, 60, 210);
 
 	QRect rect = option.rect;
 
 	if (option.state & QStyle::State_Selected) {
 		if (index.parent().isValid())
 			rect.setLeft(0);
-		painter->fillRect(option.rect, selected_bg);
+		painter->fillRect(rect, selected_bg);
 	}
 
 	rect = option.rect;

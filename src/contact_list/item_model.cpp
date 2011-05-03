@@ -167,9 +167,17 @@ void ItemModel::contactAdded(GroupItem *const sender, int ind) {
 }
 
 void ItemModel::contactMoved(GroupItem *const sender, int from, int to) {
+#ifdef MOVE_ROWS_WORKAROUND
+	int groupID = m_groups.indexOf(sender);
+	emit layoutAboutToBeChanged();
+	changePersistentIndex(index(from, 0, groupID),
+						  index(to, 0, groupID));
+	emit layoutChanged();
+#else
 	QModelIndex groupIndex = index(m_groups.indexOf(sender), 0);
 	beginMoveRows(groupIndex, from, from, groupIndex, to);
 	endMoveRows();
+#endif
 }
 
 void ItemModel::contactChanged(ContactItem *const sender) {
