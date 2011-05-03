@@ -25,6 +25,7 @@ void ChatWidget::insertMessage(QXmppMessage &message) {
 
 void ChatWidget::on_send_clicked() {
 	QString text = ui->message->toPlainText();
+	emit aboutToSend(jid, text);
 	text.replace("&", "&amp;");
 	text.replace("<", "&lt;");
 	text.replace("<", "&gt;");
@@ -34,7 +35,6 @@ void ChatWidget::on_send_clicked() {
     ui->message->clear();
 	ui->chatview->append("<font color=\"#AA0000\">&lt;me&gt;</font> " + text);
     ui->message->setFocus();
-	emit aboutToSend(jid, text);
 }
 
 void ChatWidget::on_message_textChanged() {
