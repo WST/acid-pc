@@ -463,7 +463,6 @@ void Messenger::rosterReceived() {
 }
 
 void Messenger::presenceChanged(const QString &bare_jid, const QString &resource) {
-	qDebug() << "presence" << bare_jid << resource;
 	if(bare_jid == client_settings->jidBare()) {
 		return;
 	}
@@ -472,7 +471,7 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 		return;
 	}*/
 
-	QMap<QString, QXmppPresence> presences = client->rosterManager().getAllPresencesForBareJid(bare_jid);
+	const QMap<QString, QXmppPresence> &presences = client->rosterManager().getAllPresencesForBareJid(bare_jid);
 	CL::ContactItem::Status status;
 	if (presences.contains(resource))
 		status = CL::QXmppBridge::qxmpp2cl(presences[resource]);

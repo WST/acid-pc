@@ -2,6 +2,7 @@
 
 #include "../functions.h"
 #include "group_item.h"
+#include "item_model.h"
 
 #include "contact_item.h"
 
@@ -9,8 +10,8 @@ using namespace CL;
 
 const char *ContactItem::statusString[] = { "offline", "dnd", "xa", "away", "online", "f4c" };
 
-ContactItem::ContactItem(const QString &jid) {
-	split_jid(jid, &m_bareJid);
+ContactItem::ContactItem(ItemModel *_owner, const QString &_jid): owner(_owner) {
+	split_jid(_jid, &m_bareJid);
 	setOffline();
 }
 
@@ -39,9 +40,9 @@ bool ContactItem::operator<(const ContactItem &_other) const {
 			// Both are online, compare statuses
 			const Status *resource_status = getResource().second,
 					*other_resource_status = _other.getResource().second;
-			if (*resource_status < *other_resource_status)
+			if (resource_status->type < other_resource_status->type)
 				return true;
-			elsif (*other_resource_status < *resource_status)
+			elsif (other_resource_status->type < resource_status->type)
 				return false;
 		}
 
@@ -78,6 +79,7 @@ void ContactItem::setOffline() {
 	foreach (Status *status, m_resources)
 		delete status;
 	m_resources.clear();
+	changeStatus();
 	updateIcon();
 }
 
@@ -108,15 +110,27 @@ void ContactItem::setResourceStatus(const QString &resource, const Status &_valu
 			*rcptr = _value;
 		}
 
-		foreach (GroupItem *group, m_groups)
-			group->statusChanged(this);
-
+		changeStatus();
 		updateIcon();
 	}
 }
 
+void ContactItem::changeStatus() {
+	foreach (GroupItem *group, m_groups)
+		group->statusChanged(this);
+}
+
 void ContactItem::updateIcon() {
-	QString icon_name = isOnline() ? statusString[getResource().second->type] :
-									 statusString[Offline];
-	m_icon = QIcon(":/trayicon/"+icon_name+"-16px.png");
+	QString new_icon_name = isOnline() ? statusString[getResource().second->type] :
+										 statusString[Offline];
+	if (icon_name != new_icon_name) {
+		icon_name = new_icon_name;
+		m_icon = QIcon(":/trayicon/"+icon_name+"-16px.png");
+		owner->contactChanged(this);
+	}
+}
+
+void ContactItem::setNick(const QString &_value) {
+	m_nick = _value;
+	owner->contactChanged(this);
 }

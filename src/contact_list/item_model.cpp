@@ -56,14 +56,24 @@ QModelIndex ItemModel::index(int row, int column, const QModelIndex &parent) con
 	if (parent.isValid()) {
 		// parent is a group, return contact ID
 		int groupID = parent.internalId() >> 16;
+		return index(row, column, groupID);
+	} else {
+		// parent is root, return group ID
+		return index(row, column);
+	}
+
+	return QModelIndex();
+}
+
+QModelIndex ItemModel::index(int row, int column, int groupID) const {
+	if (groupID >= 0) {
 		if (groupID < m_groups.size()) {
 			GroupItem *group = m_groups.at(groupID);
 			if (group->childCount() > row)
 				return createIndex(row, column, (groupID << 16) + row);
 		}
 	} else {
-		// parent is root, return group ID
-		if (m_groups.size() > row)
+		if (row < m_groups.size())
 			return createIndex(row, column, (row << 16) + 0xFFFF);
 	}
 
@@ -85,6 +95,7 @@ void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value)
 	ContactItem *item = getContact(jid);
 
 	unless (item) {
+		// Status from not-in-roster
 		if (throttleNotInRoster)
 			return;
 		QSet<QString> notInRosterGroups;
@@ -93,13 +104,12 @@ void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value)
 	}
 
 	item->setResourceStatus(resource, _value);
-	reset();
 }
 
 ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSet<QString> groups) {
 	ContactItem *item = getContact(jid);
 	unless (item) {
-		item = new ContactItem(jid);
+		item = new ContactItem(this, jid);
 		QString bare_jid;
 		split_jid(jid, &bare_jid);
 		m_contacts[bare_jid] = item;
@@ -108,7 +118,7 @@ ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSe
 	if (item->getNick() != nick)
 		item->setNick(nick);
 
-	// Synchronize groups (note: due to performance impact, this code is made unportable through containers)
+	// Synchronize groups
 	const QList<GroupItem *> &current_groups = item->getGroups();
 	for (int i = 0; i < current_groups.size(); ++i)
 		unless (groups.contains(current_groups[i]->getGroupName()))
@@ -119,9 +129,10 @@ ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSe
 	foreach (const QString &group, groups)
 		item->addToGroup(getGroup(group));
 
+	// Item is out of all groups
 	unless (current_groups.size())
 		item->addToGroup(getGroup(noGroupName));
-	reset();
+
 	return item;
 }
 
@@ -129,13 +140,17 @@ GroupItem *ItemModel::getGroup(const QString &name) {
 	foreach (GroupItem *item, m_groups)
 		if (item->getGroupName() == name)
 			return item;
-	GroupItem *new_item = new GroupItem(name);
 
+	// Create a new group
+	GroupItem *new_item = new GroupItem(this, name);
 	int i;
 	for (i = 0; i < m_groups.size(); ++i)
 		if (m_groups[i]->getGroupName().compare(name, Qt::CaseInsensitive) > 0)
 			break;
+
+	beginInsertRows(QModelIndex(), i, i);
 	m_groups.insert(i, new_item);
+	endInsertRows();
 
 	return new_item;
 }
@@ -144,4 +159,27 @@ ContactItem *ItemModel::getContact(const QString &jid) {
 	QString bare_jid;
 	split_jid(jid, &bare_jid);
 	return m_contacts.value(bare_jid);
+}
+
+void ItemModel::contactAdded(GroupItem *const sender, int ind) {
+	beginInsertRows(index(m_groups.indexOf(sender), 0), ind, ind);
+	endInsertRows();
+}
+
+void ItemModel::contactMoved(GroupItem *const sender, int from, int to) {
+	QModelIndex groupIndex = index(m_groups.indexOf(sender), 0);
+	beginMoveRows(groupIndex, from, from, groupIndex, to);
+	endMoveRows();
+}
+
+void ItemModel::contactChanged(ContactItem *const sender) {
+	foreach (GroupItem *group, sender->getGroups()) {
+		QModelIndex itemIndex = index(group->getContacts().indexOf(sender), 0, m_groups.indexOf(group));
+		emit dataChanged(itemIndex, itemIndex);
+	}
+}
+
+void ItemModel::groupChanged(GroupItem *const sender) {
+	QModelIndex groupIndex = index(m_groups.indexOf(sender), 0);
+	emit dataChanged(groupIndex, groupIndex);
 }

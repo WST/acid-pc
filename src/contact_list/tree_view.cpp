@@ -77,6 +77,7 @@ const ContactItem *TreeView::selectedContact() const {
 		const Item *item = static_cast<const Item *>(v_item.value<const void *>());
 		return item->childCount() ? NULL : static_cast<const ContactItem *>(item);
 	}
+	return NULL;
 }
 
 void TreeView::showChatDialog_helper() {

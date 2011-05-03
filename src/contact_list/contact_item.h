@@ -9,6 +9,7 @@
 
 namespace CL {
 	class GroupItem;
+	class ItemModel;
 
 	/*!
 	  Roster item. Just an entry in a roster tree.
@@ -16,8 +17,7 @@ namespace CL {
 	  */
 	class ContactItem: public Item {
 	public:
-		ContactItem() { setOffline(); };
-		explicit ContactItem(const QString &jid);
+		explicit ContactItem(ItemModel *_owner, const QString &_jid);
 
 		/*!
 		  Gets bare jid of an item, as set by addJid or initial constructor
@@ -45,7 +45,8 @@ namespace CL {
 			explicit Status(): type(Offline), priority(0) {}
 
 			/*!
-			  For suitable resource search
+			  For suitable resource search.
+			  Note: only resources of the same jid should be compared with this operator (because of priority)
 			  */
 			bool operator<(const Status &_other) const {
 				return priority < _other.priority ? true :
@@ -79,7 +80,7 @@ namespace CL {
 		void setResourceStatus(const QString &resource, const Status &_value);
 
 		const QString &getNick() const { return m_nick; }
-		void setNick(const QString &_value) { m_nick = _value; }
+		void setNick(const QString &_value);
 
 		/*!
 		  Returns true if at least one resource is not offline
@@ -127,13 +128,16 @@ namespace CL {
 		virtual const QIcon &getIcon() const { return m_icon; }
 
 	private:
+		ItemModel *owner;
 		QMap<QString, Status *> m_resources;
 		QList<GroupItem *> m_groups;
 		QString m_bareJid;
 		QString m_nick;
 		QIcon m_icon;
+		QString icon_name;
 
 		void updateIcon();
+		void changeStatus();
 	};
 
 };

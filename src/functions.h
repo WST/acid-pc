@@ -12,19 +12,6 @@ void split_jid(const QString &jid, QString *bare, QString *resource = NULL);
 #define unless(x) if (!(x))
 #define elsif else if
 
-//// Helper class to store a pointer in QVariant
-//template <class T> class VPtr
-//{
-//public:
-//	static T *asPtr(QVariant v)
-//	{
-//		return static_cast<T *>(v.value<void *>());
-//	}
-
-//	static QVariant asQVariant(T* ptr)
-//	{
-//		return qVariantFromValue(static_cast<void *>(ptr));
-//	}
-//};
+Q_DECLARE_METATYPE(const void *)
 
 #endif // FUNCTIONS_H

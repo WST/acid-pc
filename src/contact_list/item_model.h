@@ -58,7 +58,7 @@ namespace CL {
 		  */
 		QString noGroupName;
 
-	public:
+	public: // QAbstractItemModel
 		enum SpecificRole {
 			ItemRole = Qt::UserRole + 2
 		};
@@ -70,9 +70,20 @@ namespace CL {
 		virtual QVariant data(const QModelIndex &index, int role) const;
 		virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
+	public: // Event system
+		void contactAdded(GroupItem *const sender, int ind);
+		void contactMoved(GroupItem *const sender, int from, int to);
+		void contactChanged(ContactItem *const sender);
+		void groupChanged(GroupItem *const sender);
+
 	private:
 		QMap<QString, ContactItem*> m_contacts;
 		QList<GroupItem *> m_groups;
+
+		/*!
+		  Returns index of contact (if groupID >= 0) or group
+		  */
+		QModelIndex index(int row, int column, int groupID = -1) const;
 
 		/*!
 		  Adds non-existent item to roster
@@ -80,7 +91,5 @@ namespace CL {
 		ContactItem *addItem(const QString &jid, const QString &nick);
 	};
 };
-
-Q_DECLARE_METATYPE(const void *)
 
 #endif // CL_ITEMMODEL_H

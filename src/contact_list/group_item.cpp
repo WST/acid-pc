@@ -1,4 +1,5 @@
 #include "contact_item.h"
+#include "item_model.h"
 
 #include "group_item.h"
 
@@ -11,13 +12,18 @@ bool GroupItem::addContact(ContactItem *item) {
 			if (*m_contacts[i] < *item)
 				break;
 		m_contacts.insert(i, item);
-		//emit itemAdded(i);
+		if (item->isOnline())
+			++online_count;
+		owner->contactAdded(this, i);
+		owner->groupChanged(this);
 		return true;
 	}
 	return false;
 }
 
 bool GroupItem::removeContact(ContactItem *item) {
+	if (item->isOnline())
+		--online_count;
 	return m_contacts.removeOne(item);
 }
 
@@ -27,19 +33,18 @@ void GroupItem::statusChanged(ContactItem *item) {
 		if (*m_contacts[i] < *item)
 			break;
 	int item_index = m_contacts.indexOf(item);
-	if (i < item_index) {
+	if (i > item_index)
+		--i;
+	if (i != item_index) {
 		m_contacts.move(item_index, i);
-		//emit itemMoved(item_index, i);
-	} elsif (i > item_index) {
-		m_contacts.move(item_index, i-1);
-		//emit itemMoved(item_index, i-1);
+		owner->contactMoved(this, item_index, i);
 	}
-}
 
-QString GroupItem::getSubText() const {
-	int online_count = 0;
-	foreach (const ContactItem *contact, m_contacts)
+	int prev_online_count = online_count;
+	online_count = 0;
+	foreach (ContactItem *contact, m_contacts)
 		if (contact->isOnline())
 			++online_count;
-	return QString("%1 / %2").arg(online_count).arg(m_contacts.size());
+	if (prev_online_count != online_count)
+		owner->groupChanged(this);
 }
