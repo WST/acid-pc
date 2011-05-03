@@ -16,6 +16,7 @@ namespace CL {
 	  */
 	class ContactItem: public Item {
 	public:
+		ContactItem() { setOffline(); };
 		explicit ContactItem(const QString &jid);
 
 		/*!
@@ -136,7 +137,5 @@ namespace CL {
 	};
 
 };
-
-Q_DECLARE_METATYPE(const CL::ContactItem *)
 
 #endif // CL_CONTACTITEM_H

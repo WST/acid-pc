@@ -71,13 +71,12 @@ void TreeView::drawBranches(QPainter *painter, const QRect &rect, const QModelIn
 }
 
 const ContactItem *TreeView::selectedContact() const {
-	// a long long doomed chain
-	return reinterpret_cast<const ContactItem *>(qvariant_cast<int>(selectedIndexes().at(0).data(ItemModel::ContactItemRole)));
-}
-
-const GroupItem *TreeView::selectedGroup() const {
-	// fuck me gently with a chainsaw
-	return reinterpret_cast<const GroupItem *>(qvariant_cast<int>(selectedIndexes().at(0).data(ItemModel::GroupItemRole)));
+	const QModelIndexList &selected = selectedIndexes();
+	if (selected.size()) {
+		const QVariant &v_item = selected.at(0).data(ItemModel::ItemRole);
+		const Item *item = static_cast<const Item *>(v_item.value<const void *>());
+		return item->childCount() ? NULL : static_cast<const ContactItem *>(item);
+	}
 }
 
 void TreeView::showChatDialog_helper() {

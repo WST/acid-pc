@@ -60,8 +60,7 @@ namespace CL {
 
 	public:
 		enum SpecificRole {
-			ContactItemRole = Qt::UserRole + 2,
-			GroupItemRole = Qt::UserRole + 3
+			ItemRole = Qt::UserRole + 2
 		};
 
 		virtual QModelIndex index(int row, int column, const QModelIndex &parent) const;
@@ -81,5 +80,7 @@ namespace CL {
 		ContactItem *addItem(const QString &jid, const QString &nick);
 	};
 };
+
+Q_DECLARE_METATYPE(const void *)
 
 #endif // CL_ITEMMODEL_H

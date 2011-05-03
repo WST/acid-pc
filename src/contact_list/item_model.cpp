@@ -38,10 +38,8 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const {
 		return item->getIcon();
 	case Qt::ToolTipRole:
 		return item->getSubText();
-	case ContactItemRole:
-		return (int)(item->childCount() ? NULL : item);
-	case GroupItemRole:
-		return (int)(item->childCount() ? item : NULL);
+	case ItemRole:
+		return qVariantFromValue(static_cast<const void *>(item));
 	default:
 		return QVariant();
 	}

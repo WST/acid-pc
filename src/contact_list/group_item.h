@@ -58,6 +58,4 @@ namespace CL {
 
 };
 
-Q_DECLARE_METATYPE(const CL::GroupItem *)
-
 #endif // CL_GROUPITEM_H

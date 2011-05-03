@@ -37,14 +37,9 @@ namespace CL {
 
 	public:
 		/*!
-		  Returns selected roster item. NULL if it is a group. Use selectedGroup instead then.
+		  Returns selected roster item. NULL if no items are selected
 		  */
 		const ContactItem *selectedContact() const;
-
-		/*!
-		  Returns selected group item. NULL if it is a contact. Use selectedContact instead then.
-		  */
-		const GroupItem *selectedGroup() const;
 
 	private:
 		QAction *action_chat;
