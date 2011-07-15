@@ -43,7 +43,6 @@ HEADERS += $$PWD/qxmpp/src/QXmppUtils.h \
            $$PWD/qxmpp/src/QXmppPingIq.h \
            $$PWD/qxmpp/src/QXmppPresence.h \
            $$PWD/qxmpp/src/QXmppPubSubIq.h \
-           $$PWD/qxmpp/src/QXmppRoster.h \
            $$PWD/qxmpp/src/QXmppRosterIq.h \
            $$PWD/qxmpp/src/QXmppRosterManager.h \
 		   $$PWD/qxmpp/src/QXmppRtpChannel.h \
