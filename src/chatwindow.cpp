@@ -12,7 +12,7 @@ ChatWindow::~ChatWindow() {
 	delete ui;
 }
 
-void ChatWindow::displayMessage(QXmppMessage &message) {
+void ChatWindow::displayMessage(QXmppMessage &message, QString tab_name) {
 	if(!isVisible()) {
 		show();
 	}
@@ -25,9 +25,9 @@ void ChatWindow::displayMessage(QXmppMessage &message) {
 	QStringList jid = parseJid(message.from());
 	if(((widget = getWidgetByJid(jid[1])) != 0) && !jid[5].isEmpty()) {
 		((ChatWidget *) widget)->appendResource(jid[5]);
-		return displayMessage(message);
+		return displayMessage(message, tab_name);
 	} else {
-		return ((ChatWidget *) openTab(message.from(), TabWidget::Chat))->insertMessage(message);
+		return ((ChatWidget *) openTab(message.from(), tab_name, TabWidget::Chat))->insertMessage(message);
 	}
 }
 
@@ -57,7 +57,7 @@ bool ChatWindow::adaTabForJid(QString jid) {
 	return (bool) getWidgetByJid(jid);
 }
 
-TabWidget *ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
+TabWidget *ChatWindow::openTab(QString fulljid, QString tab_name, TabWidget::Type type) {
 	if(!isVisible()) {
 		show();
 	}
@@ -73,7 +73,7 @@ TabWidget *ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
 			ChatWidget *widget = new ChatWidget(fulljid);
 			connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
 			connect(widget, SIGNAL(chatGeometryChanged(QByteArray)), this, SLOT(chatGeometryChanged(QByteArray)));
-			ui->tabWidget->addTab(widget, "tab");
+			ui->tabWidget->addTab(widget, tab_name);
 			ui->tabWidget->setCurrentWidget(widget);
 			widget->setOnline(online);
 			widget->activate();
@@ -83,7 +83,7 @@ TabWidget *ChatWindow::openTab(QString fulljid, TabWidget::Type type) {
 			// NOTE: при входе в MUC fulljid является bare JID комнаты!
 			MUCWidget *widget = new MUCWidget(fulljid);
 			connect(widget, SIGNAL(aboutToSend(QString, QString)), this, SIGNAL(aboutToSendMUC(QString, QString)));
-			ui->tabWidget->addTab(widget, "MUC");
+			ui->tabWidget->addTab(widget, tab_name);
 			ui->tabWidget->setCurrentWidget(widget);
 			widget->setOnline(online);
 			widget->activate();

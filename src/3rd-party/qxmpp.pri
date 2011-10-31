@@ -62,7 +62,6 @@ HEADERS += $$PWD/qxmpp/src/QXmppUtils.h \
            $$PWD/qxmpp/src/QXmppRpcIq.h \
            $$PWD/qxmpp/src/QXmppVCardManager.h \
            $$PWD/qxmpp/src/QXmppVCardIq.h \
-           $$PWD/qxmpp/src/QXmppVCard.h \
            $$PWD/qxmpp/src/QXmppVersionIq.h\
            $$PWD/qxmpp/src/QXmppVersionManager.h \
 			  $$PWD/qxmpp/src/QXmppPasswordChecker.h

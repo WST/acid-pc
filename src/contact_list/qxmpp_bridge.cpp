@@ -40,7 +40,7 @@ ContactItem::StatusType	QXmppBridge::qxmpp2cl(const QXmppPresence::Status::Type 
 		return ContactItem::XA;
 	case QXmppPresence::Status::DND:
 		return ContactItem::DND;
-	case QXmppPresence::Status::Invisible:
+	//case QXmppPresence::Status::Invisible:
 	case QXmppPresence::Status::Offline:
 		return ContactItem::Offline;
 	}

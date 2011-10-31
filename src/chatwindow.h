@@ -26,10 +26,10 @@ class ChatWindow: public QDialog
 public:
     explicit ChatWindow(Messenger *parent);
     ~ChatWindow();
-    void displayMessage(QXmppMessage &message);
+	void displayMessage(QXmppMessage &message, QString tab_name);
     void displayMUCMessage(QXmppMessage &message);
     bool adaTabForJid(QString fulljid);
-	TabWidget *openTab(QString fulljid, TabWidget::Type type);
+	TabWidget *openTab(QString fulljid, QString tab_name, TabWidget::Type type);
     void reloadGeometry(QSettings *settings);
     TabWidget *getWidgetByJid(QString jid);
     TabWidget *getWidgetByIndex(int index);

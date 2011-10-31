@@ -411,14 +411,14 @@ void Messenger::gotMessage(QXmppMessage message) {
 				return;
 			}
 			if(settings->value("settings/automatically_open_new_tabs", false).toBool()) {
-				chat->displayMessage(message);
+				chat->displayMessage(message, "fooooooo");
 				return;
 			}
 			if(!chat->adaTabForJid(message.from())) {
 				messages[message.id()] = message;
 				connect(ConfirmationWindow::newMessage(& messages[message.id()], settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
 			} else {
-				chat->displayMessage(message);
+				chat->displayMessage(message, "foo");
 			}
 		break;
 	}
@@ -431,7 +431,7 @@ void Messenger::confirmedMessage(const QString &message_id) {
 	QXmppMessage message = messages.find(message_id).value();
 	for(QMap<QString, QXmppMessage>::iterator i = messages.begin(); i != messages.end(); ++ i) {
 		if(i.value().from() == message.from()) {
-			chat->displayMessage(i.value());
+			chat->displayMessage(i.value(), "foooo");
 			messages.erase(i);
 		}
 	}
@@ -480,7 +480,7 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 }
 
 void Messenger::openChat(const QString &full_jid) {
-	chat->openTab(full_jid, TabWidget::Chat);
+	chat->openTab(full_jid, "fooo", TabWidget::Chat);
 }
 
 void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
@@ -488,7 +488,7 @@ void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
 	room->setNickName(nick);
 	room->join();
 	rooms[room_jid] = room;
-	chat->openTab(room_jid, TabWidget::MUC);
+	chat->openTab(room_jid, "room", TabWidget::MUC);
 }
 
 void Messenger::leaveRoom(const QString &room_jid) {
