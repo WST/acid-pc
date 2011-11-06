@@ -40,5 +40,6 @@
         <file>notifications/file.png</file>
         <file>notifications/message.png</file>
         <file>notifications/muc.png</file>
+        <file>menu/rss.png</file>
     </qresource>
 </RCC>

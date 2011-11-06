@@ -125,13 +125,10 @@ void Messenger::createConnections() {
 	connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
 	connect(muc_manager, SIGNAL(roomParticipantChanged(QString,QString)), this, SLOT(roomParticipantChanged(QString, QString)));
 	connect(transfer_manager, SIGNAL(fileReceived(QXmppTransferJob *)), this, SLOT(gotFile(QXmppTransferJob *)));
-	connect(transfer_manager, SIGNAL(finished(QXmppTransferJob *)), this, SLOT(fileTransferFinished(QXmppTransferJob *)));
 	// Следующая строка — реальный кошмар. Почему одни менеджеры надо вызывать напрямую, а этот через метод?
-	connect(& client->vCardManager(), SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
-
-	connect(this, SIGNAL(showChatDialog(QString)), this, SLOT(openChat(QString)));
+        connect(& client->vCardManager(), SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
 	
-	connect(& roster_widget, SIGNAL(showChatDialog(const QString &)), this, SLOT(openChat(const QString &)));
+        connect(& roster_widget, SIGNAL(showChatDialog(const QString &)), this, SLOT(openChat(const QString &)));
 	connect(& roster_widget, SIGNAL(showProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
 	connect(& roster_widget, SIGNAL(removeContact(const QString &)), this, SLOT(removeContact(const QString &)));
 	connect(& roster_widget, SIGNAL(makeVoiceCall(const QString &)), this, SLOT(makeVoiceCall(const QString &)));
@@ -149,9 +146,10 @@ void Messenger::createMenus() {
 		QMenu *connect_service_menu = im_menu->addMenu(QIcon(":/menu/plug.png"), "Connect service");
 			QAction *action_connect_yahoo = connect_service_menu->addAction(QIcon(":/menu/yahoo.png"), "Yahoo! Messenger");
 			QAction *action_connect_msn = connect_service_menu->addAction(QIcon(":/menu/msn.png"), "MSN (Windows Live)");
-			QAction *action_connect_icq = connect_service_menu->addAction(QIcon(":/menu/icq.png"), "ICQ");
+                        QAction *action_connect_icq = connect_service_menu->addAction(QIcon(":/menu/icq.png"), "ICQ");
 			connect_service_menu->addSeparator();
 			QAction *action_connect_lopbox = connect_service_menu->addAction(QIcon(), "Lopbox microblog");
+                        QAction *action_connect_rss = connect_service_menu->addAction(QIcon(":/menu/rss.png"), "Add an RSS feed");
 			connect_service_menu->addSeparator();
 			QAction *action_browse_services = connect_service_menu->addAction(QIcon(":/menu/plug.png"), "Service discovery");
 		im_menu->addSeparator();
