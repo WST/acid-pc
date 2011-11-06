@@ -359,7 +359,7 @@ void Messenger::confirmedFile(QXmppTransferJob *job, bool confirmed) {
 		job->abort();
 		return;
 	}
-	QFile *target = new QFile(settings->value("settings/savepath", INCOMING_FILES_STORAGE).toString() + "/" + job->fileName());
+	QFile *target = new QFile(settings->value("settings/savepath", INCOMING_FILES_STORAGE).toString() + "/" + job->fileInfo().name());
 	if(target->open(QIODevice::ReadWrite)) {
 		job->accept(target);
 	} else {

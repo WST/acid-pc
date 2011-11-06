@@ -2,9 +2,7 @@ TARGET      = acid-pc
 TEMPLATE    = app
 QT         += core \
               gui
-CONFIG     += qt \
-              warn_on \
-              release
+CONFIG     += qt warn_on debug
 
 DESTDIR     = bin
 MOC_DIR     = build/moc
