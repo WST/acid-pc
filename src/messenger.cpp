@@ -128,7 +128,7 @@ void Messenger::createConnections() {
 	// Следующая строка — реальный кошмар. Почему одни менеджеры надо вызывать напрямую, а этот через метод?
         connect(& client->vCardManager(), SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
 
-        connect(& roster_widget, SIGNAL(showChatDialog(const QString &)), this, SLOT(openChat(const QString &)));
+	connect(& roster_widget, SIGNAL(showChatDialog(const QString &, const QString &)), this, SLOT(openChat(const QString &, const QString &)));
 	connect(& roster_widget, SIGNAL(showProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
 	connect(& roster_widget, SIGNAL(removeContact(const QString &)), this, SLOT(removeContact(const QString &)));
 	connect(& roster_widget, SIGNAL(makeVoiceCall(const QString &)), this, SLOT(makeVoiceCall(const QString &)));
@@ -477,16 +477,17 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 	roster_model.setStatus(QString("%1" JID_RESOURCE_SEPARATOR "%2").arg(bare_jid).arg(resource), status);
 }
 
-void Messenger::openChat(const QString &full_jid) {
-	chat->openTab(full_jid, "fooo", TabWidget::Chat);
+void Messenger::openChat(const QString &full_jid, const QString &nick) {
+	chat->openTab(full_jid, nick, TabWidget::Chat);
 }
 
 void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
+	QStringList jid = parseJid(room_jid);
 	QXmppMucRoom *room = muc_manager->addRoom(room_jid);
 	room->setNickName(nick);
 	room->join();
 	rooms[room_jid] = room;
-	chat->openTab(room_jid, "room", TabWidget::MUC);
+	chat->openTab(room_jid, jid[2], TabWidget::MUC);
 }
 
 void Messenger::leaveRoom(const QString &room_jid) {
