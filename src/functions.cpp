@@ -1,4 +1,3 @@
-
 #include "functions.h"
 
 QStringList parseJid(QString jid) {
@@ -6,7 +5,7 @@ QStringList parseJid(QString jid) {
 	return format.exactMatch(jid) ?  format.capturedTexts() : QStringList();
 }
 
-void split_jid(const QString &jid, QString *bare, QString *resource) {
+void splitJid(const QString &jid, QString *bare, QString *resource) {
 	if (bare || resource) {
 		int sep = jid.indexOf(JID_RESOURCE_SEPARATOR);
 		if (resource)

@@ -27,11 +27,11 @@ TreeView::TreeView(QWidget* parent):QTreeView(parent) {
 }
 
 TreeView::~TreeView() {
-    delete action_chat;
-    delete action_profile;
-    delete action_remove;
-    delete action_send_file;
-    delete action_call;
+		delete action_chat;
+		delete action_profile;
+		delete action_remove;
+		delete action_send_file;
+		delete action_call;
 }
 
 bool TreeView::event(QEvent* e) {
@@ -39,9 +39,9 @@ bool TreeView::event(QEvent* e) {
 }
 
 void TreeView::mousePressed(const QModelIndex& index) {
-    if(QApplication::mouseButtons() == Qt::RightButton) {
-        QString bareJid = index.data().toString();
-        QMenu menu(this);
+		if(QApplication::mouseButtons() == Qt::RightButton) {
+				QString bareJid = index.data().toString();
+				QMenu menu(this);
 	menu.addAction(action_chat);
 	menu.setDefaultAction(action_chat);
 	menu.addSeparator();
@@ -50,13 +50,13 @@ void TreeView::mousePressed(const QModelIndex& index) {
 	menu.addSeparator();
 	menu.addAction(action_profile);
 	menu.addAction(action_remove);
-        menu.exec(QCursor::pos());
-    }
+				menu.exec(QCursor::pos());
+		}
 }
 
 void TreeView::doubleClicked(const QModelIndex& index) {
 	Q_UNUSED(index);
-    action_chat->trigger();
+		action_chat->trigger();
 }
 
 void TreeView::clicked(const QModelIndex& index) {
@@ -64,7 +64,7 @@ void TreeView::clicked(const QModelIndex& index) {
 }
 
 void TreeView::drawBranches(QPainter *painter, const QRect &rect, const QModelIndex &index) const {
-	unless (index.parent().isValid()) {
+	if (!index.parent().isValid()) {
 		QImage plus(":/roster/plus.png"), minus(":/roster/minus.png");
 		painter->drawImage(rect, isExpanded(index) ? minus : plus);
 	}
@@ -97,9 +97,9 @@ void TreeView::showProfile_helper() {
 }
 
 void TreeView::keyPressEvent(QKeyEvent* event1) {
-    if(event1->key() == Qt::Key_Return) {
-        showChatDialog_helper();
-    }
+		if(event1->key() == Qt::Key_Return) {
+				showChatDialog_helper();
+		}
 	QTreeView::keyPressEvent(event1);
 }
 

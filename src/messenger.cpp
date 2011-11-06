@@ -44,31 +44,31 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 	createConnections();
 	createMenus();
 	loadSettings();
-	
+
 	setWindowTitle(APP_NAME);
 	setWindowIcon(QIcon(":/acid_16.png"));
-	
+
 	roster_widget.setModel(& roster_model);
 	setCentralWidget(& roster_widget);
-	
+
 	roster_widget.setItemDelegate(new CL::ItemDelegate());
 
 	QDesktopServices::setUrlHandler("xmpp", this, "handleLink");
 }
 
 Messenger::~Messenger() {
-    saveSettings();
+		saveSettings();
 	/*
-    delete about;
-    delete tray;
-    delete chat;
-    delete login;
-    delete window;
+		delete about;
+		delete tray;
+		delete chat;
+		delete login;
+		delete window;
 	 delete call_manager;
 	delete muc_manager;
-    delete client;
-    delete client_settings;
-    delete settings;
+		delete client;
+		delete client_settings;
+		delete settings;
 	*/
 }
 
@@ -117,7 +117,7 @@ void Messenger::createConnections() {
 	connect(client, SIGNAL(error(QXmppClient::Error)), this, SLOT(handleConnectionError(QXmppClient::Error)));
 	connect(client, SIGNAL(iqReceived(QXmppIq)), this, SLOT(gotIQ(QXmppIq)));
 	connect(client, SIGNAL(messageReceived(QXmppMessage)), this, SLOT(gotMessage(QXmppMessage)));
-	
+
 	connect(& client->rosterManager(), SIGNAL(rosterReceived()), this, SLOT(rosterReceived()));
 	connect(& client->rosterManager(), SIGNAL(rosterChanged(const QString&)), this, SLOT(rosterChanged(const QString&)));
 	connect(& client->rosterManager(), SIGNAL(presenceChanged(const QString&, const QString&)), this, SLOT(presenceChanged(const QString&, const QString&)));
@@ -127,7 +127,7 @@ void Messenger::createConnections() {
 	connect(transfer_manager, SIGNAL(fileReceived(QXmppTransferJob *)), this, SLOT(gotFile(QXmppTransferJob *)));
 	// Следующая строка — реальный кошмар. Почему одни менеджеры надо вызывать напрямую, а этот через метод?
         connect(& client->vCardManager(), SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
-	
+
         connect(& roster_widget, SIGNAL(showChatDialog(const QString &)), this, SLOT(openChat(const QString &)));
 	connect(& roster_widget, SIGNAL(showProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
 	connect(& roster_widget, SIGNAL(removeContact(const QString &)), this, SLOT(removeContact(const QString &)));
@@ -156,7 +156,7 @@ void Messenger::createMenus() {
 		QAction *action_settings = im_menu->addAction(QIcon(":/menu/toolbox.png"), "Settings");
 		im_menu->addSeparator();
 		QAction *action_quit = im_menu->addAction(QIcon(":/menu/door.png"), "Quit");
-	
+
 	QMenu *status_menu = menuBar()->addMenu("Status");
 		QAction *action_status_available = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Available");
 		QAction *action_status_f4c = status_menu->addAction(QIcon(":/trayicon/f4c-16px.png"), "Free for chat");
@@ -165,7 +165,7 @@ void Messenger::createMenus() {
 		QAction *action_status_dnd = status_menu->addAction(QIcon(":/trayicon/dnd-16px.png"), "Do not disturb");
 		status_menu->addSeparator();
 		QAction *action_status_dc = status_menu->addAction(QIcon(":/trayicon/offline-16px.png"), "Offline");
-	
+
 	QMenu *help_menu = menuBar()->addMenu("Help");
 		QAction *action_support_room = help_menu->addAction(QIcon(":/menu/question.png"), "Support chat");
 		QAction *action_official_site = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "Official site");

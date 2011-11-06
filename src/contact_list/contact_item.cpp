@@ -8,10 +8,11 @@
 
 using namespace CL;
 
-const char *ContactItem::statusString[] = { "offline", "dnd", "xa", "away", "online", "f4c" };
+const char *ContactItem::statusString[] = { "offline", "dnd", "xa",     "away",   "online", "f4c" };
+const char *ContactItem::statusColor[] =  { "gray",    "red", "orange", "yellow", "green",  "green" };
 
 ContactItem::ContactItem(ItemModel *_owner, const QString &_jid): owner(_owner) {
-	split_jid(_jid, &m_bareJid);
+	splitJid(_jid, &m_bareJid);
 	setOffline();
 }
 
@@ -42,7 +43,7 @@ bool ContactItem::operator<(const ContactItem &_other) const {
 					*other_resource_status = _other.getResource().second;
 			if (resource_status->type < other_resource_status->type)
 				return true;
-			elsif (other_resource_status->type < resource_status->type)
+			else if (other_resource_status->type < resource_status->type)
 				return false;
 		}
 
@@ -97,9 +98,9 @@ QString ContactItem::getText() const {
 }
 
 void ContactItem::setResourceStatus(const QString &resource, const Status &_value) {
-	unless (_value.type == Unchanged) {
+	if (!_value.type == Unchanged) {
 		Status *rcptr = m_resources.value(resource);
-		unless (rcptr || _value.type == Offline)
+		if (!rcptr && _value.type != Offline)
 			m_resources[resource] = rcptr = new Status();
 		if (_value.type == Offline) {
 			if (rcptr) {
@@ -133,4 +134,20 @@ void ContactItem::updateIcon() {
 void ContactItem::setNick(const QString &_value) {
 	m_nick = _value;
 	owner->contactChanged(this);
+}
+
+QString ContactItem::getSubText() const {
+	const ResourceStatus &rs = getResource();
+	QString baseText;
+	if (rs.second)
+		baseText = QString("<span color='%1'>%2</span>\n").arg(statusColor[rs.second->type]).arg(rs.second->text);
+	else
+		baseText = QString("<span color='grey'>offline</span>");
+	for (QMap<QString, Status *>::const_iterator i = m_resources.constBegin(); i != m_resources.constEnd(); ++i)
+		baseText += QString("%1 <img src=':/trayicon/%2-16px.png' /> <span color='%3'>%4</span>\n").
+				arg(i.key()).
+				arg(statusString[i.value()->type]).
+				arg(statusColor[i.value()->type]).
+				arg(i.value()->text);
+	return baseText;
 }

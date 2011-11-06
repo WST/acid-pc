@@ -91,10 +91,10 @@ QModelIndex ItemModel::parent(const QModelIndex &child) const {
 
 void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value) {
 	QString resource;
-	split_jid(jid, NULL, &resource);
+	splitJid(jid, NULL, &resource);
 	ContactItem *item = getContact(jid);
 
-	unless (item) {
+	if (!item) {
 		// Status from not-in-roster
 		if (throttleNotInRoster)
 			return;
@@ -108,10 +108,10 @@ void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value)
 
 ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSet<QString> groups) {
 	ContactItem *item = getContact(jid);
-	unless (item) {
+	if (!item) {
 		item = new ContactItem(this, jid);
 		QString bare_jid;
-		split_jid(jid, &bare_jid);
+		splitJid(jid, &bare_jid);
 		m_contacts[bare_jid] = item;
 	}
 
@@ -121,7 +121,7 @@ ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSe
 	// Synchronize groups
 	const QList<GroupItem *> &current_groups = item->getGroups();
 	for (int i = 0; i < current_groups.size(); ++i)
-		unless (groups.contains(current_groups[i]->getGroupName()))
+		if (!groups.contains(current_groups[i]->getGroupName()))
 			item->removeFromGroup(current_groups[i--]);
 		else
 			groups.remove(current_groups[i]->getGroupName());
@@ -130,7 +130,7 @@ ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSe
 		item->addToGroup(getGroup(group));
 
 	// Item is out of all groups
-	unless (current_groups.size())
+	if (current_groups.empty())
 		item->addToGroup(getGroup(noGroupName));
 
 	return item;
@@ -157,7 +157,7 @@ GroupItem *ItemModel::getGroup(const QString &name) {
 
 ContactItem *ItemModel::getContact(const QString &jid) {
 	QString bare_jid;
-	split_jid(jid, &bare_jid);
+	splitJid(jid, &bare_jid);
 	return m_contacts.value(bare_jid);
 }
 
@@ -171,7 +171,7 @@ void ItemModel::contactMoved(GroupItem *const sender, int from, int to) {
 	int groupID = m_groups.indexOf(sender);
 	emit layoutAboutToBeChanged();
 	changePersistentIndex(index(from, 0, groupID),
-						  index(to, 0, groupID));
+							index(to, 0, groupID));
 	emit layoutChanged();
 #else
 	QModelIndex groupIndex = index(m_groups.indexOf(sender), 0);
