@@ -3,7 +3,7 @@
 #include "messenger.h"
 #include <version.h>
 
-#include <QXmppLogger.h>
+#include <qxmpp/QXmppLogger.h>
 
 int main(int argc, char *argv[])
 {

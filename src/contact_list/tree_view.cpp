@@ -84,7 +84,7 @@ void TreeView::showChatDialog_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
 		if(!bareJid.isEmpty())
-			emit showChatDialog(bareJid);
+            emit showChatDialog(bareJid, selectedContact()->getNick());
 	}
 }
 

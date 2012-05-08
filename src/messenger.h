@@ -5,14 +5,14 @@
 #include <QtGui>
 
 // qxmpp
-#include <QXmppClient.h>
-#include <QXmppTransferManager.h>
-#include <QXmppCallManager.h>
-#include <QXmppMucManager.h>
-#include <QXmppVCardManager.h>
-#include <QXmppVersionManager.h>
-#include <QXmppDiscoveryManager.h>
-#include <QXmppMessage.h>
+#include <qxmpp/QXmppClient.h>
+#include <qxmpp/QXmppTransferManager.h>
+#include <qxmpp/QXmppCallManager.h>
+#include <qxmpp/QXmppMucManager.h>
+#include <qxmpp/QXmppVCardManager.h>
+#include <qxmpp/QXmppVersionManager.h>
+#include <qxmpp/QXmppDiscoveryManager.h>
+#include <qxmpp/QXmppMessage.h>
 
 // ACId
 #include "loginform.h"

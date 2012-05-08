@@ -5,7 +5,7 @@
 #include "tabwidget.h"
 
 // qxmpp
-#include <QXmppMessage.h>
+#include <qxmpp/QXmppMessage.h>
 
 namespace Ui {
     class MUCWidget;

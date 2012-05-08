@@ -1,7 +1,7 @@
 #ifndef QXMPP_BRIDGE_H
 #define QXMPP_BRIDGE_H
 
-#include "QXmppPresence.h"
+#include "qxmpp/QXmppPresence.h"
 
 #include "contact_item.h"
 

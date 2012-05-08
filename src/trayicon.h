@@ -3,7 +3,7 @@
 
 #include <QtGui>
 
-#include <QXmppPresence.h>
+#include <qxmpp/QXmppPresence.h>
 
 class TrayIcon: public QSystemTrayIcon
 {

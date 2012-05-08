@@ -1,5 +1,8 @@
+
+// qxmpp
+#include "qxmpp/QXmppRosterManager.h"
+
 // ACId
-#include "QXmppRosterManager.h"
 #include "messenger.h"
 #include "functions.h"
 #include "confirmationwindow.h"

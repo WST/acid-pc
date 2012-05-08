@@ -5,7 +5,7 @@
 #include <QtGui>
 
 // qxmpp
-#include <QXmppMessage.h>
+#include <qxmpp/QXmppMessage.h>
 
 // ACId
 #include "tabwidget.h"

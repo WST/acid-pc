@@ -1,11 +1,13 @@
 #include "voicecallwindow.h"
 #include "ui_voicecallwindow.h"
 
+// Qt
 #include <QAudioInput>
 #include <QAudioOutput>
 
-#include <QXmppRtpChannel.h>
-#include <QXmppJingleIq.h>
+// qxmpp
+#include <qxmpp/QXmppRtpChannel.h>
+#include <qxmpp/QXmppJingleIq.h>
 
 VoiceCallWindow::VoiceCallWindow(QWidget *parent, QXmppCall *call): QDialog(parent), ui(new Ui::VoiceCallWindow) {
 	connect(this, SIGNAL(accepted()), call, SLOT(hangup()));

@@ -3,9 +3,9 @@
 
 #include <QtGui>
 
-#include <QXmppMessage.h>
-#include <QXmppTransferManager.h>
-#include <QXmppCallManager.h>
+#include <qxmpp/QXmppMessage.h>
+#include <qxmpp/QXmppTransferManager.h>
+#include <qxmpp/QXmppCallManager.h>
 
 namespace Ui {
     class ConfirmationWindow;

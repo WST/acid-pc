@@ -1,6 +1,6 @@
 TARGET      = acid-pc
 TEMPLATE    = app
-QT         += core gui multimedia
+QT         += core gui multimedia network xml
 CONFIG     += qt warn_on debug
 
 DESTDIR     = bin

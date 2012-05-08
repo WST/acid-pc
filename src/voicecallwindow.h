@@ -3,7 +3,7 @@
 
 #include <QtGui/QDialog>
 
-#include <QXmppCallManager.h>
+#include <qxmpp/QXmppCallManager.h>
 
 namespace Ui {
     class VoiceCallWindow;
