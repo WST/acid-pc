@@ -6,11 +6,12 @@
 ConfirmationWindow::ConfirmationWindow(QWidget *parent): QWidget(parent), ui(new Ui::ConfirmationWindow) {
     ui->setupUi(this);
 	setWindowFlags(Qt::ToolTip | Qt::X11BypassWindowManagerHint | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Desktop);
+    timer = 0;
 }
 
 ConfirmationWindow::~ConfirmationWindow() {
     delete ui;
-	delete timer;
+    delete timer; // NOTE: таймер не используется при передачах файлов
 }
 
 void ConfirmationWindow::show() {
@@ -76,7 +77,6 @@ ConfirmationWindow *ConfirmationWindow::newFile(QXmppTransferJob *job, int timeo
 	window->setEventIcon(QPixmap(":/notifications/file.png"));
 	window->setPointer((QObject *) job);
 	window->show();
-	//window->setTimeout(timeout);
 	Q_UNUSED(timeout);
 	return window;
 }
