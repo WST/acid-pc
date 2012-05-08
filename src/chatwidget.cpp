@@ -20,7 +20,7 @@ void ChatWidget::insertMessage(QXmppMessage &message) {
 	text.replace("\"", "&quot;");
 	text.replace("\n", "<br />");
 	text.replace(HYPERLINK_REPLACE_ARGS);
-	ui->chatview->append("<font color=\"#AA0000\">&lt;" + message.from() + "&gt;</font> " + text);
+    ui->chatview->append("<font color=\"#AA0000\">&lt;" + nick + "&gt;</font> " + text);
 }
 
 void ChatWidget::on_send_clicked() {
