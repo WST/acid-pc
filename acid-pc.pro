@@ -1,7 +1,6 @@
 TARGET      = acid-pc
 TEMPLATE    = app
-QT         += core \
-              gui
+QT         += core gui multimedia
 CONFIG     += qt warn_on debug
 
 DESTDIR     = bin
@@ -73,7 +72,8 @@ FORMS      += \
     ui/joinroomwindow.ui
 RESOURCES  += res/app.qrc
 
-include(src/3rd-party/qxmpp.pri)
+include(src/3rd-party/qxmpp/qxmpp.pri)
+INCLUDEPATH += $$QXMPP_INCLUDEPATH LIBS -L../src $$QXMPP_LIBS
 
 win32:RC_FILE = \
               res/win32/app.rc
