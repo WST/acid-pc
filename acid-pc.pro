@@ -72,5 +72,7 @@ FORMS      += \
     ui/joinroomwindow.ui
 RESOURCES  += res/app.qrc
 
+LIBS += -lqxmpp
+
 win32:RC_FILE = \
               res/win32/app.rc
