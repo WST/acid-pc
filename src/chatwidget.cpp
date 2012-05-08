@@ -51,6 +51,10 @@ void ChatWidget::activate() {
     ui->message->setFocus();
 }
 
+void ChatWidget::setNick(QString newnick) {
+    nick = newnick;
+}
+
 void ChatWidget::appendResource(QString resource) {
     jid += "/";
     jid += resource;

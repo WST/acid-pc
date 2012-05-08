@@ -412,12 +412,14 @@ void Messenger::gotMessage(QXmppMessage message) {
 				return;
 			}
 			if(settings->value("settings/automatically_open_new_tabs", false).toBool()) {
+                // В настройках включено автоматическое отображение новых сообщений
 				chat->displayMessage(message, "fooooooo");
 				return;
 			}
 			if(!chat->adaTabForJid(message.from())) {
-				messages[message.id()] = message;
-				connect(ConfirmationWindow::newMessage(& messages[message.id()], settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
+                // Сохраним текст сообщения
+                messages[message.from()][message.id()] = message;
+                connect(ConfirmationWindow::newMessage(& message, settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
 			} else {
 				chat->displayMessage(message, "foo");
 			}
@@ -425,17 +427,19 @@ void Messenger::gotMessage(QXmppMessage message) {
 	}
 }
 
-void Messenger::confirmedMessage(const QString &message_id) {
-	if(!messages.contains(message_id)) {
+void Messenger::confirmedMessage(const QString &message_from) {
+    if(!messages.contains(message_from)) {
+        // От данного JID ничего не приходило?
 		return;
 	}
-	QXmppMessage message = messages.find(message_id).value();
-	for(QMap<QString, QXmppMessage>::iterator i = messages.begin(); i != messages.end(); ++ i) {
-		if(i.value().from() == message.from()) {
-			chat->displayMessage(i.value(), "foooo");
-			messages.erase(i);
-		}
-	}
+
+    QMap<QString, QXmppMessage> list = messages[message_from];
+
+    for(QMap<QString, QXmppMessage>::iterator i = list.begin(); i != list.end(); ++ i) {
+        chat->displayMessage(i.value(), "foooo");
+    }
+
+    messages.erase(messages.find(message_from));
 }
 
 void Messenger::joinNewRoom() {

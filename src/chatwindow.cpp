@@ -19,7 +19,9 @@ void ChatWindow::displayMessage(QXmppMessage &message, QString tab_name) {
 
 	TabWidget *widget = getWidgetByJid(message.from());
 	if(widget) {
-		return ((ChatWidget *) widget)->insertMessage(message);
+        ((ChatWidget *) widget)->setNick(tab_name);
+        ((ChatWidget *) widget)->insertMessage(message);
+        return;
 	}
 
 	QStringList jid = parseJid(message.from());
@@ -27,7 +29,10 @@ void ChatWindow::displayMessage(QXmppMessage &message, QString tab_name) {
 		((ChatWidget *) widget)->appendResource(jid[5]);
 		return displayMessage(message, tab_name);
 	} else {
-		return ((ChatWidget *) openTab(message.from(), tab_name, TabWidget::Chat))->insertMessage(message);
+        ChatWidget *new_widget = (ChatWidget *) openTab(message.from(), tab_name, TabWidget::Chat);
+        new_widget->setNick(tab_name);
+        new_widget->insertMessage(message);
+        return;
 	}
 }
 

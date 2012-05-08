@@ -26,9 +26,11 @@ public:
     void activate();
     void setChatGeometry(QByteArray geometry);
     void appendResource(QString resource);
+    void setNick(QString newnick);
 
 private:
     Ui::ChatWidget *ui;
+    QString nick;
 
 signals:
     void aboutToSend(QString to, QString message);

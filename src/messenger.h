@@ -57,7 +57,7 @@ class Messenger: public QMainWindow {
 		CL::TreeView roster_widget; // виджет ростера
 		CL::ItemModel roster_model; // модель элемента ростера
 
-		QMap<QString, QXmppMessage> messages; // буфер принятых сообщений
+        QMap<QString, QMap<QString, QXmppMessage> > messages; // буфер принятых сообщений
 		QMap<QString, QXmppMucRoom *> rooms; // комнаты, в которые зашёл клиент
 
 	public:

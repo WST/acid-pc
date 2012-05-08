@@ -46,8 +46,9 @@ void ConfirmationWindow::setTimeout(unsigned short int seconds) {
 	timer->start();
 }
 
-void ConfirmationWindow::setMessageId(const QString &new_id) {
+void ConfirmationWindow::setMessageInfo(const QString &new_id, const QString &new_from) {
 	message_id = new_id;
+    message_from = new_from;
 }
 
 void ConfirmationWindow::disableDeclineButton() {
@@ -61,7 +62,7 @@ ConfirmationWindow *ConfirmationWindow::newMessage(QXmppMessage *message, int ti
 	window->setType(Message);
 	window->setEventIcon(QPixmap(":/notifications/message.png"));
 	window->show();
-	window->setMessageId(message->id());
+    window->setMessageInfo(message->id(), message->from());
 	window->setTimeout(timeout);
 	window->disableDeclineButton(); // неактуально для сообщений, т/к они «уже» пришли
 	return window;
@@ -97,7 +98,7 @@ ConfirmationWindow *ConfirmationWindow::newCall(QXmppCall *call, int timeout) {
 void ConfirmationWindow::on_accept_button_clicked() {
 	switch(type) {
 		case Message:
-			emit confirmedMessage(message_id);
+            emit confirmedMessage(message_from);
 		break;
 		case Transfer:
 			emit confirmedFile((QXmppTransferJob *) pointer, true);
