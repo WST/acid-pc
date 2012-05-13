@@ -29,3 +29,16 @@ void JoinRoomWindow::on_conference_name_textChanged(QString newtext) {
 	ui->room_link->clear();
 	ui->room_link->setEnabled(newtext.isEmpty());
 }
+
+void JoinRoomWindow::on_buttonBox_accepted() {
+    // TODO: всякая валидация
+    QString room_address("");
+
+    if(ui->room_link->text().isEmpty()) {
+        room_address = ui->conference_name->text() + "@" + ui->conference_server->text();
+    } else {
+        room_address = ui->room_link->text();
+    }
+
+    emit joinRoomRequested(room_address);
+}

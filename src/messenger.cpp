@@ -444,7 +444,7 @@ void Messenger::confirmedMessage(const QString &message_from) {
 
 void Messenger::joinNewRoom() {
 	JoinRoomWindow *window = new JoinRoomWindow(this);
-	connect(window, SIGNAL(joinRequested(const QString &bare_jid)), this, SLOT(processJoinRequest(const QString &bare_jid)));
+    connect(window, SIGNAL(joinRoomRequested(const QString &)), this, SLOT(processJoinRequest(const QString &)));
 	window->show();
 }
 
@@ -486,6 +486,10 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 
 void Messenger::openChat(const QString &full_jid, const QString &nick) {
 	chat->openTab(full_jid, nick, TabWidget::Chat);
+}
+
+void Messenger::processJoinRequest(const QString &room_jid) {
+    return joinRoom(room_jid, settings->value("settings/muc_nickname", login->username()).toString());
 }
 
 void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
