@@ -324,7 +324,7 @@ void Messenger::iconClicked(QSystemTrayIcon::ActivationReason reason) {
 void Messenger::showNewContactWindow() {
     NewContactWindow *window = new NewContactWindow(this);
     connect(window, SIGNAL(newContactAdditionRequested(const QString &, const QString &)), this, SLOT(addNewContact(const QString &, const QString &)));
-    // NOTE: объекты window не удаляются, а как правильно удалять?
+    // NOTE: объекты window не удаляются, а как бы их покороче удалять?
     window->show();
 }
 
@@ -427,7 +427,7 @@ void Messenger::gotMessage(QXmppMessage message) {
 			}
 			if(settings->value("settings/automatically_open_new_tabs", false).toBool()) {
                 // В настройках включено автоматическое отображение новых сообщений
-				chat->displayMessage(message, "fooooooo");
+                chat->displayMessage(message, roster_widget.getNickByJid(message.from()));
 				return;
 			}
 			if(!chat->adaTabForJid(message.from())) {
@@ -435,7 +435,7 @@ void Messenger::gotMessage(QXmppMessage message) {
                 messages[message.from()][message.id()] = message;
                 connect(ConfirmationWindow::newMessage(& message, settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
 			} else {
-				chat->displayMessage(message, "foo");
+                chat->displayMessage(message, roster_widget.getNickByJid(message.from()));
 			}
 		break;
 	}
@@ -450,7 +450,7 @@ void Messenger::confirmedMessage(const QString &message_from) {
     QMap<QString, QXmppMessage> list = messages[message_from];
 
     for(QMap<QString, QXmppMessage>::iterator i = list.begin(); i != list.end(); ++ i) {
-        chat->displayMessage(i.value(), "foooo");
+        chat->displayMessage(i.value(), roster_widget.getNickByJid(message.from()));
     }
 
     messages.erase(messages.find(message_from));
