@@ -58,6 +58,9 @@ void MUCWidget::activate() {
     ui->message->setFocus();
 }
 
+void MUCWidget::setIcon(const QString &path) {
+    Q_UNUSED(path);
+}
 
 void MUCWidget::on_send_clicked() {
     QString message = ui->message->toPlainText();

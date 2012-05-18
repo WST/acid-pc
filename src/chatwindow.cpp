@@ -78,9 +78,10 @@ TabWidget *ChatWindow::openTab(QString fulljid, QString tab_name, TabWidget::Typ
 			ChatWidget *widget = new ChatWidget(fulljid);
 			connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
 			connect(widget, SIGNAL(chatGeometryChanged(QByteArray)), this, SLOT(chatGeometryChanged(QByteArray)));
-			ui->tabWidget->addTab(widget, tab_name);
+            ui->tabWidget->addTab(widget, QIcon(":/common/chat.png"), tab_name); // TODO в соответствии со статусом — значок
 			ui->tabWidget->setCurrentWidget(widget);
 			widget->setOnline(online);
+            widget->setIcon(":/common/chat.png");
 			widget->activate();
 			return widget;
 		} break;
@@ -88,10 +89,11 @@ TabWidget *ChatWindow::openTab(QString fulljid, QString tab_name, TabWidget::Typ
 			// NOTE: при входе в MUC fulljid является bare JID комнаты!
 			MUCWidget *widget = new MUCWidget(fulljid);
 			connect(widget, SIGNAL(aboutToSend(QString, QString)), this, SIGNAL(aboutToSendMUC(QString, QString)));
-			ui->tabWidget->addTab(widget, tab_name);
+            ui->tabWidget->addTab(widget, QIcon(":/common/users.png"), tab_name);
 			ui->tabWidget->setCurrentWidget(widget);
 			widget->setOnline(online);
 			widget->activate();
+            widget->setIcon(":/common/users.png");
 			return widget;
 		} break;
 	}

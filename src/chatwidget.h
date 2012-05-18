@@ -27,6 +27,7 @@ public:
     void setChatGeometry(QByteArray geometry);
     void appendResource(QString resource);
     void setNick(QString newnick);
+    void setIcon(const QString &path);
 
 private:
     Ui::ChatWidget *ui;

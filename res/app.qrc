@@ -44,5 +44,7 @@
         <file>common/corner_logo.png</file>
         <file>menu/user-silhouette.png</file>
         <file>menu/user-black.png</file>
+        <file>common/users.png</file>
+        <file>common/chat.png</file>
     </qresource>
 </RCC>

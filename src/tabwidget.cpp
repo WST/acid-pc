@@ -15,3 +15,4 @@ TabWidget::Type TabWidget::getType() {
 void TabWidget::setType(TabWidget::Type newtype) {
     type = newtype;
 }
+

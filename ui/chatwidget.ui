@@ -27,6 +27,16 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
+          <widget class="QLabel" name="icon">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../res/app.qrc">:/acid_16.png</pixmap>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QLineEdit" name="jid">
            <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>

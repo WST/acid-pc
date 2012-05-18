@@ -21,6 +21,7 @@ public:
     void insertMessage(QXmppMessage &message);
     void setOnline(bool is_online);
     void activate();
+    void setIcon(const QString &path);
 
 signals:
     void aboutToSend(QString to, QString message);
