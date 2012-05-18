@@ -6,6 +6,7 @@
 #include "messenger.h"
 #include "functions.h"
 #include "confirmationwindow.h"
+#include "newcontactwindow.h"
 #include "joinroomwindow.h"
 #include "contact_list/qxmpp_bridge.h"
 #include <version.h>
@@ -95,6 +96,10 @@ void Messenger::loadSettings() {
 	if(settings->contains("login/domain")) login->setDomain(settings->value("login/domain").toString());
 	if(settings->contains("login/auto")) login->setAutoLogin(settings->value("login/auto").toBool());
 
+    if(settings->contains("settings/stun_server")) {
+        call_manager->setStunServer(QHostAddress(settings->value("settings/stun_server", STUN_ADDRESS).toString()));
+    }
+
 	if(settings->contains("settings/roster_opacity")) setWindowOpacity(settings->value("settings/roster_opacity").toFloat() / 100);
 	roster_widget.setAnimated(settings->value("settings/animate_roster", true).toBool());
 	if(settings->value("settings/roster_on_the_top", false).toBool()) setWindowFlags(windowFlags() | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
@@ -182,6 +187,7 @@ void Messenger::createMenus() {
 	connect(action_settings, SIGNAL(triggered()), this, SLOT(manageSettings()));
 	connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
 	connect(action_join_new_room, SIGNAL(triggered()), this, SLOT(joinNewRoom()));
+    connect(action_new_contact, SIGNAL(triggered()), this, SLOT(showNewContactWindow()));
 
 	// Меню статуса
 	connect(action_status_available, SIGNAL(triggered()), this, SLOT(setOnlineStatus()));
@@ -313,6 +319,13 @@ void Messenger::iconClicked(QSystemTrayIcon::ActivationReason reason) {
 	if(reason == QSystemTrayIcon::Trigger) {
 		client->isConnected() ? this->setVisible(!this->isVisible()) : login->setVisible(!login->isVisible());
 	}
+}
+
+void Messenger::showNewContactWindow() {
+    NewContactWindow *window = new NewContactWindow(this);
+    connect(window, SIGNAL(newContactAdditionRequested(const QString &, const QString &)), this, SLOT(addNewContact(const QString &, const QString &)));
+    // NOTE: объекты window не удаляются, а как правильно удалять?
+    window->show();
 }
 
 void Messenger::createNewMessage() {
