@@ -75,3 +75,7 @@ void LoginForm::emitFinished() {
 LoginForm::~LoginForm() {
 	delete ui;
 }
+
+void LoginForm::on_settings_button_clicked() {
+    emit showSettingsRequested();
+}

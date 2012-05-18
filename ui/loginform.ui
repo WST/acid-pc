@@ -79,6 +79,9 @@
        <property name="contextMenuPolicy">
         <enum>Qt::NoContextMenu</enum>
        </property>
+       <property name="toolTip">
+        <string>XMPP server to use</string>
+       </property>
        <item>
         <property name="text">
          <string notr="true">jsmart.web.id</string>
@@ -123,6 +126,9 @@
      </item>
      <item row="3" column="1">
       <widget class="QCheckBox" name="SavePassword_checkBox">
+       <property name="toolTip">
+        <string>Check this box to save the password</string>
+       </property>
        <property name="text">
         <string>Save password?</string>
        </property>
@@ -133,6 +139,9 @@
      </item>
      <item row="4" column="1">
       <widget class="QCheckBox" name="LogInAutomatically_checkBox">
+       <property name="toolTip">
+        <string>Check this box if you would like to sign in automatically next time</string>
+       </property>
        <property name="text">
         <string>Log in automatically?</string>
        </property>
@@ -170,6 +179,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="SignIn_pushButton">
+       <property name="toolTip">
+        <string>Sign in or register</string>
+       </property>
        <property name="text">
         <string>Sign in</string>
        </property>
@@ -181,6 +193,16 @@
        </property>
        <property name="default">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="settings_button">
+       <property name="toolTip">
+        <string>Edit application settings</string>
+       </property>
+       <property name="text">
+        <string>Settings</string>
        </property>
       </widget>
      </item>

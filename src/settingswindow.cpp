@@ -28,6 +28,7 @@ void SettingsWindow::on_button_box_accepted() {
 	// Второй таб
 	settings->setValue("settings/keepalive_interval", ui->keepalive_interval->value());
 	settings->setValue("settings/keepalive_timeout", ui->keepalive_timeout->value());
+    settings->setValue("settings/stun_server", ui->stun_server->text());
 
 	// Третий таб
 	settings->setValue("settings/roster_opacity", ui->roster_opacity->value());
@@ -53,6 +54,7 @@ void SettingsWindow::loadCurrentSettings() {
 	// Второй таб
 	ui->keepalive_interval->setValue(settings->value("settings/keepalive_interval", 60).toInt());
 	ui->keepalive_timeout->setValue(settings->value("settings/keepalive_timeout", 30).toInt());
+    ui->stun_server->setText(settings->value("settings/stun_server", STUN_ADDRESS).toString());
 
 	// Третий таб
 	ui->roster_opacity->setValue(settings->value("settings/roster_opacity", 100).toInt());

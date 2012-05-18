@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>387</width>
-    <height>354</height>
+    <height>394</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -83,6 +83,22 @@
              </widget>
             </item>
            </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_8">
+         <property name="title">
+          <string>Servers</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_13">
+          <item>
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>TODO: ability to add servers</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

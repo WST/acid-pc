@@ -34,11 +34,13 @@ private:
 
 signals:
     void finished();
+    void showSettingsRequested();
 
 private slots:
     void validateUsername(QString username);
     void validatePassword(QString password);
     void refreshButton();
+    void on_settings_button_clicked();
 };
 
 #endif // LOGINFORM_H
