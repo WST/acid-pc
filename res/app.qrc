@@ -42,5 +42,7 @@
         <file>notifications/muc.png</file>
         <file>menu/rss.png</file>
         <file>common/corner_logo.png</file>
+        <file>menu/user-silhouette.png</file>
+        <file>menu/user-black.png</file>
     </qresource>
 </RCC>

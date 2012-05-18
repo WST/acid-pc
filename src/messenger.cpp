@@ -152,6 +152,9 @@ void Messenger::createMenus() {
 			QAction *action_join_new_room = join_room_menu->addAction(QIcon(":/menu/users.png"), "Join new room");
 			QMenu *action_room_bookmarks = join_room_menu->addMenu(QIcon(":/menu/bookmarks.png"), "Bookmarks");
 		QAction *action_new_contact = im_menu->addAction(QIcon(":/menu/plus.png"), "Add contact");
+        QMenu *roster_menu = im_menu->addMenu(QIcon(":/menu/user-black.png"), "Roster");
+            QAction *action_hide_offline_contacts = roster_menu->addAction(QIcon(":/menu/user-silhouette.png"), "Hide offline items");
+            action_hide_offline_contacts->setCheckable(true);
 		QMenu *connect_service_menu = im_menu->addMenu(QIcon(":/menu/plug.png"), "Connect service");
 			QAction *action_connect_yahoo = connect_service_menu->addAction(QIcon(":/menu/yahoo.png"), "Yahoo! Messenger");
 			QAction *action_connect_msn = connect_service_menu->addAction(QIcon(":/menu/msn.png"), "MSN (Windows Live)");

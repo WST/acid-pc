@@ -37,7 +37,7 @@ void JoinRoomWindow::on_buttonBox_accepted() {
     if(ui->room_link->text().isEmpty()) {
         room_address = ui->conference_name->text() + "@" + ui->conference_server->text();
     } else {
-        room_address = ui->room_link->text();
+        room_address = ui->room_link->text().replace("xmpp:", "").replace("?join", "");
     }
 
     emit joinRoomRequested(room_address);
