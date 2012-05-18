@@ -571,5 +571,5 @@ void Messenger::endCall() {
 }
 
 void Messenger::openOfficialSite() {
-	QDesktopServices::openUrl(QUrl("http://acid-im.net/"));
+    QDesktopServices::openUrl(QUrl(APP_SITE));
 }
