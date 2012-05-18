@@ -34,7 +34,7 @@ TreeView::~TreeView() {
 		delete action_call;
 }
 
-const QString & TreeView::getNickByJid(const QString &jid) {
+const QString TreeView::getNickByJid(const QString &jid) {
     // NOTE: сюда может прийти как bare, так и full JID
     return QString("fooo");
 }

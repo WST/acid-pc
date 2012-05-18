@@ -13,7 +13,7 @@ namespace CL {
 		TreeView(QWidget* parent = 0);
 		~TreeView();
 		bool event(QEvent* e);
-        const QString &getNickByJid(const QString &jid);
+        const QString getNickByJid(const QString &jid);
 
 	public slots:
 		void mousePressed(const QModelIndex& index);
