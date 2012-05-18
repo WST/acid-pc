@@ -5,6 +5,8 @@
 
 #include "messenger.h"
 
+#include <qxmpp/QXmppVCardIq.h>
+
 namespace Ui {
 	class VcardWindow;
 }

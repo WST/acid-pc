@@ -11,6 +11,9 @@
 #include "contact_list/qxmpp_bridge.h"
 #include <version.h>
 
+// Qt
+#include <QHostAddress>
+
 Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this), roster_model(this), messages() {
 	settings = new QSettings(APP_COMPANY, APP_NAME, this);
 	client_settings = new QXmppConfiguration();
