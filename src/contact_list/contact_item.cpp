@@ -98,11 +98,15 @@ QString ContactItem::getText() const {
 }
 
 void ContactItem::setResourceStatus(const QString &resource, const Status &_value) {
-	if (!_value.type == Unchanged) {
+	LDEBUG("setting resource status for %s to %d", qPrintable(resource), (int)_value.type);
+	if (_value.type != Unchanged) {
 		Status *rcptr = m_resources.value(resource);
-		if (!rcptr && _value.type != Offline)
+		if (!rcptr && _value.type != Offline) {
+			LDEBUG("this resource did not exist, and the status is not Offline. Updating");
 			m_resources[resource] = rcptr = new Status();
+		}
 		if (_value.type == Offline) {
+			LDEBUG("removing existing resource");
 			if (rcptr) {
 				delete rcptr;
 				m_resources.remove(resource);
@@ -117,13 +121,15 @@ void ContactItem::setResourceStatus(const QString &resource, const Status &_valu
 }
 
 void ContactItem::changeStatus() {
-	foreach (GroupItem *group, m_groups)
+	foreach (GroupItem *group, m_groups) {
 		group->statusChanged(this);
+	}
 }
 
 void ContactItem::updateIcon() {
 	QString new_icon_name = isOnline() ? statusString[getResource().second->type] :
 										 statusString[Offline];
+	LDEBUG("%s -> %s", qPrintable(icon_name), qPrintable(new_icon_name));
 	if (icon_name != new_icon_name) {
 		icon_name = new_icon_name;
 		m_icon = QIcon(":/trayicon/"+icon_name+"-16px.png");

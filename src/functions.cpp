@@ -1,5 +1,8 @@
 #include "functions.h"
 
+time_t log_timestamp;
+int log_level = 0;
+
 QStringList parseJid(QString jid) {
 	QRegExp format = QRegExp("^(([^/@]+)@([^/@]+))(/([^/@]+))?$");
 	return format.exactMatch(jid) ?  format.capturedTexts() : QStringList();

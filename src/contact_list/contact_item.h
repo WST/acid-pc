@@ -50,7 +50,7 @@ namespace CL {
 				Note: only resources of the same jid should be compared with this operator (because of priority)
 				*/
 			bool operator<(const Status &_other) const {
-														return priority < _other.priority || (priority == _other.priority && type < _other.type);
+				return priority < _other.priority || (priority == _other.priority && type < _other.type);
 			}
 		};
 

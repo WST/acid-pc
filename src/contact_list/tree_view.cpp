@@ -44,24 +44,24 @@ bool TreeView::event(QEvent* e) {
 }
 
 void TreeView::mousePressed(const QModelIndex& index) {
-		if(QApplication::mouseButtons() == Qt::RightButton) {
-				QString bareJid = index.data().toString();
-				QMenu menu(this);
-	menu.addAction(action_chat);
-	menu.setDefaultAction(action_chat);
-	menu.addSeparator();
-	menu.addAction(action_call);
-	menu.addAction(action_send_file);
-	menu.addSeparator();
-	menu.addAction(action_profile);
-	menu.addAction(action_remove);
-				menu.exec(QCursor::pos());
-		}
+	if(QApplication::mouseButtons() == Qt::RightButton) {
+		QString bareJid = index.data().toString();
+		QMenu menu(this);
+		menu.addAction(action_chat);
+		menu.setDefaultAction(action_chat);
+		menu.addSeparator();
+		menu.addAction(action_call);
+		menu.addAction(action_send_file);
+		menu.addSeparator();
+		menu.addAction(action_profile);
+		menu.addAction(action_remove);
+		menu.exec(QCursor::pos());
+	}
 }
 
 void TreeView::doubleClicked(const QModelIndex& index) {
 	Q_UNUSED(index);
-		action_chat->trigger();
+	action_chat->trigger();
 }
 
 void TreeView::clicked(const QModelIndex& index) {

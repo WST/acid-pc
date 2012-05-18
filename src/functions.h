@@ -12,8 +12,29 @@ void splitJid(const QString &jid, QString *bare, QString *resource = NULL);
 
 Q_DECLARE_METATYPE(const void *)
 
-template<class T> struct Loop { Loop<T*> operator->(); };
-
-#define FUCKUP(x) Loop<int> i, j = i->x;
+///////////////////////////////////////////////////////////////////////////////////////////////
+// Logging
+///////////////////////////////////////////////////////////////////////////////////////////////
+extern time_t log_timestamp; 
+extern int log_level; 
+ 
+#define LOG_DEBUG 0 
+#define LOG_INFO  1 
+#define LOG_WARN  2 
+#define LOG_ERROR 3 
+ 
+#define LOG(level, format, ...) \
+    if (level >= log_level) { \
+        time(&log_timestamp); \
+        fprintf(stderr, "%d> %s[%s %s] %s:%s():%d: " format "\n", \
+                level, ctime(&log_timestamp), \
+                __DATE__, __TIME__, __FILE__, __func__, __LINE__, ## __VA_ARGS__); \
+    }
+ 
+#define LDEBUG(format, ...) LOG(LOG_DEBUG, format, ## __VA_ARGS__) 
+#define LINFO(format, ...)  LOG(LOG_INFO,  format, ## __VA_ARGS__) 
+#define LWARN(format, ...)  LOG(LOG_WARN,  format, ## __VA_ARGS__) 
+#define LERROR(format, ...) LOG(LOG_ERROR, format, ## __VA_ARGS__) 
+#define LFATAL(format, ...) { LOG(666, format, ## __VA_ARGS__); exit(1); } 
 
 #endif // FUNCTIONS_H

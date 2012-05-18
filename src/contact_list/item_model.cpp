@@ -95,9 +95,12 @@ void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value)
 	ContactItem *item = getContact(jid);
 
 	if (!item) {
+		LDEBUG("got presence from the not-in-roster item");
 		// Status from not-in-roster
-		if (throttleNotInRoster)
+		if (throttleNotInRoster) {
+			LDEBUG("configured for throttling them");
 			return;
+		}
 		QSet<QString> notInRosterGroups;
 		notInRosterGroups << notInRosterGroupName;
 		item = updateEntry(jid, QString(), notInRosterGroups);

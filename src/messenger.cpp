@@ -495,10 +495,18 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 		return;
 	}*/
 
+	LDEBUG("got presence from %s/%s", qPrintable(bare_jid), qPrintable(resource.data()));
+
 	const QMap<QString, QXmppPresence> &presences = client->rosterManager().getAllPresencesForBareJid(bare_jid);
 	CL::ContactItem::Status status;
-	if (presences.contains(resource))
+
+	if (presences.contains(resource)) {
 		status = CL::QXmppBridge::qxmpp2cl(presences[resource]);
+		LDEBUG("presences map DOES contain this presence, and it translates into %d", (int)status.type);
+	} else {
+		LDEBUG("presence map does NOT contain this presence");
+	}
+	roster_model.throttleNotInRoster = false;
 	roster_model.setStatus(QString("%1" JID_RESOURCE_SEPARATOR "%2").arg(bare_jid).arg(resource), status);
 }
 
