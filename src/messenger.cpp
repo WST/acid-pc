@@ -191,6 +191,7 @@ void Messenger::createMenus() {
 	connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
 	connect(action_join_new_room, SIGNAL(triggered()), this, SLOT(joinNewRoom()));
     connect(action_new_contact, SIGNAL(triggered()), this, SLOT(showNewContactWindow()));
+    connect(action_hide_offline_contacts, SIGNAL(triggered(bool)), & roster_widget, SLOT(hideOfflineContacts(bool)));
 
 	// Меню статуса
 	connect(action_status_available, SIGNAL(triggered()), this, SLOT(setOnlineStatus()));
