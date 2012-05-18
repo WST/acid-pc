@@ -450,7 +450,7 @@ void Messenger::confirmedMessage(const QString &message_from) {
     QMap<QString, QXmppMessage> list = messages[message_from];
 
     for(QMap<QString, QXmppMessage>::iterator i = list.begin(); i != list.end(); ++ i) {
-        chat->displayMessage(i.value(), roster_widget.getNickByJid(message.from()));
+        chat->displayMessage(i.value(), roster_widget.getNickByJid(message_from));
     }
 
     messages.erase(messages.find(message_from));
