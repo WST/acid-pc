@@ -51,7 +51,7 @@ TabWidget *ChatWindow::getWidgetByIndex(int index) {
 TabWidget *ChatWindow::getWidgetByJid(QString jid) {
 	TabWidget *widget;
 	for(int i = 0; i < ui->tabWidget->count(); i ++) {
-		if((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid) {
+        if((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid) {
 			return widget;
 		}
 	}

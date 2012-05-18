@@ -427,7 +427,9 @@ void Messenger::gotMessage(QXmppMessage message) {
 			chat->displayMUCMessage(message);
 		} break;
 		case QXmppMessage::Composing: break;
+        case QXmppMessage::Error: break;
 		case QXmppMessage::Chat:
+        case QXmppMessage::Normal:
 		default:
 			if(message.body().isEmpty()) {
 				return;
@@ -442,7 +444,12 @@ void Messenger::gotMessage(QXmppMessage message) {
                 messages[message.from()][message.id()] = message;
                 connect(ConfirmationWindow::newMessage(& message, settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
 			} else {
-                chat->displayMessage(message, roster_widget.getNickByJid(message.from()));
+                // Здесь может оказаться, что это сообщение от комнаты (например капча)
+                if(rooms.contains(message.from())) {
+                    // TODO
+                } else {
+                    chat->displayMessage(message, roster_widget.getNickByJid(message.from()));
+                }
 			}
 		break;
 	}
