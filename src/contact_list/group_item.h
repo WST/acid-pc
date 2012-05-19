@@ -9,6 +9,7 @@ namespace CL {
 	class ItemModel;
 
 	class GroupItem: public Item {
+		Q_OBJECT
 	public:
 		explicit GroupItem(ItemModel *_owner, const QString &_groupName = ""):
 			owner(_owner), m_groupName(_groupName), online_count(0) {}

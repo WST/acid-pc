@@ -161,3 +161,7 @@ QString ContactItem::getSubText() const {
 	}
 	return baseText;
 }
+
+void ContactItem::setBlinking(bool blinking) const {
+	Q_UNUSED(blinking)
+}

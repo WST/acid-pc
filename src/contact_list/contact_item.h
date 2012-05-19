@@ -16,6 +16,8 @@ namespace CL {
 		There is only one instance of item per JID
 		*/
 	class ContactItem: public Item {
+		Q_OBJECT
+
 	public:
 		explicit ContactItem(ItemModel *_owner, const QString &_jid);
 
@@ -130,7 +132,7 @@ namespace CL {
 		/*!
 			Sets the notification status for a roster item
 			*/
-		virtual void setBlinking(bool blinking) const {};
+		void setBlinking(bool blinking) const;
 
 	private:
 		ItemModel *owner;
