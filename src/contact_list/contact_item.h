@@ -79,7 +79,7 @@ namespace CL {
 			*/
 		void setResourceStatus(const QString &resource, const Status &_value);
 
-		const QString &getNick() const { return m_nick; }
+		const QString &getNick() const { return m_nick.isEmpty() ? m_bareJid : m_nick; }
 		void setNick(const QString &_value);
 
 		/*!

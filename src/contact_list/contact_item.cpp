@@ -48,7 +48,7 @@ bool ContactItem::operator<(const ContactItem &_other) const {
 			}
 		}
 
-		// Compare nicknames
+		// Compare displayed text
 		return getText().compare(_other.getText(), Qt::CaseInsensitive) > 0;
 	} else {
 		// Compare 'online' to 'offline'
@@ -93,9 +93,6 @@ bool ContactItem::removeFromGroup(GroupItem *group) {
 
 QString ContactItem::getText() const {
 	QString base_text = getNick();
-	if (base_text.isEmpty()) {
-		base_text = getBareJid();
-	}
 	return m_resources.size() > 1 ? (base_text + " (%1)").arg(m_resources.size()) : base_text;
 }
 
