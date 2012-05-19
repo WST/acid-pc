@@ -12,6 +12,7 @@
 #include "chatwidget.h"
 #include "mucwidget.h"
 #include "messenger.h"
+#include "contact_list/contact_item.h"
 
 namespace Ui {
 	class ChatWindow;
@@ -26,10 +27,10 @@ class ChatWindow: public QDialog
 public:
     explicit ChatWindow(Messenger *parent);
     ~ChatWindow();
-	void displayMessage(QXmppMessage &message, QString tab_name);
+    void displayMessage(QXmppMessage &message, QString tab_name, CL::ContactItem *roster_item = 0);
     void displayMUCMessage(QXmppMessage &message);
     bool adaTabForJid(QString fulljid);
-	TabWidget *openTab(QString fulljid, QString tab_name, TabWidget::Type type);
+    TabWidget *openTab(QString fulljid, QString tab_name, TabWidget::Type type, CL::ContactItem *roster_item = 0);
     void reloadGeometry(QSettings *settings);
     TabWidget *getWidgetByJid(QString jid);
     TabWidget *getWidgetByIndex(int index);

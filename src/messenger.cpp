@@ -434,22 +434,25 @@ void Messenger::gotMessage(QXmppMessage message) {
 			if(message.body().isEmpty()) {
 				return;
 			}
+            // Если контакт есть в ростере, получим указатель на него (иначе ноль)
+            CL::ContactItem *roster_item = roster_model.getContact(message.from());
+            QString nick = roster_item ? roster_item->getNick() : parseJid(message.from())[2];
 			if(settings->value("settings/automatically_open_new_tabs", false).toBool()) {
                 // В настройках включено автоматическое отображение новых сообщений
-                chat->displayMessage(message, roster_widget.getNickByJid(message.from()));
+                chat->displayMessage(message, nick, roster_model.getContact(message.from()));
 				return;
 			}
 			if(!chat->adaTabForJid(message.from())) {
                 // Сохраним текст сообщения
                 messages[message.from()][message.id()] = message;
-                roster_widget.setBlinking(message.from(), true);
+                roster_item->setBlinking(true);
                 connect(ConfirmationWindow::newMessage(& message, settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
 			} else {
                 // Здесь может оказаться, что это сообщение от комнаты (например капча)
                 if(rooms.contains(message.from())) {
                     // TODO
                 } else {
-                    chat->displayMessage(message, roster_widget.getNickByJid(message.from()));
+                    chat->displayMessage(message, nick, roster_model.getContact(message.from()));
                 }
 			}
 		break;
@@ -462,14 +465,18 @@ void Messenger::confirmedMessage(const QString &message_from) {
 		return;
 	}
 
+    // Если контакт есть в ростере, получим указатель на него (иначе ноль)
+    CL::ContactItem *roster_item = roster_model.getContact(message_from);
+    QString nick = roster_item ? roster_item->getNick() : parseJid(message_from)[2];
+
     QMap<QString, QXmppMessage> list = messages[message_from];
 
     for(QMap<QString, QXmppMessage>::iterator i = list.begin(); i != list.end(); ++ i) {
-        chat->displayMessage(i.value(), roster_widget.getNickByJid(message_from));
+        chat->displayMessage(i.value(), nick, roster_model.getContact(message_from));
     }
 
     messages.erase(messages.find(message_from));
-    roster_widget.setBlinking(message_from, false);
+    roster_item->setBlinking(false);
 }
 
 void Messenger::joinNewRoom() {
@@ -529,7 +536,7 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 }
 
 void Messenger::openChat(const QString &full_jid, const QString &nick) {
-	chat->openTab(full_jid, nick, TabWidget::Chat);
+    chat->openTab(full_jid, nick, TabWidget::Chat, roster_model.getContact(full_jid));
 }
 
 void Messenger::processJoinRequest(const QString &room_jid) {

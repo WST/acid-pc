@@ -9,6 +9,7 @@
 
 // ACId
 #include "tabwidget.h"
+#include "contact_list/contact_item.h"
 
 namespace Ui {
     class ChatWidget;
@@ -19,7 +20,7 @@ class ChatWidget: public TabWidget
     Q_OBJECT
 
 public:
-    explicit ChatWidget(QString with, QWidget *parent = 0);
+    explicit ChatWidget(QString with, CL::ContactItem *roster_item = 0, QWidget *parent = 0);
     ~ChatWidget();
     void insertMessage(QXmppMessage &message);
     void setOnline(bool is_online);
@@ -32,6 +33,7 @@ public:
 private:
     Ui::ChatWidget *ui;
     QString nick;
+    CL::ContactItem *m_item;
 
 signals:
     void aboutToSend(QString to, QString message);

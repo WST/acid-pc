@@ -12,7 +12,7 @@ ChatWindow::~ChatWindow() {
 	delete ui;
 }
 
-void ChatWindow::displayMessage(QXmppMessage &message, QString tab_name) {
+void ChatWindow::displayMessage(QXmppMessage &message, QString tab_name, CL::ContactItem *roster_item) {
 	if(!isVisible()) {
 		show();
 	}
@@ -29,7 +29,7 @@ void ChatWindow::displayMessage(QXmppMessage &message, QString tab_name) {
 		((ChatWidget *) widget)->appendResource(jid[5]);
 		return displayMessage(message, tab_name);
 	} else {
-        ChatWidget *new_widget = (ChatWidget *) openTab(message.from(), tab_name, TabWidget::Chat);
+        ChatWidget *new_widget = (ChatWidget *) openTab(message.from(), tab_name, TabWidget::Chat, roster_item);
         new_widget->setNick(tab_name);
         new_widget->insertMessage(message);
         return;
@@ -62,7 +62,7 @@ bool ChatWindow::adaTabForJid(QString jid) {
 	return (bool) getWidgetByJid(jid);
 }
 
-TabWidget *ChatWindow::openTab(QString fulljid, QString tab_name, TabWidget::Type type) {
+TabWidget *ChatWindow::openTab(QString fulljid, QString tab_name, TabWidget::Type type, CL::ContactItem *roster_item) {
 	if(!isVisible()) {
 		show();
 	}
@@ -75,7 +75,7 @@ TabWidget *ChatWindow::openTab(QString fulljid, QString tab_name, TabWidget::Typ
 
 	switch(type) {
 		case TabWidget::Chat: {
-			ChatWidget *widget = new ChatWidget(fulljid);
+            ChatWidget *widget = new ChatWidget(fulljid, roster_item);
 			connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
 			connect(widget, SIGNAL(chatGeometryChanged(QByteArray)), this, SLOT(chatGeometryChanged(QByteArray)));
             ui->tabWidget->addTab(widget, QIcon(":/common/chat.png"), tab_name); // TODO в соответствии со статусом — значок

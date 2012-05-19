@@ -2,10 +2,11 @@
 #include "ui_chatwidget.h"
 #include "version.h"
 
-ChatWidget::ChatWidget(QString with, QWidget *parent): nick(""), TabWidget(with, parent), ui(new Ui::ChatWidget) {
+ChatWidget::ChatWidget(QString with, CL::ContactItem *roster_item, QWidget *parent): nick(""), TabWidget(with, parent), ui(new Ui::ChatWidget) {
     ui->setupUi(this);
     ui->jid->setText(with);
     TabWidget::setType(TabWidget::Chat);
+    m_item = roster_item;
 }
 
 ChatWidget::~ChatWidget() {
