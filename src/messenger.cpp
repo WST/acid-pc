@@ -528,13 +528,40 @@ void Messenger::processJoinRequest(const QString &room_jid) {
     return joinRoom(room_jid, settings->value("settings/muc_nickname", login->username()).toString());
 }
 
+// Подготовка входа в конференцию
 void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
 	QStringList jid = parseJid(room_jid);
 	QXmppMucRoom *room = muc_manager->addRoom(room_jid);
 	room->setNickName(nick);
 	room->join();
 	rooms[room_jid] = room;
-	chat->openTab(room_jid, jid[2], TabWidget::MUC);
+
+    // Мы зашли в комнату и получили объект QXmppMucRoom. Этот объект является источником всех сигналов, связанных с комнатой.
+
+    connect(room, SIGNAL(joined()), this, SLOT(joinedRoom())); // а как узнать, в какую комнату вошёл? Получить бы указатель на того, кто отправил сигнал
+    connect(room, SIGNAL(left()), this, SLOT(leftRoom()));
+    connect(room, SIGNAL(kicked(QString,QString)), this, SLOT(kickedFromRoom(QString, QString)));
+}
+
+// Эта функция вызывается, когда вход в комнату не выполнен или выполнен выход из комнаты
+void Messenger::leftRoom() {
+    QXmppMucRoom *room = (QXmppMucRoom *) sender();
+    rooms.erase(rooms.find(room->jid()));
+    tray->debugMessage("Left a room");
+}
+
+// Эта функция вызывается, когда нас послали нахуй из комнаты
+void Messenger::kickedFromRoom() {
+    QXmppMucRoom *room = (QXmppMucRoom *) sender();
+    rooms.erase(rooms.find(room->jid()));
+    tray->debugMessage("Kicked from a room");
+}
+
+// Эта функция вызывается, когда вход в комнату выполнен успешно
+void Messenger::joinedRoom() {
+    QXmppMucRoom *room = (QXmppMucRoom *) sender();
+    QStringList room_jid = parseJid(room->jid());
+    chat->openTab(room->jid(), room_jid[2], TabWidget::MUC);
 }
 
 void Messenger::leaveRoom(const QString &room_jid) {
