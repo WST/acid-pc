@@ -11,6 +11,7 @@
 #include <qxmpp/QXmppMucManager.h>
 #include <qxmpp/QXmppVCardManager.h>
 #include <qxmpp/QXmppVersionManager.h>
+#include <qxmpp/QXmppBookmarkManager.h>
 #include <qxmpp/QXmppDiscoveryManager.h>
 #include <qxmpp/QXmppMessage.h>
 
@@ -53,6 +54,7 @@ class Messenger: public QMainWindow {
 		QXmppVersionManager *version_manager;
 		QXmppVCardManager *vcard_manager;
 		QXmppDiscoveryManager *disco_manager;
+        QXmppBookmarkManager *bookmark_manager;
 	
 		CL::TreeView roster_widget; // виджет ростера
 		CL::ItemModel roster_model; // модель элемента ростера

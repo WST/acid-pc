@@ -26,12 +26,14 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 	vcard_manager = new QXmppVCardManager();
 	version_manager = new QXmppVersionManager();
 	disco_manager = new QXmppDiscoveryManager();
+    bookmark_manager = new QXmppBookmarkManager();
 	client->addExtension(call_manager);
 	client->addExtension(muc_manager);
 	client->addExtension(transfer_manager);
 	client->addExtension(vcard_manager);
 	client->addExtension(version_manager);
 	client->addExtension(disco_manager);
+    client->addExtension(bookmark_manager);
 
 	version_manager->setClientName(APP_NAME);
 	version_manager->setClientVersion(APP_VERSION);
