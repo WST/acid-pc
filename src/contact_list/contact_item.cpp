@@ -41,10 +41,11 @@ bool ContactItem::operator<(const ContactItem &_other) const {
 			// Both are online, compare statuses
 			const Status *resource_status = getResource().second,
 					*other_resource_status = _other.getResource().second;
-			if (resource_status->type < other_resource_status->type)
+			if (resource_status->type < other_resource_status->type) {
 				return true;
-			else if (other_resource_status->type < resource_status->type)
+			} else if (other_resource_status->type < resource_status->type) {
 				return false;
+			}
 		}
 
 		// Compare nicknames
@@ -65,35 +66,36 @@ bool ContactItem::addToGroup(GroupItem *group) {
 
 bool ContactItem::removeFromGroup(const QString &group_name) {
 	GroupItem *found = NULL;
-	foreach (GroupItem *item, m_groups)
+	foreach (GroupItem *item, m_groups) {
 		if (item->getGroupName() == group_name) {
 			found = item;
 			break;
 		}
-	if (found)
-		return removeFromGroup(found);
-	else
-		return false;
+	}
+	return found && removeFromGroup(found);
 }
 
 void ContactItem::setOffline() {
-	foreach (Status *status, m_resources)
+	foreach (Status *status, m_resources) {
 		delete status;
+	}
 	m_resources.clear();
 	changeStatus();
 	updateIcon();
 }
 
 bool ContactItem::removeFromGroup(GroupItem *group) {
-	if (m_groups.removeOne(group))
+	if (m_groups.removeOne(group)) {
 		return group->removeContact(this);
+	}
 	return false;
 }
 
 QString ContactItem::getText() const {
 	QString base_text = getNick();
-	if (base_text.isEmpty())
+	if (base_text.isEmpty()) {
 		base_text = getBareJid();
+	}
 	return m_resources.size() > 1 ? (base_text + " (%1)").arg(m_resources.size()) : base_text;
 }
 
@@ -145,15 +147,20 @@ void ContactItem::setNick(const QString &_value) {
 QString ContactItem::getSubText() const {
 	const ResourceStatus &rs = getResource();
 	QString baseText;
-	if (rs.second)
-		baseText = QString("<span color='%1'>%2</span>\n").arg(statusColor[rs.second->type]).arg(rs.second->text);
-	else
+	if (rs.second) {
+		baseText = QString("<span color='%1'>%2</span>\n").
+			arg(statusColor[rs.second->type]).
+			arg(rs.second->text);
+	} else {
 		baseText = QString("<span color='grey'>offline</span>");
-	for (QMap<QString, Status *>::const_iterator i = m_resources.constBegin(); i != m_resources.constEnd(); ++i)
+	}
+	for (QMap<QString, Status *>::const_iterator i = m_resources.constBegin();
+			i != m_resources.constEnd(); ++i) {
 		baseText += QString("%1 <img src=':/trayicon/%2-16px.png' /> <span color='%3'>%4</span>\n").
 				arg(i.key()).
 				arg(statusString[i.value()->type]).
 				arg(statusColor[i.value()->type]).
 				arg(i.value()->text);
+	}
 	return baseText;
 }

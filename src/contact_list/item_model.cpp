@@ -13,18 +13,21 @@ int ItemModel::columnCount(const QModelIndex &parent) const {
 }
 
 int ItemModel::rowCount(const QModelIndex &parent) const {
-	if (parent.isValid())
-		if ((parent.internalId() & 0xFFFF) == 0xFFFF)
+	if (parent.isValid()) {
+		if ((parent.internalId() & 0xFFFF) == 0xFFFF) {
 			return m_groups.at(parent.internalId() >> 16)->childCount();
-		else
+		} else {
 			return 0;
-	else
+		}
+	} else {
 		return m_groups.size();
+	}
 }
 
 QVariant ItemModel::data(const QModelIndex &index, int role) const {
-	if (!index.isValid())
+	if (!index.isValid()) {
 		return QVariant();
+	}
 
 	const GroupItem *group = m_groups.at(index.internalId() >> 16);
 	int childID = index.internalId() & 0xFFFF;
@@ -46,8 +49,9 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const {
 }
 
 Qt::ItemFlags ItemModel::flags(const QModelIndex &index) const {
-	if (!index.isValid())
+	if (!index.isValid()) {
 		return 0;
+	}
 
 	return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
@@ -129,12 +133,14 @@ ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSe
 		else
 			groups.remove(current_groups[i]->getGroupName());
 
-	foreach (const QString &group, groups)
+	foreach (const QString &group, groups) {
 		item->addToGroup(getGroup(group));
+	}
 
 	// Item is out of all groups
-	if (current_groups.empty())
+	if (current_groups.empty()) {
 		item->addToGroup(getGroup(noGroupName));
+	}
 
 	return item;
 }
@@ -147,9 +153,11 @@ GroupItem *ItemModel::getGroup(const QString &name) {
 	// Create a new group
 	GroupItem *new_item = new GroupItem(this, name);
 	int i;
-	for (i = 0; i < m_groups.size(); ++i)
-		if (m_groups[i]->getGroupName().compare(name, Qt::CaseInsensitive) > 0)
+	for (i = 0; i < m_groups.size(); ++i) {
+		if (m_groups[i]->getGroupName().compare(name, Qt::CaseInsensitive) > 0) {
 			break;
+		}
+	}
 
 	beginInsertRows(QModelIndex(), i, i);
 	m_groups.insert(i, new_item);

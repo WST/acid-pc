@@ -127,6 +127,11 @@ namespace CL {
 			*/
 		virtual const QIcon &getIcon() const { return m_icon; }
 
+		/*!
+			Sets the notification status for a roster item
+			*/
+		virtual void setNotify(bool blinking) const {};
+
 	private:
 		ItemModel *owner;
 		QMap<QString, Status *> m_resources;

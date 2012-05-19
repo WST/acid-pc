@@ -5,10 +5,7 @@
 using namespace CL;
 
 QSize ItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const {
-	if (index.parent().isValid())
-		return QSize(44, 20);
-	else
-		return QSize(44, 16);
+	return index.parent().isValid() ? QSize(44, 20) : QSize(44, 16);
 }
 
 void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const {
@@ -22,14 +19,16 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
 	QRect rect = option.rect;
 
 	if (option.state & QStyle::State_Selected) {
-		if (index.parent().isValid())
+		if (index.parent().isValid()) {
 			rect.setLeft(0);
+		}
 		painter->fillRect(rect, selected_bg);
 	}
 
 	rect = option.rect;
-	if (index.parent().isValid())
+	if (index.parent().isValid()) {
 		rect.setLeft(0);
+	}
 
 	rect.setWidth(pixmap.width());
 	rect.setHeight(pixmap.height());
@@ -39,8 +38,9 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
 
 	rect = option.rect;
 
-	if (index.parent().isValid())
+	if (index.parent().isValid()) {
 		rect.setLeft(10);
+	}
 
 	rect.setLeft(rect.x() + pixmap.width() + 3);
 	rect.moveTop(rect.y() + 3);

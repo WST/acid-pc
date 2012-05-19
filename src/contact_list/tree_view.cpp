@@ -34,15 +34,6 @@ TreeView::~TreeView() {
 		delete action_call;
 }
 
-void TreeView::setBlinking(const QString &jid, bool blinking) {
-    // TODO
-}
-
-const QString TreeView::getNickByJid(const QString &jid) {
-    // NOTE: сюда может прийти как bare, так и full JID
-    return QString("fooo");
-}
-
 bool TreeView::event(QEvent* e) {
 	return QTreeView::event(e);
 }
@@ -100,30 +91,32 @@ void TreeView::showChatDialog_helper() {
 void TreeView::showProfile_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
-		if(!bareJid.isEmpty())
+		if (!bareJid.isEmpty()) {
 			emit showProfile(bareJid);
+		}
 	}
 }
 
 void TreeView::keyPressEvent(QKeyEvent* event1) {
-		if(event1->key() == Qt::Key_Return) {
-				showChatDialog_helper();
-		}
+	if(event1->key() == Qt::Key_Return) {
+		showChatDialog_helper();
+	}
 	QTreeView::keyPressEvent(event1);
 }
 
 void TreeView::removeContact_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
-		if(!bareJid.isEmpty())
+		if (!bareJid.isEmpty()) {
 			emit removeContact(bareJid);
+		}
 	}
 }
 
 void TreeView::callHelper() {
 	if (selectedContact()) {
 		ContactItem::ResourceStatus status = selectedContact()->getResource();
-		if(status.second) {
+		if (status.second) {
 			QString full_jid = selectedContact()->getBareJid() + "/" + status.first;
 			emit makeVoiceCall(full_jid);
 		}
