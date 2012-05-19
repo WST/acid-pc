@@ -34,6 +34,10 @@ TreeView::~TreeView() {
 		delete action_call;
 }
 
+void TreeView::setBlinking(const QString &jid, bool blinking) {
+    // TODO
+}
+
 const QString TreeView::getNickByJid(const QString &jid) {
     // NOTE: сюда может прийти как bare, так и full JID
     return QString("fooo");

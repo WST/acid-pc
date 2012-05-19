@@ -14,6 +14,7 @@ namespace CL {
 		~TreeView();
 		bool event(QEvent* e);
         const QString getNickByJid(const QString &jid);
+        void setBlinking(const QString &jid, bool blinking);
 
 	public slots:
 		void mousePressed(const QModelIndex& index);

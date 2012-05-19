@@ -269,7 +269,7 @@ void Messenger::activate() {
 	client_settings->setIgnoreSslErrors(true);
 	client_settings->setKeepAliveInterval(settings->value("settings/keepalive_interval", KEEPALIVE_INTERVAL).toInt()); // пинговать раз в минуту — чтобы в случае косяка быстрее спалить.
 	client_settings->setKeepAliveTimeout(settings->value("settings/keepalive_timeout", KEEPALIVE_TIMEOUT).toInt()); // таймаут пинга 30 секунд. Если ответ не пришёл, переходить в оффлайн.
-	client_settings->setAutoReconnectionEnabled(false);
+    client_settings->setAutoReconnectionEnabled(false);
 
 	// debug:
 	client_settings->setStreamSecurityMode(QXmppConfiguration::TLSDisabled);
@@ -442,6 +442,7 @@ void Messenger::gotMessage(QXmppMessage message) {
 			if(!chat->adaTabForJid(message.from())) {
                 // Сохраним текст сообщения
                 messages[message.from()][message.id()] = message;
+                roster_widget.setBlinking(message.from(), true);
                 connect(ConfirmationWindow::newMessage(& message, settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
 			} else {
                 // Здесь может оказаться, что это сообщение от комнаты (например капча)
@@ -468,6 +469,7 @@ void Messenger::confirmedMessage(const QString &message_from) {
     }
 
     messages.erase(messages.find(message_from));
+    roster_widget.setBlinking(message_from, false);
 }
 
 void Messenger::joinNewRoom() {
@@ -567,6 +569,7 @@ void Messenger::joinedRoom() {
     QXmppMucRoom *room = (QXmppMucRoom *) sender();
     QStringList room_jid = parseJid(room->jid());
     chat->openTab(room->jid(), room_jid[2], TabWidget::MUC);
+    tray->debugMessage("Joined MUC room!");
 }
 
 void Messenger::leaveRoom(const QString &room_jid) {
