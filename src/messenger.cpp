@@ -471,9 +471,15 @@ void Messenger::confirmedMessage(const QString &message_from) {
 }
 
 void Messenger::joinNewRoom() {
-	JoinRoomWindow *window = new JoinRoomWindow(this);
+    JoinRoomWindow *window = new JoinRoomWindow(this);
     connect(window, SIGNAL(joinRoomRequested(const QString &)), this, SLOT(processJoinRequest(const QString &)));
 	window->show();
+}
+
+void Messenger::rejoinRoom(QString error_message, QString room_jid) {
+    JoinRoomWindow *window = new JoinRoomWindow(error_message, room_jid, this);
+    connect(window, SIGNAL(joinRoomRequested(const QString &)), this, SLOT(processJoinRequest(const QString &)));
+    window->show();
 }
 
 void Messenger::joinSupportRoom() {
@@ -537,24 +543,23 @@ void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
 	rooms[room_jid] = room;
 
     // Мы зашли в комнату и получили объект QXmppMucRoom. Этот объект является источником всех сигналов, связанных с комнатой.
-
-    connect(room, SIGNAL(joined()), this, SLOT(joinedRoom())); // а как узнать, в какую комнату вошёл? Получить бы указатель на того, кто отправил сигнал
+    connect(room, SIGNAL(joined()), this, SLOT(joinedRoom()));
     connect(room, SIGNAL(left()), this, SLOT(leftRoom()));
-    connect(room, SIGNAL(kicked(QString,QString)), this, SLOT(kickedFromRoom(QString, QString)));
+    connect(room, SIGNAL(kicked(const QString &, const QString &)), this, SLOT(kickedFromRoom(const QString &, const QString &)));
 }
 
 // Эта функция вызывается, когда вход в комнату не выполнен или выполнен выход из комнаты
 void Messenger::leftRoom() {
     QXmppMucRoom *room = (QXmppMucRoom *) sender();
     rooms.erase(rooms.find(room->jid()));
-    tray->debugMessage("Left a room");
 }
 
 // Эта функция вызывается, когда нас послали нахуй из комнаты
-void Messenger::kickedFromRoom() {
+void Messenger::kickedFromRoom(const QString &jid, const QString &reason) {
     QXmppMucRoom *room = (QXmppMucRoom *) sender();
+    rejoinRoom(QString("You have been kicked: ") + reason, room->jid());
     rooms.erase(rooms.find(room->jid()));
-    tray->debugMessage("Kicked from a room");
+    // TODO: удалять таб или делать его неактивным
 }
 
 // Эта функция вызывается, когда вход в комнату выполнен успешно

@@ -76,7 +76,8 @@ class Messenger: public QMainWindow {
 		void iconClicked(QSystemTrayIcon::ActivationReason reason);
 		void createNewMessage();
         void showNewContactWindow();
-		void joinNewRoom();
+        void joinNewRoom();
+        void rejoinRoom(QString error_message, QString room_jid);
 		void sendMessage(MessageForm *message); // слот с аргументами to, message уже есть в клиенте (qxmpp)
 		void sendMUCMessage(QString, QString);
 		void gotVoiceCall(QXmppCall *call);
@@ -93,7 +94,7 @@ class Messenger: public QMainWindow {
 		void joinRoom(const QString &room_jid, const QString &nick); // в qxmpp ето есть, но этот метод ещё и открывает таб
         void joinedRoom();
         void leftRoom();
-        void kickedFromRoom();
+        void kickedFromRoom(const QString &jid, const QString &reason);
         void processJoinRequest(const QString &room_jid);
 		void leaveRoom(const QString &room_jid);
 		void showProfile(const QXmppVCardIq &whose);

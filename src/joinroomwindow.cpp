@@ -1,15 +1,20 @@
 #include "joinroomwindow.h"
 #include "ui_joinroomwindow.h"
 
-JoinRoomWindow::JoinRoomWindow(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::JoinRoomWindow)
-{
+JoinRoomWindow::JoinRoomWindow(QWidget *parent): QDialog(parent), ui(new Ui::JoinRoomWindow) {
     ui->setupUi(this);
+    ui->error_message->setVisible(false);
 }
 
-JoinRoomWindow::~JoinRoomWindow()
-{
+JoinRoomWindow::JoinRoomWindow(QString error_message, QString room_jid, QWidget *parent): QDialog(parent), ui(new Ui::JoinRoomWindow) {
+    ui->setupUi(this);
+    ui->error_message->setText(error_message);
+    ui->error_message->setVisible(true);
+    ui->room_link->setText(room_jid);
+    ui->room_link->setEnabled(false);
+}
+
+JoinRoomWindow::~JoinRoomWindow() {
     delete ui;
 }
 
