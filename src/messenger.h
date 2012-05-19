@@ -58,13 +58,13 @@ class Messenger: public QMainWindow {
 		CL::ItemModel roster_model; // модель элемента ростера
 
         QMap<QString, QMap<QString, QXmppMessage> > messages; // буфер принятых сообщений
-		QMap<QString, QXmppMucRoom *> rooms; // комнаты, в которые зашёл клиент
 
 	public:
 		Messenger(QWidget *parent = 0);
 		~Messenger();
 		void launch();
 		QSettings *settingsManager();
+        QXmppMucRoom *getRoomByJid(const QString &jid);
 
 	private slots:
 		void activate();

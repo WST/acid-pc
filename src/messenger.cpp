@@ -108,7 +108,7 @@ void Messenger::createConnections() {
     connect(login, SIGNAL(showSettingsRequested()), this, SLOT(manageSettings()));
 	connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
 	connect(chat, SIGNAL(aboutToSend(QString, QString)), client, SLOT(sendMessage(QString, QString)));
-    connect(chat, SIGNAL(aboutToSendMUC(QString, QString)), client, SLOT(sendMUCMessage(QString, QString)));
+    connect(chat, SIGNAL(aboutToSendMUC(QString, QString)), this, SLOT(sendMUCMessage(QString, QString)));
 	connect(chat, SIGNAL(mucTabClosed(QString)), this, SLOT(leaveRoom(QString)));
 
 	// сигналы клиента
@@ -437,7 +437,7 @@ void Messenger::gotMessage(QXmppMessage message) {
                 connect(ConfirmationWindow::newMessage(& message, settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
 			} else {
                 // Здесь может оказаться, что это сообщение от комнаты (например капча)
-                if(rooms.contains(message.from())) {
+                if(getRoomByJid(message.from())) {
                     // TODO
                 } else {
                     chat->displayMessage(message, nick, roster_model.getContact(message.from()));
@@ -537,7 +537,6 @@ void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
 	QXmppMucRoom *room = muc_manager->addRoom(room_jid);
 	room->setNickName(nick);
 	room->join();
-	rooms[room_jid] = room;
 
     // Мы зашли в комнату и получили объект QXmppMucRoom. Этот объект является источником всех сигналов, связанных с комнатой.
     connect(room, SIGNAL(joined()), this, SLOT(joinedRoom()));
@@ -550,14 +549,14 @@ void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
 // Эта функция вызывается, когда вход в комнату не выполнен или выполнен выход из комнаты
 void Messenger::leftRoom() {
     QXmppMucRoom *room = (QXmppMucRoom *) sender();
-    rooms.erase(rooms.find(room->jid()));
+    delete room;
 }
 
 // Эта функция вызывается, когда нас послали нахуй из комнаты
 void Messenger::kickedFromRoom(const QString &jid, const QString &reason) {
     QXmppMucRoom *room = (QXmppMucRoom *) sender();
     rejoinRoom(QString("You have been kicked: ") + reason, room->jid());
-    rooms.erase(rooms.find(room->jid()));
+    delete room;
     // TODO: удалять таб или делать его неактивным
 }
 
@@ -570,7 +569,8 @@ void Messenger::joinedRoom() {
 }
 
 void Messenger::leaveRoom(const QString &room_jid) {
-	rooms[room_jid]->leave();
+    QXmppMucRoom *room = getRoomByJid(room_jid);
+    if(room) room->leave();
 }
 
 void Messenger::roomParticipantChanged(QString room_jid, QString nick) {
@@ -582,8 +582,18 @@ void Messenger::roomParticipantChanged(QString room_jid, QString nick) {
 	//widget->presenceFrom(nick);
 }
 
-void Messenger::sendMUCMessage(QString room, QString message) {
-	rooms[room]->sendMessage(message);
+QXmppMucRoom *Messenger::getRoomByJid(const QString &jid) {
+    QListIterator<QXmppMucRoom *> iterator(muc_manager->rooms());
+     while (iterator.hasNext()) {
+         QXmppMucRoom *next = iterator.next();
+         if(next->jid() == jid) return next;
+     }
+     return 0;
+}
+
+void Messenger::sendMUCMessage(QString jid, QString message) {
+    QXmppMucRoom *room = getRoomByJid(jid);
+    if(room) room->sendMessage(message);
 }
 
 QSettings *Messenger::settingsManager() {
