@@ -130,7 +130,7 @@ namespace CL {
 		/*!
 			Sets the notification status for a roster item
 			*/
-		virtual void setNotify(bool blinking) const {};
+		virtual void setBlinking(bool blinking) const {};
 
 	private:
 		ItemModel *owner;
