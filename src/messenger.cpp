@@ -65,18 +65,6 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 
 Messenger::~Messenger() {
 		saveSettings();
-	/*
-		delete about;
-		delete tray;
-		delete chat;
-		delete login;
-		delete window;
-	 delete call_manager;
-	delete muc_manager;
-		delete client;
-		delete client_settings;
-		delete settings;
-	*/
 }
 
 void Messenger::saveSettings() {
@@ -120,7 +108,7 @@ void Messenger::createConnections() {
     connect(login, SIGNAL(showSettingsRequested()), this, SLOT(manageSettings()));
 	connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
 	connect(chat, SIGNAL(aboutToSend(QString, QString)), client, SLOT(sendMessage(QString, QString)));
-	connect(chat, SIGNAL(aboutToSendMUC(QString, QString)), this, SLOT(sendMUCMessage(QString, QString)));
+    connect(chat, SIGNAL(aboutToSendMUC(QString, QString)), client, SLOT(sendMUCMessage(QString, QString)));
 	connect(chat, SIGNAL(mucTabClosed(QString)), this, SLOT(leaveRoom(QString)));
 
 	// сигналы клиента
@@ -536,7 +524,7 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 }
 
 void Messenger::openChat(const QString &full_jid, const QString &nick) {
-    chat->openTab(full_jid, nick, TabWidget::Chat, roster_model.getContact(full_jid));
+    chat->openChatTab(full_jid, nick, roster_model.getContact(full_jid));
 }
 
 void Messenger::processJoinRequest(const QString &room_jid) {
@@ -555,6 +543,8 @@ void Messenger::joinRoom(const QString &room_jid, const QString &nick) {
     connect(room, SIGNAL(joined()), this, SLOT(joinedRoom()));
     connect(room, SIGNAL(left()), this, SLOT(leftRoom()));
     connect(room, SIGNAL(kicked(const QString &, const QString &)), this, SLOT(kickedFromRoom(const QString &, const QString &)));
+
+    // Остальные события мы обработаем в табе комнаты
 }
 
 // Эта функция вызывается, когда вход в комнату не выполнен или выполнен выход из комнаты
@@ -575,7 +565,7 @@ void Messenger::kickedFromRoom(const QString &jid, const QString &reason) {
 void Messenger::joinedRoom() {
     QXmppMucRoom *room = (QXmppMucRoom *) sender();
     QStringList room_jid = parseJid(room->jid());
-    chat->openTab(room->jid(), room_jid[2], TabWidget::MUC);
+    chat->openMUCTab(room);
     tray->debugMessage("Joined MUC room!");
 }
 

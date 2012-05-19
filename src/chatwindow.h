@@ -27,13 +27,20 @@ class ChatWindow: public QDialog
 public:
     explicit ChatWindow(Messenger *parent);
     ~ChatWindow();
-    void displayMessage(QXmppMessage &message, QString tab_name, CL::ContactItem *roster_item = 0);
+    void displayMessage(QXmppMessage &message, QString tab_name, CL::ContactItem *roster_item);
     void displayMUCMessage(QXmppMessage &message);
     bool adaTabForJid(QString fulljid);
-    TabWidget *openTab(QString fulljid, QString tab_name, TabWidget::Type type, CL::ContactItem *roster_item = 0);
+
+    ChatWidget *openChatTab(QString fulljid, QString tab_name, CL::ContactItem *roster_item = 0);
+    MUCWidget *openMUCTab(QXmppMucRoom *room);
+
+    // Deprecated © WST
+    //TabWidget *openTab(QString fulljid, QString tab_name, TabWidget::Type type, CL::ContactItem *roster_item = 0, QXmppMucRoom *room = 0);
     void reloadGeometry(QSettings *settings);
     TabWidget *getWidgetByJid(QString jid);
     TabWidget *getWidgetByIndex(int index);
+    ChatWidget *getChatByJid(QString jid);
+    MUCWidget *getMUCByJid(QString jid);
 
 private:
     Ui::ChatWindow *ui;

@@ -13,35 +13,28 @@ ChatWindow::~ChatWindow() {
 }
 
 void ChatWindow::displayMessage(QXmppMessage &message, QString tab_name, CL::ContactItem *roster_item) {
-	if(!isVisible()) {
-		show();
-	}
+    if(!isVisible()) show();
 
-	TabWidget *widget = getWidgetByJid(message.from());
-	if(widget) {
-        ((ChatWidget *) widget)->setNick(tab_name);
-        ((ChatWidget *) widget)->insertMessage(message);
-        return;
-	}
+    ChatWidget *widget = getChatByJid(message.from());
+    if(widget) return widget->insertMessage(message);
 
 	QStringList jid = parseJid(message.from());
-	if(((widget = getWidgetByJid(jid[1])) != 0) && !jid[5].isEmpty()) {
-		((ChatWidget *) widget)->appendResource(jid[5]);
-		return displayMessage(message, tab_name);
-	} else {
-        ChatWidget *new_widget = (ChatWidget *) openTab(message.from(), tab_name, TabWidget::Chat, roster_item);
-        new_widget->setNick(tab_name);
-        new_widget->insertMessage(message);
-        return;
-	}
+
+    if(((widget = getChatByJid(jid[1]))) && !jid[5].isEmpty()) {
+        widget->appendResource(jid[5]);
+        return displayMessage(message, tab_name, roster_item);
+    }
+
+    ChatWidget *new_widget = openChatTab(message.from(), tab_name, roster_item);
+    new_widget->setNick(tab_name);
+    new_widget->insertMessage(message);
 }
 
 void ChatWindow::displayMUCMessage(QXmppMessage &message) {
-	QStringList jid = parseJid(message.from());
-	TabWidget *widget = getWidgetByJid(jid[1]);
-	if(widget && widget->getType() == TabWidget::MUC) {
-		((MUCWidget *) widget)->insertMessage(message);
-	}
+    QStringList jid = parseJid(message.from());
+    MUCWidget *widget = getMUCByJid(jid[1]);
+    if(widget) widget->insertMessage(message);
+    // Если виджета нет, сообщение нахуй не надо
 }
 
 TabWidget *ChatWindow::getWidgetByIndex(int index) {
@@ -58,46 +51,55 @@ TabWidget *ChatWindow::getWidgetByJid(QString jid) {
 	return 0;
 }
 
+ChatWidget *ChatWindow::getChatByJid(QString jid) {
+    TabWidget *widget = getWidgetByJid(jid);
+    return widget ? ((widget->getType() == TabWidget::Chat) ? (ChatWidget *) widget : 0) : 0;
+}
+
+MUCWidget *ChatWindow::getMUCByJid(QString jid) {
+    TabWidget *widget = getWidgetByJid(jid);
+    return widget ? ((widget->getType() == TabWidget::MUC) ? (MUCWidget *) widget : 0) : 0;
+}
+
 bool ChatWindow::adaTabForJid(QString jid) {
 	return (bool) getWidgetByJid(jid);
 }
 
-TabWidget *ChatWindow::openTab(QString fulljid, QString tab_name, TabWidget::Type type, CL::ContactItem *roster_item) {
-	if(!isVisible()) {
-		show();
-	}
+ChatWidget *ChatWindow::openChatTab(QString fulljid, QString tab_name, CL::ContactItem *roster_item) {
+    if(!isVisible()) show();
 
-	TabWidget *sudah_ada = getWidgetByJid(fulljid);
-	if(sudah_ada) {
-		// TODO: активировать требуемую вкладку, она уже открыта
-		return sudah_ada;
-	}
+    ChatWidget *widget = getChatByJid(fulljid);
+    if(widget) return widget;
 
-	switch(type) {
-		case TabWidget::Chat: {
-            ChatWidget *widget = new ChatWidget(fulljid, roster_item);
-			connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
-			connect(widget, SIGNAL(chatGeometryChanged(QByteArray)), this, SLOT(chatGeometryChanged(QByteArray)));
-            ui->tabWidget->addTab(widget, QIcon(":/common/chat.png"), tab_name); // TODO в соответствии со статусом — значок
-			ui->tabWidget->setCurrentWidget(widget);
-			widget->setOnline(online);
-            widget->setIcon(":/common/chat.png");
-			widget->activate();
-			return widget;
-		} break;
-		case TabWidget::MUC: {
-			// NOTE: при входе в MUC fulljid является bare JID комнаты!
-			MUCWidget *widget = new MUCWidget(fulljid);
-			connect(widget, SIGNAL(aboutToSend(QString, QString)), this, SIGNAL(aboutToSendMUC(QString, QString)));
-            ui->tabWidget->addTab(widget, QIcon(":/common/users.png"), tab_name);
-			ui->tabWidget->setCurrentWidget(widget);
-			widget->setOnline(online);
-			widget->activate();
-            widget->setIcon(":/common/users.png");
-			return widget;
-		} break;
-	}
+    widget = new ChatWidget(fulljid, roster_item);
+    connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
+    connect(widget, SIGNAL(chatGeometryChanged(QByteArray)), this, SLOT(chatGeometryChanged(QByteArray)));
+    ui->tabWidget->addTab(widget, QIcon(":/common/chat.png"), tab_name); // TODO в соответствии со статусом — значок
+    ui->tabWidget->setCurrentWidget(widget);
+    widget->setOnline(online);
+    widget->setIcon(":/common/chat.png");
+    widget->activate();
+    return widget;
 }
+
+MUCWidget *ChatWindow::openMUCTab(QXmppMucRoom *room) {
+    if(!isVisible()) show();
+
+    MUCWidget *widget = getMUCByJid(room->jid());
+    if(widget) return widget;
+
+    QStringList jid_parts = parseJid(room->jid());
+
+    widget = new MUCWidget(room);
+    connect(widget, SIGNAL(aboutToSend(QString, QString)), this, SIGNAL(aboutToSendMUC(QString, QString)));
+    ui->tabWidget->addTab(widget, QIcon(":/common/users.png"), jid_parts[2]);
+    ui->tabWidget->setCurrentWidget(widget);
+    widget->setOnline(online);
+    widget->activate();
+    widget->setIcon(":/common/users.png");
+    return widget;
+}
+
 
 void ChatWindow::setOnline(bool is_online) {
 	online = is_online;

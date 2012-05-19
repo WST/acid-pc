@@ -6,6 +6,7 @@
 
 // qxmpp
 #include <qxmpp/QXmppMessage.h>
+#include <qxmpp/QXmppMucManager.h>
 
 namespace Ui {
     class MUCWidget;
@@ -16,7 +17,7 @@ class MUCWidget: public TabWidget
     Q_OBJECT
 
 public:
-    explicit MUCWidget(QString with, QWidget *parent = 0);
+    explicit MUCWidget(QXmppMucRoom *room, QWidget *parent = 0);
     ~MUCWidget();
     void insertMessage(QXmppMessage &message);
     void setOnline(bool is_online);
@@ -28,6 +29,7 @@ signals:
 
 private:
     Ui::MUCWidget *ui;
+    QXmppMucRoom *m_room;
 
 private slots:
     void on_send_clicked();
