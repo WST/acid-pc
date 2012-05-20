@@ -2,12 +2,12 @@
 #include "ui_chatwidget.h"
 #include "version.h"
 
-ChatWidget::ChatWidget(QString with, CL::ContactItem *roster_item, QWidget *parent): nick(""), TabWidget(with, parent), ui(new Ui::ChatWidget) {
+ChatWidget::ChatWidget(QString with, ChatWindow *parent, CL::ContactItem *roster_item): nick(""), TabWidget(with, parent), ui(new Ui::ChatWidget) {
     ui->setupUi(this);
     ui->jid->setText(with);
     TabWidget::setType(TabWidget::Chat);
     m_item = roster_item;
-
+    window = parent;
     connect(roster_item, SIGNAL(iconChanged(const QIcon &)), this, SLOT(setIcon(const QIcon &)));
 }
 
@@ -64,7 +64,7 @@ void ChatWidget::setNick(QString newnick) {
 
 void ChatWidget::setIcon(QIcon icon) {
     ui->icon->setPixmap(icon.pixmap(16));
-    // ((ChatWindow *) parentWidget())->setTabIcon(m_position, icon); // Я не разобрался почему оно сегфолтит
+     window->setTabIcon(m_position, icon); // Я не разобрался почему оно сегфолтит
 }
 
 void ChatWidget::appendResource(QString resource) {

@@ -17,12 +17,14 @@ namespace Ui {
     class ChatWidget;
 }
 
+class ChatWindow;
+
 class ChatWidget: public TabWidget
 {
     Q_OBJECT
 
 public:
-    explicit ChatWidget(QString with, CL::ContactItem *roster_item = 0, QWidget *parent = 0);
+    explicit ChatWidget(QString with, ChatWindow *parent, CL::ContactItem *roster_item = 0);
     ~ChatWidget();
     void setChatGeometry(QByteArray geometry);
 
@@ -31,6 +33,7 @@ private:
     QString nick;
     CL::ContactItem *m_item;
     int m_position;
+    ChatWindow *window;
 
 public slots:
     void setNick(QString newnick);

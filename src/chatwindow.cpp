@@ -108,7 +108,7 @@ ChatWidget *ChatWindow::openChatTab(QString fulljid, QString tab_name, CL::Conta
         return widget;
     }
 
-    widget = new ChatWidget(fulljid, roster_item, this);
+    widget = new ChatWidget(fulljid, this, roster_item);
     connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
     connect(widget, SIGNAL(chatGeometryChanged(QByteArray)), this, SLOT(chatGeometryChanged(QByteArray)));
 
@@ -116,13 +116,13 @@ ChatWidget *ChatWindow::openChatTab(QString fulljid, QString tab_name, CL::Conta
 
     if(roster_item) {
         QIcon item_icon = roster_item->getIcon();
-        position = ui->tabWidget->addTab(widget, item_icon, tab_name); // TODO update the icon
-        widget->setIcon(item_icon);
+        position = ui->tabWidget->addTab(widget, item_icon, tab_name);
         widget->setNumber(position);
+        widget->setIcon(item_icon);
     } else {
         position = ui->tabWidget->addTab(widget, tab_name);
-        widget->setIcon(QIcon(":/common/chat.png")); // задаст значок и для таба
         widget->setNumber(position);
+        widget->setIcon(QIcon(":/common/chat.png"));
     }
 
     ui->tabWidget->setCurrentWidget(widget);
