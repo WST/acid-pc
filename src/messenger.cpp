@@ -633,6 +633,11 @@ void Messenger::addNewContact(const QString &jid, const QString &nick) {
     client->rosterManager().subscribe(jid);
 }
 
+void Messenger::removeContact(const QString &jid) {
+    client->rosterManager().unsubscribe(jid);
+    client->rosterManager().removeItem(jid);
+}
+
 void Messenger::endCall() {
 	delete call_window;
 	call_window = 0;
