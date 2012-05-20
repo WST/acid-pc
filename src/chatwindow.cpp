@@ -5,7 +5,6 @@
 ChatWindow::ChatWindow(Messenger *parent): QDialog(parent), ui(new Ui::ChatWindow) {
 	settings = parent->settingsManager();
 	ui->setupUi(this);
-	setWindowIcon(QIcon(":/acid_16.png"));
 }
 
 ChatWindow::~ChatWindow() {
@@ -113,13 +112,17 @@ ChatWidget *ChatWindow::openChatTab(QString fulljid, QString tab_name, CL::Conta
     connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
     connect(widget, SIGNAL(chatGeometryChanged(QByteArray)), this, SLOT(chatGeometryChanged(QByteArray)));
 
+    int position = 0;
+
     if(roster_item) {
         QIcon item_icon = roster_item->getIcon();
-        ui->tabWidget->addTab(widget, item_icon, tab_name); // TODO update the icon
+        position = ui->tabWidget->addTab(widget, item_icon, tab_name); // TODO update the icon
         widget->setIcon(item_icon);
+        widget->setNumber(position);
     } else {
-        ui->tabWidget->addTab(widget, QIcon(":/common/chat.png"), tab_name);
-        widget->setIcon(QIcon(":/common/chat.png"));
+        position = ui->tabWidget->addTab(widget, tab_name);
+        widget->setIcon(QIcon(":/common/chat.png")); // задаст значок и для таба
+        widget->setNumber(position);
     }
 
     ui->tabWidget->setCurrentWidget(widget);
@@ -149,6 +152,9 @@ MUCWidget *ChatWindow::openMUCTab(QXmppMucRoom *room) {
     return widget;
 }
 
+void ChatWindow::setTabIcon(int position, const QIcon &icon) {
+    ui->tabWidget->setTabIcon(position, icon);
+}
 
 void ChatWindow::setOnline(bool is_online) {
 	online = is_online;
@@ -174,8 +180,11 @@ void ChatWindow::on_tabWidget_tabCloseRequested(int index) {
 			delete (MUCWidget *) widget;
 		} break;
 		case TabWidget::Chat: {
-			delete (TabWidget *) widget;
+            delete (ChatWidget *) widget;
 		} break;
+        case TabWidget::ServiceDiscovery: {
+            delete (ServiceDiscoveryWidget *) widget;
+        } break;
 	}
 
 	if(ui->tabWidget->count() == 0) {
@@ -205,3 +214,4 @@ void ChatWindow::on_tabWidget_currentChanged(int index) {
 void ChatWindow::chatGeometryChanged(QByteArray geometry) {
 	settings->setValue("chat/geometry", geometry);
 }
+

@@ -9,7 +9,9 @@
 
 // ACId
 #include "tabwidget.h"
+#include "chatwindow.h"
 #include "contact_list/contact_item.h"
+
 
 namespace Ui {
     class ChatWidget;
@@ -22,18 +24,22 @@ class ChatWidget: public TabWidget
 public:
     explicit ChatWidget(QString with, CL::ContactItem *roster_item = 0, QWidget *parent = 0);
     ~ChatWidget();
-    void insertMessage(QXmppMessage &message);
-    void setOnline(bool is_online);
-    void activate();
     void setChatGeometry(QByteArray geometry);
-    void appendResource(QString resource);
-    void setNick(QString newnick);
-    void setIcon(QIcon icon);
 
 private:
     Ui::ChatWidget *ui;
     QString nick;
     CL::ContactItem *m_item;
+    int m_position;
+
+public slots:
+    void setNick(QString newnick);
+    void setIcon(QIcon icon);
+    void appendResource(QString resource);
+    void insertMessage(QXmppMessage &message);
+    void setOnline(bool is_online);
+    void activate();
+    void setNumber(int position);
 
 signals:
     void aboutToSend(QString to, QString message);
@@ -43,6 +49,7 @@ private slots:
     void on_splitter_splitterMoved(int pos, int index);
     void on_message_textChanged();
     void on_send_clicked();
+
 };
 
 #endif // CHATWIDGET_H

@@ -20,6 +20,7 @@ namespace Ui {
 }
 
 class Messenger;
+class ChatWidget;
 
 class ChatWindow: public QDialog
 {
@@ -55,6 +56,7 @@ signals:
 
 public slots:
     void setOnline(bool is_online);
+    void setTabIcon(int position, const QIcon &icon);
 
 private slots:
     void on_tabWidget_currentChanged(int index);

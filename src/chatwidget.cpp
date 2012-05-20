@@ -7,6 +7,8 @@ ChatWidget::ChatWidget(QString with, CL::ContactItem *roster_item, QWidget *pare
     ui->jid->setText(with);
     TabWidget::setType(TabWidget::Chat);
     m_item = roster_item;
+
+    connect(roster_item, SIGNAL(iconChanged(const QIcon &)), this, SLOT(setIcon(const QIcon &)));
 }
 
 ChatWidget::~ChatWidget() {
@@ -22,6 +24,10 @@ void ChatWidget::insertMessage(QXmppMessage &message) {
 	text.replace("\n", "<br />");
 	text.replace(HYPERLINK_REPLACE_ARGS);
     ui->chatview->append("<font color=\"#AA0000\">&lt;" + nick + "&gt;</font> " + text);
+}
+
+void ChatWidget::setNumber(int position) {
+    m_position = position;
 }
 
 void ChatWidget::on_send_clicked() {
@@ -58,6 +64,7 @@ void ChatWidget::setNick(QString newnick) {
 
 void ChatWidget::setIcon(QIcon icon) {
     ui->icon->setPixmap(icon.pixmap(16));
+    // ((ChatWindow *) parentWidget())->setTabIcon(m_position, icon); // Я не разобрался почему оно сегфолтит
 }
 
 void ChatWidget::appendResource(QString resource) {
