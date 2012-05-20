@@ -5,7 +5,7 @@ SettingsWindow::SettingsWindow(Messenger *parent): QDialog(parent), ui(new Ui::S
 	ui->setupUi(this);
 	settings = parent->settingsManager();
 	loadCurrentSettings();
-	setWindowIcon(QIcon(":/acid_16.png"));
+    resize(width(), minimumSizeHint().height());
 }
 
 SettingsWindow::~SettingsWindow() {
