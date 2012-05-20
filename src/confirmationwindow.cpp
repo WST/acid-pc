@@ -7,6 +7,7 @@ ConfirmationWindow::ConfirmationWindow(QWidget *parent): QWidget(parent), ui(new
     ui->setupUi(this);
 	setWindowFlags(Qt::ToolTip | Qt::X11BypassWindowManagerHint | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Desktop);
     timer = 0;
+    ui->actions_button->setVisible(false); // По умолчанию не нужна
 }
 
 ConfirmationWindow::~ConfirmationWindow() {

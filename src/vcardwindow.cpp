@@ -7,11 +7,12 @@ VcardWindow::VcardWindow(Messenger *parent, const QXmppVCardIq *whose): QDialog(
 
 	ui->fullname->setText(whose->fullName());
 	ui->nickname->setText(whose->nickName());
-	ui->about->document()->setPlainText("");
+    ui->about->document()->setPlainText("");
 	ui->birthday->setText(whose->birthday().toString("dd.MM.yyyy"));
 	ui->city->setText("");
 
 	setWindowTitle(whose->fullName().isEmpty() ? "Viewing profile" : whose->fullName());
+    resize(width(), minimumSizeHint().height());
 }
 
 VcardWindow::~VcardWindow() {
