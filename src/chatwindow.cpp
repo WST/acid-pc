@@ -52,13 +52,23 @@ TabWidget *ChatWindow::getWidgetByJid(QString jid) {
 }
 
 ChatWidget *ChatWindow::getChatByJid(QString jid) {
-    TabWidget *widget = getWidgetByJid(jid);
-    return widget ? ((widget->getType() == TabWidget::Chat) ? (ChatWidget *) widget : 0) : 0;
+    TabWidget *widget;
+    for(int i = 0; i < ui->tabWidget->count(); i ++) {
+        if(((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid) && widget->getType() == TabWidget::Chat) {
+            return (ChatWidget *) widget;
+        }
+    }
+    return 0;
 }
 
 MUCWidget *ChatWindow::getMUCByJid(QString jid) {
-    TabWidget *widget = getWidgetByJid(jid);
-    return widget ? ((widget->getType() == TabWidget::MUC) ? (MUCWidget *) widget : 0) : 0;
+    TabWidget *widget;
+    for(int i = 0; i < ui->tabWidget->count(); i ++) {
+        if(((widget = (MUCWidget *) ui->tabWidget->widget(i))->getJid() == jid) && widget->getType() == TabWidget::MUC) {
+            return (MUCWidget *) widget;
+        }
+    }
+    return 0;
 }
 
 bool ChatWindow::adaTabForJid(QString jid) {
