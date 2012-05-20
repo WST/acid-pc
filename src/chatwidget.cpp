@@ -56,8 +56,8 @@ void ChatWidget::setNick(QString newnick) {
     nick = newnick;
 }
 
-void ChatWidget::setIcon(const QString &path) {
-    ui->icon->setPixmap(QPixmap(path));
+void ChatWidget::setIcon(QIcon icon) {
+    ui->icon->setPixmap(icon.pixmap(16));
 }
 
 void ChatWidget::appendResource(QString resource) {

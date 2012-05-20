@@ -12,7 +12,8 @@ public:
     Type getType();
     virtual void setOnline(bool is_online) = 0;
     void setType(Type newtype);
-    virtual void setIcon(const QString &path) = 0;
+    //virtual void setIcon(const QString &path) = 0;
+    //virtual void setIcon(QIcon &icon) = 0;
 
 protected:
     QString jid;

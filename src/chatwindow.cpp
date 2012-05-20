@@ -84,10 +84,18 @@ ChatWidget *ChatWindow::openChatTab(QString fulljid, QString tab_name, CL::Conta
     widget = new ChatWidget(fulljid, roster_item);
     connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
     connect(widget, SIGNAL(chatGeometryChanged(QByteArray)), this, SLOT(chatGeometryChanged(QByteArray)));
-    ui->tabWidget->addTab(widget, QIcon(":/common/chat.png"), tab_name); // TODO в соответствии со статусом — значок
+
+    if(roster_item) {
+        QIcon item_icon = roster_item->getIcon();
+        ui->tabWidget->addTab(widget, item_icon, tab_name); // TODO update the icon
+        widget->setIcon(item_icon);
+    } else {
+        ui->tabWidget->addTab(widget, QIcon(":/common/chat.png"), tab_name);
+        widget->setIcon(QIcon(":/common/chat.png"));
+    }
+
     ui->tabWidget->setCurrentWidget(widget);
     widget->setOnline(online);
-    widget->setIcon(":/common/chat.png");
     widget->activate();
     return widget;
 }
