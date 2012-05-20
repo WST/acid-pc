@@ -133,6 +133,10 @@ namespace CL {
 			Sets the notification status for a roster item
 			*/
 		void setBlinking(bool blinking) const;
+	
+	signals:
+		void iconChanged(const QIcon &new_icon);
+		void nickChanged(const QString &new_nick);
 
 	private:
 		ItemModel *owner;

@@ -133,12 +133,14 @@ void ContactItem::updateIcon() {
 		icon_name = new_icon_name;
 		m_icon = QIcon(":/trayicon/"+icon_name+"-16px.png");
 		owner->contactChanged(this);
+		emit iconChanged(m_icon);
 	}
 }
 
 void ContactItem::setNick(const QString &_value) {
 	m_nick = _value;
 	owner->contactChanged(this);
+	emit nickChanged(_value);
 }
 
 QString ContactItem::getSubText() const {
