@@ -511,7 +511,7 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 		return;
 	}*/
 
-	LDEBUG("got presence from %s/%s", qPrintable(bare_jid), qPrintable(resource.data()));
+	LDEBUG("got presence from %s/%s", qPrintable(bare_jid), qPrintable(resource));
 
 	const QMap<QString, QXmppPresence> &presences = client->rosterManager().getAllPresencesForBareJid(bare_jid);
 	CL::ContactItem::Status status;
