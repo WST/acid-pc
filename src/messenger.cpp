@@ -627,6 +627,11 @@ void Messenger::makeVoiceCall(const QString &full_jid) {
 	call_window->show();
 }
 
+void Messenger::addNewContact(const QString &jid, const QString &nick) {
+    client->rosterManager().addItem(jid, nick);
+    client->rosterManager().subscribe(jid);
+}
+
 void Messenger::endCall() {
 	delete call_window;
 	call_window = 0;
