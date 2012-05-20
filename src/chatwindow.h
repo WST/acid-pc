@@ -11,6 +11,7 @@
 #include "tabwidget.h"
 #include "chatwidget.h"
 #include "mucwidget.h"
+#include "servicediscoverywidget.h"
 #include "messenger.h"
 #include "contact_list/contact_item.h"
 
@@ -33,14 +34,14 @@ public:
 
     ChatWidget *openChatTab(QString fulljid, QString tab_name, CL::ContactItem *roster_item = 0);
     MUCWidget *openMUCTab(QXmppMucRoom *room);
+    ServiceDiscoveryWidget *openDiscoTab(QXmppDiscoveryManager *manager, const QString &jid);
 
-    // Deprecated © WST
-    //TabWidget *openTab(QString fulljid, QString tab_name, TabWidget::Type type, CL::ContactItem *roster_item = 0, QXmppMucRoom *room = 0);
     void reloadGeometry(QSettings *settings);
     TabWidget *getWidgetByJid(QString jid);
     TabWidget *getWidgetByIndex(int index);
     ChatWidget *getChatByJid(QString jid);
     MUCWidget *getMUCByJid(QString jid);
+    ServiceDiscoveryWidget *getServiceBrowserByJid(QString jid);
 
 private:
     Ui::ChatWindow *ui;

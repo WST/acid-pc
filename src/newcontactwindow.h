@@ -21,6 +21,10 @@ signals:
 private slots:
     void on_buttonBox_accepted();
 
+    void on_contact_jid_textChanged(const QString &arg1);
+
+    void on_contact_name_textChanged(const QString &arg1);
+
 private:
     Ui::NewContactWindow *ui;
 };

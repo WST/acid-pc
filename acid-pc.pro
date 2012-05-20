@@ -35,7 +35,8 @@ SOURCES    += src/main.cpp \
     src/voicecallwindow.cpp \
     src/confirmationwindow.cpp \
     src/joinroomwindow.cpp \
-    src/newcontactwindow.cpp
+    src/newcontactwindow.cpp \
+    src/servicediscoverywidget.cpp
 HEADERS    += version.h \
               src/messenger.h \
               src/loginform.h \
@@ -59,7 +60,8 @@ HEADERS    += version.h \
     src/voicecallwindow.h \
     src/confirmationwindow.h \
     src/joinroomwindow.h \
-    src/newcontactwindow.h
+    src/newcontactwindow.h \
+    src/servicediscoverywidget.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \
@@ -72,7 +74,8 @@ FORMS      += \
     ui/voicecallwindow.ui \
     ui/confirmationwindow.ui \
     ui/joinroomwindow.ui \
-    ui/newcontactwindow.ui
+    ui/newcontactwindow.ui \
+    ui/servicediscoverywidget.ui
 RESOURCES  += res/app.qrc
 
 LIBS += -lqxmpp

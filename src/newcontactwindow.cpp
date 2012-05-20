@@ -12,3 +12,11 @@ NewContactWindow::~NewContactWindow() {
 void NewContactWindow::on_buttonBox_accepted() {
     emit newContactAdditionRequested(ui->contact_jid->text(), ui->contact_name->text());
 }
+
+void NewContactWindow::on_contact_jid_textChanged(const QString &arg1) {
+    // TODO
+}
+
+void NewContactWindow::on_contact_name_textChanged(const QString &arg1) {
+    // TODO
+}

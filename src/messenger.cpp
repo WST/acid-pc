@@ -185,6 +185,7 @@ void Messenger::createMenus() {
 	connect(action_join_new_room, SIGNAL(triggered()), this, SLOT(joinNewRoom()));
     connect(action_new_contact, SIGNAL(triggered()), this, SLOT(showNewContactWindow()));
     connect(action_hide_offline_contacts, SIGNAL(triggered(bool)), & roster_widget, SLOT(hideOfflineContacts(bool)));
+    connect(action_browse_services, SIGNAL(triggered()), this, SLOT(openServiceBrowser()));
 
 	// Меню статуса
 	connect(action_status_available, SIGNAL(triggered()), this, SLOT(setOnlineStatus()));
@@ -639,4 +640,8 @@ void Messenger::endCall() {
 
 void Messenger::openOfficialSite() {
     QDesktopServices::openUrl(QUrl(APP_SITE));
+}
+
+void Messenger::openServiceBrowser() {
+    chat->openDiscoTab(disco_manager, login->domain());
 }

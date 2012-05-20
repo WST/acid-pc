@@ -115,6 +115,7 @@ class Messenger: public QMainWindow {
 		void setF4CStatus();
 		void setDNDStatus();
         void addNewContact(const QString &jid, const QString &nick);
+        void openServiceBrowser();
 };
 
 #endif // MESSENGER_H

@@ -71,17 +71,45 @@ MUCWidget *ChatWindow::getMUCByJid(QString jid) {
     return 0;
 }
 
+ServiceDiscoveryWidget *ChatWindow::getServiceBrowserByJid(QString jid) {
+    TabWidget *widget;
+    for(int i = 0; i < ui->tabWidget->count(); i ++) {
+        if(((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid) && widget->getType() == TabWidget::ServiceDiscovery) {
+            return (ServiceDiscoveryWidget *) widget;
+        }
+    }
+    return 0;
+}
+
 bool ChatWindow::adaTabForJid(QString jid) {
 	return (bool) getWidgetByJid(jid);
+}
+
+ServiceDiscoveryWidget *ChatWindow::openDiscoTab(QXmppDiscoveryManager *manager, const QString &jid) {
+    if(!isVisible()) show();
+
+    ServiceDiscoveryWidget *widget = getServiceBrowserByJid(jid);
+    if(widget) {
+        ui->tabWidget->setCurrentWidget(widget);
+        return widget;
+    }
+
+    widget = new ServiceDiscoveryWidget(manager, this);
+    ui->tabWidget->addTab(widget, QIcon(), "Services");
+    ui->tabWidget->setCurrentWidget(widget);
+    return widget;
 }
 
 ChatWidget *ChatWindow::openChatTab(QString fulljid, QString tab_name, CL::ContactItem *roster_item) {
     if(!isVisible()) show();
 
     ChatWidget *widget = getChatByJid(fulljid);
-    if(widget) return widget;
+    if(widget) {
+        ui->tabWidget->setCurrentWidget(widget);
+        return widget;
+    }
 
-    widget = new ChatWidget(fulljid, roster_item);
+    widget = new ChatWidget(fulljid, roster_item, this);
     connect(widget, SIGNAL(aboutToSend(QString,QString)), this, SIGNAL(aboutToSend(QString, QString)));
     connect(widget, SIGNAL(chatGeometryChanged(QByteArray)), this, SLOT(chatGeometryChanged(QByteArray)));
 
@@ -104,7 +132,10 @@ MUCWidget *ChatWindow::openMUCTab(QXmppMucRoom *room) {
     if(!isVisible()) show();
 
     MUCWidget *widget = getMUCByJid(room->jid());
-    if(widget) return widget;
+    if(widget) {
+        ui->tabWidget->setCurrentWidget(widget);
+        return widget;
+    }
 
     QStringList jid_parts = parseJid(room->jid());
 
