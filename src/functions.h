@@ -4,6 +4,8 @@
 #include <QtCore>
 #include <QDebug>
 
+#include <ctime>
+
 #define JID_RESOURCE_SEPARATOR "/"
 
 QStringList parseJid(QString jid);
