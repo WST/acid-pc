@@ -95,21 +95,25 @@ ConfirmationWindow *ConfirmationWindow::newCall(QXmppCall *call, int timeout) {
 	return window;
 }
 
+ConfirmationWindow *ConfirmationWindow::confirmRegistration() {
+    ConfirmationWindow *window = new ConfirmationWindow();
+    window->setEventTitle("Failed to log in. Register this account?");
+    window->setEventDescription("If you click <accept> here, an attempt to register new account will be made");
+    window->setType(Registration);
+    window->setEventIcon(QPixmap(""));
+    window->setPointer(0);
+    window->show();
+
+    return window;
+}
 
 void ConfirmationWindow::on_accept_button_clicked() {
 	switch(type) {
-		case Message:
-            emit confirmedMessage(message_from);
-		break;
-		case Transfer:
-			emit confirmedFile((QXmppTransferJob *) pointer, true);
-		break;
-		case MUCInvitation:
-			// TODO
-		break;
-		case VoiceCall:
-			emit confirmedCall((QXmppCall *) pointer, false);
-		break;
+        case Message: emit confirmedMessage(message_from); break;
+        case Transfer: emit confirmedFile((QXmppTransferJob *) pointer, true); break;
+        case MUCInvitation: break; // TODO
+        case VoiceCall: emit confirmedCall((QXmppCall *) pointer, false); break;
+        case Registration: emit confirmedRegistration(true); break;
 	}
 	hide();
 	delete this;
@@ -118,15 +122,10 @@ void ConfirmationWindow::on_accept_button_clicked() {
 void ConfirmationWindow::on_decline_button_clicked() {
 	switch(type) {
 		case Message: break;
-		case Transfer:
-			emit confirmedFile((QXmppTransferJob *) pointer, false);
-		break;
-		case MUCInvitation:
-			// TODO
-		break;
-		case VoiceCall:
-			emit confirmedCall((QXmppCall *) pointer, false);
-		break;
+        case Transfer: emit confirmedFile((QXmppTransferJob *) pointer, false); break;  
+        case MUCInvitation: break;
+        case VoiceCall: emit confirmedCall((QXmppCall *) pointer, false); break;
+        case Registration: emit confirmedRegistration(false); break;
 	}
 	hide();
 	delete this;

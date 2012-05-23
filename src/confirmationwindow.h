@@ -17,7 +17,7 @@ class ConfirmationWindow: public QWidget
 
 public:
 	enum Type {
-		File, Message, Transfer, MUCInvitation, VoiceCall
+        Message, Transfer, MUCInvitation, VoiceCall, Registration, Subscription
 	};
 
     explicit ConfirmationWindow(QWidget *parent = 0);
@@ -35,6 +35,7 @@ public:
 	static ConfirmationWindow *newMessage(QXmppMessage *message, int timeout = 5);
 	static ConfirmationWindow *newFile(QXmppTransferJob *job, int timeout = 5);
 	static ConfirmationWindow *newCall(QXmppCall *call, int timeout = 5);
+    static ConfirmationWindow *confirmRegistration();
 
 private:
     Ui::ConfirmationWindow *ui;
@@ -48,6 +49,7 @@ signals:
 	void confirmedFile(QXmppTransferJob *job, bool accepted);
 	void confirmedMessage(const QString &message_id);
 	void confirmedCall(QXmppCall *call, bool accepted);
+    void confirmedRegistration(bool mau_register);
 
 private slots:
 	void on_accept_button_clicked();

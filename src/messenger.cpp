@@ -23,14 +23,14 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 	transfer_manager = new QXmppTransferManager();
 	call_manager = new QXmppCallManager();
 	muc_manager = new QXmppMucManager();
-	vcard_manager = new QXmppVCardManager();
+    //vcard_manager = new QXmppVCardManager();
 	version_manager = new QXmppVersionManager();
 	disco_manager = new QXmppDiscoveryManager();
     bookmark_manager = new QXmppBookmarkManager();
 	client->addExtension(call_manager);
 	client->addExtension(muc_manager);
 	client->addExtension(transfer_manager);
-	client->addExtension(vcard_manager);
+    //client->addExtension(vcard_manager);
 	client->addExtension(version_manager);
 	client->addExtension(disco_manager);
     client->addExtension(bookmark_manager);
@@ -123,12 +123,11 @@ void Messenger::createConnections() {
 	connect(& client->rosterManager(), SIGNAL(rosterReceived()), this, SLOT(rosterReceived()));
 	connect(& client->rosterManager(), SIGNAL(rosterChanged(const QString&)), this, SLOT(rosterChanged(const QString&)));
 	connect(& client->rosterManager(), SIGNAL(presenceChanged(const QString&, const QString&)), this, SLOT(presenceChanged(const QString&, const QString&)));
+    connect(& client->vCardManager(), SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
 
 	connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
 	connect(muc_manager, SIGNAL(roomParticipantChanged(QString,QString)), this, SLOT(roomParticipantChanged(QString, QString)));
 	connect(transfer_manager, SIGNAL(fileReceived(QXmppTransferJob *)), this, SLOT(gotFile(QXmppTransferJob *)));
-	// Следующая строка — реальный кошмар. Почему одни менеджеры надо вызывать напрямую, а этот через метод?
-        connect(& client->vCardManager(), SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
 
 	connect(& roster_widget, SIGNAL(showChatDialog(const QString &, const QString &)), this, SLOT(openChat(const QString &, const QString &)));
 	connect(& roster_widget, SIGNAL(showProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
@@ -301,11 +300,16 @@ void Messenger::handleDisconnection() {
 }
 
 void Messenger::handleConnectionError(QXmppClient::Error error) {
-	// получена ошибка. После этого сигнала будет тутже испущен disconnected().
-	// тут можно передать окошку входа сообщение об ошибке для отображения в нём
-	// но можно сделать это и в трее… Также желательно смотреть, что за ошибка произошла.
-	Q_UNUSED(error);
-	tray->debugMessage("Failed to connect to the server. Ensure that you’ve entered valid username/password.");
+    Q_UNUSED(error);
+    connect(ConfirmationWindow::confirmRegistration(), SIGNAL(confirmedRegistration(bool)), this, SLOT(inBandRegister(bool)));
+}
+
+void Messenger::inBandRegister(bool confirmed) {
+    if(confirmed) {
+        /// TODO
+    } else {
+        handleDisconnection();
+    }
 }
 
 void Messenger::disconnect() {

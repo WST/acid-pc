@@ -117,6 +117,7 @@ class Messenger: public QMainWindow {
         void addNewContact(const QString &jid, const QString &nick);
         void removeContact(const QString &jid);
         void openServiceBrowser();
+        void inBandRegister(bool);
 };
 
 #endif // MESSENGER_H

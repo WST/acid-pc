@@ -31,9 +31,12 @@
   <property name="windowTitle">
    <string>Event</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../res/app.qrc">
+    <normaloff>:/acid_16.png</normaloff>:/acid_16.png</iconset>
+  </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);
-</string>
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_3">
    <property name="margin">
@@ -99,6 +102,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QToolButton" name="accept_button">
+           <property name="toolTip">
+            <string>Accept event</string>
+           </property>
            <property name="text">
             <string>Accept</string>
            </property>
@@ -112,6 +118,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="decline_button">
+           <property name="toolTip">
+            <string>Reject event</string>
+           </property>
            <property name="text">
             <string>Decline</string>
            </property>
@@ -157,6 +166,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/app.qrc"/>
+ </resources>
  <connections/>
 </ui>
