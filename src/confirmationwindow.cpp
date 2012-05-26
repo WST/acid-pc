@@ -102,7 +102,7 @@ ConfirmationWindow *ConfirmationWindow::newCall(QXmppCall *call, int timeout) {
 ConfirmationWindow *ConfirmationWindow::confirmRegistration() {
     ConfirmationWindow *window = new ConfirmationWindow();
     window->setEventTitle("Failed to log in. Register this account?");
-    window->setEventDescription("If you click <accept> here, an attempt to register new account will be made");
+    window->setEventDescription("Click <accept> to make an attempt");
     window->setType(Registration);
     window->setEventIcon(QPixmap(":/notifications/information.png"));
     window->setPointer(0);
