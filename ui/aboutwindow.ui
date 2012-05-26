@@ -34,13 +34,95 @@
   <property name="windowTitle">
    <string>About this application</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">background: url(&quot;:/about/about.png&quot;);</string>
+  <property name="windowIcon">
+   <iconset resource="../res/app.qrc">
+    <normaloff>:/acid_16.png</normaloff>:/acid_16.png</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
   </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Application</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Developers</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This program is brought to you by SmartCommunity members and other people interested in XMPP development. The full list of people who contributed to this application development is follow:&lt;/p&gt;&lt;p&gt;· Ilja Averkov &amp;lt;WST&amp;gt;&lt;br/&gt;· Artem Sh &amp;lt;dot&amp;gt;&lt;br/&gt;· Yury Potapov &amp;lt;Erik&amp;gt;&lt;br/&gt;· Paijo Ahmad &amp;lt;Jo&amp;gt;&lt;br/&gt;· Irfan Mahfudz Guntur &amp;lt;ayes&amp;gt;&lt;br/&gt;· Arnold Lapian &amp;lt;bLaDe&amp;gt;&lt;br/&gt;· Wiecliff Reynardo &amp;lt;WRS&amp;gt;&lt;br/&gt;· Fakhri Izz &amp;lt;Ŧакнгί&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::RichText</enum>
+         </property>
+         <property name="scaledContents">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Donate</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="pixmap">
+        <pixmap resource="../res/app.qrc">:/common/corner_logo.png</pixmap>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Close</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/app.qrc"/>
+ </resources>
  <connections/>
 </ui>

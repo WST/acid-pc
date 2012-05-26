@@ -12,3 +12,7 @@ AboutWindow::~AboutWindow()
 {
     delete ui;
 }
+
+void AboutWindow::on_buttonBox_accepted() {
+    hide();
+}

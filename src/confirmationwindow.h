@@ -28,6 +28,7 @@ public:
 	void setEventIcon(QPixmap icon);
 	void setType(Type newtype);
 	void setPointer(QObject *newpointer);
+    void setString(const QString &some_value);
 	void setTimeout(unsigned short int seconds);
 	void disableDeclineButton();
     void setMessageInfo(const QString &new_id, const QString &new_from);
@@ -36,6 +37,7 @@ public:
 	static ConfirmationWindow *newFile(QXmppTransferJob *job, int timeout = 5);
 	static ConfirmationWindow *newCall(QXmppCall *call, int timeout = 5);
     static ConfirmationWindow *confirmRegistration();
+    static ConfirmationWindow *confirmSubscriptionRequest(const QString &jid);
 
 private:
     Ui::ConfirmationWindow *ui;
@@ -44,12 +46,14 @@ private:
 	QTimer *timer;
 	QString message_id;
     QString message_from;
+    QString string_data;
 
 signals:
 	void confirmedFile(QXmppTransferJob *job, bool accepted);
 	void confirmedMessage(const QString &message_id);
 	void confirmedCall(QXmppCall *call, bool accepted);
     void confirmedRegistration(bool mau_register);
+    void confirmedSubscription(const QString &jid, bool accepted);
 
 private slots:
 	void on_accept_button_clicked();

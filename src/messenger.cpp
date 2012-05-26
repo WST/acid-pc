@@ -23,14 +23,14 @@ Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this),
 	transfer_manager = new QXmppTransferManager();
 	call_manager = new QXmppCallManager();
 	muc_manager = new QXmppMucManager();
-    //vcard_manager = new QXmppVCardManager();
+    vcard_manager = new QXmppVCardManager(); // странно, что его надо создавать, а обращаться через метод, но так и есть…
 	version_manager = new QXmppVersionManager();
 	disco_manager = new QXmppDiscoveryManager();
     bookmark_manager = new QXmppBookmarkManager();
 	client->addExtension(call_manager);
 	client->addExtension(muc_manager);
 	client->addExtension(transfer_manager);
-    //client->addExtension(vcard_manager);
+    client->addExtension(vcard_manager);
 	client->addExtension(version_manager);
 	client->addExtension(disco_manager);
     client->addExtension(bookmark_manager);
@@ -123,6 +123,7 @@ void Messenger::createConnections() {
 	connect(& client->rosterManager(), SIGNAL(rosterReceived()), this, SLOT(rosterReceived()));
 	connect(& client->rosterManager(), SIGNAL(rosterChanged(const QString&)), this, SLOT(rosterChanged(const QString&)));
 	connect(& client->rosterManager(), SIGNAL(presenceChanged(const QString&, const QString&)), this, SLOT(presenceChanged(const QString&, const QString&)));
+    connect(& client->rosterManager(), SIGNAL(subscriptionReceived(const QString &)), this, SLOT(handleSubscriptionRequest(const QString &)));
     connect(& client->vCardManager(), SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
 
 	connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
@@ -260,6 +261,7 @@ void Messenger::activate() {
 	client_settings->setKeepAliveInterval(settings->value("settings/keepalive_interval", KEEPALIVE_INTERVAL).toInt()); // пинговать раз в минуту — чтобы в случае косяка быстрее спалить.
 	client_settings->setKeepAliveTimeout(settings->value("settings/keepalive_timeout", KEEPALIVE_TIMEOUT).toInt()); // таймаут пинга 30 секунд. Если ответ не пришёл, переходить в оффлайн.
     client_settings->setAutoReconnectionEnabled(false);
+    client_settings->setAutoAcceptSubscriptions(false);
 
 	// debug:
 	client_settings->setStreamSecurityMode(QXmppConfiguration::TLSDisabled);
@@ -268,7 +270,6 @@ void Messenger::activate() {
 	transfer_manager->setProxyOnly(false);
 
 	// Сохранить пароль, если нужно
-	// TODO: сохранять и восстанавливать сервер (домен)
 	if(login->savePassword()) {
 		settings->setValue("login/password", login->password());
 	} else {
@@ -653,4 +654,13 @@ void Messenger::openOfficialSite() {
 
 void Messenger::openServiceBrowser() {
     chat->openDiscoTab(disco_manager, login->domain());
+}
+
+void Messenger::handleSubscriptionRequest(const QString &jid) {
+    ConfirmationWindow *window = ConfirmationWindow::confirmSubscriptionRequest(jid);
+    connect(window, SIGNAL(confirmedSubscription(const QString &, bool)), this, SLOT(answerSubscriptionRequest(const QString &, bool)));
+}
+
+void Messenger::answerSubscriptionRequest(const QString &jid, bool accepted) {
+    accepted ? client->rosterManager().acceptSubscription(jid) : client->rosterManager().refuseSubscription(jid);
 }

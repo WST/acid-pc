@@ -14,7 +14,10 @@ class AboutWindow: public QDialog
 		explicit AboutWindow(QWidget *parent = 0);
 		~AboutWindow();
 
-	private:
+private slots:
+    void on_buttonBox_accepted();
+
+private:
 		Ui::AboutWindow *ui;
 };
 

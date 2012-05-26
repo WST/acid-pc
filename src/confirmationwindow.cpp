@@ -41,6 +41,10 @@ void ConfirmationWindow::setPointer(QObject *newpointer) {
 	pointer = newpointer;
 }
 
+void ConfirmationWindow::setString(const QString &some_value) {
+    string_data = some_value;
+}
+
 void ConfirmationWindow::setTimeout(unsigned short int seconds) {
 	timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(kill()));
@@ -107,6 +111,18 @@ ConfirmationWindow *ConfirmationWindow::confirmRegistration() {
     return window;
 }
 
+ConfirmationWindow *ConfirmationWindow::confirmSubscriptionRequest(const QString &jid) {
+    ConfirmationWindow *window = new ConfirmationWindow();
+    window->setEventTitle(jid);
+    window->setEventDescription("This user wants to see your online status. Accept?");
+    window->setType(Subscription);
+    window->setEventIcon(QPixmap(""));
+    window->setString(jid);
+    window->show();
+
+    return window;
+}
+
 void ConfirmationWindow::on_accept_button_clicked() {
 	switch(type) {
         case Message: emit confirmedMessage(message_from); break;
@@ -114,6 +130,7 @@ void ConfirmationWindow::on_accept_button_clicked() {
         case MUCInvitation: break; // TODO
         case VoiceCall: emit confirmedCall((QXmppCall *) pointer, false); break;
         case Registration: emit confirmedRegistration(true); break;
+        case Subscription: emit confirmedSubscription(string_data, true); break;
 	}
 	hide();
 	delete this;
@@ -126,6 +143,7 @@ void ConfirmationWindow::on_decline_button_clicked() {
         case MUCInvitation: break;
         case VoiceCall: emit confirmedCall((QXmppCall *) pointer, false); break;
         case Registration: emit confirmedRegistration(false); break;
+        case Subscription: emit confirmedSubscription(string_data, false); break;
 	}
 	hide();
 	delete this;

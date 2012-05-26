@@ -118,6 +118,8 @@ class Messenger: public QMainWindow {
         void removeContact(const QString &jid);
         void openServiceBrowser();
         void inBandRegister(bool);
+        void handleSubscriptionRequest(const QString &jid);
+        void answerSubscriptionRequest(const QString &jid, bool accepted);
 };
 
 #endif // MESSENGER_H
