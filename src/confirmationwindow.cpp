@@ -104,7 +104,7 @@ ConfirmationWindow *ConfirmationWindow::confirmRegistration() {
     window->setEventTitle("Failed to log in. Register this account?");
     window->setEventDescription("If you click <accept> here, an attempt to register new account will be made");
     window->setType(Registration);
-    window->setEventIcon(QPixmap(""));
+    window->setEventIcon(QPixmap(":/notifications/information.png"));
     window->setPointer(0);
     window->show();
 
@@ -116,7 +116,7 @@ ConfirmationWindow *ConfirmationWindow::confirmSubscriptionRequest(const QString
     window->setEventTitle(jid);
     window->setEventDescription("This user wants to see your online status. Accept?");
     window->setType(Subscription);
-    window->setEventIcon(QPixmap(""));
+    window->setEventIcon(QPixmap(":/notifications/information.png"));
     window->setString(jid);
     window->show();
 

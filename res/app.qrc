@@ -46,5 +46,6 @@
         <file>menu/user-black.png</file>
         <file>common/users.png</file>
         <file>common/chat.png</file>
+        <file>notifications/information.png</file>
     </qresource>
 </RCC>
