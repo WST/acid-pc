@@ -1,6 +1,7 @@
 
 // qxmpp
 #include "qxmpp/QXmppRosterManager.h"
+#include "qxmpp/QXmppBookmarkSet.h"
 
 // ACId
 #include "messenger.h"
@@ -129,6 +130,7 @@ void Messenger::createConnections() {
 	connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
 	connect(muc_manager, SIGNAL(roomParticipantChanged(QString,QString)), this, SLOT(roomParticipantChanged(QString, QString)));
 	connect(transfer_manager, SIGNAL(fileReceived(QXmppTransferJob *)), this, SLOT(gotFile(QXmppTransferJob *)));
+    connect(bookmark_manager, SIGNAL(bookmarksReceived(const QXmppBookmarkSet &)), this, SLOT(handleBookmarks(const QXmppBookmarkSet &)));
 
 	connect(& roster_widget, SIGNAL(showChatDialog(const QString &, const QString &)), this, SLOT(openChat(const QString &, const QString &)));
 	connect(& roster_widget, SIGNAL(showProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
@@ -665,4 +667,17 @@ void Messenger::handleSubscriptionRequest(const QString &jid) {
 
 void Messenger::answerSubscriptionRequest(const QString &jid, bool accepted) {
     accepted ? client->rosterManager().acceptSubscription(jid) : client->rosterManager().refuseSubscription(jid);
+}
+
+void Messenger::handleBookmarks(const QXmppBookmarkSet &bookmarks) {
+    QListIterator<QXmppBookmarkConference> iterator(bookmarks.conferences());
+    while(iterator.hasNext()) {
+        QXmppBookmarkConference room = iterator.next();
+        if(room.autoJoin()) {
+            // Автовход в конференцию
+            QString nickname = room.nickName().isEmpty() ? settings->value("settings/muc_nickname", login->username()).toString() : room.nickName();
+            joinRoom(room.jid(), nickname);
+        }
+    }
+    // TODO: заносить закладки в меню
 }

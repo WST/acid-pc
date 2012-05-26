@@ -120,6 +120,7 @@ class Messenger: public QMainWindow {
         void inBandRegister(bool);
         void handleSubscriptionRequest(const QString &jid);
         void answerSubscriptionRequest(const QString &jid, bool accepted);
+        void handleBookmarks(const QXmppBookmarkSet &bookmarks);
 };
 
 #endif // MESSENGER_H
