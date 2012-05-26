@@ -307,7 +307,9 @@ void Messenger::handleConnectionError(QXmppClient::Error error) {
 
 void Messenger::inBandRegister(bool confirmed) {
     if(confirmed) {
-        /// TODO
+        // Смотри http://dev.jsmart.web.id/issues/166
+        QDesktopServices::openUrl(QUrl(REGISTER_URL));
+        handleDisconnection();
     } else {
         handleDisconnection();
     }
