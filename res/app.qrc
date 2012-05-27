@@ -47,5 +47,8 @@
         <file>common/users.png</file>
         <file>common/chat.png</file>
         <file>notifications/information.png</file>
+        <file>common/cross.png</file>
+        <file>common/disk.png</file>
+        <file>common/plus.png</file>
     </qresource>
 </RCC>
