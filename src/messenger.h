@@ -61,9 +61,10 @@ class Messenger: public QMainWindow {
 		CL::ItemModel roster_model; // модель элемента ростера
 
         QMap<QString, QMap<QString, QXmppMessage> > messages; // буфер принятых сообщений
+        QTranslator *translator; // Транслятор UI приложения
 
 	public:
-		Messenger(QWidget *parent = 0);
+        Messenger(QTranslator *app_translator);
 		~Messenger();
 		void launch();
 		QSettings *settingsManager();

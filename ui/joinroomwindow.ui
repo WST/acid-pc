@@ -45,14 +45,14 @@
       <string notr="true">color: #AA0000;</string>
      </property>
      <property name="text">
-      <string>Error</string>
+      <string notr="true">Error</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -75,37 +75,37 @@
            </property>
            <item>
             <property name="text">
-             <string>Tangerang room (general)</string>
+             <string notr="true">Tangerang room (general)</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Manado room</string>
+             <string notr="true">Manado room</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Mawar room</string>
+             <string notr="true">Mawar room</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Jawa room</string>
+             <string notr="true">Jawa room</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Bot zone</string>
+             <string notr="true">Bot zone</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Support</string>
+             <string notr="true">Support</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Adventure (Syria &amp; Iran)</string>
+             <string notr="true">Adventure (Syria &amp; Iran)</string>
             </property>
            </item>
           </widget>

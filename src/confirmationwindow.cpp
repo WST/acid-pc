@@ -63,7 +63,7 @@ void ConfirmationWindow::disableDeclineButton() {
 
 ConfirmationWindow *ConfirmationWindow::newMessage(QXmppMessage *message, int timeout) {
 	ConfirmationWindow *window = new ConfirmationWindow();
-	window->setEventTitle("New chat message");
+    window->setEventTitle(tr("New chat message"));
 	window->setEventDescription(message->from());
 	window->setType(Message);
 	window->setEventIcon(QPixmap(":/notifications/message.png"));
@@ -76,8 +76,8 @@ ConfirmationWindow *ConfirmationWindow::newMessage(QXmppMessage *message, int ti
 
 ConfirmationWindow *ConfirmationWindow::newFile(QXmppTransferJob *job, int timeout) {
 	ConfirmationWindow *window = new ConfirmationWindow();
-	window->setEventTitle("New incoming file");
-	window->setEventDescription(QString("Name: ") + job->fileName() + QString(", size: ") + QString::number(job->fileSize()));
+    window->setEventTitle(tr("New incoming file"));
+    window->setEventDescription(tr("Name: ") + job->fileName() + tr(", size: ") + QString::number(job->fileSize()));
 	window->setType(Transfer);
 	window->setEventIcon(QPixmap(":/notifications/file.png"));
 	window->setPointer((QObject *) job);
@@ -88,8 +88,8 @@ ConfirmationWindow *ConfirmationWindow::newFile(QXmppTransferJob *job, int timeo
 
 ConfirmationWindow *ConfirmationWindow::newCall(QXmppCall *call, int timeout) {
 	ConfirmationWindow *window = new ConfirmationWindow();
-	window->setEventTitle("New incoming voice call");
-	window->setEventDescription("foo bar");
+    window->setEventTitle(tr("New incoming voice call"));
+    window->setEventDescription("");
 	window->setType(VoiceCall);
 	window->setEventIcon(QPixmap(":/notifications/call.png"));
 	window->setPointer((QObject *) call);
@@ -101,8 +101,8 @@ ConfirmationWindow *ConfirmationWindow::newCall(QXmppCall *call, int timeout) {
 
 ConfirmationWindow *ConfirmationWindow::confirmRegistration() {
     ConfirmationWindow *window = new ConfirmationWindow();
-    window->setEventTitle("Failed to log in. Register this account?");
-    window->setEventDescription("Click <accept> to make an attempt");
+    window->setEventTitle(tr("Failed to log in. Register this account?"));
+    window->setEventDescription(tr("Click <accept> to make an attempt"));
     window->setType(Registration);
     window->setEventIcon(QPixmap(":/notifications/information.png"));
     window->setPointer(0);
@@ -114,7 +114,7 @@ ConfirmationWindow *ConfirmationWindow::confirmRegistration() {
 ConfirmationWindow *ConfirmationWindow::confirmSubscriptionRequest(const QString &jid) {
     ConfirmationWindow *window = new ConfirmationWindow();
     window->setEventTitle(jid);
-    window->setEventDescription("This user wants to see your online status. Accept?");
+    window->setEventDescription(tr("This user wants to see your online status. Accept?"));
     window->setType(Subscription);
     window->setEventIcon(QPixmap(":/notifications/information.png"));
     window->setString(jid);

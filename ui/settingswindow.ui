@@ -96,7 +96,7 @@
           <item>
            <widget class="QLabel" name="label_11">
             <property name="text">
-             <string>TODO: ability to add servers</string>
+             <string notr="true">TODO: ability to add servers</string>
             </property>
            </widget>
           </item>
@@ -308,12 +308,12 @@
               </item>
               <item>
                <property name="text">
-                <string>Plastique</string>
+                <string notr="true">Plastique</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Cleanlooks</string>
+                <string notr="true">Cleanlooks</string>
                </property>
               </item>
              </widget>

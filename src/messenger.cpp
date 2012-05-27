@@ -15,7 +15,10 @@
 // Qt
 #include <QHostAddress>
 
-Messenger::Messenger(QWidget *parent): QMainWindow(parent), roster_widget(this), roster_model(this), messages() {
+Messenger::Messenger(QTranslator *app_translator): QMainWindow(0), roster_widget(this), roster_model(this), messages() {
+
+    translator = app_translator;
+
 	settings = new QSettings(APP_COMPANY, APP_NAME, this);
 	client_settings = new QXmppConfiguration();
 	client_presence = new QXmppPresence(QXmppPresence::Available, QXmppPresence::Status::Online);
@@ -141,44 +144,44 @@ void Messenger::createConnections() {
 }
 
 void Messenger::createMenus() {
-	QMenu *im_menu = menuBar()->addMenu("Program");
-		QAction *action_new_message = im_menu->addAction(QIcon(":/menu/document.png"), "New message");
-		QMenu *join_room_menu = im_menu->addMenu(QIcon(":/menu/users.png"), "Join a room");
-			QAction *action_join_new_room = join_room_menu->addAction(QIcon(":/menu/users.png"), "Join new room");
-            action_room_bookmarks = join_room_menu->addMenu(QIcon(":/menu/bookmarks.png"), "Bookmarks");
-		QAction *action_new_contact = im_menu->addAction(QIcon(":/menu/plus.png"), "Add contact");
-        QMenu *roster_menu = im_menu->addMenu(QIcon(":/menu/user-black.png"), "Roster");
-            QAction *action_hide_offline_contacts = roster_menu->addAction(QIcon(":/menu/user-silhouette.png"), "Hide offline items");
+    QMenu *im_menu = menuBar()->addMenu(tr("Program"));
+        QAction *action_new_message = im_menu->addAction(QIcon(":/menu/document.png"), tr("New message"));
+        QMenu *join_room_menu = im_menu->addMenu(QIcon(":/menu/users.png"), tr("Join a room"));
+            QAction *action_join_new_room = join_room_menu->addAction(QIcon(":/menu/users.png"), tr("Join new room"));
+            action_room_bookmarks = join_room_menu->addMenu(QIcon(":/menu/bookmarks.png"), tr("Bookmarks"));
+        QAction *action_new_contact = im_menu->addAction(QIcon(":/menu/plus.png"), tr("Add contact"));
+        QMenu *roster_menu = im_menu->addMenu(QIcon(":/menu/user-black.png"), tr("Roster"));
+            QAction *action_hide_offline_contacts = roster_menu->addAction(QIcon(":/menu/user-silhouette.png"), tr("Hide offline items"));
             action_hide_offline_contacts->setCheckable(true);
-		QMenu *connect_service_menu = im_menu->addMenu(QIcon(":/menu/plug.png"), "Connect service");
-			QAction *action_connect_yahoo = connect_service_menu->addAction(QIcon(":/menu/yahoo.png"), "Yahoo! Messenger");
-			QAction *action_connect_msn = connect_service_menu->addAction(QIcon(":/menu/msn.png"), "MSN (Windows Live)");
+        QMenu *connect_service_menu = im_menu->addMenu(QIcon(":/menu/plug.png"), tr("Connect service"));
+            QAction *action_connect_yahoo = connect_service_menu->addAction(QIcon(":/menu/yahoo.png"), "Yahoo! Messenger");
+            QAction *action_connect_msn = connect_service_menu->addAction(QIcon(":/menu/msn.png"), "MSN (Windows Live)");
                         QAction *action_connect_icq = connect_service_menu->addAction(QIcon(":/menu/icq.png"), "ICQ");
 			connect_service_menu->addSeparator();
-			QAction *action_connect_lopbox = connect_service_menu->addAction(QIcon(), "Lopbox microblog");
-                        QAction *action_connect_rss = connect_service_menu->addAction(QIcon(":/menu/rss.png"), "Add an RSS feed");
+            QAction *action_connect_lopbox = connect_service_menu->addAction(QIcon(), tr("Lopbox microblog"));
+                        QAction *action_connect_rss = connect_service_menu->addAction(QIcon(":/menu/rss.png"), tr("Add an RSS feed"));
 			connect_service_menu->addSeparator();
-			QAction *action_browse_services = connect_service_menu->addAction(QIcon(":/menu/plug.png"), "Service discovery");
+            QAction *action_browse_services = connect_service_menu->addAction(QIcon(":/menu/plug.png"), tr("Service discovery"));
 		im_menu->addSeparator();
-		QAction *action_settings = im_menu->addAction(QIcon(":/menu/toolbox.png"), "Settings");
+        QAction *action_settings = im_menu->addAction(QIcon(":/menu/toolbox.png"), tr("Settings"));
 		im_menu->addSeparator();
-		QAction *action_quit = im_menu->addAction(QIcon(":/menu/door.png"), "Quit");
+        QAction *action_quit = im_menu->addAction(QIcon(":/menu/door.png"), tr("Quit"));
 
-	QMenu *status_menu = menuBar()->addMenu("Status");
-		QAction *action_status_available = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), "Available");
-		QAction *action_status_f4c = status_menu->addAction(QIcon(":/trayicon/f4c-16px.png"), "Free for chat");
-		QAction *action_status_away = status_menu->addAction(QIcon(":/trayicon/away-16px.png"), "Away");
-		QAction *action_status_xa = status_menu->addAction(QIcon(":/trayicon/xa-16px.png"), "Extended away");
-		QAction *action_status_dnd = status_menu->addAction(QIcon(":/trayicon/dnd-16px.png"), "Do not disturb");
+    QMenu *status_menu = menuBar()->addMenu(tr("Status"));
+        QAction *action_status_available = status_menu->addAction(QIcon(":/trayicon/online-16px.png"), tr("Available"));
+        QAction *action_status_f4c = status_menu->addAction(QIcon(":/trayicon/f4c-16px.png"), tr("Free for chat"));
+        QAction *action_status_away = status_menu->addAction(QIcon(":/trayicon/away-16px.png"), tr("Away"));
+        QAction *action_status_xa = status_menu->addAction(QIcon(":/trayicon/xa-16px.png"), tr("Extended away"));
+        QAction *action_status_dnd = status_menu->addAction(QIcon(":/trayicon/dnd-16px.png"), tr("Do not disturb"));
 		status_menu->addSeparator();
-		QAction *action_status_dc = status_menu->addAction(QIcon(":/trayicon/offline-16px.png"), "Offline");
+        QAction *action_status_dc = status_menu->addAction(QIcon(":/trayicon/offline-16px.png"), tr("Offline"));
 
-	QMenu *help_menu = menuBar()->addMenu("Help");
-		QAction *action_support_room = help_menu->addAction(QIcon(":/menu/question.png"), "Support chat");
-		QAction *action_official_site = help_menu->addAction(QIcon(":/menu/smartcomm.png"), "Official site");
+    QMenu *help_menu = menuBar()->addMenu(tr("Help"));
+        QAction *action_support_room = help_menu->addAction(QIcon(":/menu/question.png"), tr("Support chat"));
+        QAction *action_official_site = help_menu->addAction(QIcon(":/menu/smartcomm.png"), tr("Official site"));
 		help_menu->addSeparator();
-		QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), "About " APP_NAME);
-		QAction *action_about_qt = help_menu->addAction("About Qt");
+        QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), tr("About ") + APP_NAME);
+        QAction *action_about_qt = help_menu->addAction(tr("About Qt"));
 
 	// Главное меню
 	connect(action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
@@ -387,7 +390,7 @@ void Messenger::confirmedFile(QXmppTransferJob *job, bool confirmed) {
 	if(target->open(QIODevice::ReadWrite)) {
 		job->accept(target);
 	} else {
-		tray->debugMessage("Cannot write to the target file! Check permissions.");
+        tray->debugMessage("Cannot write to the target file! Check permissions.");
 		job->abort();
 	}
 }
@@ -567,7 +570,7 @@ void Messenger::leftRoom() {
 // Эта функция вызывается, когда нас послали нахуй из комнаты
 void Messenger::kickedFromRoom(const QString &jid, const QString &reason) {
     QXmppMucRoom *room = (QXmppMucRoom *) sender();
-    rejoinRoom(QString("You have been kicked: ") + reason, room->jid());
+    rejoinRoom(tr("You have been kicked: ") + reason, room->jid());
     delete room;
     // TODO: удалять таб или делать его неактивным
 }
@@ -629,8 +632,6 @@ void Messenger::makeVoiceCall(const QString &full_jid) {
 		call_window->activateWindow();
 		return;
 	}
-
-	qDebug() << "calling" << full_jid;
 
 	call_window = new VoiceCallWindow(this, call_manager->call(full_jid));
 	connect(call_window, SIGNAL(accepted()), this, SLOT(endCall()));

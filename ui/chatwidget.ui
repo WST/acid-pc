@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Chat widget</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../res/app.qrc">
+    <normaloff>:/acid_16.png</normaloff>:/acid_16.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="margin">
@@ -128,7 +132,7 @@
            <normaloff>:/chat/paper-plane.png</normaloff>:/chat/paper-plane.png</iconset>
          </property>
          <property name="shortcut">
-          <string>Ctrl+Return</string>
+          <string notr="true">Ctrl+Return</string>
          </property>
          <property name="default">
           <bool>false</bool>

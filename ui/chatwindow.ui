@@ -10,6 +10,13 @@
     <height>298</height>
    </rect>
   </property>
+  <property name="windowTitle">
+   <string>Conversations</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../res/app.qrc">
+    <normaloff>:/acid_16.png</normaloff>:/acid_16.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="margin">
     <number>0</number>
@@ -29,6 +36,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/app.qrc"/>
+ </resources>
  <connections/>
 </ui>

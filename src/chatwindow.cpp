@@ -94,7 +94,7 @@ ServiceDiscoveryWidget *ChatWindow::openDiscoTab(QXmppDiscoveryManager *manager,
     }
 
     widget = new ServiceDiscoveryWidget(manager, this);
-    ui->tabWidget->addTab(widget, QIcon(":/menu/plug.png"), "Services");
+    ui->tabWidget->addTab(widget, QIcon(":/menu/plug.png"), tr("Services"));
     ui->tabWidget->setCurrentWidget(widget);
     return widget;
 }

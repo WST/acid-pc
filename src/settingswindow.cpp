@@ -80,7 +80,7 @@ void SettingsWindow::on_muc_nickname_textChanged(QString newtext) {
 }
 
 void SettingsWindow::on_savepath_browse_button_clicked() {
-	QString dir = QFileDialog::getExistingDirectory(this, "Select a directory");
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Select a directory"));
 	if(!dir.isNull()) {
 		ui->savepath->setText(dir);
 	}

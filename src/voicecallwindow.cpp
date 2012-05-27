@@ -45,7 +45,7 @@ void VoiceCallWindow::callStateChanged(QXmppCall::State state) {
 			ui->call_status->setText(tr("Disconnecting"));
 		break;
 		case QXmppCall::FinishedState:
-			ui->call_status->setText("Finished");
+            ui->call_status->setText(tr("Finished"));
 			ui->hangup_button->setText(tr("Close"));
 		break;
 	}

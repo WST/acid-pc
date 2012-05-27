@@ -77,7 +77,7 @@ FORMS      += \
     ui/newcontactwindow.ui \
     ui/servicediscoverywidget.ui
 RESOURCES  += res/app.qrc
-
+TRANSLATIONS += i18n/acid-pc_ru.ts i18n/acid-pc_id.ts
 LIBS += -lqxmpp
 
 win32:RC_FILE = \
