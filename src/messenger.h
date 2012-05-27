@@ -55,6 +55,7 @@ class Messenger: public QMainWindow {
 		QXmppVCardManager *vcard_manager;
 		QXmppDiscoveryManager *disco_manager;
         QXmppBookmarkManager *bookmark_manager;
+        QMenu *action_room_bookmarks; // меню с закладками на MUC
 	
 		CL::TreeView roster_widget; // виджет ростера
 		CL::ItemModel roster_model; // модель элемента ростера
@@ -121,6 +122,7 @@ class Messenger: public QMainWindow {
         void handleSubscriptionRequest(const QString &jid);
         void answerSubscriptionRequest(const QString &jid, bool accepted);
         void handleBookmarks(const QXmppBookmarkSet &bookmarks);
+        void processBookmarkClick();
 };
 
 #endif // MESSENGER_H

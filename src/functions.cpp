@@ -4,6 +4,7 @@ time_t log_timestamp;
 int log_level = 0;
 
 QStringList parseJid(QString jid) {
+    // 1 = bare JID, 2 = username, 3 = hostname, 5 = resource
 	QRegExp format = QRegExp("^(([^/@]+)@([^/@]+))(/([^/@]+))?$");
 	return format.exactMatch(jid) ?  format.capturedTexts() : QStringList();
 }

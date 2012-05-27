@@ -145,7 +145,7 @@ void Messenger::createMenus() {
 		QAction *action_new_message = im_menu->addAction(QIcon(":/menu/document.png"), "New message");
 		QMenu *join_room_menu = im_menu->addMenu(QIcon(":/menu/users.png"), "Join a room");
 			QAction *action_join_new_room = join_room_menu->addAction(QIcon(":/menu/users.png"), "Join new room");
-			QMenu *action_room_bookmarks = join_room_menu->addMenu(QIcon(":/menu/bookmarks.png"), "Bookmarks");
+            action_room_bookmarks = join_room_menu->addMenu(QIcon(":/menu/bookmarks.png"), "Bookmarks");
 		QAction *action_new_contact = im_menu->addAction(QIcon(":/menu/plus.png"), "Add contact");
         QMenu *roster_menu = im_menu->addMenu(QIcon(":/menu/user-black.png"), "Roster");
             QAction *action_hide_offline_contacts = roster_menu->addAction(QIcon(":/menu/user-silhouette.png"), "Hide offline items");
@@ -673,11 +673,21 @@ void Messenger::handleBookmarks(const QXmppBookmarkSet &bookmarks) {
     QListIterator<QXmppBookmarkConference> iterator(bookmarks.conferences());
     while(iterator.hasNext()) {
         QXmppBookmarkConference room = iterator.next();
+        QString nickname = room.nickName().isEmpty() ? settings->value("settings/muc_nickname", login->username()).toString() : room.nickName();
+
         if(room.autoJoin()) {
             // Автовход в конференцию
-            QString nickname = room.nickName().isEmpty() ? settings->value("settings/muc_nickname", login->username()).toString() : room.nickName();
             joinRoom(room.jid(), nickname);
         }
+
+        QAction *action = action_room_bookmarks->addAction(QIcon(""), room.name());
+        action->setData(room.jid() + "/" + nickname);
+        connect(action, SIGNAL(triggered()), this, SLOT(processBookmarkClick()));
     }
-    // TODO: заносить закладки в меню
+}
+
+void Messenger::processBookmarkClick() {
+    QAction *action = (QAction *) sender();
+    QStringList jid = parseJid(action->data().toString());
+    joinRoom(jid[1], jid[5]);
 }
