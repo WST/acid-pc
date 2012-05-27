@@ -16,7 +16,6 @@
 #include <QHostAddress>
 
 Messenger::Messenger(QTranslator *app_translator): QMainWindow(0), roster_widget(this), roster_model(this), messages() {
-
     translator = app_translator;
 
 	settings = new QSettings(APP_COMPANY, APP_NAME, this);
@@ -683,6 +682,11 @@ void Messenger::answerSubscriptionRequest(const QString &jid, bool accepted) {
 }
 
 void Messenger::handleBookmarks(const QXmppBookmarkSet &bookmarks) {
+
+    QAction *action = action_room_bookmarks->addAction(QIcon(), tr("Edit bookmarks"));
+    connect(action, SIGNAL(triggered()), this, SLOT(showBookmarkManager()));
+    action_room_bookmarks->addSeparator();
+
     QListIterator<QXmppBookmarkConference> iterator(bookmarks.conferences());
     while(iterator.hasNext()) {
         QXmppBookmarkConference room = iterator.next();
@@ -693,10 +697,14 @@ void Messenger::handleBookmarks(const QXmppBookmarkSet &bookmarks) {
             joinRoom(room.jid(), nickname);
         }
 
-        QAction *action = action_room_bookmarks->addAction(QIcon(":/menu/bookmarks.png"), "Join " + room.name());
+        action = action_room_bookmarks->addAction(QIcon(":/menu/bookmarks.png"), tr("Join ") + room.name());
         action->setData(room.jid() + "/" + nickname);
         connect(action, SIGNAL(triggered()), this, SLOT(processBookmarkClick()));
     }
+}
+
+void Messenger::showBookmarkManager() {
+    chat->openBookmarksEditor(bookmark_manager);
 }
 
 void Messenger::processBookmarkClick() {

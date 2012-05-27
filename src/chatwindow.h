@@ -11,6 +11,7 @@
 #include "tabwidget.h"
 #include "chatwidget.h"
 #include "mucwidget.h"
+#include "bookmarkswidget.h"
 #include "servicediscoverywidget.h"
 #include "messenger.h"
 #include "contact_list/contact_item.h"
@@ -36,6 +37,7 @@ public:
     ChatWidget *openChatTab(QString fulljid, QString tab_name, CL::ContactItem *roster_item = 0);
     MUCWidget *openMUCTab(QXmppMucRoom *room);
     ServiceDiscoveryWidget *openDiscoTab(QXmppDiscoveryManager *manager, const QString &jid);
+    BookmarksWidget *openBookmarksEditor(QXmppBookmarkManager *manager);
 
     void reloadGeometry(QSettings *settings);
     TabWidget *getWidgetByJid(QString jid);

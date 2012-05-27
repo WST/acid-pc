@@ -124,6 +124,7 @@ class Messenger: public QMainWindow {
         void answerSubscriptionRequest(const QString &jid, bool accepted);
         void handleBookmarks(const QXmppBookmarkSet &bookmarks);
         void processBookmarkClick();
+        void showBookmarkManager();
 };
 
 #endif // MESSENGER_H

@@ -36,7 +36,8 @@ SOURCES    += src/main.cpp \
     src/confirmationwindow.cpp \
     src/joinroomwindow.cpp \
     src/newcontactwindow.cpp \
-    src/servicediscoverywidget.cpp
+    src/servicediscoverywidget.cpp \
+    src/bookmarkswidget.cpp
 HEADERS    += version.h \
               src/messenger.h \
               src/loginform.h \
@@ -61,7 +62,8 @@ HEADERS    += version.h \
     src/confirmationwindow.h \
     src/joinroomwindow.h \
     src/newcontactwindow.h \
-    src/servicediscoverywidget.h
+    src/servicediscoverywidget.h \
+    src/bookmarkswidget.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \
@@ -75,7 +77,8 @@ FORMS      += \
     ui/confirmationwindow.ui \
     ui/joinroomwindow.ui \
     ui/newcontactwindow.ui \
-    ui/servicediscoverywidget.ui
+    ui/servicediscoverywidget.ui \
+    ui/bookmarkswidget.ui
 RESOURCES  += res/app.qrc
 TRANSLATIONS += i18n/acid-pc_ru.ts i18n/acid-pc_id.ts
 LIBS += -lqxmpp

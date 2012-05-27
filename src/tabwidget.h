@@ -8,7 +8,7 @@ class TabWidget: public QWidget
 public:
     TabWidget(QString with, QWidget *parent = 0);
     QString &getJid();
-    enum Type {Chat, MUC, ServiceDiscovery};
+    enum Type {Chat, MUC, ServiceDiscovery, Bookmarks};
     Type getType();
     virtual void setOnline(bool is_online) = 0;
     void setType(Type newtype);
