@@ -106,6 +106,18 @@ void Messenger::loadSettings() {
 		const char *active_style = styles[settings->value("settings/gui_style").toInt()];
 		qApp->setStyle(active_style);
 	}
+
+    /*
+    if(settings->contains("settings/language")) {
+        int language = settings->value("settings/language", 0).toInt();
+        tray->debugMessage("Language: " + QString::number(language));
+        switch(language) {
+            case 0: break;
+            case 1: translator->load("acid-pc_id"); break;
+            case 2: translator->load("acid-pc_ru"); break;
+        }
+    }
+    */
 }
 
 void Messenger::createConnections() {

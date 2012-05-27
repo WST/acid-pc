@@ -38,6 +38,9 @@
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
            <layout class="QFormLayout" name="formLayout">
+            <property name="fieldGrowthPolicy">
+             <enum>QFormLayout::ExpandingFieldsGrow</enum>
+            </property>
             <item row="0" column="0">
              <widget class="QLabel" name="label_4">
               <property name="text">
@@ -79,6 +82,35 @@
               </property>
               <property name="text">
                <string>Automatically open new tabs on new conversations</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QComboBox" name="language">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string notr="true">English</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string notr="true">Bahasa Indonesia</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string notr="true">Русский</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>Application language:</string>
               </property>
              </widget>
             </item>

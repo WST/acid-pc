@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     //logger->setLoggingType(QXmppLogger::StdoutLogging);
 
     QTranslator translator;
+    translator.load("acid-pc_" + QLocale::system().name());
 
     QApplication app(argc, argv);
         app.setApplicationName(APP_NAME);
