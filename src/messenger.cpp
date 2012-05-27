@@ -680,7 +680,7 @@ void Messenger::handleBookmarks(const QXmppBookmarkSet &bookmarks) {
             joinRoom(room.jid(), nickname);
         }
 
-        QAction *action = action_room_bookmarks->addAction(QIcon(""), room.name());
+        QAction *action = action_room_bookmarks->addAction(QIcon(":/menu/bookmarks.png"), "Join " + room.name());
         action->setData(room.jid() + "/" + nickname);
         connect(action, SIGNAL(triggered()), this, SLOT(processBookmarkClick()));
     }
