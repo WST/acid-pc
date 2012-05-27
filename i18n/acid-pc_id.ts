@@ -58,12 +58,12 @@
     </message>
     <message>
         <location filename="../ui/bookmarkswidget.ui" line="73"/>
-        <source>Bookmark name:</source>
+        <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/bookmarkswidget.ui" line="86"/>
-        <source>Conference JID:</source>
+        <source>JID:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -82,12 +82,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="139"/>
+        <location filename="../ui/bookmarkswidget.ui" line="143"/>
         <source>Delete selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="159"/>
+        <location filename="../ui/bookmarkswidget.ui" line="167"/>
         <source>Save bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
