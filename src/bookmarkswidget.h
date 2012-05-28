@@ -17,6 +17,11 @@ public:
     explicit BookmarksWidget(QXmppBookmarkManager *manager);
     ~BookmarksWidget();
     
+private slots:
+    void on_add_button_clicked();
+
+    void on_delete_button_clicked();
+
 private:
     Ui::BookmarksWidget *ui;
 };

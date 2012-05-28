@@ -9,3 +9,11 @@ BookmarksWidget::BookmarksWidget(QXmppBookmarkManager *manager): QWidget(), ui(n
 BookmarksWidget::~BookmarksWidget() {
     delete ui;
 }
+
+void BookmarksWidget::on_add_button_clicked() {
+    ui->items->insertRow(ui->items->rowCount());
+}
+
+void BookmarksWidget::on_delete_button_clicked() {
+    ui->items->removeRow(ui->items->currentRow());
+}

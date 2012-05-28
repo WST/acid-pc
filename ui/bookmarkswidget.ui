@@ -21,17 +21,29 @@
        <property name="selectionMode">
         <enum>QAbstractItemView::SingleSelection</enum>
        </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <property name="verticalScrollMode">
+        <enum>QAbstractItemView::ScrollPerPixel</enum>
+       </property>
+       <property name="horizontalScrollMode">
+        <enum>QAbstractItemView::ScrollPerPixel</enum>
+       </property>
        <property name="columnCount">
         <number>3</number>
        </property>
        <attribute name="horizontalHeaderVisible">
-        <bool>false</bool>
+        <bool>true</bool>
        </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>50</number>
+        <number>100</number>
        </attribute>
        <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>20</number>
+        <number>40</number>
+       </attribute>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
        </attribute>
        <attribute name="verticalHeaderVisible">
         <bool>false</bool>
@@ -46,12 +58,12 @@
        </column>
        <column>
         <property name="text">
-         <string>JID</string>
+         <string>Nickname</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>Nickname</string>
+         <string>JID</string>
         </property>
        </column>
       </widget>

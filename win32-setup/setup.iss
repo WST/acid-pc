@@ -21,6 +21,8 @@ Source: "..\bin\QtGui4.dll"; DestDir: "{app}"
 Source: "..\bin\QtNetwork4.dll"; DestDir: "{app}"
 Source: "..\bin\QtXml4.dll"; DestDir: "{app}"
 Source: "..\bin\QtMultimedia4.dll"; DestDir: "{app}"
+Source: "..\i18n\acid-pc_ru.qm"; DestDir: "{app}"
+Source: "..\i18n\acid-pc_id.qm"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\ACId Messenger"; Filename: "{app}\acid-pc.exe"
