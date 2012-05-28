@@ -158,7 +158,7 @@ BookmarksWidget *ChatWindow::openBookmarksEditor(QXmppBookmarkManager *manager) 
     //BookmarksWidget *widget = getBookmarksEditor();
     BookmarksWidget *widget;
 
-    widget = new BookmarksWidget(manager);
+    widget = new BookmarksWidget(manager, this);
     ui->tabWidget->addTab(widget, QIcon(":/menu/bookmarks.png"), tr("Bookmarks"));
     ui->tabWidget->setCurrentWidget(widget);
 
@@ -198,6 +198,9 @@ void ChatWindow::on_tabWidget_tabCloseRequested(int index) {
 		} break;
         case TabWidget::ServiceDiscovery: {
             delete (ServiceDiscoveryWidget *) widget;
+        } break;
+        case TabWidget::Bookmarks: {
+            delete (BookmarksWidget *) widget;
         } break;
 	}
 
