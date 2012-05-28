@@ -37,57 +37,57 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="41"/>
+        <location filename="../ui/bookmarkswidget.ui" line="56"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="46"/>
+        <location filename="../ui/bookmarkswidget.ui" line="66"/>
         <source>JID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="51"/>
+        <location filename="../ui/bookmarkswidget.ui" line="61"/>
         <source>Nickname</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="65"/>
+        <location filename="../ui/bookmarkswidget.ui" line="80"/>
         <source>Bookmark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="73"/>
+        <location filename="../ui/bookmarkswidget.ui" line="88"/>
         <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="86"/>
+        <location filename="../ui/bookmarkswidget.ui" line="101"/>
         <source>JID:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="96"/>
+        <location filename="../ui/bookmarkswidget.ui" line="111"/>
         <source>Nickname:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="103"/>
+        <location filename="../ui/bookmarkswidget.ui" line="118"/>
         <source>Join automatically</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="132"/>
+        <location filename="../ui/bookmarkswidget.ui" line="147"/>
         <source>Add new</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="143"/>
+        <location filename="../ui/bookmarkswidget.ui" line="158"/>
         <source>Delete selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="167"/>
+        <location filename="../ui/bookmarkswidget.ui" line="182"/>
         <source>Save bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -356,147 +356,147 @@
 <context>
     <name>Messenger</name>
     <message>
-        <location filename="../src/messenger.cpp" line="158"/>
+        <location filename="../src/messenger.cpp" line="146"/>
         <source>Program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="159"/>
+        <location filename="../src/messenger.cpp" line="147"/>
         <source>New message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="160"/>
+        <location filename="../src/messenger.cpp" line="148"/>
         <source>Join a room</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="161"/>
+        <location filename="../src/messenger.cpp" line="149"/>
         <source>Join new room</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="162"/>
+        <location filename="../src/messenger.cpp" line="150"/>
+        <source>Manage bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/messenger.cpp" line="151"/>
         <source>Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="163"/>
+        <location filename="../src/messenger.cpp" line="152"/>
         <source>Add contact</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="164"/>
+        <location filename="../src/messenger.cpp" line="153"/>
         <source>Roster</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="165"/>
+        <location filename="../src/messenger.cpp" line="154"/>
         <source>Hide offline items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="167"/>
+        <location filename="../src/messenger.cpp" line="156"/>
         <source>Connect service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="172"/>
+        <location filename="../src/messenger.cpp" line="161"/>
         <source>Lopbox microblog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="173"/>
+        <location filename="../src/messenger.cpp" line="162"/>
         <source>Add an RSS feed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="175"/>
+        <location filename="../src/messenger.cpp" line="164"/>
         <source>Service discovery</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="177"/>
+        <location filename="../src/messenger.cpp" line="166"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="179"/>
+        <location filename="../src/messenger.cpp" line="168"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="181"/>
+        <location filename="../src/messenger.cpp" line="170"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="182"/>
+        <location filename="../src/messenger.cpp" line="171"/>
         <source>Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="183"/>
+        <location filename="../src/messenger.cpp" line="172"/>
         <source>Free for chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="184"/>
+        <location filename="../src/messenger.cpp" line="173"/>
         <source>Away</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="185"/>
+        <location filename="../src/messenger.cpp" line="174"/>
         <source>Extended away</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="186"/>
+        <location filename="../src/messenger.cpp" line="175"/>
         <source>Do not disturb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="188"/>
+        <location filename="../src/messenger.cpp" line="177"/>
         <source>Offline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="190"/>
+        <location filename="../src/messenger.cpp" line="179"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="191"/>
+        <location filename="../src/messenger.cpp" line="180"/>
         <source>Support chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="192"/>
+        <location filename="../src/messenger.cpp" line="181"/>
         <source>Official site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="194"/>
+        <location filename="../src/messenger.cpp" line="183"/>
         <source>About </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="195"/>
+        <location filename="../src/messenger.cpp" line="184"/>
         <source>About Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="584"/>
+        <location filename="../src/messenger.cpp" line="575"/>
         <source>You have been kicked: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="686"/>
-        <source>Edit bookmarks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/messenger.cpp" line="700"/>
+        <location filename="../src/messenger.cpp" line="685"/>
         <source>Join </source>
         <translation type="unfinished"></translation>
     </message>
@@ -517,6 +517,59 @@
     <message utf8="true">
         <location filename="../ui/newcontactwindow.ui" line="60"/>
         <source>Contact’s nick:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ServiceDiscoveryWidget</name>
+    <message>
+        <location filename="../ui/servicediscoverywidget.ui" line="22"/>
+        <source>Address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/servicediscoverywidget.ui" line="32"/>
+        <source>Go</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/servicediscoverywidget.ui" line="46"/>
+        <source>Browse the selected item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/servicediscoverywidget.ui" line="49"/>
+        <source>Browse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/servicediscoverywidget.ui" line="73"/>
+        <source>Register within the selected item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/servicediscoverywidget.ui" line="76"/>
+        <source>Register</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/servicediscoverywidget.ui" line="87"/>
+        <source>Join the selected item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/servicediscoverywidget.ui" line="90"/>
+        <source>Join MUC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/servicediscoverywidget.ui" line="101"/>
+        <source>See the selected item&apos;s vCard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/servicediscoverywidget.ui" line="104"/>
+        <source>vCard</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -578,167 +631,172 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="113"/>
+        <location filename="../ui/settingswindow.ui" line="110"/>
         <source>Application language:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="125"/>
+        <location filename="../ui/settingswindow.ui" line="117"/>
+        <source>Automatically connect the network when the application starts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/settingswindow.ui" line="129"/>
         <source>Servers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="155"/>
+        <location filename="../ui/settingswindow.ui" line="159"/>
         <source>Network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="161"/>
+        <location filename="../ui/settingswindow.ui" line="165"/>
         <source>keep-alive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="169"/>
+        <location filename="../ui/settingswindow.ui" line="173"/>
         <source>Keep-alive interval (seconds):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="189"/>
+        <location filename="../ui/settingswindow.ui" line="193"/>
         <source>Keep-alive timeout (seconds):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="211"/>
+        <location filename="../ui/settingswindow.ui" line="215"/>
         <source>File transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="219"/>
+        <location filename="../ui/settingswindow.ui" line="223"/>
         <source>File transfer mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="229"/>
+        <location filename="../ui/settingswindow.ui" line="233"/>
         <source>This box allows you to change the preferred type of file transfer. Please note: using SOCKS is highly recommended.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="233"/>
+        <location filename="../ui/settingswindow.ui" line="237"/>
         <source>SOCKS Bytestreams</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="238"/>
+        <location filename="../ui/settingswindow.ui" line="242"/>
         <source>SI (may not work!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="243"/>
+        <location filename="../ui/settingswindow.ui" line="247"/>
         <source>In-Band (slow)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="254"/>
+        <location filename="../ui/settingswindow.ui" line="258"/>
         <source>You can manually specify SOCKS proxy address. Be careful: if you provide wrong value, file transfer may not work. It is recommended to use default setting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="257"/>
+        <location filename="../ui/settingswindow.ui" line="261"/>
         <source>proxy.jsmart.web.id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="264"/>
+        <location filename="../ui/settingswindow.ui" line="268"/>
         <source>SOCKS proxy address:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="276"/>
+        <location filename="../ui/settingswindow.ui" line="280"/>
         <source>VoIP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="284"/>
+        <location filename="../ui/settingswindow.ui" line="288"/>
         <source>STUN server:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="313"/>
+        <location filename="../ui/settingswindow.ui" line="317"/>
         <source>Look &amp;&amp; feel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="319"/>
+        <location filename="../ui/settingswindow.ui" line="323"/>
         <source>Application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="327"/>
+        <location filename="../ui/settingswindow.ui" line="331"/>
         <source>Application style:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="338"/>
+        <location filename="../ui/settingswindow.ui" line="342"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="372"/>
+        <location filename="../ui/settingswindow.ui" line="376"/>
         <source>Roster opacity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="381"/>
+        <location filename="../ui/settingswindow.ui" line="385"/>
         <source>Display roster window on the top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="388"/>
+        <location filename="../ui/settingswindow.ui" line="392"/>
         <source>Animate roster</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="398"/>
+        <location filename="../ui/settingswindow.ui" line="402"/>
         <source>Use ctrl-enter to send messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="408"/>
+        <location filename="../ui/settingswindow.ui" line="412"/>
         <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="416"/>
+        <location filename="../ui/settingswindow.ui" line="420"/>
         <source>Notification display time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="455"/>
+        <location filename="../ui/settingswindow.ui" line="459"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="461"/>
+        <location filename="../ui/settingswindow.ui" line="465"/>
         <source>Paths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="469"/>
+        <location filename="../ui/settingswindow.ui" line="473"/>
         <source>Save files to:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="476"/>
+        <location filename="../ui/settingswindow.ui" line="480"/>
         <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="502"/>
+        <location filename="../ui/settingswindow.ui" line="506"/>
         <source>Ask me everytime</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settingswindow.cpp" line="85"/>
+        <location filename="../src/settingswindow.cpp" line="87"/>
         <source>Select a directory</source>
         <translation type="unfinished"></translation>
     </message>

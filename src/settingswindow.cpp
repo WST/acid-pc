@@ -25,6 +25,7 @@ void SettingsWindow::on_button_box_accepted() {
 	settings->setValue("settings/file_transfer_proxy", ui->file_transfer_proxy->text());
 	settings->setValue("settings/muc_nickname", ui->muc_nickname->text());
     settings->setValue("settings/language", ui->language->currentIndex());
+    settings->setValue("login/auto", ui->auto_connect->checkState());
 
 	// Второй таб
 	settings->setValue("settings/keepalive_interval", ui->keepalive_interval->value());
@@ -51,6 +52,7 @@ void SettingsWindow::loadCurrentSettings() {
 	ui->automatically_open_new_tabs->setChecked(settings->value("settings/automatically_open_new_tabs", false).toBool());
 	ui->automatically_accept_files->setChecked(settings->value("settings/automatically_accept_files", false).toBool());
 	ui->muc_nickname->setText(settings->value("settings/muc_nickname", "").toString());
+    ui->auto_connect->setChecked(settings->value("login/auto", false).toBool());
     ui->language->setCurrentIndex(settings->value("settings/language", 0).toInt());
 
 	// Второй таб

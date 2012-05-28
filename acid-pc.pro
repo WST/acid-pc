@@ -1,7 +1,7 @@
 TARGET      = acid-pc
 TEMPLATE    = app
 QT         += core gui multimedia network xml
-CONFIG     += qt warn_on debug
+CONFIG     += qt warn_on
 
 DESTDIR     = bin
 MOC_DIR     = build/moc
@@ -9,8 +9,8 @@ OBJECTS_DIR = build/obj
 RCC_DIR     = build/rcc
 UI_DIR      = build/ui
 
-INCLUDEPATH += \
-              $$PWD
+INCLUDEPATH = $$PWD
+win32:INCLUDEPATH += C:/include
 
 SOURCES    += src/main.cpp \
               src/messenger.cpp \
@@ -80,8 +80,10 @@ FORMS      += \
     ui/servicediscoverywidget.ui \
     ui/bookmarkswidget.ui
 RESOURCES  += res/app.qrc
-TRANSLATIONS += i18n/acid-pc_ru.ts i18n/acid-pc_id.ts
-LIBS += -lqxmpp
+TRANSLATIONS += i18n/acid-pc_ru.ts i18n/acid-pc_id.ts i18n/acid-pc_jawa.ts i18n/acid-pc_sunda.ts
+
+win32:LIBS += -L"C:/lib" -lqxmpp -lws2_32 -ldnsapi
+unix:LIBS += -lqxmpp
 
 win32:RC_FILE = \
               res/win32/app.rc

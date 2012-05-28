@@ -192,6 +192,7 @@ void Messenger::createMenus() {
     connect(action_hide_offline_contacts, SIGNAL(triggered(bool)), & roster_widget, SLOT(hideOfflineContacts(bool)));
     connect(action_browse_services, SIGNAL(triggered()), this, SLOT(openServiceBrowser()));
     connect(action_edit_bookmarks, SIGNAL(triggered()), this, SLOT(showBookmarkManager()));
+    room_bookmarks_menu->setEnabled(false);
 
 	// Меню статуса
 	connect(action_status_available, SIGNAL(triggered()), this, SLOT(setOnlineStatus()));
@@ -578,10 +579,7 @@ void Messenger::kickedFromRoom(const QString &jid, const QString &reason) {
 
 // Эта функция вызывается, когда вход в комнату выполнен успешно
 void Messenger::joinedRoom() {
-    QXmppMucRoom *room = (QXmppMucRoom *) sender();
-    QStringList room_jid = parseJid(room->jid());
-    chat->openMUCTab(room);
-    tray->debugMessage("Joined MUC room!");
+    chat->openMUCTab((QXmppMucRoom *) sender());
 }
 
 void Messenger::leaveRoom(const QString &room_jid) {
@@ -672,6 +670,7 @@ void Messenger::answerSubscriptionRequest(const QString &jid, bool accepted) {
 }
 
 void Messenger::handleBookmarks(const QXmppBookmarkSet &bookmarks) {
+    room_bookmarks_menu->setEnabled(true);
     QListIterator<QXmppBookmarkConference> iterator(bookmarks.conferences());
     QAction *action;
     while(iterator.hasNext()) {
