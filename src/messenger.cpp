@@ -15,11 +15,11 @@
 // Qt
 #include <QHostAddress>
 
-Messenger::Messenger(QTranslator *app_translator): QMainWindow(0), roster_widget(this), roster_model(this), messages() {
+Messenger::Messenger(QTranslator *app_translator, QSettings *app_settings): QMainWindow(0), roster_widget(this), roster_model(this), messages() {
     translator = app_translator;
 
-	settings = new QSettings(APP_COMPANY, APP_NAME, this);
-	client_settings = new QXmppConfiguration();
+    settings = app_settings;
+    client_settings = new QXmppConfiguration();
 	client_presence = new QXmppPresence(QXmppPresence::Available, QXmppPresence::Status::Online);
 	client = new QXmppClient(this);
 
@@ -105,18 +105,6 @@ void Messenger::loadSettings() {
 		const char *active_style = styles[settings->value("settings/gui_style").toInt()];
 		qApp->setStyle(active_style);
 	}
-
-    /*
-    if(settings->contains("settings/language")) {
-        int language = settings->value("settings/language", 0).toInt();
-        tray->debugMessage("Language: " + QString::number(language));
-        switch(language) {
-            case 0: break;
-            case 1: translator->load("acid-pc_id"); break;
-            case 2: translator->load("acid-pc_ru"); break;
-        }
-    }
-    */
 }
 
 void Messenger::createConnections() {
@@ -159,7 +147,8 @@ void Messenger::createMenus() {
         QAction *action_new_message = im_menu->addAction(QIcon(":/menu/document.png"), tr("New message"));
         QMenu *join_room_menu = im_menu->addMenu(QIcon(":/menu/users.png"), tr("Join a room"));
             QAction *action_join_new_room = join_room_menu->addAction(QIcon(":/menu/users.png"), tr("Join new room"));
-            action_room_bookmarks = join_room_menu->addMenu(QIcon(":/menu/bookmarks.png"), tr("Bookmarks"));
+            action_edit_bookmarks = join_room_menu->addAction(QIcon(":/menu/bookmarks.png"), tr("Manage bookmarks"));
+            room_bookmarks_menu = join_room_menu->addMenu(QIcon(":/menu/bookmarks.png"), tr("Bookmarks"));
         QAction *action_new_contact = im_menu->addAction(QIcon(":/menu/plus.png"), tr("Add contact"));
         QMenu *roster_menu = im_menu->addMenu(QIcon(":/menu/user-black.png"), tr("Roster"));
             QAction *action_hide_offline_contacts = roster_menu->addAction(QIcon(":/menu/user-silhouette.png"), tr("Hide offline items"));
@@ -202,6 +191,7 @@ void Messenger::createMenus() {
     connect(action_new_contact, SIGNAL(triggered()), this, SLOT(showNewContactWindow()));
     connect(action_hide_offline_contacts, SIGNAL(triggered(bool)), & roster_widget, SLOT(hideOfflineContacts(bool)));
     connect(action_browse_services, SIGNAL(triggered()), this, SLOT(openServiceBrowser()));
+    connect(action_edit_bookmarks, SIGNAL(triggered()), this, SLOT(showBookmarkManager()));
 
 	// Меню статуса
 	connect(action_status_available, SIGNAL(triggered()), this, SLOT(setOnlineStatus()));
@@ -682,12 +672,8 @@ void Messenger::answerSubscriptionRequest(const QString &jid, bool accepted) {
 }
 
 void Messenger::handleBookmarks(const QXmppBookmarkSet &bookmarks) {
-
-    QAction *action = action_room_bookmarks->addAction(QIcon(), tr("Edit bookmarks"));
-    connect(action, SIGNAL(triggered()), this, SLOT(showBookmarkManager()));
-    action_room_bookmarks->addSeparator();
-
     QListIterator<QXmppBookmarkConference> iterator(bookmarks.conferences());
+    QAction *action;
     while(iterator.hasNext()) {
         QXmppBookmarkConference room = iterator.next();
         QString nickname = room.nickName().isEmpty() ? settings->value("settings/muc_nickname", login->username()).toString() : room.nickName();
@@ -697,7 +683,7 @@ void Messenger::handleBookmarks(const QXmppBookmarkSet &bookmarks) {
             joinRoom(room.jid(), nickname);
         }
 
-        action = action_room_bookmarks->addAction(QIcon(":/menu/bookmarks.png"), tr("Join ") + room.name());
+        action = room_bookmarks_menu->addAction(QIcon(":/menu/bookmarks.png"), tr("Join ") + room.name());
         action->setData(room.jid() + "/" + nickname);
         connect(action, SIGNAL(triggered()), this, SLOT(processBookmarkClick()));
     }

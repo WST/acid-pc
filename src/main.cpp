@@ -10,8 +10,18 @@ int main(int argc, char *argv[])
     //QXmppLogger *logger = QXmppLogger::getLogger();
     //logger->setLoggingType(QXmppLogger::StdoutLogging);
 
+    QSettings settings(APP_COMPANY, APP_NAME);
     QTranslator translator;
-    translator.load("acid-pc_" + QLocale::system().name());
+
+    if(settings.contains("settings/language")) {
+        switch(settings.value("settings/language", 0).toInt()) {
+            case 0: break;
+            case 1: translator.load("acid-pc_id"); break;
+            case 2: translator.load("acid-pc_ru"); break;
+        }
+    } else {
+        translator.load("acid-pc_" + QLocale::system().name());
+    }
 
     QApplication app(argc, argv);
         app.setApplicationName(APP_NAME);
@@ -21,7 +31,7 @@ int main(int argc, char *argv[])
         app.setQuitOnLastWindowClosed(false);
         app.installTranslator(& translator);
 
-    Messenger m(& translator);
+    Messenger m(& translator, & settings);
     m.launch();
 
     return app.exec();

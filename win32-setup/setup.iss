@@ -11,6 +11,14 @@ SolidCompression=yes
 OutputDir="..\bin"
 WizardImageFile="setupbg.bmp"
 LicenseFile="licence.rtf"
+DirExistsWarning=yes
+ShowLanguageDialog=yes
+VersionInfoProductVersion=0.1
+VersionInfoCompany=SmartCommunity
+VersionInfoCopyright="(c) SmartCommunity"
+VersionInfoProductName="ACId Messenger"
+VersionInfoDescription="Easy to use Jabber/XMPP powered IM application"
+VersionInfoVersion=0.1
 
 [Files]
 Source: "..\bin\acid-pc.exe"; DestDir: "{app}"

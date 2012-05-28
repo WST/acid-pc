@@ -50,5 +50,7 @@
         <file>common/cross.png</file>
         <file>common/disk.png</file>
         <file>common/plus.png</file>
+        <file>common/plug.png</file>
+        <file>common/card-address.png</file>
     </qresource>
 </RCC>

@@ -182,6 +182,9 @@ void ChatWindow::setOnline(bool is_online) {
 			case TabWidget::MUC: {
 				((MUCWidget *) widget)->setOnline(is_online);
 			} break;
+            case TabWidget::Bookmarks: {
+                ((BookmarksWidget *) widget)->setOnline(is_online);
+            } break;
 		}
 	}
 }

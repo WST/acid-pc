@@ -13,7 +13,108 @@
   <property name="windowTitle">
    <string notr="true">Disco widget</string>
   </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Address:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="address_bar"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="go_button">
+       <property name="text">
+        <string>Go</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="items"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="browse_button">
+       <property name="toolTip">
+        <string>Browse the selected item</string>
+       </property>
+       <property name="text">
+        <string>Browse</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/app.qrc">
+         <normaloff>:/common/plug.png</normaloff>:/common/plug.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="register_button">
+       <property name="toolTip">
+        <string>Register within the selected item</string>
+       </property>
+       <property name="text">
+        <string>Register</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/app.qrc">
+         <normaloff>:/common/plus.png</normaloff>:/common/plus.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="join_button">
+       <property name="toolTip">
+        <string>Join the selected item</string>
+       </property>
+       <property name="text">
+        <string>Join MUC</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/app.qrc">
+         <normaloff>:/common/users.png</normaloff>:/common/users.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="vcard_button">
+       <property name="toolTip">
+        <string>See the selected item's vCard</string>
+       </property>
+       <property name="text">
+        <string>vCard</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/app.qrc">
+         <normaloff>:/common/card-address.png</normaloff>:/common/card-address.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/app.qrc"/>
+ </resources>
  <connections/>
 </ui>

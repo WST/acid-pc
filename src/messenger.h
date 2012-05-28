@@ -55,7 +55,8 @@ class Messenger: public QMainWindow {
 		QXmppVCardManager *vcard_manager;
 		QXmppDiscoveryManager *disco_manager;
         QXmppBookmarkManager *bookmark_manager;
-        QMenu *action_room_bookmarks; // меню с закладками на MUC
+        QMenu *room_bookmarks_menu; // меню с закладками на MUC
+        QAction *action_edit_bookmarks;
 	
 		CL::TreeView roster_widget; // виджет ростера
 		CL::ItemModel roster_model; // модель элемента ростера
@@ -64,7 +65,7 @@ class Messenger: public QMainWindow {
         QTranslator *translator; // Транслятор UI приложения
 
 	public:
-        Messenger(QTranslator *app_translator);
+        Messenger(QTranslator *app_translator, QSettings *app_settings);
 		~Messenger();
 		void launch();
 		QSettings *settingsManager();

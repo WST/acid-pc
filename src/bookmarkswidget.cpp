@@ -26,4 +26,12 @@ void BookmarksWidget::on_save_button_clicked() {
 
 void BookmarksWidget::setOnline(bool is_online) {
     ui->save_button->setEnabled(is_online);
+    ui->add_button->setEnabled(is_online);
+    ui->delete_button->setEnabled(is_online);
+    ui->items->setEnabled(is_online);
+    unsigned int i,rows;
+    rows = ui->items->rowCount();
+    for(i = 0; i < rows; i ++) {
+        ui->items->removeRow(0);
+    }
 }

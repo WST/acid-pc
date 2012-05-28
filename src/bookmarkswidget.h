@@ -18,12 +18,12 @@ class BookmarksWidget: public TabWidget
 public:
     explicit BookmarksWidget(QXmppBookmarkManager *manager, QWidget *parent = 0);
     ~BookmarksWidget();
+    void setOnline(bool is_online);
     
 private slots:
     void on_add_button_clicked();
     void on_delete_button_clicked();
     void on_save_button_clicked();
-    void setOnline(bool is_online);
 
 private:
     Ui::BookmarksWidget *ui;
