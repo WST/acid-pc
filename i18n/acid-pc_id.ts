@@ -20,11 +20,25 @@
     </message>
     <message utf8="true">
         <location filename="../ui/aboutwindow.ui" line="63"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This program is brought to you by SmartCommunity members and other people interested in XMPP development. The full list of people who contributed to this application development is follow:&lt;/p&gt;&lt;p&gt;· Ilja Averkov &amp;lt;WST&amp;gt;&lt;br/&gt;· Artem Sh &amp;lt;dot&amp;gt;&lt;br/&gt;· Yury Potapov &amp;lt;Erik&amp;gt;&lt;br/&gt;· Paijo Ahmad &amp;lt;Jo&amp;gt;&lt;br/&gt;· Irfan Mahfudz Guntur &amp;lt;ayes&amp;gt;&lt;br/&gt;· Arnold Lapian &amp;lt;bLaDe&amp;gt;&lt;br/&gt;· Wiecliff Reynardo &amp;lt;WRS&amp;gt;&lt;br/&gt;· Fakhri Izz &amp;lt;Ŧакнгί&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Developers and testers&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This program is brought to you by SmartCommunity members and other people interested in XMPP development. The full list of people who contributed to this application development is follow:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Ilja Averkov&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — Project management and core programming&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Artem Sh&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Yury Potapov&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Paijo Ahmad&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and translations&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Wiecliff Reynardo&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and application name&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Eddy Purwa&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — logotype and icon design&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Fakhri Izz&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Victoria Grogorian&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Yelena Kasianova&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Irfan Mahfudz Guntur&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Arnold Lapian&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Third parties&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This program includes components from third parties:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://qt.nokia.com&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Qt Library&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from Nokia corporation&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://p.yusukekamiyamane.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Fugue icons&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from Yusuke Kamiyamane&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://qxmpp.googlecode.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Qxmpp&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from qxmpp development team&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="99"/>
+        <location filename="../ui/aboutwindow.ui" line="108"/>
+        <source>Dedications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/aboutwindow.ui" line="113"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -493,12 +507,7 @@
     </message>
     <message>
         <location filename="../src/messenger.cpp" line="183"/>
-        <source>About </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/messenger.cpp" line="184"/>
-        <source>About Qt</source>
+        <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

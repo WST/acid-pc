@@ -180,8 +180,8 @@ void Messenger::createMenus() {
         QAction *action_support_room = help_menu->addAction(QIcon(":/menu/question.png"), tr("Support chat"));
         QAction *action_official_site = help_menu->addAction(QIcon(":/menu/smartcomm.png"), tr("Official site"));
 		help_menu->addSeparator();
-        QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), tr("About ") + APP_NAME);
-        QAction *action_about_qt = help_menu->addAction(tr("About Qt"));
+        QAction *action_about_app = help_menu->addAction(QIcon(":/acid_16.png"), tr("About"));
+        //QAction *action_about_qt = help_menu->addAction(tr("About Qt"));
 
 	// Главное меню
 	connect(action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
@@ -204,7 +204,7 @@ void Messenger::createMenus() {
 
 	// Меню Help
 	connect(action_official_site, SIGNAL(triggered()), this, SLOT(openOfficialSite()));
-	connect(action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+    //connect(action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 	connect(action_about_app, SIGNAL(triggered()), this, SLOT(showApplicationInfo()));
 	connect(action_support_room, SIGNAL(triggered()), this, SLOT(joinSupportRoom()));
 
