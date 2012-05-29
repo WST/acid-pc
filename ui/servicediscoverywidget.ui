@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string notr="true">Disco widget</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../res/app.qrc">
+    <normaloff>:/acid_16.png</normaloff>:/acid_16.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">

@@ -152,11 +152,25 @@ MUCWidget *ChatWindow::openMUCTab(QXmppMucRoom *room) {
     return widget;
 }
 
+BookmarksWidget *ChatWindow::getBookmarksEditor() {
+    TabWidget *widget;
+    for(int i = 0; i < ui->tabWidget->count(); i ++) {
+        if((widget = (TabWidget *) ui->tabWidget->widget(i))->getType() == TabWidget::Bookmarks) {
+            return (BookmarksWidget *) widget;
+        }
+    }
+    return 0;
+}
+
 BookmarksWidget *ChatWindow::openBookmarksEditor(QXmppBookmarkManager *manager) {
     if(!isVisible()) show();
 
-    //BookmarksWidget *widget = getBookmarksEditor();
-    BookmarksWidget *widget;
+    BookmarksWidget *widget = getBookmarksEditor();
+
+    if(widget) {
+        ui->tabWidget->setCurrentWidget(widget);
+        return widget;
+    }
 
     widget = new BookmarksWidget(manager, this);
     ui->tabWidget->addTab(widget, QIcon(":/menu/bookmarks.png"), tr("Bookmarks"));

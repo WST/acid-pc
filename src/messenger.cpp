@@ -671,6 +671,7 @@ void Messenger::answerSubscriptionRequest(const QString &jid, bool accepted) {
 
 void Messenger::handleBookmarks(const QXmppBookmarkSet &bookmarks) {
     room_bookmarks_menu->setEnabled(true);
+    room_bookmarks_menu->clear();
     QListIterator<QXmppBookmarkConference> iterator(bookmarks.conferences());
     QAction *action;
     while(iterator.hasNext()) {

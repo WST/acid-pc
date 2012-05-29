@@ -32,64 +32,75 @@
 <context>
     <name>BookmarksWidget</name>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/bookmarkswidget.ui" line="56"/>
+        <location filename="../ui/bookmarkswidget.ui" line="60"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="66"/>
+        <location filename="../ui/bookmarkswidget.ui" line="70"/>
         <source>JID</source>
         <translation>JID</translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="61"/>
+        <location filename="../ui/bookmarkswidget.ui" line="65"/>
         <source>Nickname</source>
         <translation>Ник</translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="80"/>
+        <location filename="../ui/bookmarkswidget.ui" line="84"/>
         <source>Bookmark</source>
         <translation>Закладка</translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="88"/>
+        <location filename="../ui/bookmarkswidget.ui" line="92"/>
         <source>Name:</source>
         <translation>Название:</translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="101"/>
+        <location filename="../ui/bookmarkswidget.ui" line="105"/>
         <source>JID:</source>
         <translation>JID:</translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="111"/>
+        <location filename="../ui/bookmarkswidget.ui" line="115"/>
         <source>Nickname:</source>
         <translation>Псевдоним:</translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="118"/>
+        <location filename="../ui/bookmarkswidget.ui" line="122"/>
         <source>Join automatically</source>
         <translation>Входить автоматически</translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="147"/>
+        <location filename="../ui/bookmarkswidget.ui" line="151"/>
         <source>Add new</source>
         <translation>Добавить</translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="158"/>
+        <location filename="../ui/bookmarkswidget.ui" line="162"/>
         <source>Delete selected</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../ui/bookmarkswidget.ui" line="182"/>
+        <location filename="../ui/bookmarkswidget.ui" line="186"/>
         <source>Save bookmarks</source>
         <translation>Сохранить закладки</translation>
+    </message>
+    <message>
+        <location filename="../src/bookmarkswidget.cpp" line="67"/>
+        <location filename="../src/bookmarkswidget.cpp" line="76"/>
+        <source>Bookmark editor</source>
+        <translation>Редактор закладок</translation>
+    </message>
+    <message>
+        <location filename="../src/bookmarkswidget.cpp" line="67"/>
+        <source>Please fill in all the fields</source>
+        <translation>Пожалуйста, заполните все поля</translation>
+    </message>
+    <message>
+        <location filename="../src/bookmarkswidget.cpp" line="76"/>
+        <source>Bookmarks have been saved</source>
+        <translation>Закладки сохранены на сервере</translation>
     </message>
 </context>
 <context>
@@ -123,7 +134,7 @@
         <translation>Службы</translation>
     </message>
     <message>
-        <location filename="../src/chatwindow.cpp" line="162"/>
+        <location filename="../src/chatwindow.cpp" line="176"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
@@ -267,47 +278,47 @@
         <translation>Используемый XMPP-сервер</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="119"/>
+        <location filename="../ui/loginform.ui" line="124"/>
         <source>Password:</source>
         <translation>Пароль:</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="139"/>
+        <location filename="../ui/loginform.ui" line="144"/>
         <source>Check this box to save the password</source>
         <translation>Установите этот флаг, чтобы сохранять пароль</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="142"/>
+        <location filename="../ui/loginform.ui" line="147"/>
         <source>Save password?</source>
         <translation>Сохранить пароль?</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="152"/>
+        <location filename="../ui/loginform.ui" line="157"/>
         <source>Check this box if you would like to sign in automatically next time</source>
         <translation>Установите этот флаг, чтобы в следующий раз подключиться автоматически</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="155"/>
+        <location filename="../ui/loginform.ui" line="160"/>
         <source>Log in automatically?</source>
         <translation>Входить автоматически?</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="192"/>
+        <location filename="../ui/loginform.ui" line="197"/>
         <source>Sign in or register</source>
         <translation>Войти или выполнить регистрацию на сервере</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="195"/>
+        <location filename="../ui/loginform.ui" line="200"/>
         <source>Sign in</source>
         <translation>Подключиться</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="211"/>
+        <location filename="../ui/loginform.ui" line="216"/>
         <source>Edit application settings</source>
         <translation>Редактировать настройки приложения</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="214"/>
+        <location filename="../ui/loginform.ui" line="219"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
@@ -343,12 +354,12 @@
         <translation>Получатель:</translation>
     </message>
     <message>
-        <location filename="../ui/messageform.ui" line="52"/>
+        <location filename="../ui/messageform.ui" line="62"/>
         <source>Send</source>
         <translation>Отправить</translation>
     </message>
     <message>
-        <location filename="../ui/messageform.ui" line="59"/>
+        <location filename="../ui/messageform.ui" line="73"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -496,7 +507,7 @@
         <translation>Вас выгнали из комнаты:</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="685"/>
+        <location filename="../src/messenger.cpp" line="686"/>
         <source>Join </source>
         <translation>Войти в </translation>
     </message>
@@ -523,52 +534,52 @@
 <context>
     <name>ServiceDiscoveryWidget</name>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="22"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="26"/>
         <source>Address:</source>
         <translation>Адрес:</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="32"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="36"/>
         <source>Go</source>
         <translation>Переход</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="46"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="50"/>
         <source>Browse the selected item</source>
         <translation>Открыть выбранный элемент</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="49"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="53"/>
         <source>Browse</source>
         <translation>Обзор</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="73"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="77"/>
         <source>Register within the selected item</source>
         <translation>Зарегистрироваться на выбранном узле</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="76"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="80"/>
         <source>Register</source>
         <translation>Регистрация</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="87"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="91"/>
         <source>Join the selected item</source>
         <translation>Войти в выбранный чат</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="90"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="94"/>
         <source>Join MUC</source>
         <translation>Войти</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="101"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="105"/>
         <source>See the selected item&apos;s vCard</source>
         <translation>Просмотреть vCard выбранного элемента</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="104"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="108"/>
         <source>vCard</source>
         <translation>vCard</translation>
     </message>
@@ -598,7 +609,7 @@
     <message>
         <location filename="../ui/settingswindow.ui" line="54"/>
         <source>Here you can specify your MUC nickname. The default is the left part of your Jabber ID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Здесь вы можете указать предпочитаемое имя пользователя для чатов. По умолчанию будет использоваться левая часть вашего Jabber ID.</translation>
     </message>
     <message utf8="true">
         <location filename="../ui/settingswindow.ui" line="61"/>
@@ -631,167 +642,177 @@
         <translation>Открывать новые табы автоматически</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="110"/>
+        <location filename="../ui/settingswindow.ui" line="102"/>
+        <source>Jawanese</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../ui/settingswindow.ui" line="107"/>
+        <source>Sundanese</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../ui/settingswindow.ui" line="120"/>
         <source>Application language:</source>
         <translation>Язык приложения:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="117"/>
+        <location filename="../ui/settingswindow.ui" line="127"/>
         <source>Automatically connect the network when the application starts</source>
         <translation>Автоматически входить в сеть при запуске</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="129"/>
+        <location filename="../ui/settingswindow.ui" line="139"/>
         <source>Servers</source>
         <translation>Серверы</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="159"/>
+        <location filename="../ui/settingswindow.ui" line="169"/>
         <source>Network</source>
         <translation>Сеть</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="165"/>
+        <location filename="../ui/settingswindow.ui" line="175"/>
         <source>keep-alive</source>
         <translation>keep-alive</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="173"/>
+        <location filename="../ui/settingswindow.ui" line="183"/>
         <source>Keep-alive interval (seconds):</source>
         <translation>Интервал keep-alive:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="193"/>
+        <location filename="../ui/settingswindow.ui" line="203"/>
         <source>Keep-alive timeout (seconds):</source>
         <translation>Таймаут keep-alive:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="215"/>
+        <location filename="../ui/settingswindow.ui" line="225"/>
         <source>File transfer</source>
         <translation>Передачи файлов</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="223"/>
+        <location filename="../ui/settingswindow.ui" line="233"/>
         <source>File transfer mode:</source>
         <translation>Режим передач:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="233"/>
+        <location filename="../ui/settingswindow.ui" line="243"/>
         <source>This box allows you to change the preferred type of file transfer. Please note: using SOCKS is highly recommended.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="237"/>
+        <location filename="../ui/settingswindow.ui" line="247"/>
         <source>SOCKS Bytestreams</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="242"/>
+        <location filename="../ui/settingswindow.ui" line="252"/>
         <source>SI (may not work!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="247"/>
+        <location filename="../ui/settingswindow.ui" line="257"/>
         <source>In-Band (slow)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="258"/>
+        <location filename="../ui/settingswindow.ui" line="268"/>
         <source>You can manually specify SOCKS proxy address. Be careful: if you provide wrong value, file transfer may not work. It is recommended to use default setting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="261"/>
+        <location filename="../ui/settingswindow.ui" line="271"/>
         <source>proxy.jsmart.web.id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="268"/>
+        <location filename="../ui/settingswindow.ui" line="278"/>
         <source>SOCKS proxy address:</source>
         <translation>Адрес SOCKS-прокси:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="280"/>
+        <location filename="../ui/settingswindow.ui" line="290"/>
         <source>VoIP</source>
         <translation>Голосовые вызовы</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="288"/>
+        <location filename="../ui/settingswindow.ui" line="298"/>
         <source>STUN server:</source>
         <translation>Сервер STUN:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="317"/>
+        <location filename="../ui/settingswindow.ui" line="327"/>
         <source>Look &amp;&amp; feel</source>
         <translation>Интерфейс</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="323"/>
+        <location filename="../ui/settingswindow.ui" line="333"/>
         <source>Application</source>
         <translation>Приложение</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="331"/>
+        <location filename="../ui/settingswindow.ui" line="341"/>
         <source>Application style:</source>
         <translation>Стиль GUI:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="342"/>
+        <location filename="../ui/settingswindow.ui" line="352"/>
         <source>Default</source>
         <translation>По умолчанию</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="376"/>
+        <location filename="../ui/settingswindow.ui" line="386"/>
         <source>Roster opacity:</source>
         <translation>Непрозрачность:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="385"/>
+        <location filename="../ui/settingswindow.ui" line="395"/>
         <source>Display roster window on the top</source>
         <translation>Окно ростера поверх остальных окон</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="392"/>
+        <location filename="../ui/settingswindow.ui" line="402"/>
         <source>Animate roster</source>
         <translation>Использовать анимации в ростере</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="402"/>
+        <location filename="../ui/settingswindow.ui" line="412"/>
         <source>Use ctrl-enter to send messages</source>
         <translation>Использовать ctrl-enter для отправки сообщений</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="412"/>
+        <location filename="../ui/settingswindow.ui" line="422"/>
         <source>Notifications</source>
         <translation>Уведомления</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="420"/>
+        <location filename="../ui/settingswindow.ui" line="430"/>
         <source>Notification display time:</source>
         <translation>Время показа уведомлений:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="459"/>
+        <location filename="../ui/settingswindow.ui" line="469"/>
         <source>Miscellaneous</source>
         <translation>Мелочи</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="465"/>
+        <location filename="../ui/settingswindow.ui" line="475"/>
         <source>Paths</source>
         <translation>Пути</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="473"/>
+        <location filename="../ui/settingswindow.ui" line="483"/>
         <source>Save files to:</source>
         <translation>Сохранять файлы:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="480"/>
+        <location filename="../ui/settingswindow.ui" line="490"/>
         <source>Browse</source>
         <translation>Обзор</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="506"/>
+        <location filename="../ui/settingswindow.ui" line="516"/>
         <source>Ask me everytime</source>
         <translation>Спрашивать меня каждый раз</translation>
     </message>

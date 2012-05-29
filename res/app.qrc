@@ -52,5 +52,6 @@
         <file>common/plus.png</file>
         <file>common/plug.png</file>
         <file>common/card-address.png</file>
+        <file>common/paper-plane.png</file>
     </qresource>
 </RCC>

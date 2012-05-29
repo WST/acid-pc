@@ -94,7 +94,17 @@
               </item>
               <item>
                <property name="text">
-                <string notr="true">Bahasa Indonesia</string>
+                <string notr="true">Indonesian</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Jawanese</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Sundanese</string>
                </property>
               </item>
               <item>

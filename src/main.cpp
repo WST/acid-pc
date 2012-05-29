@@ -17,7 +17,9 @@ int main(int argc, char *argv[])
         switch(settings.value("settings/language", 0).toInt()) {
             case 0: break;
             case 1: translator.load("acid-pc_id"); break;
-            case 2: translator.load("acid-pc_ru"); break;
+            case 2: translator.load("acid-pc_jawa"); break;
+            case 3: translator.load("acid-pc_sunda"); break;
+            case 4: translator.load("acid-pc_ru"); break;
         }
     } else {
         translator.load("acid-pc_" + QLocale::system().name());

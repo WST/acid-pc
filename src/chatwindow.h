@@ -45,6 +45,7 @@ public:
     ChatWidget *getChatByJid(QString jid);
     MUCWidget *getMUCByJid(QString jid);
     ServiceDiscoveryWidget *getServiceBrowserByJid(QString jid);
+    BookmarksWidget *getBookmarksEditor();
 
 private:
     Ui::ChatWindow *ui;
