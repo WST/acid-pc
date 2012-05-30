@@ -101,7 +101,7 @@ void Messenger::loadSettings() {
 	if(settings->value("settings/roster_on_the_top", false).toBool()) setWindowFlags(windowFlags() | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
 
 	if(settings->contains("settings/gui_style")) {
-		const char *styles[] = {0, "plastique", "cleanlooks"};
+        const char *styles[] = {0, "plastique", "cleanlooks"};
 		const char *active_style = styles[settings->value("settings/gui_style").toInt()];
 		qApp->setStyle(active_style);
 	}
@@ -442,6 +442,7 @@ void Messenger::gotMessage(QXmppMessage message) {
             // Если контакт есть в ростере, получим указатель на него (иначе ноль)
             CL::ContactItem *roster_item = roster_model.getContact(message.from());
             QString nick = roster_item ? roster_item->getNick() : parseJid(message.from())[2];
+            QString bare_jid = parseJid(message.from())[1];
 			if(settings->value("settings/automatically_open_new_tabs", false).toBool()) {
                 // В настройках включено автоматическое отображение новых сообщений
                 chat->displayMessage(message, nick, roster_model.getContact(message.from()));
@@ -449,7 +450,7 @@ void Messenger::gotMessage(QXmppMessage message) {
 			}
 			if(!chat->adaTabForJid(message.from())) {
                 // Сохраним текст сообщения
-                messages[message.from()][message.id()] = message;
+                messages[bare_jid][message.id()] = message;
                 roster_item->setBlinking(true);
                 connect(ConfirmationWindow::newMessage(& message, settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
 			} else {
@@ -541,7 +542,23 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 }
 
 void Messenger::openChat(const QString &full_jid, const QString &nick) {
+
+    // TODO: сюда логичнее передавать сам элемент ростера в качестве аргумента
+
     chat->openChatTab(full_jid, nick, roster_model.getContact(full_jid));
+    QStringList jid = parseJid(full_jid);
+
+    // Если контакт есть в ростере, получим указатель на него (иначе ноль)
+    CL::ContactItem *roster_item = roster_model.getContact(full_jid);
+
+    QMap<QString, QXmppMessage> list = messages[jid[1]];
+
+    for(QMap<QString, QXmppMessage>::iterator i = list.begin(); i != list.end(); ++ i) {
+        chat->displayMessage(i.value(), nick, roster_model.getContact(jid[1]));
+    }
+
+    messages.erase(messages.find(jid[1]));
+    roster_item->setBlinking(false);
 }
 
 void Messenger::processJoinRequest(const QString &room_jid) {

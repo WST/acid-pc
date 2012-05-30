@@ -349,7 +349,7 @@
               </property>
               <item>
                <property name="text">
-                <string>Default</string>
+                <string notr="true">Default</string>
                </property>
               </item>
               <item>

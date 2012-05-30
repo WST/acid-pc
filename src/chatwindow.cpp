@@ -14,6 +14,10 @@ ChatWindow::~ChatWindow() {
 void ChatWindow::displayMessage(QXmppMessage &message, QString tab_name, CL::ContactItem *roster_item) {
     if(!isVisible()) show();
 
+    if(!isActiveWindow()) {
+        qApp->alert(this, 0);
+    }
+
     ChatWidget *widget = getChatByJid(message.from());
     if(widget) return widget->insertMessage(message);
 

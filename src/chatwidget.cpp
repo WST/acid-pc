@@ -2,13 +2,15 @@
 #include "ui_chatwidget.h"
 #include "version.h"
 
-ChatWidget::ChatWidget(QString with, ChatWindow *parent, CL::ContactItem *roster_item): nick(""), TabWidget(with, parent), ui(new Ui::ChatWidget) {
+ChatWidget::ChatWidget(QString with, ChatWindow *parent, CL::ContactItem *roster_item): TabWidget(with, parent), ui(new Ui::ChatWidget) {
     ui->setupUi(this);
     ui->jid->setText(with);
     TabWidget::setType(TabWidget::Chat);
     m_item = roster_item;
     window = parent;
+    nick = roster_item->getNick();
     connect(roster_item, SIGNAL(iconChanged(const QIcon &)), this, SLOT(setIcon(const QIcon &)));
+    connect(roster_item, SIGNAL(nickChanged(const QString &)), this, SLOT(setNick(const QString &)));
 }
 
 ChatWidget::~ChatWidget() {
@@ -23,7 +25,7 @@ void ChatWidget::insertMessage(QXmppMessage &message) {
 	text.replace("\"", "&quot;");
 	text.replace("\n", "<br />");
 	text.replace(HYPERLINK_REPLACE_ARGS);
-    ui->chatview->append("<font color=\"#AA0000\">&lt;" + nick + "&gt;</font> " + text);
+    ui->chatview->append("<font color=\"#0000AA\">&lt;" + nick + "&gt;</font> " + text);
 }
 
 void ChatWidget::setNumber(int position) {
@@ -40,7 +42,7 @@ void ChatWidget::on_send_clicked() {
 	text.replace("\n", "<br />");
 	text.replace(HYPERLINK_REPLACE_ARGS);
     ui->message->clear();
-	ui->chatview->append("<font color=\"#AA0000\">&lt;me&gt;</font> " + text);
+    ui->chatview->append("<font color=\"#AA0000\">&lt;me&gt;</font> " + text);
     ui->message->setFocus();
 }
 
@@ -64,7 +66,9 @@ void ChatWidget::setNick(QString newnick) {
 
 void ChatWidget::setIcon(QIcon icon) {
     ui->icon->setPixmap(icon.pixmap(16));
-     window->setTabIcon(m_position, icon); // Я не разобрался почему оно сегфолтит
+    window->setTabIcon(m_position, icon);
+    // TODO: значок таба сейчас обновляется по позиции,
+    // Это работает только если не двигать табы
 }
 
 void ChatWidget::appendResource(QString resource) {

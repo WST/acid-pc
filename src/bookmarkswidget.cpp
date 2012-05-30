@@ -63,8 +63,8 @@ void BookmarksWidget::on_save_button_clicked() {
         }
 
         if(!success) {
-            setEnabled(true);
             QMessageBox::warning(this, tr("Bookmark editor"), tr("Please fill in all the fields"));
+            setEnabled(true);
             return;
         }
     }
@@ -72,8 +72,8 @@ void BookmarksWidget::on_save_button_clicked() {
     bookmarks.setConferences(conferences);
     manager->setBookmarks(bookmarks);
 
-    setEnabled(true);
     QMessageBox::information(this, tr("Bookmark editor"), tr("Bookmarks have been saved"));
+    setEnabled(true);
 }
 
 void BookmarksWidget::setOnline(bool is_online) {
