@@ -466,23 +466,25 @@ void Messenger::gotMessage(QXmppMessage message) {
 }
 
 void Messenger::confirmedMessage(const QString &message_from) {
-    if(!messages.contains(message_from)) {
+    QStringList jid = parseJid(message_from);
+
+    if(!messages.contains(jid[1])) {
         // От данного JID ничего не приходило?
-		return;
-	}
+        return;
+    }
 
     // Если контакт есть в ростере, получим указатель на него (иначе ноль)
     CL::ContactItem *roster_item = roster_model.getContact(message_from);
-    QString nick = roster_item ? roster_item->getNick() : parseJid(message_from)[2];
+    QString nick = roster_item ? roster_item->getNick() : jid[2];
 
-    QMap<QString, QXmppMessage> list = messages[message_from];
+    QMap<QString, QXmppMessage> list = messages[jid[1]];
 
     for(QMap<QString, QXmppMessage>::iterator i = list.begin(); i != list.end(); ++ i) {
-        chat->displayMessage(i.value(), nick, roster_model.getContact(message_from));
+        chat->displayMessage(i.value(), nick, roster_item);
     }
 
-    messages.erase(messages.find(message_from));
-    roster_item->setBlinking(false);
+    messages.erase(messages.find(jid[1]));
+    if(roster_item) roster_item->setBlinking(false);
 }
 
 void Messenger::joinNewRoom() {
@@ -548,17 +550,17 @@ void Messenger::openChat(const QString &full_jid, const QString &nick) {
     chat->openChatTab(full_jid, nick, roster_model.getContact(full_jid));
     QStringList jid = parseJid(full_jid);
 
-    // Если контакт есть в ростере, получим указатель на него (иначе ноль)
+    // Контакт точно есть в ростере
     CL::ContactItem *roster_item = roster_model.getContact(full_jid);
 
     QMap<QString, QXmppMessage> list = messages[jid[1]];
 
     for(QMap<QString, QXmppMessage>::iterator i = list.begin(); i != list.end(); ++ i) {
-        chat->displayMessage(i.value(), nick, roster_model.getContact(jid[1]));
+        chat->displayMessage(i.value(), nick, roster_item);
     }
 
     messages.erase(messages.find(jid[1]));
-    roster_item->setBlinking(false);
+    if(roster_item) roster_item->setBlinking(false);
 }
 
 void Messenger::processJoinRequest(const QString &room_jid) {
