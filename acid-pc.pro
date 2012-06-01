@@ -37,7 +37,8 @@ SOURCES    += src/main.cpp \
     src/joinroomwindow.cpp \
     src/newcontactwindow.cpp \
     src/servicediscoverywidget.cpp \
-    src/bookmarkswidget.cpp
+    src/bookmarkswidget.cpp \
+    src/transfermanagerwidget.cpp
 HEADERS    += version.h \
               src/messenger.h \
               src/loginform.h \
@@ -63,7 +64,8 @@ HEADERS    += version.h \
     src/joinroomwindow.h \
     src/newcontactwindow.h \
     src/servicediscoverywidget.h \
-    src/bookmarkswidget.h
+    src/bookmarkswidget.h \
+    src/transfermanagerwidget.h
 FORMS      += \
               ui/loginform.ui \
     ui/messageform.ui \
@@ -78,7 +80,8 @@ FORMS      += \
     ui/joinroomwindow.ui \
     ui/newcontactwindow.ui \
     ui/servicediscoverywidget.ui \
-    ui/bookmarkswidget.ui
+    ui/bookmarkswidget.ui \
+    ui/transfermanagerwidget.ui
 RESOURCES  += res/app.qrc
 TRANSLATIONS += i18n/acid-pc_ru.ts i18n/acid-pc_id.ts i18n/acid-pc_jawa.ts i18n/acid-pc_sunda.ts
 
