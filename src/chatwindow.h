@@ -6,6 +6,7 @@
 
 // qxmpp
 #include <qxmpp/QXmppMessage.h>
+#include <qxmpp/QXmppTransferManager.h>
 
 // ACId
 #include "tabwidget.h"
@@ -13,6 +14,7 @@
 #include "mucwidget.h"
 #include "bookmarkswidget.h"
 #include "servicediscoverywidget.h"
+#include "transfermanagerwidget.h"
 #include "messenger.h"
 #include "contact_list/contact_item.h"
 
@@ -38,6 +40,7 @@ public:
     MUCWidget *openMUCTab(QXmppMucRoom *room);
     ServiceDiscoveryWidget *openDiscoTab(QXmppDiscoveryManager *manager, const QString &jid);
     BookmarksWidget *openBookmarksEditor(QXmppBookmarkManager *manager);
+    TransferManagerWidget *openTransferManager(QXmppTransferJob *job);
 
     void reloadGeometry(QSettings *settings);
     TabWidget *getWidgetByJid(QString jid);
@@ -46,6 +49,7 @@ public:
     MUCWidget *getMUCByJid(QString jid);
     ServiceDiscoveryWidget *getServiceBrowserByJid(QString jid);
     BookmarksWidget *getBookmarksEditor();
+    TransferManagerWidget *getTransferManager();
 
 private:
     Ui::ChatWindow *ui;

@@ -46,6 +46,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QPushButton" name="browse_button">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="toolTip">
         <string>Browse the selected item</string>
        </property>
@@ -73,6 +76,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="register_button">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="toolTip">
         <string>Register within the selected item</string>
        </property>
@@ -87,6 +93,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="join_button">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="toolTip">
         <string>Join the selected item</string>
        </property>
@@ -101,6 +110,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="vcard_button">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="toolTip">
         <string>See the selected item's vCard</string>
        </property>

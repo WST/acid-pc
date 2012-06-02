@@ -166,6 +166,34 @@ BookmarksWidget *ChatWindow::getBookmarksEditor() {
     return 0;
 }
 
+TransferManagerWidget *ChatWindow::getTransferManager() {
+    TabWidget *widget;
+    for(int i = 0; i < ui->tabWidget->count(); i ++) {
+        if((widget = (TabWidget *) ui->tabWidget->widget(i))->getType() == TabWidget::Transfers) {
+            return (TransferManagerWidget *) widget;
+        }
+    }
+    return 0;
+}
+
+TransferManagerWidget *ChatWindow::openTransferManager(QXmppTransferJob *job) {
+    if(!isVisible()) show();
+
+    TransferManagerWidget *widget = getTransferManager();
+
+    if(widget) {
+        ui->tabWidget->setCurrentWidget(widget);
+        return widget;
+    }
+
+    widget = new TransferManagerWidget(this);
+    ui->tabWidget->addTab(widget, QIcon(":/menu/disk.png"), tr("Transfers"));
+    ui->tabWidget->setCurrentWidget(widget);
+    widget->newTransferJob(job);
+
+    return widget;
+}
+
 BookmarksWidget *ChatWindow::openBookmarksEditor(QXmppBookmarkManager *manager) {
     if(!isVisible()) show();
 
@@ -181,7 +209,6 @@ BookmarksWidget *ChatWindow::openBookmarksEditor(QXmppBookmarkManager *manager) 
     ui->tabWidget->setCurrentWidget(widget);
 
     return widget;
-    // TODO дописать
 }
 
 void ChatWindow::setTabIcon(int position, const QIcon &icon) {

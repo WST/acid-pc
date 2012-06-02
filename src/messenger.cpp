@@ -391,6 +391,7 @@ void Messenger::confirmedFile(QXmppTransferJob *job, bool confirmed) {
 	QFile *target = new QFile(settings->value("settings/savepath", INCOMING_FILES_STORAGE).toString() + "/" + job->fileInfo().name());
 	if(target->open(QIODevice::ReadWrite)) {
 		job->accept(target);
+        chat->openTransferManager(job);
 	} else {
         tray->debugMessage("Cannot write to the target file! Check permissions.");
 		job->abort();
