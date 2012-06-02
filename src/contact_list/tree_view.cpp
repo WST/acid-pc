@@ -23,17 +23,17 @@ TreeView::TreeView(QWidget* parent):QTreeView(parent) {
 	connect(action_profile, SIGNAL(triggered()), this, SLOT(showProfile_helper()));
 	connect(action_remove, SIGNAL(triggered()), this, SLOT(removeContact_helper()));
 	connect(action_call, SIGNAL(triggered()), this, SLOT(callHelper()));
-    connect(action_send_file, SIGNAL(triggered()), this, SLOT(sendFile_helper()));
+	connect(action_send_file, SIGNAL(triggered()), this, SLOT(sendFile_helper()));
 
 	setHeaderHidden(true);
 }
 
 TreeView::~TreeView() {
-		delete action_chat;
-		delete action_profile;
-		delete action_remove;
-		delete action_send_file;
-		delete action_call;
+	delete action_chat;
+	delete action_profile;
+	delete action_remove;
+	delete action_send_file;
+	delete action_call;
 }
 
 bool TreeView::event(QEvent* e) {
@@ -41,7 +41,7 @@ bool TreeView::event(QEvent* e) {
 }
 
 void TreeView::mousePressed(const QModelIndex& index) {
-	if(QApplication::mouseButtons() == Qt::RightButton) {
+	if (QApplication::mouseButtons() == Qt::RightButton) {
 		QString bareJid = index.data().toString();
 		QMenu menu(this);
 		menu.addAction(action_chat);
@@ -86,7 +86,7 @@ void TreeView::showChatDialog_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
 		if(!bareJid.isEmpty())
-            emit wannaShowChatDialog(bareJid, selectedContact()->getNick());
+			emit wannaShowChatDialog(bareJid, selectedContact()->getNick());
 	}
 }
 
@@ -94,7 +94,7 @@ void TreeView::showProfile_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
 		if (!bareJid.isEmpty()) {
-            emit wannaShowProfile(bareJid);
+			emit wannaShowProfile(bareJid);
 		}
 	}
 }
@@ -110,27 +110,29 @@ void TreeView::removeContact_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
 		if (!bareJid.isEmpty()) {
-            emit wannaRemoveContact(bareJid);
+			emit wannaRemoveContact(bareJid);
 		}
 	}
 }
 
 void TreeView::callHelper() {
 	if (selectedContact()) {
-		ContactItem::ResourceStatus status = selectedContact()->getResource();
-		if (status.second) {
-			QString full_jid = selectedContact()->getBareJid() + "/" + status.first;
-            emit wannaMakeVoiceCall(full_jid);
+		const ContactItem::ResourceStatus &rs =
+			selectedContact()->getResource();
+		if (rs.status) {
+			QString full_jid = selectedContact()->getBareJid() + "/" + rs.resourceName;
+			emit wannaMakeVoiceCall(full_jid);
 		}
 	}
 }
 
 void TreeView::sendFile_helper() {
-    if (selectedContact()) {
-        ContactItem::ResourceStatus status = selectedContact()->getResource();
-        if (status.second) {
-            QString full_jid = selectedContact()->getBareJid() + "/" + status.first;
-            emit wannaSendFile(full_jid);
-        }
-    }
+	if (selectedContact()) {
+		const ContactItem::ResourceStatus &rs =
+			selectedContact()->getResource();
+		if (rs.status) {
+			QString full_jid = selectedContact()->getBareJid() + "/" + rs.resourceName;
+			emit wannaSendFile(full_jid);
+		}
+	}
 }

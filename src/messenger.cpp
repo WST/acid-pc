@@ -454,7 +454,9 @@ void Messenger::gotMessage(QXmppMessage message) {
 			if(!chat->adaTabForJid(message.from())) {
                 // Сохраним текст сообщения
                 messages[bare_jid][message.id()] = message;
-                roster_item->setBlinking(true);
+				if (roster_item) {
+	                roster_item->setBlinking(true, "You have unread messages");
+				}
                 connect(ConfirmationWindow::newMessage(& message, settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
 			} else {
                 // Здесь может оказаться, что это сообщение от комнаты (например капча)

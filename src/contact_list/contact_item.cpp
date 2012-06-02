@@ -14,33 +14,39 @@ const char *ContactItem::statusColor[] =  { "gray",    "red", "orange", "yellow"
 ContactItem::ContactItem(ItemModel *_owner, const QString &_jid): owner(_owner) {
 	splitJid(_jid, &m_bareJid);
 	setOffline();
+	setBlinking(false);
 }
 
 ContactItem::ResourceStatus ContactItem::getResource(const QString &resource) const {
+	ResourceStatus rs;
 	if (resource.isEmpty()) {
 		if (m_resources.size() == 1) {
-			return ResourceStatus(m_resources.constBegin().key(), m_resources.constBegin().value());
+			rs.resourceName = m_resources.constBegin().key();
+			rs.status = m_resources.constBegin().value();
 		} else {
-			QString highestName;
-			const Status *highestStatus = NULL;
-			for (QMap<QString, Status *>::const_iterator i = m_resources.constBegin(); i != m_resources.constEnd(); ++i)
-				if (!highestStatus || *highestStatus < *i.value()) {
-					highestName = i.key();
-					highestStatus = i.value();
+			rs.status = NULL;
+			for (QMap<QString, Status *>::const_iterator i = m_resources.constBegin();
+					i != m_resources.constEnd(); ++i) {
+				if (!rs.status || *rs.status < *i.value()) {
+					rs.resourceName = i.key();
+					rs.status = i.value();
 				}
-			return ResourceStatus(highestName, highestStatus);
+			}
 		}
 	} else {
-		return ResourceStatus(resource, m_resources.value(resource));
+		rs.resourceName = resource;
+		rs.status = m_resources.value(resource);
 	}
+
+	return rs;
 }
 
 bool ContactItem::operator<(const ContactItem &_other) const {
 	if (isOnline() == _other.isOnline()) {
 		if (isOnline()) {
 			// Both are online, compare statuses
-			const Status *resource_status = getResource().second,
-					*other_resource_status = _other.getResource().second;
+			const Status *resource_status = getResource().status,
+					*other_resource_status = _other.getResource().status;
 			if (resource_status->type < other_resource_status->type) {
 				return true;
 			} else if (other_resource_status->type < resource_status->type) {
@@ -92,6 +98,8 @@ bool ContactItem::removeFromGroup(GroupItem *group) {
 }
 
 QString ContactItem::getText() const {
+	// XXX: review comparer proc
+	// XXX: change operator overloads to functions
 	QString base_text = getNick();
 	return m_resources.size() > 1 ? (base_text + " (%1)").arg(m_resources.size()) : base_text;
 }
@@ -126,7 +134,7 @@ void ContactItem::changeStatus() {
 }
 
 void ContactItem::updateIcon() {
-	QString new_icon_name = isOnline() ? statusString[getResource().second->type] :
+	QString new_icon_name = isOnline() ? statusString[getResource().status->type] :
 										 statusString[Offline];
 	LDEBUG("%s -> %s", qPrintable(icon_name), qPrintable(new_icon_name));
 	if (icon_name != new_icon_name) {
@@ -145,25 +153,47 @@ void ContactItem::setNick(const QString &_value) {
 
 QString ContactItem::getSubText() const {
 	const ResourceStatus &rs = getResource();
-	QString baseText;
-	if (rs.second) {
-		baseText = QString("<span color='%1'>%2</span>\n").
-			arg(statusColor[rs.second->type]).
-			arg(rs.second->text);
+	const QString statusTemplate =
+		"<br />%1 %2 <img src=':/trayicon/%3-16px.png' /> <span color='%4'>%5</span>";
+	const QString selectedStatusTemplate =
+		QString("<b>%1</b>").arg(statusTemplate);
+
+	QString baseText = QString("%1").arg(m_bareJid);
+	if (rs.status) {
+		for (QMap<QString, Status *>::const_iterator i = m_resources.constBegin();
+				i != m_resources.constEnd(); ++i) {
+			baseText += QString(
+					(i.value() == rs.status) ? selectedStatusTemplate : statusTemplate).
+					arg(i.key()).
+					arg(QString("(%1)").arg(i.value()->priority)).
+					arg(statusString[i.value()->type]).
+					arg(statusColor[i.value()->type]).
+					arg(i.value()->text);
+		}
 	} else {
-		baseText = QString("<span color='grey'>offline</span>");
+		baseText += QString(statusTemplate).
+			arg(QString()).
+			arg(QString()).
+			arg(statusString[Offline]).
+			arg(statusColor[Offline]).
+			arg(tr("offline"));
 	}
-	for (QMap<QString, Status *>::const_iterator i = m_resources.constBegin();
-			i != m_resources.constEnd(); ++i) {
-		baseText += QString("%1 <img src=':/trayicon/%2-16px.png' /> <span color='%3'>%4</span>\n").
-				arg(i.key()).
-				arg(statusString[i.value()->type]).
-				arg(statusColor[i.value()->type]).
-				arg(i.value()->text);
+	if (m_blinking && !m_blinkingReason.isEmpty()) {
+		baseText += "<br />" + m_blinkingReason;
 	}
 	return baseText;
 }
 
-void ContactItem::setBlinking(bool blinking) const {
-	Q_UNUSED(blinking)
+void ContactItem::setBlinking(bool blinking, const QString &reason) {
+	if (m_blinking != blinking) {
+		LDEBUG("changing blink status of %s: %d -> %d: %s",
+				qPrintable(m_bareJid), m_blinking, blinking, qPrintable(reason));
+		m_blinking = blinking;
+		if (blinking) {
+			m_blinkingReason = reason;
+		} else {
+			m_blinkingReason = QString();
+		}
+		owner->contactChanged(this);
+	}
 }

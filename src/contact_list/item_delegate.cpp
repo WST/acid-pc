@@ -1,5 +1,7 @@
 #include <QPainter>
 
+#include "item_model.h"
+
 #include "item_delegate.h"
 
 using namespace CL;
@@ -45,5 +47,15 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
 	rect.setLeft(rect.x() + pixmap.width() + 3);
 	rect.moveTop(rect.y() + 3);
 
+	// XXX: you know it.
+	QFont font = painter->font();
+	if (index.data(ItemModel::BlinkingRole).toBool()) {
+		font.setBold(true);
+		painter->setFont(font);
+	}
+
 	painter->drawText(rect, index.data(Qt::DisplayRole).toString());
+
+	font.setBold(false);
+	painter->setFont(font);
 }

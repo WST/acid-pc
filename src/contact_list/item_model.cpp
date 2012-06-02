@@ -43,6 +43,11 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const {
 		return item->getSubText();
 	case ItemRole:
 		return qVariantFromValue(static_cast<const void *>(item));
+	case BlinkingRole:
+		// TODO: change setBlinking() to setNotify(), add to Item
+		return item->childCount() ?
+			false :
+			static_cast<const ContactItem *>(item)->getBlinking();
 	default:
 		return QVariant();
 	}
@@ -146,9 +151,11 @@ ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSe
 }
 
 GroupItem *ItemModel::getGroup(const QString &name) {
-	foreach (GroupItem *item, m_groups)
-		if (item->getGroupName() == name)
+	foreach (GroupItem *item, m_groups) {
+		if (item->getGroupName() == name) {
 			return item;
+		}
+	}
 
 	// Create a new group
 	GroupItem *new_item = new GroupItem(this, name);

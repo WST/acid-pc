@@ -67,7 +67,10 @@ namespace CL {
 			*/
 		QList<QString> getResourceNames() const { return m_resources.keys(); }
 
-		typedef QPair<QString, const Status *> ResourceStatus;
+		typedef struct {
+			QString resourceName;
+			Status *status;
+		} ResourceStatus;
 
 		/*!
 			Gets the name and status by resource name.
@@ -130,9 +133,15 @@ namespace CL {
 		virtual const QIcon &getIcon() const { return m_icon; }
 
 		/*!
-			Sets the notification status for a roster item
+			Sets the notification status for a roster item.
+			If @reason is given, it will be displayed with getSubText
 			*/
-		void setBlinking(bool blinking) const;
+		void setBlinking(bool blinking, const QString &reason = QString());
+
+		/*!
+			Gets the notification status
+			*/
+		bool getBlinking() const { return m_blinking; }
 	
 	signals:
 		void iconChanged(const QIcon &new_icon);
@@ -146,6 +155,8 @@ namespace CL {
 		QString m_nick;
 		QIcon m_icon;
 		QString icon_name;
+		bool m_blinking;
+		QString m_blinkingReason;
 
 		void updateIcon();
 		void changeStatus();
