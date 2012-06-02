@@ -134,10 +134,11 @@ void Messenger::createConnections() {
 	connect(transfer_manager, SIGNAL(fileReceived(QXmppTransferJob *)), this, SLOT(gotFile(QXmppTransferJob *)));
     connect(bookmark_manager, SIGNAL(bookmarksReceived(const QXmppBookmarkSet &)), this, SLOT(handleBookmarks(const QXmppBookmarkSet &)));
 
-	connect(& roster_widget, SIGNAL(showChatDialog(const QString &, const QString &)), this, SLOT(openChat(const QString &, const QString &)));
-	connect(& roster_widget, SIGNAL(showProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
-	connect(& roster_widget, SIGNAL(removeContact(const QString &)), this, SLOT(removeContact(const QString &)));
-	connect(& roster_widget, SIGNAL(makeVoiceCall(const QString &)), this, SLOT(makeVoiceCall(const QString &)));
+    connect(& roster_widget, SIGNAL(wannaShowChatDialog(const QString &, const QString &)), this, SLOT(openChat(const QString &, const QString &)));
+    connect(& roster_widget, SIGNAL(wannaShowProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
+    connect(& roster_widget, SIGNAL(wannaRemoveContact(const QString &)), this, SLOT(removeContact(const QString &)));
+    connect(& roster_widget, SIGNAL(wannaMakeVoiceCall(const QString &)), this, SLOT(makeVoiceCall(const QString &)));
+    connect(& roster_widget, SIGNAL(wannaSendFile(const QString &)), this, SLOT(showSendFileDialog(const QString &)));
 
 	connect(settings_window, SIGNAL(modified()), this, SLOT(loadSettings()));
 }
@@ -610,10 +611,6 @@ void Messenger::leaveRoom(const QString &room_jid) {
 void Messenger::roomParticipantChanged(QString room_jid, QString nick) {
 	// TODO: при получении чьего-то presence уведомить об этом таб; при получении кика закрыть таб
 	// не закрыть таб (это бесит), а подсветить его как offline
-	Q_UNUSED(nick);
-	MUCWidget *widget = (MUCWidget *) chat->getWidgetByJid(room_jid);
-	Q_UNUSED(widget);
-	//widget->presenceFrom(nick);
 }
 
 QXmppMucRoom *Messenger::getRoomByJid(const QString &jid) {
@@ -717,4 +714,8 @@ void Messenger::processBookmarkClick() {
     QAction *action = (QAction *) sender();
     QStringList jid = parseJid(action->data().toString());
     joinRoom(jid[1], jid[5]);
+}
+
+void Messenger::showSendFileDialog(const QString &jid) {
+    // TODO
 }

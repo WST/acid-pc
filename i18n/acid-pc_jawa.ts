@@ -19,27 +19,34 @@
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/aboutwindow.ui" line="63"/>
+        <location filename="../ui/aboutwindow.ui" line="81"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Developers and testers&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Developers and testers&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This program is brought to you by SmartCommunity members and other people interested in XMPP development. The full list of people who contributed to this application development is follow:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Ilja Averkov&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — Project management and core programming&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Artem Sh&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Yury Potapov&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Paijo Ahmad&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and translations&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Wiecliff Reynardo&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and application name&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Eddy Purwa&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — logotype and icon design&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Fakhri Izz&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Victoria Grogorian&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Yelena Kasianova&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Irfan Mahfudz Guntur&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Arnold Lapian&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Third parties&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://averkov.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Ilja Averkov&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — Project management and core programming&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://rubyrails.pro/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Artem Sh&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://immensus.net/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Yury Potapov&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming, UI suggestions&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://paijo.jsmart.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Paijo Ahmad&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and translations&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://jabberid.org/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Wiecliff Reynardo&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — original idea, application name and testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Eddy Purwa&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — logotype and icon design&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://bsmsite.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Irfan Mahfudz Guntur&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and suggestions&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Yelena Kasyanova&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Third parties&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This program includes components from third parties:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://qt.nokia.com&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Qt Library&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from Nokia corporation&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://p.yusukekamiyamane.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Fugue icons&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from Yusuke Kamiyamane&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://qxmpp.googlecode.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Qxmpp&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from qxmpp development team&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="108"/>
-        <source>Dedications</source>
+        <location filename="../ui/aboutwindow.ui" line="126"/>
+        <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="113"/>
-        <source>Donate</source>
+        <location filename="../ui/aboutwindow.ui" line="132"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Dedications&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This software is dedicated to ...&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Donations&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This program was completely written in the developers&apos; spare time which they could dedicate to many other things. If you appreciate it, you can support the development by making a &lt;/span&gt;&lt;a href=&quot;http://acid.jsmart.web.id/donate&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;money donation&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -101,18 +108,18 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bookmarkswidget.cpp" line="67"/>
-        <location filename="../src/bookmarkswidget.cpp" line="76"/>
+        <location filename="../src/bookmarkswidget.cpp" line="66"/>
+        <location filename="../src/bookmarkswidget.cpp" line="75"/>
         <source>Bookmark editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bookmarkswidget.cpp" line="67"/>
+        <location filename="../src/bookmarkswidget.cpp" line="66"/>
         <source>Please fill in all the fields</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bookmarkswidget.cpp" line="76"/>
+        <location filename="../src/bookmarkswidget.cpp" line="75"/>
         <source>Bookmarks have been saved</source>
         <translation type="unfinished"></translation>
     </message>
@@ -125,12 +132,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/chatwidget.cpp" line="53"/>
+        <location filename="../src/chatwidget.cpp" line="55"/>
         <source>Send the message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/chatwidget.cpp" line="53"/>
+        <location filename="../src/chatwidget.cpp" line="55"/>
         <source>This button is not available because you are not connected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -143,12 +150,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/chatwindow.cpp" line="97"/>
+        <location filename="../src/chatwindow.cpp" line="101"/>
         <source>Services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/chatwindow.cpp" line="176"/>
+        <location filename="../src/chatwindow.cpp" line="190"/>
+        <source>Transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/chatwindow.cpp" line="208"/>
         <source>Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -511,12 +523,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="575"/>
+        <location filename="../src/messenger.cpp" line="595"/>
         <source>You have been kicked: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="686"/>
+        <location filename="../src/messenger.cpp" line="706"/>
         <source>Join </source>
         <translation type="unfinished"></translation>
     </message>
@@ -553,42 +565,42 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="50"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="53"/>
         <source>Browse the selected item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="53"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="56"/>
         <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="77"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="83"/>
         <source>Register within the selected item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="80"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="86"/>
         <source>Register</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="91"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="100"/>
         <source>Join the selected item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="94"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="103"/>
         <source>Join MUC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="105"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="117"/>
         <source>See the selected item&apos;s vCard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="108"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="120"/>
         <source>vCard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -766,11 +778,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="352"/>
-        <source>Default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/settingswindow.ui" line="386"/>
         <source>Roster opacity:</source>
         <translation type="unfinished"></translation>
@@ -828,6 +835,34 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/settingswindow.cpp" line="87"/>
         <source>Select a directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TransferManagerWidget</name>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="36"/>
+        <source>File name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="41"/>
+        <source>Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="46"/>
+        <source>Progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="56"/>
+        <source>Stop selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="63"/>
+        <source>Clear finished</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

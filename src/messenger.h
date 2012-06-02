@@ -126,6 +126,7 @@ class Messenger: public QMainWindow {
         void handleBookmarks(const QXmppBookmarkSet &bookmarks);
         void processBookmarkClick();
         void showBookmarkManager();
+        void showSendFileDialog(const QString &jid);
 };
 
 #endif // MESSENGER_H

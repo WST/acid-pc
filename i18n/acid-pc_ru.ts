@@ -19,28 +19,51 @@
         <translation>Разработчики</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/aboutwindow.ui" line="63"/>
+        <location filename="../ui/aboutwindow.ui" line="81"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Developers and testers&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Developers and testers&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This program is brought to you by SmartCommunity members and other people interested in XMPP development. The full list of people who contributed to this application development is follow:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Ilja Averkov&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — Project management and core programming&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Artem Sh&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Yury Potapov&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Paijo Ahmad&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and translations&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Wiecliff Reynardo&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and application name&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Eddy Purwa&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — logotype and icon design&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Fakhri Izz&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Victoria Grogorian&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Yelena Kasianova&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Irfan Mahfudz Guntur&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Arnold Lapian&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Third parties&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://averkov.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Ilja Averkov&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — Project management and core programming&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://rubyrails.pro/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Artem Sh&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://immensus.net/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Yury Potapov&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming, UI suggestions&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://paijo.jsmart.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Paijo Ahmad&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and translations&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://jabberid.org/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Wiecliff Reynardo&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — original idea, application name and testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Eddy Purwa&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — logotype and icon design&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://bsmsite.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Irfan Mahfudz Guntur&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and suggestions&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Yelena Kasyanova&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Third parties&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This program includes components from third parties:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://qt.nokia.com&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Qt Library&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from Nokia corporation&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://p.yusukekamiyamane.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Fugue icons&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from Yusuke Kamiyamane&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://qxmpp.googlecode.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Qxmpp&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from qxmpp development team&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Разработчики и тестеры&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Эта программа разработана участниками сообщества SmartCommunity и прочими лицами, заинтересованными в разработке для Jabber/XMPP.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://averkov.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Илья Аверков&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — управление и программирование&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://rubyrails.pro/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Артём Ш&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — программирование&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://immensus.net/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Юрий Потапов&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — программирование и советы по UI&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://paijo.jsmart.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Paijo Ahmad&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — тестирование и переводы&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://jabberid.org/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Wiecliff Reynardo&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — идея и имя проекта, тестирование&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Eddy Purwa&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — логотип и значок&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://bsmsite.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Irfan Mahfudz Guntur&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — тестирование и предложения&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Елена Касьянова&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — тестирование&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Третьи стороны&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Эта программа включает ряд компонентов от сторонних разработчиков:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://qt.nokia.com&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Библиотеки Qt&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от Nokia corporation&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://p.yusukekamiyamane.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Набор значков Fugue&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от Yusuke Kamiyamane&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://qxmpp.googlecode.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Qxmpp&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от команды разработчиков Qxmpp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="108"/>
-        <source>Dedications</source>
-        <translation>Посвящения</translation>
+        <location filename="../ui/aboutwindow.ui" line="126"/>
+        <source>Miscellaneous</source>
+        <translation>Мелочи</translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="113"/>
-        <source>Donate</source>
-        <translation>Пожертвования</translation>
+        <location filename="../ui/aboutwindow.ui" line="132"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Dedications&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This software is dedicated to ...&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Donations&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This program was completely written in the developers&apos; spare time which they could dedicate to many other things. If you appreciate it, you can support the development by making a &lt;/span&gt;&lt;a href=&quot;http://acid.jsmart.web.id/donate&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;money donation&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Посвящение&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Эта программа посвящается ...&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Пожертвования&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Программа была полностью разработана в свободное время, которое разработчики могли уделить любым другим занятиям. Если вы цените проделанную работу, вы можете сделать &lt;a href=&quot;http://acid.jsmart.web.id/donate&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;денежное пожертвование&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -101,18 +124,18 @@ p, li { white-space: pre-wrap; }
         <translation>Сохранить закладки</translation>
     </message>
     <message>
-        <location filename="../src/bookmarkswidget.cpp" line="67"/>
-        <location filename="../src/bookmarkswidget.cpp" line="76"/>
+        <location filename="../src/bookmarkswidget.cpp" line="66"/>
+        <location filename="../src/bookmarkswidget.cpp" line="75"/>
         <source>Bookmark editor</source>
         <translation>Редактор закладок</translation>
     </message>
     <message>
-        <location filename="../src/bookmarkswidget.cpp" line="67"/>
+        <location filename="../src/bookmarkswidget.cpp" line="66"/>
         <source>Please fill in all the fields</source>
         <translation>Пожалуйста, заполните все поля</translation>
     </message>
     <message>
-        <location filename="../src/bookmarkswidget.cpp" line="76"/>
+        <location filename="../src/bookmarkswidget.cpp" line="75"/>
         <source>Bookmarks have been saved</source>
         <translation>Закладки сохранены на сервере</translation>
     </message>
@@ -125,12 +148,12 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/chatwidget.cpp" line="53"/>
+        <location filename="../src/chatwidget.cpp" line="55"/>
         <source>Send the message</source>
         <translation>Отправить сообщение</translation>
     </message>
     <message>
-        <location filename="../src/chatwidget.cpp" line="53"/>
+        <location filename="../src/chatwidget.cpp" line="55"/>
         <source>This button is not available because you are not connected</source>
         <translation>Эта кнопка недоступна, так как вы сейчас не в сети</translation>
     </message>
@@ -143,12 +166,17 @@ p, li { white-space: pre-wrap; }
         <translation>Диалоги</translation>
     </message>
     <message>
-        <location filename="../src/chatwindow.cpp" line="97"/>
+        <location filename="../src/chatwindow.cpp" line="101"/>
         <source>Services</source>
         <translation>Службы</translation>
     </message>
     <message>
-        <location filename="../src/chatwindow.cpp" line="176"/>
+        <location filename="../src/chatwindow.cpp" line="190"/>
+        <source>Transfers</source>
+        <translation>Передачи</translation>
+    </message>
+    <message>
+        <location filename="../src/chatwindow.cpp" line="208"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
@@ -493,7 +521,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/messenger.cpp" line="179"/>
         <source>Help</source>
-        <translation>Помощь</translation>
+        <translation>?</translation>
     </message>
     <message>
         <location filename="../src/messenger.cpp" line="180"/>
@@ -511,12 +539,12 @@ p, li { white-space: pre-wrap; }
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="575"/>
+        <location filename="../src/messenger.cpp" line="595"/>
         <source>You have been kicked: </source>
         <translation>Вас выгнали из комнаты:</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="686"/>
+        <location filename="../src/messenger.cpp" line="706"/>
         <source>Join </source>
         <translation>Войти в </translation>
     </message>
@@ -553,42 +581,42 @@ p, li { white-space: pre-wrap; }
         <translation>Переход</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="50"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="53"/>
         <source>Browse the selected item</source>
         <translation>Открыть выбранный элемент</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="53"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="56"/>
         <source>Browse</source>
         <translation>Обзор</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="77"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="83"/>
         <source>Register within the selected item</source>
         <translation>Зарегистрироваться на выбранном узле</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="80"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="86"/>
         <source>Register</source>
         <translation>Регистрация</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="91"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="100"/>
         <source>Join the selected item</source>
         <translation>Войти в выбранный чат</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="94"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="103"/>
         <source>Join MUC</source>
         <translation>Войти</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="105"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="117"/>
         <source>See the selected item&apos;s vCard</source>
         <translation>Просмотреть vCard выбранного элемента</translation>
     </message>
     <message>
-        <location filename="../ui/servicediscoverywidget.ui" line="108"/>
+        <location filename="../ui/servicediscoverywidget.ui" line="120"/>
         <source>vCard</source>
         <translation>vCard</translation>
     </message>
@@ -623,7 +651,7 @@ p, li { white-space: pre-wrap; }
     <message utf8="true">
         <location filename="../ui/settingswindow.ui" line="61"/>
         <source>When activated, you will not be asked to accept or decline incoming voice calls — all calls will be accepted without warning.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если флаг установлен, все входящие голосовые вызовы будут приниматься без уведомления.</translation>
     </message>
     <message>
         <location filename="../ui/settingswindow.ui" line="64"/>
@@ -633,7 +661,7 @@ p, li { white-space: pre-wrap; }
     <message utf8="true">
         <location filename="../ui/settingswindow.ui" line="71"/>
         <source>When activated, you will not be asked to accept or decline incoming files — all files will be accepted without warning.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если флаг установлен, все входящие файлы будут приниматься без подтверждения.</translation>
     </message>
     <message>
         <location filename="../ui/settingswindow.ui" line="74"/>
@@ -643,7 +671,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/settingswindow.ui" line="81"/>
         <source>If enabled, the tabs for new conversations will be opened automatically every time when you receive a message from a new JID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если флаг установлен, при получении новых сообщений программа будет самостоятельно открывать новые вкладки.</translation>
     </message>
     <message>
         <location filename="../ui/settingswindow.ui" line="84"/>
@@ -708,32 +736,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/settingswindow.ui" line="243"/>
         <source>This box allows you to change the preferred type of file transfer. Please note: using SOCKS is highly recommended.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это меню позволяет задать предпочитаемый метод передачи файлов. Обратите внимание, что рекомендуемым методом является SOCKS bytestreams.</translation>
     </message>
     <message>
         <location filename="../ui/settingswindow.ui" line="247"/>
         <source>SOCKS Bytestreams</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ui/settingswindow.ui" line="252"/>
         <source>SI (may not work!)</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямой (может не работать)</translation>
     </message>
     <message>
         <location filename="../ui/settingswindow.ui" line="257"/>
         <source>In-Band (slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>В канале (медленно)</translation>
     </message>
     <message>
         <location filename="../ui/settingswindow.ui" line="268"/>
         <source>You can manually specify SOCKS proxy address. Be careful: if you provide wrong value, file transfer may not work. It is recommended to use default setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы можете вручную указать адрес прокси-сервера для передачи файлов.</translation>
     </message>
     <message>
         <location filename="../ui/settingswindow.ui" line="271"/>
         <source>proxy.jsmart.web.id</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ui/settingswindow.ui" line="278"/>
@@ -764,11 +792,6 @@ p, li { white-space: pre-wrap; }
         <location filename="../ui/settingswindow.ui" line="341"/>
         <source>Application style:</source>
         <translation>Стиль GUI:</translation>
-    </message>
-    <message>
-        <location filename="../ui/settingswindow.ui" line="352"/>
-        <source>Default</source>
-        <translation>По умолчанию</translation>
     </message>
     <message>
         <location filename="../ui/settingswindow.ui" line="386"/>
@@ -829,6 +852,34 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/settingswindow.cpp" line="87"/>
         <source>Select a directory</source>
         <translation>Выбрать целевой каталог</translation>
+    </message>
+</context>
+<context>
+    <name>TransferManagerWidget</name>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="36"/>
+        <source>File name</source>
+        <translation>Имя файла</translation>
+    </message>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="41"/>
+        <source>Direction</source>
+        <translation>Направление</translation>
+    </message>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="46"/>
+        <source>Progress</source>
+        <translation>Прогресс</translation>
+    </message>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="56"/>
+        <source>Stop selected</source>
+        <translation>Остановить выбранный</translation>
+    </message>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="63"/>
+        <source>Clear finished</source>
+        <translation>Очистить завершённые</translation>
     </message>
 </context>
 <context>

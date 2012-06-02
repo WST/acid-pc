@@ -25,16 +25,18 @@ namespace CL {
 		void showProfile_helper();
 		void removeContact_helper();
 		void callHelper();
+        void sendFile_helper();
 
 	protected:
 		void keyPressEvent(QKeyEvent*);
 		void drawBranches(QPainter *painter, const QRect &rect, const QModelIndex &index) const;
 
 	signals:
-        void showChatDialog(const QString& bareJid, const QString &nick);
-		void showProfile(const QString& bareJid);
-		void removeContact(const QString& bareJid);
-		void makeVoiceCall(const QString &full_jid);
+        void wannaShowChatDialog(const QString& bareJid, const QString &nick);
+        void wannaShowProfile(const QString& bareJid);
+        void wannaRemoveContact(const QString& bareJid);
+        void wannaMakeVoiceCall(const QString &full_jid);
+        void wannaSendFile(const QString &full_jid);
 
 	public:
 		/*!

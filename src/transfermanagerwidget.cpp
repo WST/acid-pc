@@ -11,7 +11,11 @@ TransferManagerWidget::~TransferManagerWidget() {
 }
 
 void TransferManagerWidget::newTransferJob(QXmppTransferJob *job) {
+
     // TODO
+
+    connect(job, SIGNAL(stateChanged(QXmppTransferJob::State)), this, SLOT(changeState(QXmppTransferJob::State)));
+    connect(job, SIGNAL(progress(qint64, qint64)), this, SLOT(progress(qint64, qint64)));
 }
 
 void TransferManagerWidget::setOnline(bool is_online) {

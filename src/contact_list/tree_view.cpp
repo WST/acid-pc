@@ -18,10 +18,12 @@ TreeView::TreeView(QWidget* parent):QTreeView(parent) {
 	connect(this, SIGNAL(pressed(const QModelIndex&)), this, SLOT(mousePressed(const QModelIndex&)));
 	connect(this, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(doubleClicked(const QModelIndex&)));
 	connect(this, SIGNAL(clicked(const QModelIndex&)), this, SLOT(clicked(const QModelIndex&)));
+
 	connect(action_chat, SIGNAL(triggered()), this, SLOT(showChatDialog_helper()));
 	connect(action_profile, SIGNAL(triggered()), this, SLOT(showProfile_helper()));
 	connect(action_remove, SIGNAL(triggered()), this, SLOT(removeContact_helper()));
 	connect(action_call, SIGNAL(triggered()), this, SLOT(callHelper()));
+    connect(action_send_file, SIGNAL(triggered()), this, SLOT(sendFile_helper()));
 
 	setHeaderHidden(true);
 }
@@ -84,7 +86,7 @@ void TreeView::showChatDialog_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
 		if(!bareJid.isEmpty())
-            emit showChatDialog(bareJid, selectedContact()->getNick());
+            emit wannaShowChatDialog(bareJid, selectedContact()->getNick());
 	}
 }
 
@@ -92,7 +94,7 @@ void TreeView::showProfile_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
 		if (!bareJid.isEmpty()) {
-			emit showProfile(bareJid);
+            emit wannaShowProfile(bareJid);
 		}
 	}
 }
@@ -108,7 +110,7 @@ void TreeView::removeContact_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
 		if (!bareJid.isEmpty()) {
-			emit removeContact(bareJid);
+            emit wannaRemoveContact(bareJid);
 		}
 	}
 }
@@ -118,7 +120,17 @@ void TreeView::callHelper() {
 		ContactItem::ResourceStatus status = selectedContact()->getResource();
 		if (status.second) {
 			QString full_jid = selectedContact()->getBareJid() + "/" + status.first;
-			emit makeVoiceCall(full_jid);
+            emit wannaMakeVoiceCall(full_jid);
 		}
 	}
+}
+
+void TreeView::sendFile_helper() {
+    if (selectedContact()) {
+        ContactItem::ResourceStatus status = selectedContact()->getResource();
+        if (status.second) {
+            QString full_jid = selectedContact()->getBareJid() + "/" + status.first;
+            emit wannaSendFile(full_jid);
+        }
+    }
 }
