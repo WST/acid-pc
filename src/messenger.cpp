@@ -276,7 +276,7 @@ void Messenger::activate() {
 	client_settings->setStreamSecurityMode(QXmppConfiguration::TLSDisabled);
 
 	transfer_manager->setProxy(settings->value("settings/file_transfer_proxy", PROXY65_JID).toString());
-	transfer_manager->setProxyOnly(false);
+    transfer_manager->setProxyOnly(true);
 
 	// Сохранить пароль, если нужно
 	if(login->savePassword()) {
