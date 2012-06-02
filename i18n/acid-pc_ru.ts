@@ -352,7 +352,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/loginform.ui" line="200"/>
         <source>Sign in</source>
-        <translation>Подключиться</translation>
+        <translation>Войти</translation>
     </message>
     <message>
         <location filename="../ui/loginform.ui" line="216"/>

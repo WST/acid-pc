@@ -2,6 +2,7 @@
 // qxmpp
 #include "qxmpp/QXmppRosterManager.h"
 #include "qxmpp/QXmppBookmarkSet.h"
+#include "qxmpp/QXmppUtils.h"
 
 // ACId
 #include "messenger.h"
@@ -717,5 +718,8 @@ void Messenger::processBookmarkClick() {
 }
 
 void Messenger::showSendFileDialog(const QString &jid) {
-    // TODO
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open a file"));
+    if(!filename.isEmpty() && QFile::exists(filename)) {
+        chat->openTransferManager(transfer_manager->sendFile(jid, filename, "acid_" + QString::number(QXmppUtils::generateRandomInteger(4))));
+    }
 }
