@@ -77,7 +77,7 @@ namespace CL {
 			For empty name returns status of 'the most online' resource (highest priority, highest status).
 			Returns NULL for non-existent resource
 			*/
-		ResourceStatus getResource(const QString &resource = "") const;
+		ResourceStatus getResource(const QString &resource = QString()) const;
 
 		/*!
 			Adds / removes / updates resources as needed
@@ -136,12 +136,9 @@ namespace CL {
 			Sets the notification status for a roster item.
 			If @reason is given, it will be displayed with getSubText
 			*/
-		void setBlinking(bool blinking, const QString &reason = QString());
+		void setNotified(bool notified, const QString &text = QString());
 
-		/*!
-			Gets the notification status
-			*/
-		bool getBlinking() const { return m_blinking; }
+		virtual bool notified() const { return m_notified; }
 	
 	signals:
 		void iconChanged(const QIcon &new_icon);
@@ -155,8 +152,8 @@ namespace CL {
 		QString m_nick;
 		QIcon m_icon;
 		QString icon_name;
-		bool m_blinking;
-		QString m_blinkingReason;
+		bool m_notified;
+		QString m_notification;
 
 		void updateIcon();
 		void changeStatus();

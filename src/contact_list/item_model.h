@@ -66,7 +66,7 @@ namespace CL {
 	public: // QAbstractItemModel
 		enum SpecificRole {
 			ItemRole = Qt::UserRole + 2,
-			BlinkingRole
+			NotificationRole
 		};
 
 		virtual QModelIndex index(int row, int column, const QModelIndex &parent) const;

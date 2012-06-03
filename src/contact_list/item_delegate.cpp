@@ -49,7 +49,7 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
 
 	// XXX: you know it.
 	QFont font = painter->font();
-	if (index.data(ItemModel::BlinkingRole).toBool()) {
+	if (index.data(ItemModel::NotificationRole).toBool()) {
 		font.setBold(true);
 		painter->setFont(font);
 	}

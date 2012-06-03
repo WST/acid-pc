@@ -14,7 +14,7 @@ const char *ContactItem::statusColor[] =  { "gray",    "red", "orange", "yellow"
 ContactItem::ContactItem(ItemModel *_owner, const QString &_jid): owner(_owner) {
 	splitJid(_jid, &m_bareJid);
 	setOffline();
-	setBlinking(false);
+	setNotified(false);
 }
 
 ContactItem::ResourceStatus ContactItem::getResource(const QString &resource) const {
@@ -98,8 +98,6 @@ bool ContactItem::removeFromGroup(GroupItem *group) {
 }
 
 QString ContactItem::getText() const {
-	// XXX: review comparer proc
-	// XXX: change operator overloads to functions
 	QString base_text = getNick();
 	return m_resources.size() > 1 ? (base_text + " (%1)").arg(m_resources.size()) : base_text;
 }
@@ -178,21 +176,21 @@ QString ContactItem::getSubText() const {
 			arg(statusColor[Offline]).
 			arg(tr("offline"));
 	}
-	if (m_blinking && !m_blinkingReason.isEmpty()) {
-		baseText += "<br />" + m_blinkingReason;
+	if (m_notified && !m_notification.isEmpty()) {
+		baseText += "<br />" + m_notification;
 	}
 	return baseText;
 }
 
-void ContactItem::setBlinking(bool blinking, const QString &reason) {
-	if (m_blinking != blinking) {
-		LDEBUG("changing blink status of %s: %d -> %d: %s",
-				qPrintable(m_bareJid), m_blinking, blinking, qPrintable(reason));
-		m_blinking = blinking;
-		if (blinking) {
-			m_blinkingReason = reason;
+void ContactItem::setNotified(bool notified, const QString &text) {
+	if (m_notified != notified) {
+		LDEBUG("changing notification status for %s from %d to %d: %s",
+				qPrintable(m_bareJid), m_notified, notified, qPrintable(text));
+		m_notified = notified;
+		if (notified) {
+			m_notification = text;
 		} else {
-			m_blinkingReason = QString();
+			m_notification = QString();
 		}
 		owner->contactChanged(this);
 	}

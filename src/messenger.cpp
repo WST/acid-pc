@@ -460,7 +460,7 @@ void Messenger::gotMessage(QXmppMessage message) {
                 // Сохраним текст сообщения
                 messages[bare_jid][message.id()] = message;
 				if (roster_item) {
-	                roster_item->setBlinking(true, "You have unread messages");
+	                roster_item->setNotified(true, tr("There are unread messages"));
 				}
                 connect(ConfirmationWindow::newMessage(& message, settings->value("settings/notification_display_time", 5).toInt()), SIGNAL(confirmedMessage(const QString &)), this, SLOT(confirmedMessage(const QString &)));
 			} else {
@@ -494,7 +494,7 @@ void Messenger::confirmedMessage(const QString &message_from) {
     }
 
     messages.erase(messages.find(jid[1]));
-    if(roster_item) roster_item->setBlinking(false);
+    if(roster_item) roster_item->setNotified(false);
 }
 
 void Messenger::joinNewRoom() {
@@ -570,7 +570,7 @@ void Messenger::openChat(const QString &full_jid, const QString &nick) {
     }
 
     messages.erase(messages.find(jid[1]));
-    if(roster_item) roster_item->setBlinking(false);
+    if(roster_item) roster_item->setNotified(false);
 }
 
 void Messenger::processJoinRequest(const QString &room_jid) {

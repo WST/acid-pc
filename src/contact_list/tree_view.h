@@ -13,7 +13,7 @@ namespace CL {
 		TreeView(QWidget* parent = 0);
 		~TreeView();
 		bool event(QEvent* e);
-        void setBlinking(const QString &jid, bool blinking);
+        void setNotified(const QString &jid, bool notified);
 
 	public slots:
 		void mousePressed(const QModelIndex& index);

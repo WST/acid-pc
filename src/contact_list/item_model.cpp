@@ -43,11 +43,8 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const {
 		return item->getSubText();
 	case ItemRole:
 		return qVariantFromValue(static_cast<const void *>(item));
-	case BlinkingRole:
-		// TODO: change setBlinking() to setNotify(), add to Item
-		return item->childCount() ?
-			false :
-			static_cast<const ContactItem *>(item)->getBlinking();
+	case NotificationRole:
+		return item->notified();
 	default:
 		return QVariant();
 	}

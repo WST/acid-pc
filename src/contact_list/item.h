@@ -33,6 +33,13 @@ namespace CL {
 			and always zero for contacts (because contacts can't have groups)
 			*/
 		virtual int childCount() const { return 0; }
+
+		/*!
+			Notification status for the item.
+			This is always false for the group (since the group could not be notified)
+			and true for contacts requiring attention (new messages etc)
+			*/
+		virtual bool notified() const { return false; }
 	};
 }
 
