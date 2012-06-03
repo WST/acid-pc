@@ -23,10 +23,11 @@ public:
     
 private:
     Ui::TransferManagerWidget *ui;
+    int rowBySid(const QString &sid);
 
 private slots:
     void changeState(QXmppTransferJob::State state);
-    void progress(qint64 total, qint64 sent);
+    void progress(qint64 sent, qint64 total);
 };
 
 #endif // TRANSFERMANAGERWIDGET_H
