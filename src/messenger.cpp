@@ -2,7 +2,6 @@
 // qxmpp
 #include "qxmpp/QXmppRosterManager.h"
 #include "qxmpp/QXmppBookmarkSet.h"
-#include "qxmpp/QXmppUtils.h"
 
 // ACId
 #include "messenger.h"
@@ -67,6 +66,8 @@ Messenger::Messenger(QTranslator *app_translator, QSettings *app_settings): QMai
 	roster_widget.setItemDelegate(new CL::ItemDelegate());
 
 	QDesktopServices::setUrlHandler("xmpp", this, "handleLink");
+
+    counter = 0;
 }
 
 Messenger::~Messenger() {
@@ -80,6 +81,10 @@ void Messenger::saveSettings() {
 	settings->setValue("about/geometry", about->saveGeometry());
 
 	settings->sync();
+}
+
+QString Messenger::id() {
+    return "acid_" + QString::number(++ counter);
 }
 
 void Messenger::loadSettings() {
@@ -722,6 +727,6 @@ void Messenger::processBookmarkClick() {
 void Messenger::showSendFileDialog(const QString &jid) {
     QString filename = QFileDialog::getOpenFileName(this, tr("Open a file"));
     if(!filename.isEmpty() && QFile::exists(filename)) {
-        chat->openTransferManager(transfer_manager->sendFile(jid, filename, "acid_" + QString::number(QXmppUtils::generateRandomInteger(4))));
+        chat->openTransferManager(transfer_manager->sendFile(jid, filename, id()));
     }
 }

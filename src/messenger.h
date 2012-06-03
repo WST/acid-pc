@@ -70,6 +70,8 @@ class Messenger: public QMainWindow {
 		void launch();
 		QSettings *settingsManager();
         QXmppMucRoom *getRoomByJid(const QString &jid);
+        unsigned long int counter;
+        QString id();
 
 	private slots:
 		void activate();
