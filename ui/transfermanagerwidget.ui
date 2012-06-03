@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>493</width>
     <height>300</height>
    </rect>
   </property>
@@ -43,6 +43,11 @@
      </column>
      <column>
       <property name="text">
+       <string>Size</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string>Progress</string>
       </property>
      </column>
@@ -55,6 +60,10 @@
        <property name="text">
         <string>Stop selected</string>
        </property>
+       <property name="icon">
+        <iconset resource="../res/app.qrc">
+         <normaloff>:/common/cross.png</normaloff>:/common/cross.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
@@ -64,7 +73,7 @@
        </property>
        <property name="icon">
         <iconset resource="../res/app.qrc">
-         <normaloff>:/common/cross.png</normaloff>:/common/cross.png</iconset>
+         <normaloff>:/common/tick-circle.png</normaloff>:/common/tick-circle.png</iconset>
        </property>
       </widget>
      </item>

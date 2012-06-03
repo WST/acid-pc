@@ -32,7 +32,6 @@ private:
     Ui::ChatWidget *ui;
     QString nick;
     CL::ContactItem *m_item;
-    int m_position;
     ChatWindow *window;
 
 public slots:
@@ -42,7 +41,6 @@ public slots:
     void insertMessage(QXmppMessage &message);
     void setOnline(bool is_online);
     void activate();
-    void setNumber(int position);
 
 signals:
     void aboutToSend(QString to, QString message);

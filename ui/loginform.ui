@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>233</width>
+    <width>240</width>
     <height>304</height>
    </rect>
   </property>
@@ -16,6 +16,18 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>240</width>
+    <height>304</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>240</width>
+    <height>304</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string notr="true">Login window</string>
   </property>
@@ -24,6 +36,9 @@
     <normaloff>:/acid_16.png</normaloff>:/acid_16.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>8</number>
+   </property>
    <item>
     <widget class="QLabel" name="Logo_label">
      <property name="text">
@@ -199,6 +214,10 @@
        <property name="text">
         <string>Sign in</string>
        </property>
+       <property name="icon">
+        <iconset resource="../res/app.qrc">
+         <normaloff>:/login_form/tick-circle.png</normaloff>:/login_form/tick-circle.png</iconset>
+       </property>
        <property name="shortcut">
         <string notr="true">Return</string>
        </property>
@@ -217,6 +236,10 @@
        </property>
        <property name="text">
         <string>Settings</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../res/app.qrc">
+         <normaloff>:/login_form/toolbox.png</normaloff>:/login_form/toolbox.png</iconset>
        </property>
       </widget>
      </item>

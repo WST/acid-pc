@@ -53,5 +53,8 @@
         <file>common/plug.png</file>
         <file>common/card-address.png</file>
         <file>common/paper-plane.png</file>
+        <file>common/tick-circle.png</file>
+        <file>login_form/tick-circle.png</file>
+        <file>login_form/toolbox.png</file>
     </qresource>
 </RCC>

@@ -121,11 +121,9 @@ ChatWidget *ChatWindow::openChatTab(QString fulljid, QString tab_name, CL::Conta
     if(roster_item) {
         QIcon item_icon = roster_item->getIcon();
         position = ui->tabWidget->addTab(widget, item_icon, tab_name);
-        widget->setNumber(position);
         widget->setIcon(item_icon);
     } else {
         position = ui->tabWidget->addTab(widget, tab_name);
-        widget->setNumber(position);
         widget->setIcon(QIcon(":/common/chat.png"));
     }
 
@@ -213,6 +211,10 @@ BookmarksWidget *ChatWindow::openBookmarksEditor(QXmppBookmarkManager *manager) 
 
 void ChatWindow::setTabIcon(int position, const QIcon &icon) {
     ui->tabWidget->setTabIcon(position, icon);
+}
+
+void ChatWindow::setTabIcon(QWidget *widget, const QIcon &icon) {
+    setTabIcon(ui->tabWidget->indexOf(widget), icon);
 }
 
 void ChatWindow::setOnline(bool is_online) {

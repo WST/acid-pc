@@ -28,10 +28,6 @@ void ChatWidget::insertMessage(QXmppMessage &message) {
     ui->chatview->append("<font color=\"#0000AA\">&lt;" + nick + "&gt;</font> " + text);
 }
 
-void ChatWidget::setNumber(int position) {
-    m_position = position;
-}
-
 void ChatWidget::on_send_clicked() {
 	QString text = ui->message->toPlainText();
 	emit aboutToSend(jid, text);
@@ -66,9 +62,7 @@ void ChatWidget::setNick(QString newnick) {
 
 void ChatWidget::setIcon(QIcon icon) {
     ui->icon->setPixmap(icon.pixmap(16));
-    window->setTabIcon(m_position, icon);
-    // TODO: значок таба сейчас обновляется по позиции,
-    // Это работает только если не двигать табы
+    window->setTabIcon(this, icon);
 }
 
 void ChatWidget::appendResource(QString resource) {

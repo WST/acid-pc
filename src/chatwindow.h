@@ -64,6 +64,7 @@ signals:
 public slots:
     void setOnline(bool is_online);
     void setTabIcon(int position, const QIcon &icon);
+    void setTabIcon(QWidget *widget, const QIcon &icon);
 
 private slots:
     void on_tabWidget_currentChanged(int index);
