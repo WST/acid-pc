@@ -23,6 +23,10 @@ public:
     
 private:
     Ui::TransferManagerWidget *ui;
+
+private slots:
+    void changeState(QXmppTransferJob::State state);
+    void progress(qint64 total, qint64 sent);
 };
 
 #endif // TRANSFERMANAGERWIDGET_H
