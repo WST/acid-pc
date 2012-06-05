@@ -49,6 +49,9 @@ void ChatWidget::on_message_textChanged() {
 void ChatWidget::setOnline(bool is_online) {
     ui->send->setEnabled((online = is_online) && !ui->message->toPlainText().isEmpty());
     ui->send->setToolTip(online ? tr("Send the message") : tr("This button is not available because you are not connected"));
+    if(!is_online) {
+        setIcon(QIcon(":/trayicon/offline-16px.png"));
+    }
 }
 
 void ChatWidget::activate() {
