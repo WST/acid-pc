@@ -9,17 +9,17 @@
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="52"/>
+        <location filename="../ui/aboutwindow.ui" line="55"/>
         <source>Application</source>
         <translation>Приложение</translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="57"/>
+        <location filename="../ui/aboutwindow.ui" line="60"/>
         <source>Developers</source>
         <translation>Разработчики</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/aboutwindow.ui" line="81"/>
+        <location filename="../ui/aboutwindow.ui" line="84"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -42,12 +42,12 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://qt.nokia.com&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Библиотеки Qt&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от Nokia corporation&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://p.yusukekamiyamane.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Набор значков Fugue&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от Yusuke Kamiyamane&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://qxmpp.googlecode.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Qxmpp&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от команды разработчиков Qxmpp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="126"/>
+        <location filename="../ui/aboutwindow.ui" line="129"/>
         <source>Miscellaneous</source>
         <translation>Мелочи</translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="132"/>
+        <location filename="../ui/aboutwindow.ui" line="135"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -141,6 +141,14 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>CL::ContactItem</name>
+    <message>
+        <location filename="../src/contact_list/contact_item.cpp" line="177"/>
+        <source>offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChatWidget</name>
     <message>
         <location filename="../ui/chatwidget.ui" line="56"/>
@@ -148,12 +156,12 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/chatwidget.cpp" line="55"/>
+        <location filename="../src/chatwidget.cpp" line="51"/>
         <source>Send the message</source>
         <translation>Отправить сообщение</translation>
     </message>
     <message>
-        <location filename="../src/chatwidget.cpp" line="55"/>
+        <location filename="../src/chatwidget.cpp" line="51"/>
         <source>This button is not available because you are not connected</source>
         <translation>Эта кнопка недоступна, так как вы сейчас не в сети</translation>
     </message>
@@ -166,17 +174,17 @@ p, li { white-space: pre-wrap; }
         <translation>Диалоги</translation>
     </message>
     <message>
-        <location filename="../src/chatwindow.cpp" line="101"/>
+        <location filename="../src/chatwindow.cpp" line="104"/>
         <source>Services</source>
         <translation>Службы</translation>
     </message>
     <message>
-        <location filename="../src/chatwindow.cpp" line="190"/>
+        <location filename="../src/chatwindow.cpp" line="195"/>
         <source>Transfers</source>
         <translation>Передачи</translation>
     </message>
     <message>
-        <location filename="../src/chatwindow.cpp" line="208"/>
+        <location filename="../src/chatwindow.cpp" line="217"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
@@ -305,62 +313,62 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>LoginForm</name>
     <message>
-        <location filename="../ui/loginform.ui" line="61"/>
+        <location filename="../ui/loginform.ui" line="76"/>
         <source>Username:</source>
         <translation>Логин:</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="74"/>
+        <location filename="../ui/loginform.ui" line="89"/>
         <source>Server:</source>
         <translation>Домен:</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="87"/>
+        <location filename="../ui/loginform.ui" line="102"/>
         <source>XMPP server to use</source>
         <translation>Используемый XMPP-сервер</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="124"/>
+        <location filename="../ui/loginform.ui" line="139"/>
         <source>Password:</source>
         <translation>Пароль:</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="144"/>
+        <location filename="../ui/loginform.ui" line="159"/>
         <source>Check this box to save the password</source>
         <translation>Установите этот флаг, чтобы сохранять пароль</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="147"/>
+        <location filename="../ui/loginform.ui" line="162"/>
         <source>Save password?</source>
         <translation>Сохранить пароль?</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="157"/>
+        <location filename="../ui/loginform.ui" line="172"/>
         <source>Check this box if you would like to sign in automatically next time</source>
         <translation>Установите этот флаг, чтобы в следующий раз подключиться автоматически</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="160"/>
+        <location filename="../ui/loginform.ui" line="175"/>
         <source>Log in automatically?</source>
         <translation>Входить автоматически?</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="197"/>
+        <location filename="../ui/loginform.ui" line="212"/>
         <source>Sign in or register</source>
         <translation>Войти или выполнить регистрацию на сервере</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="200"/>
+        <location filename="../ui/loginform.ui" line="215"/>
         <source>Sign in</source>
         <translation>Войти</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="216"/>
+        <location filename="../ui/loginform.ui" line="235"/>
         <source>Edit application settings</source>
         <translation>Редактировать настройки приложения</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="219"/>
+        <location filename="../ui/loginform.ui" line="238"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
@@ -409,144 +417,154 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Messenger</name>
     <message>
-        <location filename="../src/messenger.cpp" line="146"/>
+        <location filename="../src/messenger.cpp" line="153"/>
         <source>Program</source>
         <translation>Программа</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="147"/>
+        <location filename="../src/messenger.cpp" line="154"/>
         <source>New message</source>
         <translation>Новое сообщение</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="148"/>
+        <location filename="../src/messenger.cpp" line="155"/>
         <source>Join a room</source>
         <translation>Войти в конференцию</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="149"/>
+        <location filename="../src/messenger.cpp" line="156"/>
         <source>Join new room</source>
         <translation>В новую</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="150"/>
+        <location filename="../src/messenger.cpp" line="157"/>
         <source>Manage bookmarks</source>
         <translation>Редактировать закладки</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="151"/>
+        <location filename="../src/messenger.cpp" line="158"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="152"/>
+        <location filename="../src/messenger.cpp" line="159"/>
         <source>Add contact</source>
         <translation>Добавить контакт</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="153"/>
+        <location filename="../src/messenger.cpp" line="160"/>
         <source>Roster</source>
         <translation>Ростер</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="154"/>
+        <location filename="../src/messenger.cpp" line="161"/>
         <source>Hide offline items</source>
         <translation>Скрывать отключённых</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="156"/>
+        <location filename="../src/messenger.cpp" line="163"/>
         <source>Connect service</source>
         <translation>Подключить службу</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="161"/>
+        <location filename="../src/messenger.cpp" line="168"/>
         <source>Lopbox microblog</source>
         <translation>Микроблог Lopbox</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="162"/>
+        <location filename="../src/messenger.cpp" line="169"/>
         <source>Add an RSS feed</source>
         <translation>Добавить RSS-ленту</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="164"/>
+        <location filename="../src/messenger.cpp" line="171"/>
         <source>Service discovery</source>
         <translation>Обзор служб</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="166"/>
+        <location filename="../src/messenger.cpp" line="173"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="168"/>
+        <location filename="../src/messenger.cpp" line="175"/>
         <source>Quit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="170"/>
+        <location filename="../src/messenger.cpp" line="177"/>
         <source>Status</source>
         <translation>Статус</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="171"/>
+        <location filename="../src/messenger.cpp" line="178"/>
         <source>Available</source>
         <translation>Доступен</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="172"/>
+        <location filename="../src/messenger.cpp" line="179"/>
         <source>Free for chat</source>
         <translation>Свободен для общения</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="173"/>
+        <location filename="../src/messenger.cpp" line="180"/>
         <source>Away</source>
         <translation>Отошёл</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="174"/>
+        <location filename="../src/messenger.cpp" line="181"/>
         <source>Extended away</source>
         <translation>Отошёл надолго</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="175"/>
+        <location filename="../src/messenger.cpp" line="182"/>
         <source>Do not disturb</source>
         <translation>Не беспокоить</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="177"/>
+        <location filename="../src/messenger.cpp" line="184"/>
         <source>Offline</source>
         <translation>Отключён</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="179"/>
+        <location filename="../src/messenger.cpp" line="186"/>
         <source>Help</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="180"/>
+        <location filename="../src/messenger.cpp" line="187"/>
         <source>Support chat</source>
         <translation>Конференция поддержки</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="181"/>
+        <location filename="../src/messenger.cpp" line="188"/>
         <source>Official site</source>
         <translation>Официальный сайт</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="183"/>
+        <location filename="../src/messenger.cpp" line="190"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="595"/>
+        <location filename="../src/messenger.cpp" line="463"/>
+        <source>There are unread messages</source>
+        <translation>Есть непрочитанные сообщения</translation>
+    </message>
+    <message>
+        <location filename="../src/messenger.cpp" line="607"/>
         <source>You have been kicked: </source>
         <translation>Вас выгнали из комнаты:</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="706"/>
+        <location filename="../src/messenger.cpp" line="714"/>
         <source>Join </source>
         <translation>Войти в </translation>
+    </message>
+    <message>
+        <location filename="../src/messenger.cpp" line="731"/>
+        <source>Open a file</source>
+        <translation>Открыть файл</translation>
     </message>
 </context>
 <context>
@@ -814,42 +832,47 @@ p, li { white-space: pre-wrap; }
         <translation>Использовать ctrl-enter для отправки сообщений</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="422"/>
+        <location filename="../ui/settingswindow.ui" line="419"/>
+        <source>Hide caption lines for common tabs</source>
+        <translation>Скрывать заголовки служебных табов</translation>
+    </message>
+    <message>
+        <location filename="../ui/settingswindow.ui" line="429"/>
         <source>Notifications</source>
         <translation>Уведомления</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="430"/>
+        <location filename="../ui/settingswindow.ui" line="437"/>
         <source>Notification display time:</source>
         <translation>Время показа уведомлений:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="469"/>
+        <location filename="../ui/settingswindow.ui" line="476"/>
         <source>Miscellaneous</source>
         <translation>Мелочи</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="475"/>
+        <location filename="../ui/settingswindow.ui" line="482"/>
         <source>Paths</source>
         <translation>Пути</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="483"/>
+        <location filename="../ui/settingswindow.ui" line="490"/>
         <source>Save files to:</source>
         <translation>Сохранять файлы:</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="490"/>
+        <location filename="../ui/settingswindow.ui" line="497"/>
         <source>Browse</source>
         <translation>Обзор</translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="516"/>
+        <location filename="../ui/settingswindow.ui" line="523"/>
         <source>Ask me everytime</source>
         <translation>Спрашивать меня каждый раз</translation>
     </message>
     <message>
-        <location filename="../src/settingswindow.cpp" line="87"/>
+        <location filename="../src/settingswindow.cpp" line="89"/>
         <source>Select a directory</source>
         <translation>Выбрать целевой каталог</translation>
     </message>
@@ -857,29 +880,54 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TransferManagerWidget</name>
     <message>
-        <location filename="../ui/transfermanagerwidget.ui" line="36"/>
+        <location filename="../ui/transfermanagerwidget.ui" line="39"/>
         <source>File name</source>
         <translation>Имя файла</translation>
     </message>
     <message>
-        <location filename="../ui/transfermanagerwidget.ui" line="41"/>
+        <location filename="../ui/transfermanagerwidget.ui" line="44"/>
         <source>Direction</source>
         <translation>Направление</translation>
     </message>
     <message>
-        <location filename="../ui/transfermanagerwidget.ui" line="46"/>
+        <location filename="../ui/transfermanagerwidget.ui" line="49"/>
+        <source>Size</source>
+        <translation>Размер</translation>
+    </message>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="54"/>
+        <source>Speed</source>
+        <translation>Скорость</translation>
+    </message>
+    <message>
+        <location filename="../ui/transfermanagerwidget.ui" line="59"/>
         <source>Progress</source>
         <translation>Прогресс</translation>
     </message>
     <message>
-        <location filename="../ui/transfermanagerwidget.ui" line="56"/>
+        <location filename="../ui/transfermanagerwidget.ui" line="72"/>
         <source>Stop selected</source>
         <translation>Остановить выбранный</translation>
     </message>
     <message>
-        <location filename="../ui/transfermanagerwidget.ui" line="63"/>
+        <location filename="../ui/transfermanagerwidget.ui" line="86"/>
         <source>Clear finished</source>
         <translation>Очистить завершённые</translation>
+    </message>
+    <message>
+        <location filename="../src/transfermanagerwidget.cpp" line="19"/>
+        <source>Incoming</source>
+        <translation>Входящий</translation>
+    </message>
+    <message>
+        <location filename="../src/transfermanagerwidget.cpp" line="19"/>
+        <source>Outgoing</source>
+        <translation>Исходящий</translation>
+    </message>
+    <message>
+        <location filename="../src/transfermanagerwidget.cpp" line="41"/>
+        <source>Finished</source>
+        <translation>Выполнено</translation>
     </message>
 </context>
 <context>

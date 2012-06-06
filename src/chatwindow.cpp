@@ -98,7 +98,11 @@ ServiceDiscoveryWidget *ChatWindow::openDiscoTab(QXmppDiscoveryManager *manager,
     }
 
     widget = new ServiceDiscoveryWidget(manager, this);
-    ui->tabWidget->addTab(widget, QIcon(":/menu/plug.png"), tr("Services"));
+    if(settings->value("settings/hide_tab_captions", false).toBool()) {
+        ui->tabWidget->addTab(widget, QIcon(":/menu/plug.png"), "");
+    } else {
+        ui->tabWidget->addTab(widget, QIcon(":/menu/plug.png"),  tr("Services"));
+    }
     ui->tabWidget->setCurrentWidget(widget);
     return widget;
 }
@@ -185,7 +189,11 @@ TransferManagerWidget *ChatWindow::openTransferManager(QXmppTransferJob *job) {
     }
 
     widget = new TransferManagerWidget(this);
-    ui->tabWidget->addTab(widget, QIcon(":/menu/disk.png"), tr("Transfers"));
+    if(settings->value("settings/hide_tab_captions", false).toBool()) {
+        ui->tabWidget->addTab(widget, QIcon(":/menu/disk.png"), "");
+    } else {
+        ui->tabWidget->addTab(widget, QIcon(":/menu/disk.png"),  tr("Transfers"));
+    }
     ui->tabWidget->setCurrentWidget(widget);
     widget->newTransferJob(job);
 
@@ -203,7 +211,11 @@ BookmarksWidget *ChatWindow::openBookmarksEditor(QXmppBookmarkManager *manager) 
     }
 
     widget = new BookmarksWidget(manager, this);
-    ui->tabWidget->addTab(widget, QIcon(":/menu/bookmarks.png"), tr("Bookmarks"));
+    if(settings->value("settings/hide_tab_captions", false).toBool()) {
+        ui->tabWidget->addTab(widget, QIcon(":/menu/bookmarks.png"), "");
+    } else {
+        ui->tabWidget->addTab(widget, QIcon(":/menu/bookmarks.png"),  tr("Bookmarks"));
+    }
     ui->tabWidget->setCurrentWidget(widget);
 
     return widget;
@@ -252,6 +264,9 @@ void ChatWindow::on_tabWidget_tabCloseRequested(int index) {
         case TabWidget::Bookmarks: {
             delete (BookmarksWidget *) widget;
         } break;
+    case TabWidget::Transfers: {
+        delete (TransferManagerWidget *) widget;
+    } break;
 	}
 
 	if(ui->tabWidget->count() == 0) {

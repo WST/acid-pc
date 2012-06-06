@@ -560,16 +560,19 @@ void Messenger::openChat(const QString &full_jid, const QString &nick) {
     chat->openChatTab(full_jid, nick, roster_model.getContact(full_jid));
     QStringList jid = parseJid(full_jid);
 
+    // TODO: если JID содержит только hostname, будут серьёзные проблемы,
+    // Это надо пофиксить
+
     // Контакт точно есть в ростере
     CL::ContactItem *roster_item = roster_model.getContact(full_jid);
 
     QMap<QString, QXmppMessage> list = messages[jid[1]];
-
     for(QMap<QString, QXmppMessage>::iterator i = list.begin(); i != list.end(); ++ i) {
         chat->displayMessage(i.value(), nick, roster_item);
     }
 
     messages.erase(messages.find(jid[1]));
+
     if(roster_item) roster_item->setNotified(false);
 }
 

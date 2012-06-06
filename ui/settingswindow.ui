@@ -413,6 +413,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="hide_tab_captions">
+            <property name="text">
+             <string>Hide caption lines for common tabs</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
