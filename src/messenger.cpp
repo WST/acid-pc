@@ -1,7 +1,7 @@
 
 // qxmpp
-#include "qxmpp/QXmppRosterManager.h"
-#include "qxmpp/QXmppBookmarkSet.h"
+#include <qxmpp/QXmppRosterManager.h>
+#include <qxmpp/QXmppBookmarkSet.h>
 
 // ACId
 #include "messenger.h"
@@ -9,7 +9,6 @@
 #include "confirmationwindow.h"
 #include "newcontactwindow.h"
 #include "joinroomwindow.h"
-#include "contact_list/qxmpp_bridge.h"
 #include <version.h>
 
 // Qt
@@ -52,6 +51,7 @@ Messenger::Messenger(QTranslator *app_translator, QSettings *app_settings): QMai
 	settings_window = new SettingsWindow(this);
 	call_window = 0;
 	tray = new TrayIcon(this);
+	rosterBridge = new CL::QXmppBridge(&roster_model, &client->rosterManager());
 
 	createConnections();
 	createMenus();
@@ -72,6 +72,7 @@ Messenger::Messenger(QTranslator *app_translator, QSettings *app_settings): QMai
 
 Messenger::~Messenger() {
 		saveSettings();
+		delete rosterBridge;
 }
 
 void Messenger::saveSettings() {
@@ -130,7 +131,9 @@ void Messenger::createConnections() {
 	connect(client, SIGNAL(messageReceived(QXmppMessage)), this, SLOT(gotMessage(QXmppMessage)));
 
 	connect(& client->rosterManager(), SIGNAL(rosterReceived()), this, SLOT(rosterReceived()));
-	connect(& client->rosterManager(), SIGNAL(rosterChanged(const QString&)), this, SLOT(rosterChanged(const QString&)));
+	connect(& client->rosterManager(), SIGNAL(itemAdded(const QString&)), rosterBridge, SLOT(itemAdded(const QString &)));
+	connect(& client->rosterManager(), SIGNAL(itemChanged(const QString&)), rosterBridge, SLOT(itemChanged(const QString &)));
+	connect(& client->rosterManager(), SIGNAL(itemRemoved(const QString&)), rosterBridge, SLOT(itemRemoved(const QString &)));
 	connect(& client->rosterManager(), SIGNAL(presenceChanged(const QString&, const QString&)), this, SLOT(presenceChanged(const QString&, const QString&)));
     connect(& client->rosterManager(), SIGNAL(subscriptionReceived(const QString &)), this, SLOT(handleSubscriptionRequest(const QString &)));
     connect(& client->vCardManager(), SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
@@ -196,7 +199,7 @@ void Messenger::createMenus() {
 	connect(action_new_message, SIGNAL(triggered()), this, SLOT(createNewMessage()));
 	connect(action_join_new_room, SIGNAL(triggered()), this, SLOT(joinNewRoom()));
     connect(action_new_contact, SIGNAL(triggered()), this, SLOT(showNewContactWindow()));
-    connect(action_hide_offline_contacts, SIGNAL(triggered(bool)), & roster_widget, SLOT(hideOfflineContacts(bool)));
+    connect(action_hide_offline_contacts, SIGNAL(triggered(bool)), & roster_widget, SLOT(setHideOfflineItems(bool)));
     connect(action_browse_services, SIGNAL(triggered()), this, SLOT(openServiceBrowser()));
     connect(action_edit_bookmarks, SIGNAL(triggered()), this, SLOT(showBookmarkManager()));
     room_bookmarks_menu->setEnabled(false);
@@ -517,15 +520,10 @@ void Messenger::showApplicationInfo() {
 	about->show();
 }
 
-void Messenger::rosterChanged(const QString &bare_jid) {
-	QXmppRosterIq::Item item = client->rosterManager().getRosterEntry(bare_jid);
-	roster_model.updateEntry(bare_jid, item.name(), item.groups());
-}
-
 void Messenger::rosterReceived() {
 	QStringList list = client->rosterManager().getRosterBareJids();
-	foreach(QString bare_jid, list) {
-		rosterChanged(bare_jid);
+	foreach (QString bare_jid, list) {
+		rosterBridge->itemAdded(bare_jid);
 	}
 }
 
@@ -549,7 +547,6 @@ void Messenger::presenceChanged(const QString &bare_jid, const QString &resource
 	} else {
 		LDEBUG("presence map does NOT contain this presence");
 	}
-	roster_model.throttleNotInRoster = false;
 	roster_model.setStatus(QString("%1" JID_RESOURCE_SEPARATOR "%2").arg(bare_jid).arg(resource), status);
 }
 
@@ -565,6 +562,8 @@ void Messenger::openChat(const QString &full_jid, const QString &nick) {
 
     // Контакт точно есть в ростере
     CL::ContactItem *roster_item = roster_model.getContact(full_jid);
+
+	LASSERT(roster_item, "The roster item for %s does not exist", qPrintable(full_jid));
 
     QMap<QString, QXmppMessage> list = messages[jid[1]];
     for(QMap<QString, QXmppMessage>::iterator i = list.begin(); i != list.end(); ++ i) {
@@ -601,7 +600,7 @@ void Messenger::leftRoom() {
     delete room;
 }
 
-// Эта функция вызывается, когда нас послали нахуй из комнаты
+// Эта функция вызывается, когда пользователя выгнали из комнаты
 void Messenger::kickedFromRoom(const QString &jid, const QString &reason) {
     QXmppMucRoom *room = (QXmppMucRoom *) sender();
     rejoinRoom(tr("You have been kicked: ") + reason, room->jid());

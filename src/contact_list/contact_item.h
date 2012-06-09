@@ -113,6 +113,11 @@ namespace CL {
 		bool removeFromGroup(const QString &group_name);
 
 		/*!
+			Remove a contact from all groups
+			*/
+		void remove();
+
+		/*!
 			Returns a list of all groups item is presented in
 			*/
 		const QList<GroupItem *> &getGroups() const { return m_groups; }
@@ -141,8 +146,24 @@ namespace CL {
 		virtual bool notified() const { return m_notified; }
 	
 	signals:
+		/*!
+			Contact icon has changed.
+			Emitted after the actual change is rendered to the roster
+			*/
 		void iconChanged(const QIcon &new_icon);
+	
+		/*!
+			Contact nickname has changed.
+			Emitted after the actual change is rendered to the roster
+			*/
 		void nickChanged(const QString &new_nick);
+
+		/*!
+			Contact has been removed from all groups.
+			Emitted after the change is rendered, but BEFORE the item is destroyed,
+			i.e. you can still read the properties.
+			*/
+		void removed();
 
 	private:
 		ItemModel *owner;

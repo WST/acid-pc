@@ -97,6 +97,13 @@ bool ContactItem::removeFromGroup(GroupItem *group) {
 	return false;
 }
 
+void ContactItem::remove() {
+	foreach (GroupItem *group, m_groups) {
+		removeFromGroup(group);
+	}
+	emit removed();
+}
+
 QString ContactItem::getText() const {
 	QString base_text = getNick();
 	return m_resources.size() > 1 ? (base_text + " (%1)").arg(m_resources.size()) : base_text;

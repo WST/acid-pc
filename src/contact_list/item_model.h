@@ -7,8 +7,8 @@
 #include "group_item.h"
 
 /*!
-  This workaround makes changes of {begin,end}MoveRows manually, preventing crash in some cases
-  */
+	This workaround makes changes of {begin,end}MoveRows manually, preventing crash in some cases
+	*/
 #define MOVE_ROWS_WORKAROUND
 
 namespace CL {
@@ -23,44 +23,44 @@ namespace CL {
 			noGroupName("General") {}
 
 		/*!
-		  Returns a contact by it's JID
-		  */
+			Returns a contact by it's JID
+			*/
 		ContactItem *getContact(const QString &jid);
 
 		/*!
-		  Changes the status of an item with full jid JID
-		  If an item does not exist, adds it to not-in-roster group (unless notInRosterGroupName is empty)
-		  */
+			Changes the status of an item with full jid JID
+			If an item does not exist, adds it to not-in-roster group (unless notInRosterGroupName is empty)
+			*/
 		void setStatus(const QString &jid, const ContactItem::Status &_value);
 
 		/*!
-		  Adds an entry for jid, updating it's groups as needed
-		  */
+			Adds an entry for jid, updating it's groups as needed
+			*/
 		ContactItem *updateEntry(const QString &jid, const QString &nick, QSet<QString> groups);
 
 		/*!
-		  Removes an entry for jid from all groups
-		  */
+			Removes an entry for jid from all groups
+			*/
 		void removeEntry(const QString &jid);
 
 		/*!
-		  Gets an existing group from list (by name) or creates a new group
-		  */
+			Gets an existing group from list (by name) or creates a new group
+			*/
 		GroupItem *getGroup(const QString &name);
 
 		/*!
-		  Drop status if sender is not in roster
-		  */
+			Drop status if sender is not in roster
+			*/
 		bool throttleNotInRoster;
 
 		/*!
-		  Group name for new contacts not in roster
-		  */
+			Group name for new contacts not in roster
+			*/
 		QString notInRosterGroupName;
 
 		/*!
-		  Group name for new contacts without groups
-		  */
+			Group name for new contacts without groups
+			*/
 		QString noGroupName;
 
 	public: // QAbstractItemModel
@@ -87,13 +87,13 @@ namespace CL {
 		QList<GroupItem *> m_groups;
 
 		/*!
-		  Returns index of contact (if groupID >= 0) or group
-		  */
+			Returns index of contact (if groupID >= 0) or group
+			*/
 		QModelIndex index(int row, int column, int groupID = -1) const;
 
 		/*!
-		  Adds non-existent item to roster
-		  */
+			Adds non-existent item to roster
+			*/
 		ContactItem *addItem(const QString &jid, const QString &nick);
 	};
 };

@@ -24,6 +24,7 @@
 #include "aboutwindow.h"
 #include "vcardwindow.h"
 #include "voicecallwindow.h"
+#include "contact_list/qxmpp_bridge.h"
 #include "contact_list/tree_view.h"
 #include "contact_list/item_model.h"
 #include "contact_list/item_delegate.h"
@@ -57,7 +58,8 @@ class Messenger: public QMainWindow {
         QXmppBookmarkManager *bookmark_manager;
         QMenu *room_bookmarks_menu; // меню с закладками на MUC
         QAction *action_edit_bookmarks;
-	
+
+		CL::QXmppBridge *rosterBridge; // мост между QXmpp и CL ростером
 		CL::TreeView roster_widget; // виджет ростера
 		CL::ItemModel roster_model; // модель элемента ростера
 
@@ -96,7 +98,6 @@ class Messenger: public QMainWindow {
 		void showApplicationInfo();
 		void presenceChanged(const QString &bare_jid, const QString &resource);
 		void rosterReceived();
-		void rosterChanged(const QString& bare_jid);
 		void openChat(const QString &full_jid, const QString &nick);
 		void joinRoom(const QString &room_jid, const QString &nick); // в qxmpp ето есть, но этот метод ещё и открывает таб
         void joinedRoom();

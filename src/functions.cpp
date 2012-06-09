@@ -12,9 +12,11 @@ QStringList parseJid(QString jid) {
 void splitJid(const QString &jid, QString *bare, QString *resource) {
 	if (bare || resource) {
 		int sep = jid.indexOf(JID_RESOURCE_SEPARATOR);
-		if (resource)
+		if (resource) {
 			*resource = sep >= 0 ? jid.mid(sep+1) : "";
-		if (bare)
+		}
+		if (bare) {
 			*bare = jid.mid(0, sep);
+		}
 	}
 }

@@ -10,6 +10,7 @@ namespace CL {
 		*/
 	class Item: public QObject {
 		Q_OBJECT
+
 	public:
 		/*!
 			Main display text of an item

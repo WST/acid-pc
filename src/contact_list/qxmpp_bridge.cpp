@@ -1,4 +1,4 @@
-#include <QDebug>
+#include "item_model.h"
 
 #include "qxmpp_bridge.h"
 
@@ -46,4 +46,17 @@ ContactItem::StatusType	QXmppBridge::qxmpp2cl(const QXmppPresence::Status::Type 
 			return ContactItem::Offline;
 	}
 	return ContactItem::Unchanged;
+}
+
+void QXmppBridge::itemAdded(const QString &bareJid) {
+	itemChanged(bareJid);
+}
+
+void QXmppBridge::itemChanged(const QString &bareJid) {
+	const QXmppRosterIq::Item &item = m_manager->getRosterEntry(bareJid);
+	m_model->updateEntry(bareJid, item.name(), item.groups());
+}
+
+void QXmppBridge::itemRemoved(const QString &bareJid) {
+	m_model->removeEntry(bareJid);
 }

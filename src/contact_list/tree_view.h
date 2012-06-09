@@ -4,6 +4,7 @@
 #include <QtGui>
 #include "contact_item.h"
 #include "group_item.h"
+#include "item_model.h"
 
 namespace CL {
 	class TreeView : public QTreeView {
@@ -15,10 +16,16 @@ namespace CL {
 		bool event(QEvent* e);
         void setNotified(const QString &jid, bool notified);
 
+		virtual void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
 	public slots:
 		void mousePressed(const QModelIndex& index);
 		void doubleClicked(const QModelIndex& index);
 		void clicked(const QModelIndex& index);
+
+		/*!
+			Shows or hides offline items, also setting a flag for the future changes
+			*/
+		void setHideOfflineItems(bool);
 
 	private slots:
 		void showChatDialog_helper();
@@ -40,8 +47,8 @@ namespace CL {
 
 	public:
 		/*!
-		  Returns selected roster item. NULL if no items are selected
-		  */
+			Returns selected roster item. NULL if no items are selected
+			*/
 		const ContactItem *selectedContact() const;
 
 	private:
@@ -50,6 +57,12 @@ namespace CL {
 		QAction *action_remove;
 		QAction *action_send_file;
 		QAction *action_call;
+
+		bool m_hideOfflineItems;
+		const Item *itemFromIndex(const QModelIndex &index) const {
+			return static_cast<const Item *>(index.data(ItemModel::ItemRole).value<const void *>());
+		}
+		void updateOfflineItems(const QModelIndex &topLeft, const QModelIndex &bottomRight);
 	};
 };
 

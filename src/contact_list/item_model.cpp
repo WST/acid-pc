@@ -115,6 +115,18 @@ void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value)
 	item->setResourceStatus(resource, _value);
 }
 
+void ItemModel::removeEntry(const QString &jid) {
+	LDEBUG("removing entry %s from the contact list", qPrintable(jid));
+
+	ContactItem *item = getContact(jid);
+	if (item) {
+		item->remove();
+		delete item;
+	}
+
+	// XXX: remove empty groups. Optimization: only check groups the item belonged to.
+}
+
 ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSet<QString> groups) {
 	ContactItem *item = getContact(jid);
 	if (!item) {
@@ -124,16 +136,19 @@ ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSe
 		m_contacts[bare_jid] = item;
 	}
 
-	if (item->getNick() != nick)
+	if (item->getNick() != nick) {
 		item->setNick(nick);
+	}
 
 	// Synchronize groups
 	const QList<GroupItem *> &current_groups = item->getGroups();
-	for (int i = 0; i < current_groups.size(); ++i)
-		if (!groups.contains(current_groups[i]->getGroupName()))
+	for (int i = 0; i < current_groups.size(); ++i) {
+		if (!groups.contains(current_groups[i]->getGroupName())) {
 			item->removeFromGroup(current_groups[i--]);
-		else
+		} else {
 			groups.remove(current_groups[i]->getGroupName());
+		}
+	}
 
 	foreach (const QString &group, groups) {
 		item->addToGroup(getGroup(group));

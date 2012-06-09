@@ -10,6 +10,7 @@ namespace CL {
 
 	class GroupItem: public Item {
 		Q_OBJECT
+
 	public:
 		explicit GroupItem(ItemModel *_owner, const QString &_groupName = ""):
 			owner(_owner), m_groupName(_groupName), online_count(0) {}
@@ -18,33 +19,33 @@ namespace CL {
 		const QString &getGroupName() const { return m_groupName; }
 
 		/*!
-		  Returns user-friendly group name
-		  */
+			Returns user-friendly group name
+			*/
 		virtual QString getText() const { return QString("%1 (%2/%3)").arg(m_groupName).arg(online_count).arg(m_contacts.size()); }
 
 		/*!
-		  Provides some detail about group items
-		  */
+			Provides some detail about group items
+			*/
 		virtual QString getSubText() const { return ""; }
 
 		/*!
-		  Basically, this should return icon '+' or '-'
-		  */
+			Basically, this should return icon '+' or '-'
+			*/
 		virtual const QIcon &getIcon() const { return m_icon; }
 
 		/*!
-		  Contacts in group
-		  */
+			Contacts in group
+			*/
 		virtual int childCount() const { return m_contacts.size(); }
 
 		/*!
-		  Adds a contact to group. Supposed to be used internally by ContactItem
-		  */
+			Adds a contact to group. Supposed to be used internally by ContactItem
+			*/
 		bool addContact(ContactItem *item);
 
 		/*!
-		  Removes a contact from group. Supposed to be used internally by ContactItem
-		  */
+			Removes a contact from group. Supposed to be used internally by ContactItem
+			*/
 		bool removeContact(ContactItem *item);
 
 		const QList<ContactItem *> &getContacts() const { return m_contacts; }
