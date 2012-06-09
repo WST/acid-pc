@@ -25,7 +25,7 @@ TreeView::TreeView(QWidget* parent):QTreeView(parent) {
 	connect(action_send_file, SIGNAL(triggered()), this, SLOT(sendFile_helper()));
 
 	setHeaderHidden(true);
-	m_hideOfflineItems = true;
+	m_hideOfflineItems = false;
 }
 
 void TreeView::setHideOfflineItems(bool show) {
