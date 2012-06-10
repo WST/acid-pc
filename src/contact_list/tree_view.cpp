@@ -40,56 +40,51 @@ void TreeView::updateOfflineItems(const QModelIndex &topLeft, const QModelIndex 
 	/*
 	 * Scenario A: to == from are invalid => we update the whole contact list
 	 * Scenario B: to/from are groups => we update a range of groups
-	 * Scenario C: to/from are contacts => we update a range of contacts
+	 * Scenario C: to/from are contacts => we update a signle group
 	 */
 
-	int firstIndex = 0, lastIndex = 1 << 30;
+	int groupIndexStart = 0, groupIndexEnd = 1 << 30;
+
 	if (topLeft.isValid()) {
-		firstIndex = topLeft.row();
-	}
-	if (bottomRight.isValid()) {
-		lastIndex = bottomRight.row();
+		QModelIndex parentModelIndex = topLeft.parent();
+		if (parentModelIndex.isValid()) {
+			groupIndexStart = parentModelIndex.row();
+		} else {
+			groupIndexStart = topLeft.row();
+		}
 	}
 
-	QModelIndex level0m = topLeft.isValid() ? topLeft.parent() : topLeft;
-	// At this stage we have handled Scenario A and converted it to B with infinite ranges
-	for (int level1i = firstIndex; level1i <= lastIndex; ++level1i) {
-		QModelIndex level1m = model()->index(level1i, 0, level0m);
-		if (!level1m.isValid()) {
+	if (bottomRight.isValid()) {
+		QModelIndex parentModelIndex = bottomRight.parent();
+		if (parentModelIndex.isValid()) {
+			groupIndexEnd = parentModelIndex.row();
+		} else {
+			groupIndexEnd = bottomRight.row();
+		}
+	}
+
+	QModelIndex rootModelIndex = QModelIndex();
+	for (int groupIndex = groupIndexStart; groupIndex <= groupIndexEnd; ++groupIndex) {
+		QModelIndex groupModelIndex = model()->index(groupIndex, 0, rootModelIndex);
+		if (!groupModelIndex.isValid()) {
 			break;
 		}
-		const Item *level1t = itemFromIndex(level1m);
-		bool hideLevel1Item = m_hideOfflineItems;
-
-		if (level1t->childCount()) {
-			// Scenario B
-			int onlineChildrenCount = 0;
-			for (int level2i = 0; ; ++level2i) {
-				QModelIndex level2m = model()->index(level2i, 0, level1m);
-				if (!level2m.isValid()) {
-					break;
-				}
-				const ContactItem *level2t = static_cast<const ContactItem *>(itemFromIndex(level2m));
-				if (level2t->isOnline()) {
-					++onlineChildrenCount;
-				}
-				setRowHidden(level2i, level1m,
-					m_hideOfflineItems && !level2t->isOnline());
+		int onlineChildrenCount = 0;
+		for (int contactIndex = 0; ; ++contactIndex) {
+			QModelIndex contactModelIndex = model()->index(contactIndex, 0, groupModelIndex);
+			if (!contactModelIndex.isValid()) {
+				break;
 			}
-
-			if (hideLevel1Item && onlineChildrenCount) {
-				hideLevel1Item = false;
+			const ContactItem *contactItem =
+				static_cast<const ContactItem *>(itemFromIndex(contactModelIndex));
+			if (contactItem->isOnline()) {
+				++onlineChildrenCount;
 			}
-		} else {
-			// Scenario C
-			if (hideLevel1Item && static_cast<const ContactItem *>(level1t)->isOnline()) {
-				hideLevel1Item = false;
-			}
+			setRowHidden(contactIndex, groupModelIndex, m_hideOfflineItems && !contactItem->isOnline());
 		}
-		setRowHidden(level1i, level0m, hideLevel1Item);
+		setRowHidden(groupIndex, rootModelIndex, m_hideOfflineItems && !onlineChildrenCount);
 	}
 }
-
 
 void TreeView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight) {
 	QTreeView::dataChanged(topLeft, bottomRight);

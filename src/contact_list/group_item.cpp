@@ -28,6 +28,7 @@ bool GroupItem::removeContact(ContactItem *item) {
 	if (item->isOnline()) {
 		--online_count;
 	}
+	// XXX: remove a group if it's empty
 	return m_contacts.removeOne(item);
 }
 
