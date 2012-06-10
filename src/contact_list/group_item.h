@@ -58,6 +58,13 @@ namespace CL {
 	public:
 		void statusChanged(ContactItem *item);
 
+	signals:
+		/*!
+			Emitted when the group is removed.
+			The group is destroyed automatically when the last item is removed.
+			*/
+		void removed();
+
 	private:
 		ItemModel *owner;
 		QString m_groupName;

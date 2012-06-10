@@ -81,6 +81,7 @@ namespace CL {
 		void contactMoved(GroupItem *const sender, int from, int to);
 		void contactChanged(ContactItem *const sender);
 		void groupChanged(GroupItem *const sender);
+		void groupRemoved(GroupItem *const sender);
 
 	private:
 		QMap<QString, ContactItem*> m_contacts;

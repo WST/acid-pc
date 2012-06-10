@@ -28,8 +28,18 @@ bool GroupItem::removeContact(ContactItem *item) {
 	if (item->isOnline()) {
 		--onlineCount;
 	}
-	// XXX: remove a group if it's empty
-	return m_contacts.removeOne(item);
+	if (m_contacts.removeOne(item)) {
+#warning GCC/G++ bugs!
+		if (m_contacts.isEmpty()) {
+			owner->groupRemoved(this);
+			emit removed();
+			delete this; // FIXME: beware of the g++ bugs
+		} else {
+			owner->groupChanged(this);
+		}
+		return true;
+	}
+	return false;
 }
 
 void GroupItem::statusChanged(ContactItem *item) {

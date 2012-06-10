@@ -122,8 +122,6 @@ void ItemModel::removeEntry(const QString &jid) {
 		item->remove();
 		delete item;
 	}
-
-	// XXX: remove empty groups. Optimization: only check groups the item belonged to.
 }
 
 ContactItem *ItemModel::updateEntry(const QString &jid, const QString &nick, QSet<QString> groups) {
@@ -187,7 +185,7 @@ GroupItem *ItemModel::getGroup(const QString &name) {
 ContactItem *ItemModel::getContact(const QString &jid) {
 	QString bareJid;
 	splitJid(jid, &bareJid);
-	return m_contacts.value(bareJid.toLower());
+	return m_contacts.value(bareJid);
 }
 
 void ItemModel::contactAdded(GroupItem *const sender, int ind) {
@@ -219,4 +217,10 @@ void ItemModel::contactChanged(ContactItem *const sender) {
 void ItemModel::groupChanged(GroupItem *const sender) {
 	QModelIndex groupIndex = index(m_groups.indexOf(sender), 0);
 	emit dataChanged(groupIndex, groupIndex);
+}
+
+void ItemModel::groupRemoved(GroupItem *const sender) {
+	QModelIndex rootModelIndex;
+	m_groups.removeOne(sender);
+	emit dataChanged(rootModelIndex, rootModelIndex);
 }

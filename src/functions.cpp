@@ -16,7 +16,7 @@ void splitJid(const QString &jid, QString *bare, QString *resource) {
 			*resource = sep >= 0 ? jid.mid(sep+1) : "";
 		}
 		if (bare) {
-			*bare = jid.mid(0, sep);
+			*bare = jid.mid(0, sep).toLower();
 		}
 	}
 }

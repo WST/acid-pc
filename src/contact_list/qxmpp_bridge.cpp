@@ -127,12 +127,23 @@ void QXmppBridge::mucEntryAdded(const QString &jid) {
 void QXmppBridge::mucEntryChanged(const QString &jid) {
 	CHECK_PROPER_USE(m_mucRoom, true);
 	const QXmppPresence &presence = m_mucRoom->participantPresence(jid);
+
 	QSet<QString> groups;
-	groups += "Participants";
+	QXmppMucItem mucItem = presence.mucItem();
+	if (mucItem.affiliation() == QXmppMucItem::OwnerAffiliation) {
+		groups += "Owners";
+	} else if (mucItem.role() == QXmppMucItem::ModeratorRole) {
+		groups += "Moderators";
+	} else if (mucItem.role() != QXmppMucItem::VisitorRole) {
+		groups += "Participants";
+	} else {
+		groups += "Visitors";
+	}
+
 	QString nick, bareJid;
 	splitJid(jid, &bareJid, &nick);
 
-	m_model->updateEntry(bareJid, nick, groups);
+	m_model->updateEntry(jid, nick, groups);
 	m_model->setStatus(jid, qxmpp2cl(presence));
 }
 
