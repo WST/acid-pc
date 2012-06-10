@@ -105,7 +105,7 @@ void QXmppBridge::rosterEntryPresence(const QString &bareJid, const QString &res
 	CL::ContactItem::Status status;
 
 	if (presences.contains(resource)) {
-		status = CL::QXmppBridge::qxmpp2cl(presences[resource]);
+		status = qxmpp2cl(presences[resource]);
 	}
 
 	m_model->setStatus(QString("%1" JID_RESOURCE_SEPARATOR "%2").arg(bareJid).arg(resource), status);
@@ -126,12 +126,14 @@ void QXmppBridge::mucEntryAdded(const QString &jid) {
 
 void QXmppBridge::mucEntryChanged(const QString &jid) {
 	CHECK_PROPER_USE(m_mucRoom, true);
-	const QXmppPresence &item = m_mucRoom->participantPresence(jid);
+	const QXmppPresence &presence = m_mucRoom->participantPresence(jid);
 	QSet<QString> groups;
 	groups += "Participants";
 	QString nick, bareJid;
 	splitJid(jid, &bareJid, &nick);
+
 	m_model->updateEntry(bareJid, nick, groups);
+	m_model->setStatus(jid, qxmpp2cl(presence));
 }
 
 void QXmppBridge::mucEntryRemoved(const QString &jid) {
@@ -141,4 +143,3 @@ void QXmppBridge::mucEntryRemoved(const QString &jid) {
 
 void QXmppBridge::mucEntryPresence(const QString &jid) {
 }
-
