@@ -187,7 +187,7 @@ GroupItem *ItemModel::getGroup(const QString &name) {
 ContactItem *ItemModel::getContact(const QString &jid) {
 	QString bareJid;
 	splitJid(jid, &bareJid);
-	return m_contacts.value(bareJid);
+	return m_contacts.value(bareJid.toLower());
 }
 
 void ItemModel::contactAdded(GroupItem *const sender, int ind) {

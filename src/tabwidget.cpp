@@ -1,7 +1,7 @@
 #include "tabwidget.h"
 
 TabWidget::TabWidget(QString with, QWidget *parent): QWidget(parent) {
-    jid = with;
+    jid = with.toLower();
 }
 
 QString &TabWidget::getJid() {

@@ -70,7 +70,7 @@ void ChatWidget::setIcon(QIcon icon) {
 
 void ChatWidget::appendResource(QString resource) {
     jid += "/";
-    jid += resource;
+    jid += resource.toLower();
     ui->jid->setText(ui->jid->text() + "/" + resource);
 }
 

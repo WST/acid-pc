@@ -47,7 +47,7 @@ TabWidget *ChatWindow::getWidgetByIndex(int index) {
 TabWidget *ChatWindow::getWidgetByJid(QString jid) {
 	TabWidget *widget;
 	for(int i = 0; i < ui->tabWidget->count(); i ++) {
-        if((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid) {
+        if((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid.toLower()) {
 			return widget;
 		}
 	}
@@ -57,7 +57,7 @@ TabWidget *ChatWindow::getWidgetByJid(QString jid) {
 ChatWidget *ChatWindow::getChatByJid(QString jid) {
     TabWidget *widget;
     for(int i = 0; i < ui->tabWidget->count(); i ++) {
-        if(((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid) && widget->getType() == TabWidget::Chat) {
+        if(((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid.toLower()) && widget->getType() == TabWidget::Chat) {
             return (ChatWidget *) widget;
         }
     }
@@ -67,7 +67,7 @@ ChatWidget *ChatWindow::getChatByJid(QString jid) {
 MUCWidget *ChatWindow::getMUCByJid(QString jid) {
     TabWidget *widget;
     for(int i = 0; i < ui->tabWidget->count(); i ++) {
-        if(((widget = (MUCWidget *) ui->tabWidget->widget(i))->getJid() == jid) && widget->getType() == TabWidget::MUC) {
+        if(((widget = (MUCWidget *) ui->tabWidget->widget(i))->getJid() == jid.toLower()) && widget->getType() == TabWidget::MUC) {
             return (MUCWidget *) widget;
         }
     }
@@ -77,7 +77,7 @@ MUCWidget *ChatWindow::getMUCByJid(QString jid) {
 ServiceDiscoveryWidget *ChatWindow::getServiceBrowserByJid(QString jid) {
     TabWidget *widget;
     for(int i = 0; i < ui->tabWidget->count(); i ++) {
-        if(((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid) && widget->getType() == TabWidget::ServiceDiscovery) {
+        if(((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid.toLower()) && widget->getType() == TabWidget::ServiceDiscovery) {
             return (ServiceDiscoveryWidget *) widget;
         }
     }
