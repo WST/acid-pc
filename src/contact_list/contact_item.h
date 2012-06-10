@@ -57,7 +57,7 @@ namespace CL {
 		};
 
 		/*!
-			Greater items are more attractive target for converstation
+			Greater items are more attractive targets for the converstation
 			*/
 		bool operator<(const ContactItem &_other) const;
 
@@ -139,7 +139,7 @@ namespace CL {
 
 		/*!
 			Sets the notification status for a roster item.
-			If @reason is given, it will be displayed with getSubText
+			If @text is given, it will be displayed with getSubText
 			*/
 		void setNotified(bool notified, const QString &text = QString());
 

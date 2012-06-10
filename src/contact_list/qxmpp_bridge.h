@@ -4,6 +4,7 @@
 #include <QObject>
 #include <qxmpp/QXmppPresence.h>
 #include <qxmpp/QXmppRosterManager.h>
+#include <qxmpp/QXmppMucManager.h>
 
 #include "contact_item.h"
 
@@ -12,17 +13,26 @@ namespace CL {
 		Q_OBJECT
 
 	public:
-		explicit QXmppBridge(ItemModel *model,
-				QXmppRosterManager *manager): m_model(model), m_manager(manager) {}
+		explicit QXmppBridge(ItemModel *model, QXmppRosterManager *rosterManager);
+		explicit QXmppBridge(ItemModel *model, QXmppMucRoom *mucRoom);
 
 	public slots:
-		void itemAdded(const QString &);
-		void itemChanged(const QString &);
-		void itemRemoved(const QString &);
+		void rosterEntryAdded(const QString &);
+		void rosterEntryChanged(const QString &);
+		void rosterEntryRemoved(const QString &);
+		void rosterEntryPresence(const QString &, const QString &);
+		void rosterSynchronize();
+
+		// XXX: this seems overwhelming
+		void mucEntryAdded(const QString &);
+		void mucEntryChanged(const QString &);
+		void mucEntryRemoved(const QString &);
+		void mucEntryPresence(const QString &); /* deprecated? */
 
 	private:
 		ItemModel *m_model;
-		QXmppRosterManager *m_manager;
+		QXmppRosterManager *m_rosterManager;
+		QXmppMucRoom *m_mucRoom;
 
 	public:
 		static ContactItem::Status qxmpp2cl(const QXmppPresence &presence);

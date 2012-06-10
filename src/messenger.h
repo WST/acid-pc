@@ -96,8 +96,6 @@ class Messenger: public QMainWindow {
 		void fileTransferFinished(QXmppTransferJob *job);
 		void joinSupportRoom();
 		void showApplicationInfo();
-		void presenceChanged(const QString &bare_jid, const QString &resource);
-		void rosterReceived();
 		void openChat(const QString &full_jid, const QString &nick);
 		void joinRoom(const QString &room_jid, const QString &nick); // в qxmpp ето есть, но этот метод ещё и открывает таб
         void joinedRoom();

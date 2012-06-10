@@ -15,7 +15,7 @@ bool GroupItem::addContact(ContactItem *item) {
 		}
 		m_contacts.insert(i, item);
 		if (item->isOnline()) {
-			++online_count;
+			++onlineCount;
 		}
 		owner->contactAdded(this, i);
 		owner->groupChanged(this);
@@ -26,7 +26,7 @@ bool GroupItem::addContact(ContactItem *item) {
 
 bool GroupItem::removeContact(ContactItem *item) {
 	if (item->isOnline()) {
-		--online_count;
+		--onlineCount;
 	}
 	// XXX: remove a group if it's empty
 	return m_contacts.removeOne(item);
@@ -40,22 +40,24 @@ void GroupItem::statusChanged(ContactItem *item) {
 		}
 	}
 
-	int item_index = m_contacts.indexOf(item);
-	if (i > item_index) {
+	int itemIndex = m_contacts.indexOf(item);
+	if (i > itemIndex) {
 		--i;
 	}
-	if (i != item_index) {
-		m_contacts.move(item_index, i);
-		owner->contactMoved(this, item_index, i);
+	if (i != itemIndex) {
+		m_contacts.move(itemIndex, i);
+		owner->contactMoved(this, itemIndex, i);
 	}
 
-	int prev_online_count = online_count;
-	online_count = 0;
-	foreach (ContactItem *contact, m_contacts)
-		if (contact->isOnline())
-			++online_count;
+	int prevOnlineCount = onlineCount;
+	onlineCount = 0;
+	foreach (ContactItem *contact, m_contacts) {
+		if (contact->isOnline()) {
+			++onlineCount;
+		}
+	}
 
-	if (prev_online_count != online_count) {
+	if (prevOnlineCount != onlineCount) {
 		owner->groupChanged(this);
 	}
 }

@@ -130,16 +130,12 @@ void Messenger::createConnections() {
 	connect(client, SIGNAL(iqReceived(QXmppIq)), this, SLOT(gotIQ(QXmppIq)));
 	connect(client, SIGNAL(messageReceived(QXmppMessage)), this, SLOT(gotMessage(QXmppMessage)));
 
-	connect(& client->rosterManager(), SIGNAL(rosterReceived()), this, SLOT(rosterReceived()));
-	connect(& client->rosterManager(), SIGNAL(itemAdded(const QString&)), rosterBridge, SLOT(itemAdded(const QString &)));
-	connect(& client->rosterManager(), SIGNAL(itemChanged(const QString&)), rosterBridge, SLOT(itemChanged(const QString &)));
-	connect(& client->rosterManager(), SIGNAL(itemRemoved(const QString&)), rosterBridge, SLOT(itemRemoved(const QString &)));
-	connect(& client->rosterManager(), SIGNAL(presenceChanged(const QString&, const QString&)), this, SLOT(presenceChanged(const QString&, const QString&)));
     connect(& client->rosterManager(), SIGNAL(subscriptionReceived(const QString &)), this, SLOT(handleSubscriptionRequest(const QString &)));
     connect(& client->vCardManager(), SIGNAL(vCardReceived(const QXmppVCardIq &)), this, SLOT(showProfile(const QXmppVCardIq &)));
 
 	connect(call_manager, SIGNAL(callReceived(QXmppCall *)), this, SLOT(gotVoiceCall(QXmppCall *)));
-	connect(muc_manager, SIGNAL(roomParticipantChanged(QString,QString)), this, SLOT(roomParticipantChanged(QString, QString)));
+	// This signal does not exist
+//	connect(muc_manager, SIGNAL(roomParticipantChanged(QString,QString)), this, SLOT(roomParticipantChanged(QString, QString)));
 	connect(transfer_manager, SIGNAL(fileReceived(QXmppTransferJob *)), this, SLOT(gotFile(QXmppTransferJob *)));
     connect(bookmark_manager, SIGNAL(bookmarksReceived(const QXmppBookmarkSet &)), this, SLOT(handleBookmarks(const QXmppBookmarkSet &)));
 
@@ -518,36 +514,6 @@ void Messenger::joinSupportRoom() {
 
 void Messenger::showApplicationInfo() {
 	about->show();
-}
-
-void Messenger::rosterReceived() {
-	QStringList list = client->rosterManager().getRosterBareJids();
-	foreach (QString bare_jid, list) {
-		rosterBridge->itemAdded(bare_jid);
-	}
-}
-
-void Messenger::presenceChanged(const QString &bare_jid, const QString &resource) {
-	if(bare_jid == client_settings->jidBare()) {
-		return;
-	}
-
-/*	if(!roster_model.getRosterItemFromBareJid(bare_jid)) {
-		return;
-	}*/
-
-	LDEBUG("got presence from %s/%s", qPrintable(bare_jid), qPrintable(resource));
-
-	const QMap<QString, QXmppPresence> &presences = client->rosterManager().getAllPresencesForBareJid(bare_jid);
-	CL::ContactItem::Status status;
-
-	if (presences.contains(resource)) {
-		status = CL::QXmppBridge::qxmpp2cl(presences[resource]);
-		LDEBUG("presences map DOES contain this presence, and it translates into %d", (int)status.type);
-	} else {
-		LDEBUG("presence map does NOT contain this presence");
-	}
-	roster_model.setStatus(QString("%1" JID_RESOURCE_SEPARATOR "%2").arg(bare_jid).arg(resource), status);
 }
 
 void Messenger::openChat(const QString &full_jid, const QString &nick) {

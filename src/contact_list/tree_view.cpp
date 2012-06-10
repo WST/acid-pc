@@ -148,17 +148,14 @@ const ContactItem *TreeView::selectedContact() const {
 void TreeView::showChatDialog_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
-		if(!bareJid.isEmpty())
-			emit wannaShowChatDialog(bareJid, selectedContact()->getNick());
+		emit wannaShowChatDialog(bareJid, selectedContact()->getNick());
 	}
 }
 
 void TreeView::showProfile_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
-		if (!bareJid.isEmpty()) {
-			emit wannaShowProfile(bareJid);
-		}
+		emit wannaShowProfile(bareJid);
 	}
 }
 
@@ -172,9 +169,7 @@ void TreeView::keyPressEvent(QKeyEvent* event1) {
 void TreeView::removeContact_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
-		if (!bareJid.isEmpty()) {
-			emit wannaRemoveContact(bareJid);
-		}
+		emit wannaRemoveContact(bareJid);
 	}
 }
 

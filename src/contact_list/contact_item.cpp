@@ -98,8 +98,8 @@ bool ContactItem::removeFromGroup(GroupItem *group) {
 }
 
 void ContactItem::remove() {
-	foreach (GroupItem *group, m_groups) {
-		removeFromGroup(group);
+	while (!m_groups.isEmpty()) {
+		removeFromGroup(m_groups.first());
 	}
 	emit removed();
 }

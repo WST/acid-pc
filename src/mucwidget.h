@@ -3,6 +3,9 @@
 
 // acid
 #include "tabwidget.h"
+#include "contact_list/item_model.h"
+#include "contact_list/tree_view.h"
+#include "contact_list/qxmpp_bridge.h"
 
 // qxmpp
 #include <qxmpp/QXmppMessage.h>
@@ -30,6 +33,9 @@ signals:
 private:
     Ui::MUCWidget *ui;
     QXmppMucRoom *m_room;
+	
+	CL::QXmppBridge *mucBridge;
+	CL::ItemModel participantsModel;
 
 private slots:
     void on_send_clicked();

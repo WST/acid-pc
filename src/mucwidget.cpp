@@ -3,15 +3,19 @@
 #include "functions.h"
 #include "version.h"
 
-MUCWidget::MUCWidget(QXmppMucRoom *room, QWidget *parent): TabWidget(room->jid(), parent), ui(new Ui::MUCWidget) {
+MUCWidget::MUCWidget(QXmppMucRoom *room, QWidget *parent):
+	TabWidget(room->jid(), parent), ui(new Ui::MUCWidget), participantsModel(this) {
     ui->setupUi(this);
     m_room = room;
     TabWidget::setType(TabWidget::MUC);
 	connect(ui->chatview, SIGNAL(anchorClicked(const QUrl &)), this, SLOT(openLink(const QUrl &)));
 	ui->chatview->document()->setDefaultStyleSheet("a { text-decoration: none; color: #0000AA; }");
+	mucBridge = new CL::QXmppBridge(&participantsModel, room);
+	ui->participantsView->setModel(&participantsModel);
 }
 
 MUCWidget::~MUCWidget() {
+	delete mucBridge;
     delete ui;
 }
 

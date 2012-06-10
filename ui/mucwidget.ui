@@ -31,7 +31,7 @@
         <bool>false</bool>
        </property>
       </widget>
-      <widget class="QListWidget" name="chatters">
+      <widget class="CL::TreeView" name="participantsView">
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
        </property>
@@ -80,6 +80,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CL::TreeView</class>
+   <extends>QTreeView</extends>
+   <header>src/contact_list/tree_view.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

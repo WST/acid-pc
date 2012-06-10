@@ -117,7 +117,6 @@ void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value)
 
 void ItemModel::removeEntry(const QString &jid) {
 	LDEBUG("removing entry %s from the contact list", qPrintable(jid));
-
 	ContactItem *item = getContact(jid);
 	if (item) {
 		item->remove();
@@ -186,9 +185,9 @@ GroupItem *ItemModel::getGroup(const QString &name) {
 }
 
 ContactItem *ItemModel::getContact(const QString &jid) {
-	QString bare_jid;
-	splitJid(jid, &bare_jid);
-	return m_contacts.value(bare_jid);
+	QString bareJid;
+	splitJid(jid, &bareJid);
+	return m_contacts.value(bareJid);
 }
 
 void ItemModel::contactAdded(GroupItem *const sender, int ind) {
