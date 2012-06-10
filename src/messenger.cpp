@@ -158,7 +158,9 @@ void Messenger::createMenus() {
         QAction *action_new_contact = im_menu->addAction(QIcon(":/menu/plus.png"), tr("Add contact"));
         QMenu *roster_menu = im_menu->addMenu(QIcon(":/menu/user-black.png"), tr("Roster"));
             QAction *action_hide_offline_contacts = roster_menu->addAction(QIcon(":/menu/user-silhouette.png"), tr("Hide offline items"));
+            QAction *action_hide_services = roster_menu->addAction(QIcon(":/menu/plug.png"), tr("Hide gateways"));
             action_hide_offline_contacts->setCheckable(true);
+            action_hide_services->setCheckable(true);
         QMenu *connect_service_menu = im_menu->addMenu(QIcon(":/menu/plug.png"), tr("Connect service"));
             QAction *action_connect_yahoo = connect_service_menu->addAction(QIcon(":/menu/yahoo.png"), "Yahoo! Messenger");
             QAction *action_connect_msn = connect_service_menu->addAction(QIcon(":/menu/msn.png"), "MSN (Windows Live)");
@@ -196,6 +198,7 @@ void Messenger::createMenus() {
 	connect(action_join_new_room, SIGNAL(triggered()), this, SLOT(joinNewRoom()));
     connect(action_new_contact, SIGNAL(triggered()), this, SLOT(showNewContactWindow()));
     connect(action_hide_offline_contacts, SIGNAL(triggered(bool)), & roster_widget, SLOT(setHideOfflineItems(bool)));
+    connect(action_hide_services, SIGNAL(triggered(bool)), & roster_widget, SLOT(setHideServices(bool)));
     connect(action_browse_services, SIGNAL(triggered()), this, SLOT(openServiceBrowser()));
     connect(action_edit_bookmarks, SIGNAL(triggered()), this, SLOT(showBookmarkManager()));
     room_bookmarks_menu->setEnabled(false);

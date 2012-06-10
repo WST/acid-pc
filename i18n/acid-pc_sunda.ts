@@ -127,7 +127,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>CL::ContactItem</name>
     <message>
-        <location filename="../src/contact_list/contact_item.cpp" line="184"/>
+        <location filename="../src/contact_list/contact_item.cpp" line="183"/>
         <source>offline</source>
         <translation type="unfinished"></translation>
     </message>
@@ -365,12 +365,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mucwidget.cpp" line="51"/>
+        <location filename="../src/mucwidget.cpp" line="55"/>
         <source>Send the message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mucwidget.cpp" line="51"/>
+        <location filename="../src/mucwidget.cpp" line="55"/>
         <source>This button is not available because you are not connected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -401,152 +401,157 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Messenger</name>
     <message>
-        <location filename="../src/messenger.cpp" line="156"/>
+        <location filename="../src/messenger.cpp" line="152"/>
         <source>Program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="157"/>
+        <location filename="../src/messenger.cpp" line="153"/>
         <source>New message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="158"/>
+        <location filename="../src/messenger.cpp" line="154"/>
         <source>Join a room</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="159"/>
+        <location filename="../src/messenger.cpp" line="155"/>
         <source>Join new room</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="160"/>
+        <location filename="../src/messenger.cpp" line="156"/>
         <source>Manage bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="161"/>
+        <location filename="../src/messenger.cpp" line="157"/>
         <source>Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="162"/>
+        <location filename="../src/messenger.cpp" line="158"/>
         <source>Add contact</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="163"/>
+        <location filename="../src/messenger.cpp" line="159"/>
         <source>Roster</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="164"/>
+        <location filename="../src/messenger.cpp" line="160"/>
         <source>Hide offline items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="166"/>
+        <location filename="../src/messenger.cpp" line="161"/>
+        <source>Hide gateways</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/messenger.cpp" line="164"/>
         <source>Connect service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="171"/>
+        <location filename="../src/messenger.cpp" line="169"/>
         <source>Lopbox microblog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="172"/>
+        <location filename="../src/messenger.cpp" line="170"/>
         <source>Add an RSS feed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="174"/>
+        <location filename="../src/messenger.cpp" line="172"/>
         <source>Service discovery</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="176"/>
+        <location filename="../src/messenger.cpp" line="174"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="178"/>
+        <location filename="../src/messenger.cpp" line="176"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="180"/>
+        <location filename="../src/messenger.cpp" line="178"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="181"/>
+        <location filename="../src/messenger.cpp" line="179"/>
         <source>Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="182"/>
+        <location filename="../src/messenger.cpp" line="180"/>
         <source>Free for chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="183"/>
+        <location filename="../src/messenger.cpp" line="181"/>
         <source>Away</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="184"/>
+        <location filename="../src/messenger.cpp" line="182"/>
         <source>Extended away</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="185"/>
+        <location filename="../src/messenger.cpp" line="183"/>
         <source>Do not disturb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="187"/>
+        <location filename="../src/messenger.cpp" line="185"/>
         <source>Offline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="189"/>
+        <location filename="../src/messenger.cpp" line="187"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="190"/>
+        <location filename="../src/messenger.cpp" line="188"/>
         <source>Support chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="191"/>
+        <location filename="../src/messenger.cpp" line="189"/>
         <source>Official site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="193"/>
+        <location filename="../src/messenger.cpp" line="191"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="466"/>
+        <location filename="../src/messenger.cpp" line="465"/>
         <source>There are unread messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="606"/>
+        <location filename="../src/messenger.cpp" line="575"/>
         <source>You have been kicked: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="713"/>
+        <location filename="../src/messenger.cpp" line="682"/>
         <source>Join </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="730"/>
+        <location filename="../src/messenger.cpp" line="699"/>
         <source>Open a file</source>
         <translation type="unfinished"></translation>
     </message>
