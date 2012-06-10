@@ -26,20 +26,20 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Developers and testers&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This program is brought to you by SmartCommunity members and other people interested in XMPP development. The full list of people who contributed to this application development is follow:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://averkov.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Ilja Averkov&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — Project management and core programming&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://rubyrails.pro/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Artem Sh&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://immensus.net/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Yury Potapov&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming, UI suggestions&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://paijo.jsmart.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Paijo Ahmad&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and translations&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://jabberid.org/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Wiecliff Reynardo&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — original idea, application name and testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Eddy Purwa&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — logotype and icon design&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://bsmsite.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Irfan Mahfudz Guntur&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and suggestions&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Yelena Kasyanova&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://averkov.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Ilja Averkov&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — Project management and core programming&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://rubyrails.pro/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Artem Sh&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://immensus.net/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Yury Potapov&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — programming, UI suggestions&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://paijo.jsmart.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Paijo Ahmad&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and translations&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://jabberid.org/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Wiecliff Reynardo&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — original idea, application name and testing&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Eddy Purwa&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — logotype and icon design&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://bsmsite.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Irfan Mahfudz Guntur&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing and suggestions&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Yelena Kasyanova&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — testing&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Third parties&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This program includes components from third parties:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://qt.nokia.com&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Qt Library&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from Nokia corporation&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://p.yusukekamiyamane.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Fugue icons&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from Yusuke Kamiyamane&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://qxmpp.googlecode.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Qxmpp&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from qxmpp development team&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://qt.nokia.com&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Qt Library&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from Nokia corporation&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://p.yusukekamiyamane.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Fugue icons&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from Yusuke Kamiyamane&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://qxmpp.googlecode.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Qxmpp&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; from qxmpp development team&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Разработчики и тестеры&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Эта программа разработана участниками сообщества SmartCommunity и прочими лицами, заинтересованными в разработке для Jabber/XMPP.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://averkov.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Илья Аверков&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — управление и программирование&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://rubyrails.pro/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Артём Ш&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — программирование&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://immensus.net/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Юрий Потапов&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — программирование и советы по UI&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://paijo.jsmart.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Paijo Ahmad&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — тестирование и переводы&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://jabberid.org/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Wiecliff Reynardo&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — идея и имя проекта, тестирование&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Eddy Purwa&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — логотип и значок&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://bsmsite.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Irfan Mahfudz Guntur&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — тестирование и предложения&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Елена Касьянова&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — тестирование&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://averkov.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Илья Аверков&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — управление и программирование&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://rubyrails.pro/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Артём Ш&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — программирование&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://immensus.net/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Юрий Потапов&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — программирование и советы по UI&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://paijo.jsmart.web.id/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Paijo Ahmad&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — тестирование и переводы&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://jabberid.org/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Wiecliff Reynardo&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — идея и имя проекта, тестирование&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Eddy Purwa&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — логотип и значок&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://bsmsite.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Irfan Mahfudz Guntur&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — тестирование и предложения&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Елена Касьянова&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; — тестирование&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Третьи стороны&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Эта программа включает ряд компонентов от сторонних разработчиков:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://qt.nokia.com&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Библиотеки Qt&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от Nokia corporation&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://p.yusukekamiyamane.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Набор значков Fugue&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от Yusuke Kamiyamane&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://qxmpp.googlecode.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Qxmpp&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от команды разработчиков Qxmpp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://qt.nokia.com&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Библиотеки Qt&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от Nokia corporation&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://p.yusukekamiyamane.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Набор значков Fugue&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от Yusuke Kamiyamane&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://qxmpp.googlecode.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Qxmpp&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от команды разработчиков Qxmpp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ui/aboutwindow.ui" line="129"/>
@@ -143,9 +143,9 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>CL::ContactItem</name>
     <message>
-        <location filename="../src/contact_list/contact_item.cpp" line="177"/>
+        <location filename="../src/contact_list/contact_item.cpp" line="184"/>
         <source>offline</source>
-        <translation type="unfinished"></translation>
+        <translation>не в сети</translation>
     </message>
 </context>
 <context>
@@ -328,47 +328,47 @@ p, li { white-space: pre-wrap; }
         <translation>Используемый XMPP-сервер</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="139"/>
+        <location filename="../ui/loginform.ui" line="144"/>
         <source>Password:</source>
         <translation>Пароль:</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="159"/>
+        <location filename="../ui/loginform.ui" line="164"/>
         <source>Check this box to save the password</source>
         <translation>Установите этот флаг, чтобы сохранять пароль</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="162"/>
+        <location filename="../ui/loginform.ui" line="167"/>
         <source>Save password?</source>
         <translation>Сохранить пароль?</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="172"/>
+        <location filename="../ui/loginform.ui" line="177"/>
         <source>Check this box if you would like to sign in automatically next time</source>
         <translation>Установите этот флаг, чтобы в следующий раз подключиться автоматически</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="175"/>
+        <location filename="../ui/loginform.ui" line="180"/>
         <source>Log in automatically?</source>
         <translation>Входить автоматически?</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="212"/>
+        <location filename="../ui/loginform.ui" line="217"/>
         <source>Sign in or register</source>
         <translation>Войти или выполнить регистрацию на сервере</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="215"/>
+        <location filename="../ui/loginform.ui" line="220"/>
         <source>Sign in</source>
         <translation>Войти</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="235"/>
+        <location filename="../ui/loginform.ui" line="240"/>
         <source>Edit application settings</source>
         <translation>Редактировать настройки приложения</translation>
     </message>
     <message>
-        <location filename="../ui/loginform.ui" line="238"/>
+        <location filename="../ui/loginform.ui" line="243"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
@@ -417,152 +417,152 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Messenger</name>
     <message>
-        <location filename="../src/messenger.cpp" line="153"/>
+        <location filename="../src/messenger.cpp" line="156"/>
         <source>Program</source>
         <translation>Программа</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="154"/>
+        <location filename="../src/messenger.cpp" line="157"/>
         <source>New message</source>
         <translation>Новое сообщение</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="155"/>
+        <location filename="../src/messenger.cpp" line="158"/>
         <source>Join a room</source>
         <translation>Войти в конференцию</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="156"/>
+        <location filename="../src/messenger.cpp" line="159"/>
         <source>Join new room</source>
         <translation>В новую</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="157"/>
+        <location filename="../src/messenger.cpp" line="160"/>
         <source>Manage bookmarks</source>
         <translation>Редактировать закладки</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="158"/>
+        <location filename="../src/messenger.cpp" line="161"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="159"/>
+        <location filename="../src/messenger.cpp" line="162"/>
         <source>Add contact</source>
         <translation>Добавить контакт</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="160"/>
+        <location filename="../src/messenger.cpp" line="163"/>
         <source>Roster</source>
         <translation>Ростер</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="161"/>
+        <location filename="../src/messenger.cpp" line="164"/>
         <source>Hide offline items</source>
         <translation>Скрывать отключённых</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="163"/>
+        <location filename="../src/messenger.cpp" line="166"/>
         <source>Connect service</source>
         <translation>Подключить службу</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="168"/>
+        <location filename="../src/messenger.cpp" line="171"/>
         <source>Lopbox microblog</source>
         <translation>Микроблог Lopbox</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="169"/>
+        <location filename="../src/messenger.cpp" line="172"/>
         <source>Add an RSS feed</source>
         <translation>Добавить RSS-ленту</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="171"/>
+        <location filename="../src/messenger.cpp" line="174"/>
         <source>Service discovery</source>
         <translation>Обзор служб</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="173"/>
+        <location filename="../src/messenger.cpp" line="176"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="175"/>
+        <location filename="../src/messenger.cpp" line="178"/>
         <source>Quit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="177"/>
+        <location filename="../src/messenger.cpp" line="180"/>
         <source>Status</source>
         <translation>Статус</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="178"/>
+        <location filename="../src/messenger.cpp" line="181"/>
         <source>Available</source>
         <translation>Доступен</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="179"/>
+        <location filename="../src/messenger.cpp" line="182"/>
         <source>Free for chat</source>
         <translation>Свободен для общения</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="180"/>
+        <location filename="../src/messenger.cpp" line="183"/>
         <source>Away</source>
         <translation>Отошёл</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="181"/>
+        <location filename="../src/messenger.cpp" line="184"/>
         <source>Extended away</source>
         <translation>Отошёл надолго</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="182"/>
+        <location filename="../src/messenger.cpp" line="185"/>
         <source>Do not disturb</source>
         <translation>Не беспокоить</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="184"/>
+        <location filename="../src/messenger.cpp" line="187"/>
         <source>Offline</source>
         <translation>Отключён</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="186"/>
+        <location filename="../src/messenger.cpp" line="189"/>
         <source>Help</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="187"/>
+        <location filename="../src/messenger.cpp" line="190"/>
         <source>Support chat</source>
         <translation>Конференция поддержки</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="188"/>
+        <location filename="../src/messenger.cpp" line="191"/>
         <source>Official site</source>
         <translation>Официальный сайт</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="190"/>
+        <location filename="../src/messenger.cpp" line="193"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="463"/>
+        <location filename="../src/messenger.cpp" line="466"/>
         <source>There are unread messages</source>
         <translation>Есть непрочитанные сообщения</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="607"/>
+        <location filename="../src/messenger.cpp" line="606"/>
         <source>You have been kicked: </source>
         <translation>Вас выгнали из комнаты:</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="714"/>
+        <location filename="../src/messenger.cpp" line="713"/>
         <source>Join </source>
         <translation>Войти в </translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="731"/>
+        <location filename="../src/messenger.cpp" line="730"/>
         <source>Open a file</source>
         <translation>Открыть файл</translation>
     </message>
