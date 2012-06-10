@@ -80,6 +80,9 @@ QXmppBridge::QXmppBridge(ItemModel *model, QXmppMucRoom *mucRoom):
 			this, SLOT(mucEntryChanged(const QString &)));
 	connect(mucRoom, SIGNAL(participantRemoved(const QString&)),
 			this, SLOT(mucEntryRemoved(const QString &)));
+//	connect(mucRoom, SIGNAL(joined()),
+//			this, SLOT(mucSynchronize()));
+	mucSynchronize();
 }
 
 void QXmppBridge::rosterEntryAdded(const QString &bareJid) {
@@ -113,9 +116,8 @@ void QXmppBridge::rosterEntryPresence(const QString &bareJid, const QString &res
 
 void QXmppBridge::rosterSynchronize() {
 	CHECK_PROPER_USE(m_rosterManager, true);
-	LDEBUG("synchronizing rosters");
 	const QStringList &bareJids = m_rosterManager->getRosterBareJids();
-	foreach (QString bareJid, bareJids) {
+	foreach (const QString &bareJid, bareJids) {
 		rosterEntryAdded(bareJid);
 	}
 }
@@ -143,8 +145,10 @@ void QXmppBridge::mucEntryChanged(const QString &jid) {
 	QString nick, bareJid;
 	splitJid(jid, &bareJid, &nick);
 
-	m_model->updateEntry(jid, nick, groups);
-	m_model->setStatus(jid, qxmpp2cl(presence));
+	LDEBUG("updating presence of %s to %d", qPrintable(jid), qxmpp2cl(presence).type);
+
+	m_model->updateEntry(nick + "@" + jid, nick, groups);
+	m_model->setStatus(nick + "@" + jid, qxmpp2cl(presence));
 }
 
 void QXmppBridge::mucEntryRemoved(const QString &jid) {
@@ -153,4 +157,12 @@ void QXmppBridge::mucEntryRemoved(const QString &jid) {
 }
 
 void QXmppBridge::mucEntryPresence(const QString &jid) {
+}
+
+void QXmppBridge::mucSynchronize() {
+	CHECK_PROPER_USE(m_mucRoom, true);
+	const QStringList &participants = m_mucRoom->participants();
+	foreach (const QString &participant, participants) {
+		mucEntryAdded(participant);
+	}
 }

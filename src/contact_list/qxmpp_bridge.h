@@ -28,6 +28,7 @@ namespace CL {
 		void mucEntryChanged(const QString &);
 		void mucEntryRemoved(const QString &);
 		void mucEntryPresence(const QString &); /* deprecated? */
+		void mucSynchronize();
 
 	private:
 		ItemModel *m_model;

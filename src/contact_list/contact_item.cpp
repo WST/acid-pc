@@ -141,7 +141,6 @@ void ContactItem::changeStatus() {
 void ContactItem::updateIcon() {
 	QString new_icon_name = isOnline() ? statusString[getResource().status->type] :
 										 statusString[Offline];
-	LDEBUG("%s -> %s", qPrintable(icon_name), qPrintable(new_icon_name));
 	if (icon_name != new_icon_name) {
 		icon_name = new_icon_name;
 		m_icon = QIcon(":/trayicon/"+icon_name+"-16px.png");
@@ -191,8 +190,6 @@ QString ContactItem::getSubText() const {
 
 void ContactItem::setNotified(bool notified, const QString &text) {
 	if (m_notified != notified) {
-		LDEBUG("changing notification status for %s from %d to %d: %s",
-				qPrintable(m_bareJid), m_notified, notified, qPrintable(text));
 		m_notified = notified;
 		if (notified) {
 			m_notification = text;
