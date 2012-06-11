@@ -41,6 +41,15 @@ ContactItem::ResourceStatus ContactItem::getResource(const QString &resource) co
 	return rs;
 }
 
+QString ContactItem::fullJid() const {
+	const ResourceStatus &rs = getResource();
+	if (rs.status) {
+		return m_bareJid + JID_RESOURCE_SEPARATOR + rs.resourceName;
+	} else {
+		return m_bareJid;
+	}
+}
+
 bool ContactItem::operator<(const ContactItem &_other) const {
 	if (isOnline() == _other.isOnline()) {
 		if (isOnline()) {

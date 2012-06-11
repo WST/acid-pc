@@ -80,6 +80,12 @@ namespace CL {
 		ResourceStatus getResource(const QString &resource = QString()) const;
 
 		/*!
+			Gets the full JID, including resource if available.
+			\note For removal
+			*/
+		QString fullJid() const;
+
+		/*!
 			Adds / removes / updates resources as needed
 			*/
 		void setResourceStatus(const QString &resource, const Status &_value);
