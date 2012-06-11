@@ -67,28 +67,24 @@ namespace CL {
 			*/
 		QList<QString> getResourceNames() const { return m_resources.keys(); }
 
-		typedef struct {
-			QString resourceName;
-			Status *status;
-		} ResourceStatus;
-
 		/*!
 			Gets the name and status by resource name.
-			For empty name returns status of 'the most online' resource (highest priority, highest status).
-			Returns NULL for non-existent resource
+			If @resource is NULL, gets 'the most online' resource (highest priority, highest status).
+			If @resource is an empty string, gets 'the most online' resource and saves it's name to the given string.
+			Returns NULL for non-existent resource or if all resources are offline.
 			*/
-		ResourceStatus getResource(const QString &resource = QString()) const;
+		const Status *getStatus(QString *resource = NULL) const;
 
 		/*!
 			Gets the full JID, including resource if available.
 			\note For removal
 			*/
-		QString fullJid() const;
+		QString getFullJid() const;
 
 		/*!
 			Adds / removes / updates resources as needed
 			*/
-		void setResourceStatus(const QString &resource, const Status &_value);
+		void setStatus(const QString &resource, const Status &_value);
 
 		const QString &getNick() const { return m_nick.isEmpty() ? m_bareJid : m_nick; }
 		void setNick(const QString &_value);
@@ -149,7 +145,7 @@ namespace CL {
 			*/
 		void setNotified(bool notified, const QString &text = QString());
 
-		virtual bool notified() const { return m_notified; }
+		virtual bool isNotified() const { return m_notified; }
 	
 	signals:
 		/*!

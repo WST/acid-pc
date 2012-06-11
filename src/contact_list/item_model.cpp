@@ -112,7 +112,7 @@ void ItemModel::setStatus(const QString &jid, const ContactItem::Status &_value)
 		item = updateEntry(jid, QString(), notInRosterGroups);
 	}
 
-	item->setResourceStatus(resource, _value);
+	item->setStatus(resource, _value);
 }
 
 void ItemModel::removeEntry(const QString &jid) {

@@ -17,34 +17,33 @@ ContactItem::ContactItem(ItemModel *_owner, const QString &_jid): owner(_owner) 
 	setNotified(false);
 }
 
-ContactItem::ResourceStatus ContactItem::getResource(const QString &resource) const {
-	ResourceStatus rs;
-	if (resource.isEmpty()) {
+const ContactItem::Status *ContactItem::getStatus(QString *resource) const {
+	if (!resource || resource->isEmpty()) {
 		if (m_resources.size() == 1) {
-			rs.resourceName = m_resources.constBegin().key();
-			rs.status = m_resources.constBegin().value();
-		} else {
-			rs.status = NULL;
-			for (QMap<QString, Status *>::const_iterator i = m_resources.constBegin();
-					i != m_resources.constEnd(); ++i) {
-				if (!rs.status || *rs.status < *i.value()) {
-					rs.resourceName = i.key();
-					rs.status = i.value();
+			if (resource) {
+				*resource = m_resources.constBegin().key();
+			}
+			return m_resources.constBegin().value();
+		}
+		const Status *bestStatus = NULL;
+		for (QMap<QString, Status *>::const_iterator i = m_resources.constBegin();
+				i != m_resources.constEnd(); ++i) {
+			if (!bestStatus || *bestStatus < *i.value()) {
+				if (resource) {
+					*resource = i.key();
 				}
+				bestStatus = i.value();
 			}
 		}
-	} else {
-		rs.resourceName = resource;
-		rs.status = m_resources.value(resource);
+		return bestStatus;
 	}
-
-	return rs;
+	return m_resources.value(*resource);
 }
 
-QString ContactItem::fullJid() const {
-	const ResourceStatus &rs = getResource();
-	if (rs.status) {
-		return m_bareJid + JID_RESOURCE_SEPARATOR + rs.resourceName;
+QString ContactItem::getFullJid() const {
+	QString bestResource;
+	if (getStatus(&bestResource)) {
+		return m_bareJid + JID_RESOURCE_SEPARATOR + bestResource;
 	} else {
 		return m_bareJid;
 	}
@@ -54,8 +53,8 @@ bool ContactItem::operator<(const ContactItem &_other) const {
 	if (isOnline() == _other.isOnline()) {
 		if (isOnline()) {
 			// Both are online, compare statuses
-			const Status *resource_status = getResource().status,
-					*other_resource_status = _other.getResource().status;
+			const Status *resource_status = getStatus(),
+					*other_resource_status = _other.getStatus();
 			if (resource_status->type < other_resource_status->type) {
 				return true;
 			} else if (other_resource_status->type < resource_status->type) {
@@ -118,7 +117,7 @@ QString ContactItem::getText() const {
 	return m_resources.size() > 1 ? (base_text + " (%1)").arg(m_resources.size()) : base_text;
 }
 
-void ContactItem::setResourceStatus(const QString &resource, const Status &_value) {
+void ContactItem::setStatus(const QString &resource, const Status &_value) {
 	LDEBUG("setting resource status for %s to %d", qPrintable(resource), (int)_value.type);
 	if (_value.type != Unchanged) {
 		Status *rcptr = m_resources.value(resource);
@@ -148,7 +147,7 @@ void ContactItem::changeStatus() {
 }
 
 void ContactItem::updateIcon() {
-	QString new_icon_name = isOnline() ? statusString[getResource().status->type] :
+	QString new_icon_name = isOnline() ? statusString[getStatus()->type] :
 										 statusString[Offline];
 	if (icon_name != new_icon_name) {
 		icon_name = new_icon_name;
@@ -165,18 +164,18 @@ void ContactItem::setNick(const QString &_value) {
 }
 
 QString ContactItem::getSubText() const {
-	const ResourceStatus &rs = getResource();
+	const Status *status = getStatus();
 	const QString statusTemplate =
 		"<br />%1 %2 <img src=':/trayicon/%3-16px.png' /> <span color='%4'>%5</span>";
 	const QString selectedStatusTemplate =
 		QString("<b>%1</b>").arg(statusTemplate);
 
 	QString baseText = QString("%1").arg(m_bareJid);
-	if (rs.status) {
+	if (status) {
 		for (QMap<QString, Status *>::const_iterator i = m_resources.constBegin();
 				i != m_resources.constEnd(); ++i) {
 			baseText += QString(
-					(i.value() == rs.status) ? selectedStatusTemplate : statusTemplate).
+					(i.value() == status) ? selectedStatusTemplate : statusTemplate).
 					arg(i.key()).
 					arg(QString("(%1)").arg(i.value()->priority)).
 					arg(statusString[i.value()->type]).

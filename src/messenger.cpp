@@ -614,7 +614,7 @@ void Messenger::makeVoiceCall(CL::ContactItem *item) {
 		return;
 	}
 
-    call_window = new VoiceCallWindow(this, call_manager->call(item->fullJid()));
+    call_window = new VoiceCallWindow(this, call_manager->call(item->getFullJid()));
 	connect(call_window, SIGNAL(accepted()), this, SLOT(endCall()));
 	call_window->show();
 }
@@ -684,6 +684,6 @@ void Messenger::processBookmarkClick() {
 void Messenger::showSendFileDialog(CL::ContactItem *item) {
     QString filename = QFileDialog::getOpenFileName(this, tr("Open a file"));
     if(!filename.isEmpty() && QFile::exists(filename)) {
-        chat->openTransferManager(transfer_manager->sendFile(item->fullJid(), filename, id()));
+        chat->openTransferManager(transfer_manager->sendFile(item->getFullJid(), filename, id()));
     }
 }
