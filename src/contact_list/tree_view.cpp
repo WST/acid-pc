@@ -136,16 +136,7 @@ void TreeView::drawBranches(QPainter *painter, const QRect &rect, const QModelIn
 	}
 }
 
-const ContactItem *TreeView::selectedContact() const {
-	const QModelIndexList &selected = selectedIndexes();
-	if (selected.size()) {
-		const Item *item = itemFromIndex(selected.at(0));
-		return item->childCount() ? NULL : static_cast<const ContactItem *>(item);
-	}
-	return NULL;
-}
-
-ContactItem *TreeView::selectedContact() {
+ContactItem *TreeView::selectedContact() const {
 	const QModelIndexList &selected = selectedIndexes();
 	if (selected.size()) {
 		Item *item = itemFromIndex(selected.at(0));

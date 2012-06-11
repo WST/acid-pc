@@ -49,8 +49,7 @@ namespace CL {
 		/*!
 			Returns selected roster item. NULL if no items are selected
 			*/
-		const ContactItem *selectedContact() const;
-		ContactItem *selectedContact();
+		ContactItem *selectedContact() const;
 
 	private:
 		QAction *action_chat;
@@ -60,10 +59,7 @@ namespace CL {
 		QAction *action_call;
 
 		bool m_hideOfflineItems;
-		const Item *itemFromIndex(const QModelIndex &index) const {
-			return static_cast<const Item *>(index.data(ItemModel::ItemRole).value<const void *>());
-		}
-		Item *itemFromIndex(const QModelIndex &index) {
+		Item *itemFromIndex(const QModelIndex &index) const {
 			return static_cast<Item *>(index.data(ItemModel::ItemRole).value<void *>());
 		}
 		void updateOfflineItems(const QModelIndex &topLeft, const QModelIndex &bottomRight);

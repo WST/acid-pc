@@ -29,11 +29,11 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const {
 		return QVariant();
 	}
 
-	const GroupItem *group = m_groups.at(index.internalId() >> 16);
+	GroupItem *group = m_groups.at(index.internalId() >> 16);
 	int childID = index.internalId() & 0xFFFF;
-	const Item *item = group->childCount() > childID ?
-				static_cast<const Item *>(group->getContacts().at(childID)) :
-				static_cast<const Item *>(group);
+	Item *item = group->childCount() > childID ?
+				static_cast<Item *>(group->getContacts().at(childID)) :
+				static_cast<Item *>(group);
 	switch (role) {
 	case Qt::DisplayRole:
 		return item->getText();
@@ -42,7 +42,7 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const {
 	case Qt::ToolTipRole:
 		return item->getSubText();
 	case ItemRole:
-		return qVariantFromValue(static_cast<const void *>(item));
+		return qVariantFromValue(static_cast<void *>(item));
 	case NotificationRole:
 		return item->notified();
 	default:
