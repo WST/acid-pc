@@ -71,8 +71,7 @@ Messenger::Messenger(QTranslator *app_translator, QSettings *app_settings): QMai
 }
 
 Messenger::~Messenger() {
-		saveSettings();
-		delete rosterBridge;
+	saveSettings();
 }
 
 void Messenger::saveSettings() {

@@ -145,6 +145,15 @@ const ContactItem *TreeView::selectedContact() const {
 	return NULL;
 }
 
+ContactItem *TreeView::selectedContact() {
+	const QModelIndexList &selected = selectedIndexes();
+	if (selected.size()) {
+		Item *item = itemFromIndex(selected.at(0));
+		return item->childCount() ? NULL : static_cast<ContactItem *>(item);
+	}
+	return NULL;
+}
+
 void TreeView::showChatDialog_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();

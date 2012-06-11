@@ -13,6 +13,7 @@ QStringList parseJid(QString jid);
 void splitJid(const QString &jid, QString *bare, QString *resource = NULL);
 
 Q_DECLARE_METATYPE(const void *)
+Q_DECLARE_METATYPE(void *)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // Logging
