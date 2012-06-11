@@ -39,9 +39,9 @@ namespace CL {
 		void drawBranches(QPainter *painter, const QRect &rect, const QModelIndex &index) const;
 
 	signals:
-        void wannaShowChatDialog(ContactItem *item);
-        void wannaShowProfile(const QString& bareJid);
-        void wannaRemoveContact(const QString& bareJid);
+        void wannaShowChatDialog(CL::ContactItem *item);
+        void wannaShowProfile(CL::ContactItem *item);
+        void wannaRemoveContact(CL::ContactItem *item);
         void wannaMakeVoiceCall(const QString &full_jid);
         void wannaSendFile(const QString &full_jid);
 

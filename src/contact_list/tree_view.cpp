@@ -8,11 +8,11 @@
 using namespace CL;
 
 TreeView::TreeView(QWidget* parent):QTreeView(parent) {
-	action_chat = new QAction(QIcon(":/menu/balloons.png"), "Chat", this);
-	action_profile = new QAction(QIcon(":/menu/card-address.png"), "View profile", this);
-	action_remove = new QAction(QIcon(":/menu/cross.png"), "Remove contact", this);
-	action_send_file = new QAction(QIcon(":/menu/disk.png"), "Send a file", this);
-	action_call = new QAction(QIcon(":/menu/mobile-phone.png"), "Make a voice call", this);
+    action_chat = new QAction(QIcon(":/menu/balloons.png"), tr("Chat"), this);
+    action_profile = new QAction(QIcon(":/menu/card-address.png"), tr("View profile"), this);
+    action_remove = new QAction(QIcon(":/menu/cross.png"), tr("Remove contact"), this);
+    action_send_file = new QAction(QIcon(":/menu/disk.png"), tr("Send a file"), this);
+    action_call = new QAction(QIcon(":/menu/mobile-phone.png"), tr("Make a voice call"), this);
 
 	connect(this, SIGNAL(pressed(const QModelIndex&)), this, SLOT(mousePressed(const QModelIndex&)));
 	connect(this, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(doubleClicked(const QModelIndex&)));
@@ -147,15 +147,13 @@ ContactItem *TreeView::selectedContact() const {
 
 void TreeView::showChatDialog_helper() {
 	if (selectedContact()) {
-		QString bareJid = selectedContact()->getBareJid();
         emit wannaShowChatDialog(selectedContact());
 	}
 }
 
 void TreeView::showProfile_helper() {
-	if (selectedContact()) {
-		QString bareJid = selectedContact()->getBareJid();
-		emit wannaShowProfile(bareJid);
+    if (selectedContact()) {
+        emit wannaShowProfile(selectedContact());
 	}
 }
 
@@ -167,10 +165,9 @@ void TreeView::keyPressEvent(QKeyEvent* event1) {
 }
 
 void TreeView::removeContact_helper() {
-	if (selectedContact()) {
-		QString bareJid = selectedContact()->getBareJid();
-		emit wannaRemoveContact(bareJid);
-	}
+    if (selectedContact()) {
+        emit wannaRemoveContact(selectedContact());
+    }
 }
 
 void TreeView::callHelper() {

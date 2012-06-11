@@ -8,9 +8,13 @@ ChatWidget::ChatWidget(QString with, ChatWindow *parent, CL::ContactItem *roster
     TabWidget::setType(TabWidget::Chat);
     m_item = roster_item;
     window = parent;
-    nick = roster_item->getNick();
-    connect(roster_item, SIGNAL(iconChanged(const QIcon &)), this, SLOT(setIcon(const QIcon &)));
-    connect(roster_item, SIGNAL(nickChanged(const QString &)), this, SLOT(setNick(const QString &)));
+    if(roster_item) {
+        nick = roster_item->getNick();
+        connect(roster_item, SIGNAL(iconChanged(const QIcon &)), this, SLOT(setIcon(const QIcon &)));
+        connect(roster_item, SIGNAL(nickChanged(const QString &)), this, SLOT(setNick(const QString &)));
+    } else {
+        nick = parseJid(with)[2];
+    }
 }
 
 ChatWidget::~ChatWidget() {

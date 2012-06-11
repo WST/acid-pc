@@ -107,7 +107,7 @@ class Messenger: public QMainWindow {
 		void showProfile(const QXmppVCardIq &whose);
 		void loadSettings();
 		void roomParticipantChanged(QString room_jid, QString nick);
-		void requestProfile(const QString &bare_jid);
+        void requestProfile(CL::ContactItem *item);
 		void makeVoiceCall(const QString &bare_jid);
 		void openOfficialSite();
 		void endCall();
@@ -120,7 +120,7 @@ class Messenger: public QMainWindow {
 		void setF4CStatus();
 		void setDNDStatus();
         void addNewContact(const QString &jid, const QString &nick);
-        void removeContact(const QString &jid);
+        void removeContact(CL::ContactItem *item);
         void openServiceBrowser();
         void inBandRegister(bool);
         void handleSubscriptionRequest(const QString &jid);

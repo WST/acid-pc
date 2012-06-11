@@ -139,8 +139,8 @@ void Messenger::createConnections() {
     connect(bookmark_manager, SIGNAL(bookmarksReceived(const QXmppBookmarkSet &)), this, SLOT(handleBookmarks(const QXmppBookmarkSet &)));
 
     connect(& roster_widget, SIGNAL(wannaShowChatDialog(CL::ContactItem *)), this, SLOT(openChat(CL::ContactItem *)));
-    connect(& roster_widget, SIGNAL(wannaShowProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
-    connect(& roster_widget, SIGNAL(wannaRemoveContact(const QString &)), this, SLOT(removeContact(const QString &)));
+    connect(& roster_widget, SIGNAL(wannaShowProfile(CL::ContactItem *)), this, SLOT(requestProfile(CL::ContactItem *)));
+    connect(& roster_widget, SIGNAL(wannaRemoveContact(CL::ContactItem *)), this, SLOT(removeContact(CL::ContactItem *)));
     connect(& roster_widget, SIGNAL(wannaMakeVoiceCall(const QString &)), this, SLOT(makeVoiceCall(const QString &)));
     connect(& roster_widget, SIGNAL(wannaSendFile(const QString &)), this, SLOT(showSendFileDialog(const QString &)));
 
@@ -604,8 +604,8 @@ void Messenger::showProfile(const QXmppVCardIq &whose) {
 	(new VcardWindow(this, & whose))->show();
 }
 
-void Messenger::requestProfile(const QString &bare_jid) {
-	vcard_manager->requestVCard(bare_jid); // Могли бы и слотом сделать, странные какие-то эти ваши девелоперы qxmpp…
+void Messenger::requestProfile(CL::ContactItem *item) {
+    vcard_manager->requestVCard(item->getBareJid());
 }
 
 void Messenger::makeVoiceCall(const QString &full_jid) {
@@ -624,9 +624,9 @@ void Messenger::addNewContact(const QString &jid, const QString &nick) {
     client->rosterManager().subscribe(jid);
 }
 
-void Messenger::removeContact(const QString &jid) {
-    client->rosterManager().unsubscribe(jid);
-    client->rosterManager().removeItem(jid);
+void Messenger::removeContact(CL::ContactItem *item) {
+    client->rosterManager().unsubscribe(item->getBareJid());
+    client->rosterManager().removeItem(item->getBareJid());
 }
 
 void Messenger::endCall() {
