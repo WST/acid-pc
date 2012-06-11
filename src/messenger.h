@@ -28,6 +28,7 @@
 #include "contact_list/tree_view.h"
 #include "contact_list/item_model.h"
 #include "contact_list/item_delegate.h"
+#include "contact_list/contact_item.h"
 
 class Messenger;
 class ChatWindow;
@@ -96,7 +97,7 @@ class Messenger: public QMainWindow {
 		void fileTransferFinished(QXmppTransferJob *job);
 		void joinSupportRoom();
 		void showApplicationInfo();
-		void openChat(const QString &full_jid, const QString &nick);
+        void openChat(const CL::ContactItem *item);
 		void joinRoom(const QString &room_jid, const QString &nick); // в qxmpp ето есть, но этот метод ещё и открывает таб
         void joinedRoom();
         void leftRoom();

@@ -139,7 +139,7 @@ void Messenger::createConnections() {
 	connect(transfer_manager, SIGNAL(fileReceived(QXmppTransferJob *)), this, SLOT(gotFile(QXmppTransferJob *)));
     connect(bookmark_manager, SIGNAL(bookmarksReceived(const QXmppBookmarkSet &)), this, SLOT(handleBookmarks(const QXmppBookmarkSet &)));
 
-    connect(& roster_widget, SIGNAL(wannaShowChatDialog(const QString &, const QString &)), this, SLOT(openChat(const QString &, const QString &)));
+    connect(& roster_widget, SIGNAL(wannaShowChatDialog(const CL::ContactItem *)), this, SLOT(openChat(const CL::ContactItem *)));
     connect(& roster_widget, SIGNAL(wannaShowProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
     connect(& roster_widget, SIGNAL(wannaRemoveContact(const QString &)), this, SLOT(removeContact(const QString &)));
     connect(& roster_widget, SIGNAL(wannaMakeVoiceCall(const QString &)), this, SLOT(makeVoiceCall(const QString &)));
@@ -519,29 +519,16 @@ void Messenger::showApplicationInfo() {
 	about->show();
 }
 
-void Messenger::openChat(const QString &full_jid, const QString &nick) {
+void Messenger::openChat(const CL::ContactItem *item) {
+    chat->openChatTab(item->getBareJid(), item->getNick(), item);
 
-    // TODO: сюда логичнее передавать сам элемент ростера в качестве аргумента
-
-    chat->openChatTab(full_jid, nick, roster_model.getContact(full_jid));
-    QStringList jid = parseJid(full_jid);
-
-    // TODO: если JID содержит только hostname, будут серьёзные проблемы,
-    // Это надо пофиксить
-
-    // Контакт точно есть в ростере
-    CL::ContactItem *roster_item = roster_model.getContact(full_jid);
-
-	LASSERT(roster_item, "The roster item for %s does not exist", qPrintable(full_jid));
-
-    QMap<QString, QXmppMessage> list = messages[jid[1]];
+    QMap<QString, QXmppMessage> list = messages[item->getBareJid()];
     for(QMap<QString, QXmppMessage>::iterator i = list.begin(); i != list.end(); ++ i) {
-        chat->displayMessage(i.value(), nick, roster_item);
+        chat->displayMessage(i.value(), item->getNick(), item);
     }
 
-    messages.erase(messages.find(jid[1]));
-
-    if(roster_item) roster_item->setNotified(false);
+    messages.erase(messages.find(item->getBareJid()));
+    item->setNotified(false);
 }
 
 void Messenger::processJoinRequest(const QString &room_jid) {

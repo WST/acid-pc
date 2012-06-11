@@ -148,7 +148,7 @@ const ContactItem *TreeView::selectedContact() const {
 void TreeView::showChatDialog_helper() {
 	if (selectedContact()) {
 		QString bareJid = selectedContact()->getBareJid();
-		emit wannaShowChatDialog(bareJid, selectedContact()->getNick());
+        emit wannaShowChatDialog(selectedContact());
 	}
 }
 
