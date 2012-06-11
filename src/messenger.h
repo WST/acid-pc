@@ -108,7 +108,7 @@ class Messenger: public QMainWindow {
 		void loadSettings();
 		void roomParticipantChanged(QString room_jid, QString nick);
         void requestProfile(CL::ContactItem *item);
-		void makeVoiceCall(const QString &bare_jid);
+        void makeVoiceCall(CL::ContactItem *item);
 		void openOfficialSite();
 		void endCall();
 		void confirmedMessage(const QString &message_id);
@@ -128,7 +128,7 @@ class Messenger: public QMainWindow {
         void handleBookmarks(const QXmppBookmarkSet &bookmarks);
         void processBookmarkClick();
         void showBookmarkManager();
-        void showSendFileDialog(const QString &jid);
+        void showSendFileDialog(CL::ContactItem *item);
 };
 
 #endif // MESSENGER_H

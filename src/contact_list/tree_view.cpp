@@ -172,22 +172,12 @@ void TreeView::removeContact_helper() {
 
 void TreeView::callHelper() {
 	if (selectedContact()) {
-		const ContactItem::ResourceStatus &rs =
-			selectedContact()->getResource();
-		if (rs.status) {
-			QString full_jid = selectedContact()->getBareJid() + "/" + rs.resourceName;
-			emit wannaMakeVoiceCall(full_jid);
-		}
+        emit wannaMakeVoiceCall(selectedContact());
 	}
 }
 
 void TreeView::sendFile_helper() {
 	if (selectedContact()) {
-		const ContactItem::ResourceStatus &rs =
-			selectedContact()->getResource();
-		if (rs.status) {
-			QString full_jid = selectedContact()->getBareJid() + "/" + rs.resourceName;
-			emit wannaSendFile(full_jid);
-		}
+        emit wannaSendFile(selectedContact());
 	}
 }

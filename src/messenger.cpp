@@ -141,8 +141,8 @@ void Messenger::createConnections() {
     connect(& roster_widget, SIGNAL(wannaShowChatDialog(CL::ContactItem *)), this, SLOT(openChat(CL::ContactItem *)));
     connect(& roster_widget, SIGNAL(wannaShowProfile(CL::ContactItem *)), this, SLOT(requestProfile(CL::ContactItem *)));
     connect(& roster_widget, SIGNAL(wannaRemoveContact(CL::ContactItem *)), this, SLOT(removeContact(CL::ContactItem *)));
-    connect(& roster_widget, SIGNAL(wannaMakeVoiceCall(const QString &)), this, SLOT(makeVoiceCall(const QString &)));
-    connect(& roster_widget, SIGNAL(wannaSendFile(const QString &)), this, SLOT(showSendFileDialog(const QString &)));
+    connect(& roster_widget, SIGNAL(wannaMakeVoiceCall(CL::ContactItem *)), this, SLOT(makeVoiceCall(CL::ContactItem *)));
+    connect(& roster_widget, SIGNAL(wannaSendFile(CL::ContactItem *)), this, SLOT(showSendFileDialog(CL::ContactItem *)));
 
 	connect(settings_window, SIGNAL(modified()), this, SLOT(loadSettings()));
 }
@@ -608,13 +608,13 @@ void Messenger::requestProfile(CL::ContactItem *item) {
     vcard_manager->requestVCard(item->getBareJid());
 }
 
-void Messenger::makeVoiceCall(const QString &full_jid) {
+void Messenger::makeVoiceCall(CL::ContactItem *item) {
 	if(call_window) {
 		call_window->activateWindow();
 		return;
 	}
 
-	call_window = new VoiceCallWindow(this, call_manager->call(full_jid));
+    call_window = new VoiceCallWindow(this, call_manager->call(item->fullJid()));
 	connect(call_window, SIGNAL(accepted()), this, SLOT(endCall()));
 	call_window->show();
 }
@@ -681,9 +681,9 @@ void Messenger::processBookmarkClick() {
     joinRoom(jid[1], jid[5]);
 }
 
-void Messenger::showSendFileDialog(const QString &jid) {
+void Messenger::showSendFileDialog(CL::ContactItem *item) {
     QString filename = QFileDialog::getOpenFileName(this, tr("Open a file"));
     if(!filename.isEmpty() && QFile::exists(filename)) {
-        chat->openTransferManager(transfer_manager->sendFile(jid, filename, id()));
+        chat->openTransferManager(transfer_manager->sendFile(item->fullJid(), filename, id()));
     }
 }

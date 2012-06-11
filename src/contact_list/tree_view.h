@@ -42,8 +42,8 @@ namespace CL {
         void wannaShowChatDialog(CL::ContactItem *item);
         void wannaShowProfile(CL::ContactItem *item);
         void wannaRemoveContact(CL::ContactItem *item);
-        void wannaMakeVoiceCall(const QString &full_jid);
-        void wannaSendFile(const QString &full_jid);
+        void wannaMakeVoiceCall(CL::ContactItem *item);
+        void wannaSendFile(CL::ContactItem *item);
 
 	public:
 		/*!
