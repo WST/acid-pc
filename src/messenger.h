@@ -97,7 +97,7 @@ class Messenger: public QMainWindow {
 		void fileTransferFinished(QXmppTransferJob *job);
 		void joinSupportRoom();
 		void showApplicationInfo();
-        void openChat(const CL::ContactItem *item);
+        void openChat(CL::ContactItem *item);
 		void joinRoom(const QString &room_jid, const QString &nick); // в qxmpp ето есть, но этот метод ещё и открывает таб
         void joinedRoom();
         void leftRoom();

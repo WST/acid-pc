@@ -138,7 +138,7 @@ void Messenger::createConnections() {
 	connect(transfer_manager, SIGNAL(fileReceived(QXmppTransferJob *)), this, SLOT(gotFile(QXmppTransferJob *)));
     connect(bookmark_manager, SIGNAL(bookmarksReceived(const QXmppBookmarkSet &)), this, SLOT(handleBookmarks(const QXmppBookmarkSet &)));
 
-    connect(& roster_widget, SIGNAL(wannaShowChatDialog(const CL::ContactItem *)), this, SLOT(openChat(const CL::ContactItem *)));
+    connect(& roster_widget, SIGNAL(wannaShowChatDialog(CL::ContactItem *)), this, SLOT(openChat(CL::ContactItem *)));
     connect(& roster_widget, SIGNAL(wannaShowProfile(const QString &)), this, SLOT(requestProfile(const QString &)));
     connect(& roster_widget, SIGNAL(wannaRemoveContact(const QString &)), this, SLOT(removeContact(const QString &)));
     connect(& roster_widget, SIGNAL(wannaMakeVoiceCall(const QString &)), this, SLOT(makeVoiceCall(const QString &)));
@@ -518,7 +518,7 @@ void Messenger::showApplicationInfo() {
 	about->show();
 }
 
-void Messenger::openChat(const CL::ContactItem *item) {
+void Messenger::openChat(CL::ContactItem *item) {
     chat->openChatTab(item->getBareJid(), item->getNick(), item);
 
     QMap<QString, QXmppMessage> list = messages[item->getBareJid()];

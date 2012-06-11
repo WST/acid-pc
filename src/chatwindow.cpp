@@ -108,7 +108,7 @@ ServiceDiscoveryWidget *ChatWindow::openDiscoTab(QXmppDiscoveryManager *manager,
     return widget;
 }
 
-ChatWidget *ChatWindow::openChatTab(QString fulljid, QString tab_name, const CL::ContactItem *roster_item) {
+ChatWidget *ChatWindow::openChatTab(QString fulljid, QString tab_name, CL::ContactItem *roster_item) {
     if(!isVisible()) show();
 
     ChatWidget *widget = getChatByJid(fulljid);
