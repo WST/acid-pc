@@ -45,9 +45,10 @@ TabWidget *ChatWindow::getWidgetByIndex(int index) {
 }
 
 TabWidget *ChatWindow::getWidgetByJid(QString jid) {
+    QStringList parts = parseJid(jid.toLower());
 	TabWidget *widget;
 	for(int i = 0; i < ui->tabWidget->count(); i ++) {
-        if((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == jid.toLower()) {
+        if((widget = (TabWidget *) ui->tabWidget->widget(i))->getJid() == parts[1]) {
 			return widget;
 		}
 	}
