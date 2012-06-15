@@ -27,6 +27,11 @@ namespace CL {
 			*/
 		void setHideOfflineItems(bool);
 
+		/*!
+			Enables throttling of the Not-in-roster item presences
+			*/
+		void setThrottleNotInRoster(bool);
+
 	private slots:
 		void showChatDialog_helper();
 		void showProfile_helper();

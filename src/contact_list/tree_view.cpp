@@ -36,6 +36,10 @@ void TreeView::setHideOfflineItems(bool show) {
 	}
 }
 
+void TreeView::setThrottleNotInRoster(bool throttle) {
+	// TODO
+}
+
 void TreeView::updateOfflineItems(const QModelIndex &topLeft, const QModelIndex &bottomRight) {
 	/*
 	 * Scenario A: to == from are invalid => we update the whole contact list

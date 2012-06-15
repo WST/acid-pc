@@ -18,7 +18,7 @@ namespace CL {
 	public:
 		explicit ItemModel(QObject* parent):
 			QAbstractItemModel(parent),
-			throttleNotInRoster(false),
+			throttleNotInRoster(true),
 			notInRosterGroupName("Not-in-roster"),
 			noGroupName("General") {}
 
