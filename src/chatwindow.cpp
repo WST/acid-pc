@@ -297,4 +297,3 @@ void ChatWindow::on_tabWidget_currentChanged(int index) {
 void ChatWindow::chatGeometryChanged(QByteArray geometry) {
 	settings->setValue("chat/geometry", geometry);
 }
-

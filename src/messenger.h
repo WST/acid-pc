@@ -29,6 +29,7 @@
 #include "contact_list/item_model.h"
 #include "contact_list/item_delegate.h"
 #include "contact_list/contact_item.h"
+#include "textpreprocessor.h"
 
 class Messenger;
 class ChatWindow;
@@ -67,6 +68,8 @@ class Messenger: public QMainWindow {
         QMap<QString, QMap<QString, QXmppMessage> > messages; // буфер принятых сообщений
         QTranslator *translator; // Транслятор UI приложения
 
+        TextPreprocessor *preprocessor;
+
 	public:
         Messenger(QTranslator *app_translator, QSettings *app_settings);
 		~Messenger();
@@ -75,6 +78,7 @@ class Messenger: public QMainWindow {
         QXmppMucRoom *getRoomByJid(const QString &jid);
         unsigned long int counter;
         QString id();
+        QString getSharedPrefix();
 
 	private slots:
 		void activate();

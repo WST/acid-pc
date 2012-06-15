@@ -11,6 +11,7 @@ UI_DIR      = build/ui
 
 INCLUDEPATH = $$PWD
 win32:INCLUDEPATH += C:/include
+unix:DEFINES += APP_SHARED_PREFIX="\"\\\"/usr/local/share/acid-messenger\\\"\""
 
 SOURCES += \
 	src/main.cpp \
@@ -40,7 +41,8 @@ SOURCES += \
 	src/newcontactwindow.cpp \
 	src/servicediscoverywidget.cpp \
 	src/bookmarkswidget.cpp \
-	src/transfermanagerwidget.cpp
+	src/transfermanagerwidget.cpp \
+    src/textpreprocessor.cpp
 
 HEADERS += \
 	version.h \
@@ -70,7 +72,8 @@ HEADERS += \
 	src/newcontactwindow.h \
 	src/servicediscoverywidget.h \
 	src/bookmarkswidget.h \
-	src/transfermanagerwidget.h
+	src/transfermanagerwidget.h \
+    src/textpreprocessor.h
 
 FORMS += \
 	ui/loginform.ui \

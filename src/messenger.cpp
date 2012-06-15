@@ -68,6 +68,8 @@ Messenger::Messenger(QTranslator *app_translator, QSettings *app_settings): QMai
 	QDesktopServices::setUrlHandler("xmpp", this, "handleLink");
 
     counter = 0;
+
+    preprocessor = new TextPreprocessor(this, getSharedPrefix(), "default");
 }
 
 Messenger::~Messenger() {
@@ -686,4 +688,12 @@ void Messenger::showSendFileDialog(CL::ContactItem *item) {
     if(!filename.isEmpty() && QFile::exists(filename)) {
         chat->openTransferManager(transfer_manager->sendFile(item->getFullJid(), filename, id()));
     }
+}
+
+QString Messenger::getSharedPrefix() {
+#ifdef WIN32
+    return qApp->applicationFileDir() + "/shared";
+#else
+    return APP_SHARED_PREFIX;
+#endif
 }

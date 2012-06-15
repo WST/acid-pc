@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<emoticons>
+	<image filename="smiley.png" code=":)" title="smiling" />
+	<image filename="smiley-sad.png" code=":(" title="sad" />
+	<!-- … -->
+</emoticons>
