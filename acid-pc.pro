@@ -95,7 +95,7 @@ FORMS += \
 RESOURCES += res/app.qrc
 
 TRANSLATIONS += i18n/acid-pc_ru.ts i18n/acid-pc_id.ts i18n/acid-pc_jawa.ts i18n/acid-pc_sunda.ts
-
+CODECFORTR = UTF-8
 win32:LIBS += -L"C:/lib" -lqxmpp -lws2_32 -ldnsapi
 unix:LIBS += -lqxmpp
 

@@ -223,6 +223,33 @@ void Messenger::createMenus() {
 	traymenu->insertAction(0, action_quit);
 	traymenu->insertSeparator(action_quit);
 	tray->setContextMenu(traymenu);
+
+    // Панель инструментов
+    // TODO: кнопку статуса логично сделать отдельно — например справа
+    QToolBar *toolbar = addToolBar("Main");
+    toolbar->setMovable(false);
+
+    QToolButton *roster_menu_button = new QToolButton();
+    roster_menu_button->setMenu(roster_menu);
+    roster_menu_button->setPopupMode(QToolButton::InstantPopup);
+    roster_menu_button->setIcon(QIcon(":/menu/user-black.png"));
+    roster_menu_button->setFixedSize(24, 24);
+
+    QToolButton *status_menu_button = new QToolButton();
+    status_menu_button->setMenu(status_menu);
+    status_menu_button->setPopupMode(QToolButton::InstantPopup);
+    status_menu_button->setIcon(QIcon(":/trayicon/online-16px.png"));
+    status_menu_button->setFixedSize(24, 24);
+
+    QToolButton *mucs_menu_button = new QToolButton();
+    mucs_menu_button->setMenu(join_room_menu);
+    mucs_menu_button->setPopupMode(QToolButton::InstantPopup);
+    mucs_menu_button->setIcon(QIcon(":/menu/users.png"));
+    mucs_menu_button->setFixedSize(24, 24);
+
+    toolbar->addWidget(roster_menu_button);
+    toolbar->addWidget(status_menu_button);
+    toolbar->addWidget(mucs_menu_button);
 }
 
 void Messenger::setOnlineStatus() {
