@@ -247,9 +247,13 @@ void Messenger::createMenus() {
     mucs_menu_button->setIcon(QIcon(":/menu/users.png"));
     mucs_menu_button->setFixedSize(24, 24);
 
+    QWidget *spacer = new QWidget();
+    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
     toolbar->addWidget(roster_menu_button);
-    toolbar->addWidget(status_menu_button);
     toolbar->addWidget(mucs_menu_button);
+    toolbar->addWidget(spacer);
+    toolbar->addWidget(status_menu_button);
 }
 
 void Messenger::setOnlineStatus() {
