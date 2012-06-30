@@ -39,6 +39,7 @@ void SettingsWindow::on_button_box_accepted() {
 	settings->setValue("settings/roster_on_the_top", ui->roster_on_the_top->checkState());
 	settings->setValue("settings/animate_roster", ui->animate_roster->checkState());
     settings->setValue("settings/hide_tab_captions", ui->hide_tab_captions->checkState());
+    settings->setValue("settings/show_toolbar", ui->show_toolbar->checkState());
 
 	// Четвёртый таб
 	settings->setValue("settings/savepath", ui->savepath->text());
@@ -68,6 +69,7 @@ void SettingsWindow::loadCurrentSettings() {
 	ui->notification_display_time->setValue(settings->value("settings/notification_display_time", 5).toInt());
 	ui->animate_roster->setChecked(settings->value("settings/animate_roster", true).toBool());
     ui->hide_tab_captions->setChecked(settings->value("settings/hide_tab_captions", true).toBool());
+    ui->show_toolbar->setChecked(settings->value("settings/show_toolbar", true).toBool());
 
 	// Четвёртый таб
 	ui->savepath->setText(settings->value("settings/savepath", INCOMING_FILES_STORAGE).toString());

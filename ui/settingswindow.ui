@@ -420,6 +420,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="show_toolbar">
+            <property name="text">
+             <string>Show application toolbar</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

@@ -86,7 +86,7 @@ ServiceDiscoveryWidget *ChatWindow::getServiceBrowserByJid(QString jid) {
 }
 
 bool ChatWindow::adaTabForJid(QString jid) {
-	return (bool) getWidgetByJid(jid);
+    return (bool) getChatByJid(jid);
 }
 
 ServiceDiscoveryWidget *ChatWindow::openDiscoTab(QXmppDiscoveryManager *manager, const QString &jid) {

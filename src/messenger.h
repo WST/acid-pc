@@ -69,6 +69,8 @@ class Messenger: public QMainWindow {
         QTranslator *translator; // Транслятор UI приложения
 
         TextPreprocessor *preprocessor;
+        QToolBar *toolbar; // Панель инструментов
+        QToolButton *status_menu_button; // Кнопка статуса
 
 	public:
         Messenger(QTranslator *app_translator, QSettings *app_settings);
@@ -118,11 +120,7 @@ class Messenger: public QMainWindow {
 		void confirmedMessage(const QString &message_id);
 		void confirmedFile(QXmppTransferJob *job, bool confirmed);
 		void confirmedCall(QXmppCall *call, bool confirmed);
-		void setOnlineStatus();
-		void setAwayStatus();
-		void setXAStatus();
-		void setF4CStatus();
-		void setDNDStatus();
+        void setStatus();
         void addNewContact(const QString &jid, const QString &nick);
         void removeContact(CL::ContactItem *item);
         void openServiceBrowser();

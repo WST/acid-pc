@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="id_ID">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutWindow</name>
     <message>
@@ -18,7 +19,7 @@
         <source>Developers</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/aboutwindow.ui" line="84"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -127,8 +128,36 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>CL::ContactItem</name>
     <message>
-        <location filename="../src/contact_list/contact_item.cpp" line="183"/>
+        <location filename="../src/contact_list/contact_item.cpp" line="191"/>
         <source>offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CL::TreeView</name>
+    <message>
+        <location filename="../src/contact_list/tree_view.cpp" line="11"/>
+        <source>Chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/contact_list/tree_view.cpp" line="12"/>
+        <source>View profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/contact_list/tree_view.cpp" line="13"/>
+        <source>Remove contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/contact_list/tree_view.cpp" line="14"/>
+        <source>Send a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/contact_list/tree_view.cpp" line="15"/>
+        <source>Make a voice call</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -140,12 +169,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/chatwidget.cpp" line="51"/>
+        <location filename="../src/chatwidget.cpp" line="55"/>
         <source>Send the message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/chatwidget.cpp" line="51"/>
+        <location filename="../src/chatwidget.cpp" line="55"/>
         <source>This button is not available because you are not connected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -158,17 +187,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/chatwindow.cpp" line="104"/>
+        <location filename="../src/chatwindow.cpp" line="105"/>
         <source>Services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/chatwindow.cpp" line="195"/>
+        <location filename="../src/chatwindow.cpp" line="196"/>
         <source>Transfers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/chatwindow.cpp" line="217"/>
+        <location filename="../src/chatwindow.cpp" line="218"/>
         <source>Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -401,157 +430,169 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Messenger</name>
     <message>
-        <location filename="../src/messenger.cpp" line="152"/>
+        <location filename="../src/messenger.cpp" line="155"/>
         <source>Program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="153"/>
+        <location filename="../src/messenger.cpp" line="156"/>
         <source>New message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="154"/>
+        <location filename="../src/messenger.cpp" line="157"/>
         <source>Join a room</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="155"/>
+        <location filename="../src/messenger.cpp" line="158"/>
         <source>Join new room</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="156"/>
+        <location filename="../src/messenger.cpp" line="159"/>
         <source>Manage bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="157"/>
+        <location filename="../src/messenger.cpp" line="160"/>
         <source>Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="158"/>
+        <location filename="../src/messenger.cpp" line="161"/>
         <source>Add contact</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="159"/>
+        <location filename="../src/messenger.cpp" line="162"/>
+        <location filename="../src/messenger.cpp" line="250"/>
         <source>Roster</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="160"/>
+        <location filename="../src/messenger.cpp" line="163"/>
         <source>Hide offline items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="161"/>
+        <location filename="../src/messenger.cpp" line="164"/>
         <source>Hide gateways</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="164"/>
+        <location filename="../src/messenger.cpp" line="167"/>
         <source>Connect service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="169"/>
+        <location filename="../src/messenger.cpp" line="172"/>
         <source>Lopbox microblog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="170"/>
+        <location filename="../src/messenger.cpp" line="173"/>
         <source>Add an RSS feed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="172"/>
+        <location filename="../src/messenger.cpp" line="175"/>
         <source>Service discovery</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="174"/>
+        <location filename="../src/messenger.cpp" line="177"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="176"/>
+        <location filename="../src/messenger.cpp" line="179"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="178"/>
+        <location filename="../src/messenger.cpp" line="181"/>
+        <location filename="../src/messenger.cpp" line="242"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="179"/>
+        <location filename="../src/messenger.cpp" line="182"/>
         <source>Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="180"/>
+        <location filename="../src/messenger.cpp" line="183"/>
         <source>Free for chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="181"/>
+        <location filename="../src/messenger.cpp" line="184"/>
         <source>Away</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="182"/>
+        <location filename="../src/messenger.cpp" line="185"/>
         <source>Extended away</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="183"/>
+        <location filename="../src/messenger.cpp" line="186"/>
         <source>Do not disturb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="185"/>
+        <location filename="../src/messenger.cpp" line="188"/>
         <source>Offline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="187"/>
+        <location filename="../src/messenger.cpp" line="190"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="188"/>
+        <location filename="../src/messenger.cpp" line="191"/>
         <source>Support chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="189"/>
+        <location filename="../src/messenger.cpp" line="192"/>
         <source>Official site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="191"/>
+        <location filename="../src/messenger.cpp" line="194"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="465"/>
+        <location filename="../src/messenger.cpp" line="234"/>
+        <source>Main toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/messenger.cpp" line="258"/>
+        <source>Conferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/messenger.cpp" line="492"/>
         <source>There are unread messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="575"/>
+        <location filename="../src/messenger.cpp" line="589"/>
         <source>You have been kicked: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="682"/>
+        <location filename="../src/messenger.cpp" line="696"/>
         <source>Join </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="699"/>
+        <location filename="../src/messenger.cpp" line="713"/>
         <source>Open a file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -564,12 +605,12 @@ p, li { white-space: pre-wrap; }
         <source>New contact</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/newcontactwindow.ui" line="50"/>
         <source>Contact’s Jabber ID:</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/newcontactwindow.ui" line="60"/>
         <source>Contact’s nick:</source>
         <translation type="unfinished"></translation>
@@ -655,7 +696,7 @@ p, li { white-space: pre-wrap; }
         <source>Here you can specify your MUC nickname. The default is the left part of your Jabber ID.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/settingswindow.ui" line="61"/>
         <source>When activated, you will not be asked to accept or decline incoming voice calls — all calls will be accepted without warning.</source>
         <translation type="unfinished"></translation>
@@ -665,7 +706,7 @@ p, li { white-space: pre-wrap; }
         <source>Automatically accept voice calls</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../ui/settingswindow.ui" line="71"/>
         <source>When activated, you will not be asked to accept or decline incoming files — all files will be accepted without warning.</source>
         <translation type="unfinished"></translation>
@@ -826,42 +867,47 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="429"/>
+        <location filename="../ui/settingswindow.ui" line="426"/>
+        <source>Show application toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/settingswindow.ui" line="436"/>
         <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="437"/>
+        <location filename="../ui/settingswindow.ui" line="444"/>
         <source>Notification display time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="476"/>
+        <location filename="../ui/settingswindow.ui" line="483"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="482"/>
+        <location filename="../ui/settingswindow.ui" line="489"/>
         <source>Paths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="490"/>
+        <location filename="../ui/settingswindow.ui" line="497"/>
         <source>Save files to:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="497"/>
+        <location filename="../ui/settingswindow.ui" line="504"/>
         <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settingswindow.ui" line="523"/>
+        <location filename="../ui/settingswindow.ui" line="530"/>
         <source>Ask me everytime</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settingswindow.cpp" line="89"/>
+        <location filename="../src/settingswindow.cpp" line="91"/>
         <source>Select a directory</source>
         <translation type="unfinished"></translation>
     </message>

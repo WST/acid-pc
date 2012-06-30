@@ -108,6 +108,8 @@ void Messenger::loadSettings() {
 	roster_widget.setAnimated(settings->value("settings/animate_roster", true).toBool());
 	if(settings->value("settings/roster_on_the_top", false).toBool()) setWindowFlags(windowFlags() | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
 
+    toolbar->setVisible(settings->value("settings/show_toolbar", true).toBool());
+
 	if(settings->contains("settings/gui_style")) {
         const char *styles[] = {0, "plastique", "cleanlooks"};
 		const char *active_style = styles[settings->value("settings/gui_style").toInt()];
@@ -205,11 +207,16 @@ void Messenger::createMenus() {
     room_bookmarks_menu->setEnabled(false);
 
 	// Меню статуса
-	connect(action_status_available, SIGNAL(triggered()), this, SLOT(setOnlineStatus()));
-	connect(action_status_f4c, SIGNAL(triggered()), this, SLOT(setF4CStatus()));
-	connect(action_status_away, SIGNAL(triggered()), this, SLOT(setAwayStatus()));
-	connect(action_status_xa, SIGNAL(triggered()), this, SLOT(setXAStatus()));
-	connect(action_status_dnd, SIGNAL(triggered()), this, SLOT(setDNDStatus()));
+    action_status_available->setData(QXmppPresence::Status::Online);
+    action_status_f4c->setData(QXmppPresence::Status::Chat);
+    action_status_away->setData(QXmppPresence::Status::Away);
+    action_status_xa->setData(QXmppPresence::Status::XA);
+    action_status_dnd->setData(QXmppPresence::Status::DND);
+    connect(action_status_available, SIGNAL(triggered()), this, SLOT(setStatus()));
+    connect(action_status_f4c, SIGNAL(triggered()), this, SLOT(setStatus()));
+    connect(action_status_away, SIGNAL(triggered()), this, SLOT(setStatus()));
+    connect(action_status_xa, SIGNAL(triggered()), this, SLOT(setStatus()));
+    connect(action_status_dnd, SIGNAL(triggered()), this, SLOT(setStatus()));
 	connect(action_status_dc, SIGNAL(triggered()), this, SLOT(disconnect()));
 
 	// Меню Help
@@ -224,28 +231,32 @@ void Messenger::createMenus() {
 	traymenu->insertSeparator(action_quit);
 	tray->setContextMenu(traymenu);
 
-    // Панель инструментов
-    // TODO: кнопку статуса логично сделать отдельно — например справа
-    QToolBar *toolbar = addToolBar("Main");
+    toolbar = addToolBar(tr("Main toolbar"));
     toolbar->setMovable(false);
+
+    status_menu_button = new QToolButton();
+    status_menu_button->setMenu(status_menu);
+    status_menu_button->setPopupMode(QToolButton::InstantPopup);
+    status_menu_button->setIcon(QIcon(":/trayicon/online-16px.png"));
+    status_menu_button->setFixedSize(24, 24);
+    status_menu_button->setToolTip(tr("Status"));
+    status_menu_button->setIconSize(QSize(16, 16));
 
     QToolButton *roster_menu_button = new QToolButton();
     roster_menu_button->setMenu(roster_menu);
     roster_menu_button->setPopupMode(QToolButton::InstantPopup);
     roster_menu_button->setIcon(QIcon(":/menu/user-black.png"));
     roster_menu_button->setFixedSize(24, 24);
-
-    QToolButton *status_menu_button = new QToolButton();
-    status_menu_button->setMenu(status_menu);
-    status_menu_button->setPopupMode(QToolButton::InstantPopup);
-    status_menu_button->setIcon(QIcon(":/trayicon/online-16px.png"));
-    status_menu_button->setFixedSize(24, 24);
+    roster_menu_button->setToolTip(tr("Roster"));
+    roster_menu_button->setIconSize(QSize(16, 16));
 
     QToolButton *mucs_menu_button = new QToolButton();
     mucs_menu_button->setMenu(join_room_menu);
     mucs_menu_button->setPopupMode(QToolButton::InstantPopup);
     mucs_menu_button->setIcon(QIcon(":/menu/users.png"));
     mucs_menu_button->setFixedSize(24, 24);
+    mucs_menu_button->setToolTip(tr("Conferences"));
+    mucs_menu_button->setIconSize(QSize(16, 16));
 
     QWidget *spacer = new QWidget();
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -256,33 +267,17 @@ void Messenger::createMenus() {
     toolbar->addWidget(status_menu_button);
 }
 
-void Messenger::setOnlineStatus() {
-	client_presence->setStatus(QXmppPresence::Status::Online);
-	tray->setStatus(QXmppPresence::Status::Online);
-	client->setClientPresence(* client_presence);
-}
-
-void Messenger::setDNDStatus() {
-	client_presence->setStatus(QXmppPresence::Status::DND);
-	tray->setStatus(QXmppPresence::Status::DND);
-	client->setClientPresence(* client_presence);
-}
-
-void Messenger::setAwayStatus() {
-	client_presence->setStatus(QXmppPresence::Status::Away);
-	tray->setStatus(QXmppPresence::Status::Away);
-	client->setClientPresence(* client_presence);
-}
-
-void Messenger::setXAStatus() {
-	client_presence->setStatus(QXmppPresence::Status::XA);
-	tray->setStatus(QXmppPresence::Status::XA);
-	client->setClientPresence(* client_presence);
-}
-
-void Messenger::setF4CStatus() {
-	client_presence->setStatus(QXmppPresence::Status::Chat);
-	tray->setStatus(QXmppPresence::Status::Chat);
+void Messenger::setStatus() {
+    client_presence->setStatus((QXmppPresence::Status::Type)((QAction *) sender())->data().toInt());
+    tray->setStatus((QXmppPresence::Status::Type)((QAction *) sender())->data().toInt());
+    switch((QXmppPresence::Status::Type)((QAction *) sender())->data().toInt()) {
+        case QXmppPresence::Status::Away: status_menu_button->setIcon(STATUS_ICON_AWAY); break;
+        case QXmppPresence::Status::Offline: status_menu_button->setIcon(STATUS_ICON_OFFLINE); break;
+        case QXmppPresence::Status::Online: status_menu_button->setIcon(STATUS_ICON_ONLINE); break;
+        case QXmppPresence::Status::DND: status_menu_button->setIcon(STATUS_ICON_DND); break;
+        case QXmppPresence::Status::XA: status_menu_button->setIcon(STATUS_ICON_XA); break;
+        case QXmppPresence::Status::Chat: status_menu_button->setIcon(STATUS_ICON_F4C); break;
+    }
 	client->setClientPresence(* client_presence);
 }
 

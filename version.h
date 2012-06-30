@@ -18,4 +18,11 @@
 #define KEEPALIVE_INTERVAL 60
 #define KEEPALIVE_TIMEOUT 30
 
+#define STATUS_ICON_OFFLINE QIcon(":/trayicon/offline-16px.png")
+#define STATUS_ICON_ONLINE QIcon(":/trayicon/online-16px.png")
+#define STATUS_ICON_AWAY QIcon(":/trayicon/away-16px.png")
+#define STATUS_ICON_XA QIcon(":/trayicon/xa-16px.png")
+#define STATUS_ICON_DND QIcon(":/trayicon/dnd-16px.png")
+#define STATUS_ICON_F4C QIcon(":/trayicon/f4c-16px.png")
+
 #endif // VERSION_H
