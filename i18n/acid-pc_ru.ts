@@ -10,17 +10,17 @@
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="55"/>
+        <location filename="../ui/aboutwindow.ui" line="70"/>
         <source>Application</source>
         <translation>Приложение</translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="60"/>
+        <location filename="../ui/aboutwindow.ui" line="75"/>
         <source>Developers</source>
         <translation>Разработчики</translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="84"/>
+        <location filename="../ui/aboutwindow.ui" line="99"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -43,12 +43,12 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://qt.nokia.com&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Библиотеки Qt&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от Nokia corporation&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://p.yusukekamiyamane.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Набор значков Fugue&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от Yusuke Kamiyamane&lt;br /&gt;&lt;/span&gt;&lt;a href=&quot;http://qxmpp.googlecode.com/&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; text-decoration: underline; color:#000000;&quot;&gt;Qxmpp&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; от команды разработчиков Qxmpp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="129"/>
+        <location filename="../ui/aboutwindow.ui" line="144"/>
         <source>Miscellaneous</source>
         <translation>Мелочи</translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="135"/>
+        <location filename="../ui/aboutwindow.ui" line="150"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -603,12 +603,22 @@ p, li { white-space: pre-wrap; }
         <translation>Вас выгнали из комнаты:</translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="696"/>
+        <location filename="../src/messenger.cpp" line="656"/>
+        <source>Question</source>
+        <translation>Подтвердите действие</translation>
+    </message>
+    <message>
+        <location filename="../src/messenger.cpp" line="656"/>
+        <source>Do you really want to remove %1 from your roster?</source>
+        <translation>Вы действительно хотите удалить %1 из вашего списка контактов?</translation>
+    </message>
+    <message>
+        <location filename="../src/messenger.cpp" line="698"/>
         <source>Join </source>
         <translation>Войти в </translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="713"/>
+        <location filename="../src/messenger.cpp" line="715"/>
         <source>Open a file</source>
         <translation>Открыть файл</translation>
     </message>

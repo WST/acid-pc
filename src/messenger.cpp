@@ -653,8 +653,10 @@ void Messenger::addNewContact(const QString &jid, const QString &nick) {
 }
 
 void Messenger::removeContact(CL::ContactItem *item) {
-    client->rosterManager().unsubscribe(item->getBareJid());
-    client->rosterManager().removeItem(item->getBareJid());
+    if(QMessageBox::question(this, tr("Question"), tr("Do you really want to remove %1 from your roster?").arg(item->getNick()), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
+        client->rosterManager().unsubscribe(item->getBareJid());
+        client->rosterManager().removeItem(item->getBareJid());
+    }
 }
 
 void Messenger::endCall() {

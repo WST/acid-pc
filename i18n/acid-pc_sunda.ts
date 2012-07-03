@@ -10,17 +10,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="55"/>
+        <location filename="../ui/aboutwindow.ui" line="70"/>
         <source>Application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="60"/>
+        <location filename="../ui/aboutwindow.ui" line="75"/>
         <source>Developers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="84"/>
+        <location filename="../ui/aboutwindow.ui" line="99"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -34,12 +34,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="129"/>
+        <location filename="../ui/aboutwindow.ui" line="144"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/aboutwindow.ui" line="135"/>
+        <location filename="../ui/aboutwindow.ui" line="150"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -587,12 +587,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="696"/>
+        <location filename="../src/messenger.cpp" line="656"/>
+        <source>Question</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/messenger.cpp" line="656"/>
+        <source>Do you really want to remove %1 from your roster?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/messenger.cpp" line="698"/>
         <source>Join </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/messenger.cpp" line="713"/>
+        <location filename="../src/messenger.cpp" line="715"/>
         <source>Open a file</source>
         <translation type="unfinished"></translation>
     </message>
