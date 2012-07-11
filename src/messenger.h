@@ -30,6 +30,7 @@
 #include "contact_list/item_delegate.h"
 #include "contact_list/contact_item.h"
 #include "textpreprocessor.h"
+#include "soundnotifier.h"
 
 class Messenger;
 class ChatWindow;
@@ -69,6 +70,8 @@ class Messenger: public QMainWindow {
         QTranslator *translator; // Транслятор UI приложения
 
         TextPreprocessor *preprocessor;
+        SoundNotifier *notifier;
+
         QToolBar *toolbar; // Панель инструментов
         QToolButton *status_menu_button; // Кнопка статуса
 
@@ -94,7 +97,8 @@ class Messenger: public QMainWindow {
         void showNewContactWindow();
         void joinNewRoom();
         void rejoinRoom(QString error_message, QString room_jid);
-		void sendMessage(MessageForm *message); // слот с аргументами to, message уже есть в клиенте (qxmpp)
+		void sendMessage(MessageForm *message);
+        void sendMessage(const QString &to, const QString &message);
 		void sendMUCMessage(QString, QString);
 		void gotVoiceCall(QXmppCall *call);
 		void gotIQ(QXmppIq message);

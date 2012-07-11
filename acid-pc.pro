@@ -42,7 +42,8 @@ SOURCES += \
 	src/servicediscoverywidget.cpp \
 	src/bookmarkswidget.cpp \
 	src/transfermanagerwidget.cpp \
-    src/textpreprocessor.cpp
+    src/textpreprocessor.cpp \
+    src/soundnotifier.cpp
 
 HEADERS += \
 	version.h \
@@ -73,7 +74,8 @@ HEADERS += \
 	src/servicediscoverywidget.h \
 	src/bookmarkswidget.h \
 	src/transfermanagerwidget.h \
-    src/textpreprocessor.h
+    src/textpreprocessor.h \
+    src/soundnotifier.h
 
 FORMS += \
 	ui/loginform.ui \

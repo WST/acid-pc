@@ -5,6 +5,7 @@ JoinRoomWindow::JoinRoomWindow(QWidget *parent): QDialog(parent), ui(new Ui::Joi
     ui->setupUi(this);
     ui->error_message->setVisible(false);
     resize(width(), minimumSizeHint().height());
+    ui->tabWidget->setCurrentIndex(0);
 }
 
 JoinRoomWindow::JoinRoomWindow(QString error_message, QString room_jid, QWidget *parent): QDialog(parent), ui(new Ui::JoinRoomWindow) {

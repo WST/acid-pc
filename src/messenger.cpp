@@ -55,7 +55,6 @@ Messenger::Messenger(QTranslator *app_translator, QSettings *app_settings): QMai
 
 	createConnections();
 	createMenus();
-	loadSettings();
 
 	setWindowTitle(APP_NAME);
 	setWindowIcon(QIcon(":/acid_16.png"));
@@ -70,6 +69,9 @@ Messenger::Messenger(QTranslator *app_translator, QSettings *app_settings): QMai
     counter = 0;
 
     preprocessor = new TextPreprocessor(this, getSharedPrefix(), "default");
+    notifier = new SoundNotifier(this, getSharedPrefix(), "default");
+
+    loadSettings();
 }
 
 Messenger::~Messenger() {
@@ -115,6 +117,8 @@ void Messenger::loadSettings() {
 		const char *active_style = styles[settings->value("settings/gui_style").toInt()];
 		qApp->setStyle(active_style);
 	}
+
+    preprocessor->changeEmoticonSet(settings->value("settings/emoticon_set", "default").toString());
 }
 
 void Messenger::createConnections() {
@@ -122,7 +126,7 @@ void Messenger::createConnections() {
 	connect(login, SIGNAL(finished()), this, SLOT(activate()));
     connect(login, SIGNAL(showSettingsRequested()), this, SLOT(manageSettings()));
 	connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
-	connect(chat, SIGNAL(aboutToSend(QString, QString)), client, SLOT(sendMessage(QString, QString)));
+    connect(chat, SIGNAL(aboutToSend(QString, QString)), this, SLOT(sendMessage(QString, QString)));
     connect(chat, SIGNAL(aboutToSendMUC(QString, QString)), this, SLOT(sendMUCMessage(QString, QString)));
 	connect(chat, SIGNAL(mucTabClosed(QString)), this, SLOT(leaveRoom(QString)));
 
@@ -388,8 +392,13 @@ void Messenger::createNewMessage() {
 	message->show();
 }
 
+void Messenger::sendMessage(const QString &to, const QString &message) {
+    notifier->outgoing();
+    client->sendMessage(to, message);
+}
+
 void Messenger::sendMessage(MessageForm *message) {
-	client->sendMessage(message->jid(), message->body());
+    sendMessage(message->jid(), message->body());
 	delete message;
 }
 
@@ -466,6 +475,7 @@ void Messenger::gotIQ(QXmppIq iq) {
 void Messenger::gotMessage(QXmppMessage message) {
 	switch(message.type()) {
 		case QXmppMessage::GroupChat: {
+            notifier->incoming();
 			chat->displayMUCMessage(message);
 		} break;
 		case QXmppMessage::Composing: break;
@@ -476,6 +486,7 @@ void Messenger::gotMessage(QXmppMessage message) {
 			if(message.body().isEmpty()) {
 				return;
 			}
+            notifier->incoming();
             // Если контакт есть в ростере, получим указатель на него (иначе ноль)
             CL::ContactItem *roster_item = roster_model.getContact(message.from());
             QString nick = roster_item ? roster_item->getNick() : parseJid(message.from())[2];

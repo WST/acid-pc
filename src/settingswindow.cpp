@@ -6,6 +6,7 @@ SettingsWindow::SettingsWindow(Messenger *parent): QDialog(parent), ui(new Ui::S
 	settings = parent->settingsManager();
 	loadCurrentSettings();
     resize(width(), minimumSizeHint().height());
+    ui->tabWidget->setCurrentIndex(0);
 }
 
 SettingsWindow::~SettingsWindow() {
@@ -43,6 +44,9 @@ void SettingsWindow::on_button_box_accepted() {
 
 	// Четвёртый таб
 	settings->setValue("settings/savepath", ui->savepath->text());
+    settings->setValue("settings/emoticon_theme", ui->emoticon_theme->currentText());
+    settings->setValue("settings/sound_thems", ui->sound_theme->currentText());
+    // Ручное указание опций здесь является костылём и сделано в угоду скорости разработки
 
 	emit modified();
 }
@@ -76,6 +80,8 @@ void SettingsWindow::loadCurrentSettings() {
 	ui->select_savepath_everytime->setChecked(settings->value("settings/select_savepath_everytime", false).toBool());
 	ui->savepath->setEnabled(!ui->select_savepath_everytime->checkState());
 	ui->savepath_browse_button->setEnabled(!ui->select_savepath_everytime->checkState());
+    ui->emoticon_theme->setCurrentIndex(0); // заглушка
+    ui->sound_theme->setCurrentIndex(0); // заглушка
 }
 
 void SettingsWindow::on_button_box_rejected() {
