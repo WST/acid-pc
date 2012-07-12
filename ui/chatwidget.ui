@@ -51,9 +51,44 @@
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="menubutton">
+          <widget class="QToolButton" name="toolButton">
+           <property name="toolTip">
+            <string>See user’s vCard</string>
+           </property>
            <property name="text">
-            <string>+</string>
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/app.qrc">
+             <normaloff>:/menu/card-address.png</normaloff>:/menu/card-address.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="send_file">
+           <property name="toolTip">
+            <string>Send a file</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/app.qrc">
+             <normaloff>:/menu/disk.png</normaloff>:/menu/disk.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="voice_call">
+           <property name="toolTip">
+            <string>Make a voice call</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../res/app.qrc">
+             <normaloff>:/menu/mobile-phone.png</normaloff>:/menu/mobile-phone.png</iconset>
            </property>
           </widget>
          </item>

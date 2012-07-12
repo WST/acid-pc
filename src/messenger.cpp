@@ -262,11 +262,19 @@ void Messenger::createMenus() {
     mucs_menu_button->setToolTip(tr("Conferences"));
     mucs_menu_button->setIconSize(QSize(16, 16));
 
+    QToolButton *add_contact_button = new QToolButton();
+    connect(add_contact_button, SIGNAL(clicked()), this, SLOT(showNewContactWindow()));
+    add_contact_button->setIcon(QIcon(":/menu/plus.png"));
+    add_contact_button->setFixedSize(24, 24);
+    add_contact_button->setToolTip(tr("New contact"));
+    add_contact_button->setIconSize(QSize(16, 16));
+
     QWidget *spacer = new QWidget();
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     toolbar->addWidget(roster_menu_button);
     toolbar->addWidget(mucs_menu_button);
+    toolbar->addWidget(add_contact_button);
     toolbar->addWidget(spacer);
     toolbar->addWidget(status_menu_button);
 }
