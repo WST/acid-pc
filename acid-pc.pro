@@ -10,7 +10,6 @@ RCC_DIR     = build/rcc
 UI_DIR      = build/ui
 
 INCLUDEPATH = $$PWD
-win32:INCLUDEPATH += C:/include
 unix:DEFINES += APP_SHARED_PREFIX="\"\\\"/usr/local/share/acid-messenger\\\"\""
 
 SOURCES += \
@@ -98,7 +97,7 @@ RESOURCES += res/app.qrc
 
 TRANSLATIONS += i18n/acid-pc_ru.ts i18n/acid-pc_id.ts i18n/acid-pc_jawa.ts i18n/acid-pc_sunda.ts
 CODECFORTR = UTF-8
-win32:LIBS += -L"C:/lib" -lqxmpp -lws2_32 -ldnsapi
+win32:LIBS += -lqxmpp0 -lws2_32 -ldnsapi
 unix:LIBS += -lqxmpp
 
 win32:RC_FILE = \

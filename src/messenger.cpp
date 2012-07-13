@@ -739,7 +739,7 @@ void Messenger::showSendFileDialog(CL::ContactItem *item) {
 
 QString Messenger::getSharedPrefix() {
 #ifdef WIN32
-    return qApp->applicationFileDir() + "/shared";
+    return qApp->applicationDirPath() + "/shared";
 #else
     return APP_SHARED_PREFIX;
 #endif

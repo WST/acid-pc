@@ -24,6 +24,7 @@ VersionInfoVersion=0.1
 Source: "..\bin\acid-pc.exe"; DestDir: "{app}"
 Source: "..\bin\libgcc_s_dw2-1.dll"; DestDir: "{app}"
 Source: "..\bin\mingwm10.dll"; DestDir: "{app}"
+Source: "..\bin\qxmpp0.dll"; DestDir: "{app}"
 Source: "..\bin\QtCore4.dll"; DestDir: "{app}"
 Source: "..\bin\QtGui4.dll"; DestDir: "{app}"
 Source: "..\bin\QtNetwork4.dll"; DestDir: "{app}"
@@ -33,6 +34,8 @@ Source: "..\i18n\acid-pc_ru.qm"; DestDir: "{app}"
 Source: "..\i18n\acid-pc_id.qm"; DestDir: "{app}"
 Source: "..\i18n\acid-pc_jawa.qm"; DestDir: "{app}"
 Source: "..\i18n\acid-pc_sunda.qm"; DestDir: "{app}"
+Source: "..\shared\sounds\default\*"; DestDir: "{app}\shared\sounds\default"
+Source: "..\shared\emoticons\default\*"; DestDir: "{app}\shared\emoticons\default"
 
 [Icons]
 Name: "{group}\ACId Messenger"; Filename: "{app}\acid-pc.exe"
