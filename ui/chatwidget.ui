@@ -52,6 +52,18 @@
          </item>
          <item>
           <widget class="QToolButton" name="toolButton">
+           <property name="minimumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>See user’s vCard</string>
            </property>
@@ -66,6 +78,18 @@
          </item>
          <item>
           <widget class="QToolButton" name="send_file">
+           <property name="minimumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Send a file</string>
            </property>
@@ -80,6 +104,18 @@
          </item>
          <item>
           <widget class="QToolButton" name="voice_call">
+           <property name="minimumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Make a voice call</string>
            </property>
@@ -167,10 +203,7 @@
            <normaloff>:/chat/paper-plane.png</normaloff>:/chat/paper-plane.png</iconset>
          </property>
          <property name="shortcut">
-          <string notr="true">Ctrl+Return</string>
-         </property>
-         <property name="default">
-          <bool>false</bool>
+          <string>Ctrl+Return</string>
          </property>
         </widget>
        </item>
