@@ -17,7 +17,7 @@ class ConfirmationWindow: public QWidget
 
 public:
 	enum Type {
-        Message, Transfer, MUCInvitation, VoiceCall, Registration, Subscription
+        Message, Transfer, MUCInvitation, VoiceCall, Registration, Subscription, Unsubscribed
 	};
 
     explicit ConfirmationWindow(QWidget *parent = 0);
@@ -38,6 +38,7 @@ public:
 	static ConfirmationWindow *newCall(QXmppCall *call, int timeout = 5);
     static ConfirmationWindow *confirmRegistration();
     static ConfirmationWindow *confirmSubscriptionRequest(const QString &jid);
+    static ConfirmationWindow *unsubscribedByUser(const QString &jid);
 
 private:
     Ui::ConfirmationWindow *ui;

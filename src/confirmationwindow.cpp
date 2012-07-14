@@ -123,6 +123,19 @@ ConfirmationWindow *ConfirmationWindow::confirmSubscriptionRequest(const QString
     return window;
 }
 
+ConfirmationWindow *ConfirmationWindow::unsubscribedByUser(const QString &jid) {
+    ConfirmationWindow *window = new ConfirmationWindow();
+    window->setEventTitle(jid);
+    window->setEventDescription(tr("This user has removed you from the roster"));
+    window->setType(Unsubscribed);
+    window->setEventIcon(QPixmap(":/notifications/information.png"));
+    window->setString(jid);
+    window->disableDeclineButton();
+    window->show();
+
+    return window;
+}
+
 void ConfirmationWindow::on_accept_button_clicked() {
 	switch(type) {
         case Message: emit confirmedMessage(message_from); break;
@@ -131,6 +144,7 @@ void ConfirmationWindow::on_accept_button_clicked() {
         case VoiceCall: emit confirmedCall((QXmppCall *) pointer, false); break;
         case Registration: emit confirmedRegistration(true); break;
         case Subscription: emit confirmedSubscription(string_data, true); break;
+        case Unsubscribed: break; // ничего не надо
 	}
 	hide();
 	delete this;
@@ -144,6 +158,7 @@ void ConfirmationWindow::on_decline_button_clicked() {
         case VoiceCall: emit confirmedCall((QXmppCall *) pointer, false); break;
         case Registration: emit confirmedRegistration(false); break;
         case Subscription: emit confirmedSubscription(string_data, false); break;
+        case Unsubscribed: break; // ничего не надо
 	}
 	hide();
 	delete this;
