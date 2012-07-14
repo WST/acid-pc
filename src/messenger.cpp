@@ -111,6 +111,7 @@ void Messenger::loadSettings() {
 	if(settings->value("settings/roster_on_the_top", false).toBool()) setWindowFlags(windowFlags() | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint);
 
     toolbar->setVisible(settings->value("settings/show_toolbar", true).toBool());
+    enable_sound_button->setDown(settings->value("settings/enable_sound", true).toBool());
 
 	if(settings->contains("settings/gui_style")) {
         const char *styles[] = {0, "plastique", "cleanlooks"};
@@ -246,6 +247,14 @@ void Messenger::createMenus() {
     status_menu_button->setToolTip(tr("Status"));
     status_menu_button->setIconSize(QSize(16, 16));
 
+    enable_sound_button = new QToolButton();
+    enable_sound_button->setCheckable(true);
+    connect(enable_sound_button, SIGNAL(toggled(bool)), this, SLOT(enableSound(bool)));
+    enable_sound_button->setIcon(QIcon(":/menu/speaker.png"));
+    enable_sound_button->setFixedSize(24, 24);
+    enable_sound_button->setToolTip(tr("Enable sounds"));
+    enable_sound_button->setIconSize(QSize(16, 16));
+
     QToolButton *roster_menu_button = new QToolButton();
     roster_menu_button->setMenu(roster_menu);
     roster_menu_button->setPopupMode(QToolButton::InstantPopup);
@@ -275,6 +284,7 @@ void Messenger::createMenus() {
     toolbar->addWidget(roster_menu_button);
     toolbar->addWidget(mucs_menu_button);
     toolbar->addWidget(add_contact_button);
+    toolbar->addWidget(enable_sound_button);
     toolbar->addWidget(spacer);
     toolbar->addWidget(status_menu_button);
 }
@@ -401,7 +411,7 @@ void Messenger::createNewMessage() {
 }
 
 void Messenger::sendMessage(const QString &to, const QString &message) {
-    notifier->outgoing();
+    if(settings->value("settings/enable_sound", true).toBool()) notifier->outgoing();
     client->sendMessage(to, message);
 }
 
@@ -483,7 +493,7 @@ void Messenger::gotIQ(QXmppIq iq) {
 void Messenger::gotMessage(QXmppMessage message) {
 	switch(message.type()) {
 		case QXmppMessage::GroupChat: {
-            notifier->incoming();
+            //notifier->incoming();
 			chat->displayMUCMessage(message);
 		} break;
 		case QXmppMessage::Composing: break;
@@ -491,10 +501,9 @@ void Messenger::gotMessage(QXmppMessage message) {
 		case QXmppMessage::Chat:
         case QXmppMessage::Normal:
 		default:
-			if(message.body().isEmpty()) {
-				return;
-			}
-            notifier->incoming();
+            if(message.body().isEmpty()) return;
+            if(settings->value("settings/enable_sound", true).toBool()) notifier->incoming();
+
             // Если контакт есть в ростере, получим указатель на него (иначе ноль)
             CL::ContactItem *roster_item = roster_model.getContact(message.from());
             QString nick = roster_item ? roster_item->getNick() : parseJid(message.from())[2];
@@ -735,6 +744,11 @@ void Messenger::showSendFileDialog(CL::ContactItem *item) {
     if(!filename.isEmpty() && QFile::exists(filename)) {
         chat->openTransferManager(transfer_manager->sendFile(item->getFullJid(), filename, id()));
     }
+}
+
+void Messenger::enableSound(bool enable) {
+    settings->setValue("settings/enable_sound", enable);
+    settings->sync();
 }
 
 QString Messenger::getSharedPrefix() {

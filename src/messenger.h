@@ -74,6 +74,7 @@ class Messenger: public QMainWindow {
 
         QToolBar *toolbar; // Панель инструментов
         QToolButton *status_menu_button; // Кнопка статуса
+        QToolButton *enable_sound_button; // Кнопка включения-выключения звуков
 
 	public:
         Messenger(QTranslator *app_translator, QSettings *app_settings);
@@ -135,6 +136,7 @@ class Messenger: public QMainWindow {
         void processBookmarkClick();
         void showBookmarkManager();
         void showSendFileDialog(CL::ContactItem *item);
+        void enableSound(bool enable);
 };
 
 #endif // MESSENGER_H

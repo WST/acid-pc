@@ -577,6 +577,20 @@
            </layout>
           </item>
           <item>
+           <widget class="QCheckBox" name="enable_sound">
+            <property name="text">
+             <string>Enable sound notifications</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="enable_emoticons">
+            <property name="text">
+             <string>Enable emoticons</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer_4">
             <property name="orientation">
              <enum>Qt::Vertical</enum>

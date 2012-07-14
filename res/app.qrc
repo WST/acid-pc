@@ -56,5 +56,6 @@
         <file>common/tick-circle.png</file>
         <file>login_form/tick-circle.png</file>
         <file>login_form/toolbox.png</file>
+        <file>menu/speaker.png</file>
     </qresource>
 </RCC>

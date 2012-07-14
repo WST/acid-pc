@@ -46,7 +46,9 @@ void SettingsWindow::on_button_box_accepted() {
 	settings->setValue("settings/savepath", ui->savepath->text());
     settings->setValue("settings/emoticon_theme", ui->emoticon_theme->currentText());
     settings->setValue("settings/sound_thems", ui->sound_theme->currentText());
-    // Ручное указание опций здесь является костылём и сделано в угоду скорости разработки
+    settings->setValue("settings/enable_sound", ui->enable_sound->checkState());
+    settings->setValue("settings/enable_emoticons", ui->enable_emoticons->checkState());
+    // Ручное указание опций в списках тем является костылём и сделано в угоду скорости разработки
 
 	emit modified();
 }
@@ -82,6 +84,8 @@ void SettingsWindow::loadCurrentSettings() {
 	ui->savepath_browse_button->setEnabled(!ui->select_savepath_everytime->checkState());
     ui->emoticon_theme->setCurrentIndex(0); // заглушка
     ui->sound_theme->setCurrentIndex(0); // заглушка
+    ui->enable_sound->setChecked(settings->value("settings/enable_sound", true).toBool());
+    ui->enable_emoticons->setChecked(settings->value("settings/enable_emoticons", true).toBool());
 }
 
 void SettingsWindow::on_button_box_rejected() {
