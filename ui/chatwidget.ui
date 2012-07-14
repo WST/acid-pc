@@ -160,7 +160,7 @@
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="text">
-          <string/>
+          <string>Send</string>
          </property>
          <property name="icon">
           <iconset resource="../res/app.qrc">
