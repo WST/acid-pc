@@ -3,11 +3,14 @@
 
 #include <QtGui>
 
+#include "functions.h"
+
 class TabWidget: public QWidget
 {
 public:
     TabWidget(QString with, QWidget *parent = 0);
     QString &getJid();
+    QString &getBareJid();
     enum Type {Chat, MUC, ServiceDiscovery, Bookmarks, Transfers};
     Type getType();
     virtual void setOnline(bool is_online) = 0;
@@ -17,6 +20,8 @@ public:
 
 protected:
     QString jid;
+    QString bare_jid;
+    QString resource;
     Type type;
     bool online;
 };

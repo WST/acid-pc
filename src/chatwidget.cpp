@@ -72,10 +72,11 @@ void ChatWidget::setIcon(QIcon icon) {
     window->setTabIcon(this, icon);
 }
 
-void ChatWidget::appendResource(QString resource) {
+void ChatWidget::appendResource(QString _resource) {
     jid += "/";
     jid += resource.toLower();
-    ui->jid->setText(ui->jid->text() + "/" + resource);
+    resource = _resource.toLower();
+    ui->jid->setText(jid);
 }
 
 void ChatWidget::setChatGeometry(QByteArray state) {
@@ -84,4 +85,16 @@ void ChatWidget::setChatGeometry(QByteArray state) {
 
 void ChatWidget::on_splitter_splitterMoved(int pos, int index) {
     emit chatGeometryChanged(ui->splitter->saveState());
+}
+
+void ChatWidget::on_view_profile_clicked() {
+    emit wannaSeeProfile(bare_jid);
+}
+
+void ChatWidget::on_send_file_clicked() {
+    emit wannaSendFile(jid);
+}
+
+void ChatWidget::on_voice_call_clicked() {
+    emit wannaMakeCall(jid);
 }

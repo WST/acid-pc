@@ -51,7 +51,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="toolButton">
+          <widget class="QToolButton" name="view_profile">
            <property name="minimumSize">
             <size>
              <width>24</width>
