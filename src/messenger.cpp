@@ -19,7 +19,7 @@ Messenger::Messenger(QTranslator *app_translator, QSettings *app_settings): QMai
 
     settings = app_settings;
     client_settings = new QXmppConfiguration();
-	client_presence = new QXmppPresence(QXmppPresence::Available, QXmppPresence::Status::Online);
+	client_presence = new QXmppPresence(QXmppPresence::Available/*, QXmppPresence::Status::Online*/);
 	client = new QXmppClient(this);
 
 	transfer_manager = new QXmppTransferManager();
@@ -294,7 +294,7 @@ void Messenger::setStatus() {
     tray->setStatus((QXmppPresence::Status::Type)((QAction *) sender())->data().toInt());
     switch((QXmppPresence::Status::Type)((QAction *) sender())->data().toInt()) {
         case QXmppPresence::Status::Away: status_menu_button->setIcon(STATUS_ICON_AWAY); break;
-        case QXmppPresence::Status::Offline: status_menu_button->setIcon(STATUS_ICON_OFFLINE); break;
+        //case QXmppPresence::Status::Unavailable: status_menu_button->setIcon(STATUS_ICON_OFFLINE); break;
         case QXmppPresence::Status::Online: status_menu_button->setIcon(STATUS_ICON_ONLINE); break;
         case QXmppPresence::Status::DND: status_menu_button->setIcon(STATUS_ICON_DND); break;
         case QXmppPresence::Status::XA: status_menu_button->setIcon(STATUS_ICON_XA); break;
@@ -359,7 +359,7 @@ void Messenger::handleSuccessfulConnection() {
 void Messenger::handleDisconnection() {
 	// мы отключились от сервера. Успешно или в результате ошибки — об этом говорит то, был и перед этим error().
 	this->hide();
-	tray->setStatus(QXmppPresence::Status::Offline);
+	//tray->setStatus(QXmppPresence::Status::Unavailable);
 	login->setEnabled(true);
 	login->show();
 	chat->setOnline(false);

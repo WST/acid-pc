@@ -32,7 +32,7 @@ void TrayIcon::notify(const QString &title, const QString &message) {
 void TrayIcon::setStatus(QXmppPresence::Status::Type type) {
 	switch(type) {
 		case QXmppPresence::Status::Away: setIcon(TRAYICON_AWAY); break;
-		case QXmppPresence::Status::Offline: setIcon(TRAYICON_OFFLINE); break;
+		//case 0: setIcon(TRAYICON_OFFLINE); break;
 		case QXmppPresence::Status::Online: setIcon(TRAYICON_ONLINE); break;
 		case QXmppPresence::Status::DND: setIcon(TRAYICON_DND); break;
 		case QXmppPresence::Status::XA: setIcon(TRAYICON_XA); break;
