@@ -1,7 +1,7 @@
 #ifndef CONFIRMATIONWINDOW_H
 #define CONFIRMATIONWINDOW_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 #include <qxmpp/QXmppMessage.h>
 #include <qxmpp/QXmppTransferManager.h>

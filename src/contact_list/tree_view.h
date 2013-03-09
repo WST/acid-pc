@@ -1,7 +1,7 @@
 #ifndef CL_TREEVIEW_H
 #define CL_TREEVIEW_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include "contact_item.h"
 #include "group_item.h"
 #include "item_model.h"

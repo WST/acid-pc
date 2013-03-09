@@ -1,7 +1,7 @@
 #ifndef LOGINFORM_H
 #define LOGINFORM_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QtCore>
 
 namespace Ui {

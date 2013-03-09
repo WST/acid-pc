@@ -2,7 +2,7 @@
 #define MESSENGER_H
 
 // Qt
-#include <QtGui>
+#include <QtWidgets>
 
 // qxmpp
 #include <qxmpp/QXmppClient.h>

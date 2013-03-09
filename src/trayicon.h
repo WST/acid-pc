@@ -1,7 +1,7 @@
 #ifndef TRAYICON_H
 #define TRAYICON_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 #include <qxmpp/QXmppPresence.h>
 

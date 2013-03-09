@@ -1,7 +1,7 @@
 #ifndef SETTINGSWINDOW_H
 #define SETTINGSWINDOW_H
 
-#include <QtGui/QDialog>
+#include <QtWidgets/QDialog>
 
 #include "messenger.h"
 #include "version.h"

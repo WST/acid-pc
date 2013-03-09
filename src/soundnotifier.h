@@ -1,7 +1,7 @@
 #ifndef SOUNDNOTIFIER_H
 #define SOUNDNOTIFIER_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QtMultimedia>
 
 class SoundNotifier : public QObject

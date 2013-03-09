@@ -1,7 +1,7 @@
 #ifndef TABWIDGET_H
 #define TABWIDGET_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 #include "functions.h"
 

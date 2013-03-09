@@ -2,7 +2,7 @@
 #define CHATWINDOW_H
 
 // Qt
-#include <QtGui>
+#include <QtWidgets>
 
 // qxmpp
 #include <qxmpp/QXmppMessage.h>

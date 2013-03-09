@@ -1,7 +1,7 @@
 #ifndef VOICECALLWINDOW_H
 #define VOICECALLWINDOW_H
 
-#include <QtGui/QDialog>
+#include <QtWidgets/QDialog>
 
 #include <qxmpp/QXmppCallManager.h>
 

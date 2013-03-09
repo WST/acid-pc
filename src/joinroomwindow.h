@@ -1,7 +1,7 @@
 #ifndef JOINROOMWINDOW_H
 #define JOINROOMWINDOW_H
 
-#include <QtGui/QDialog>
+#include <QtWidgets/QDialog>
 
 namespace Ui {
     class JoinRoomWindow;

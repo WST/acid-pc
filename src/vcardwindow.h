@@ -1,7 +1,7 @@
 #ifndef VCARDWINDOW_H
 #define VCARDWINDOW_H
 
-#include <QtGui/QDialog>
+#include <QtWidgets/QDialog>
 
 #include "messenger.h"
 
