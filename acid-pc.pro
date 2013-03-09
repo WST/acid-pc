@@ -3,6 +3,8 @@ TEMPLATE    = app
 QT         += core gui multimedia network xml
 CONFIG     += qt warn_on
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 DESTDIR     = bin
 MOC_DIR     = build/moc
 OBJECTS_DIR = build/obj
