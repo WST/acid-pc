@@ -6,8 +6,8 @@ SoundNotifier::SoundNotifier(QObject *parent, QString shared_prefix, QString sou
     changeSoundSet(sound_set);
 
     QAudioFormat format;
-    format.setFrequency(22050);
-    format.setChannels(1);
+    format.setSampleRate(22050);
+    format.setChannelCount(1);
     format.setSampleSize(32);
     format.setCodec("audio/pcm");
     format.setByteOrder(QAudioFormat::LittleEndian);

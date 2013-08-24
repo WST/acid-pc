@@ -59,15 +59,15 @@ void VoiceCallWindow::handleConnection() {
 
 	// prepare audio format
 	QAudioFormat format;
-	format.setFrequency(channel->payloadType().clockrate());
-	format.setChannels(channel->payloadType().channels());
+	format.setSampleRate(channel->payloadType().clockrate());
+	format.setChannelCount(channel->payloadType().channels());
 	format.setSampleSize(16);
 	format.setCodec("audio/pcm");
 	format.setByteOrder(QAudioFormat::LittleEndian);
 	format.setSampleType(QAudioFormat::SignedInt);
 	// the size in bytes of the audio buffers to/from sound devices
 	// 160 ms seems to be the minimum to work consistently on Linux/Mac/Windows
-	const int buffer_size = (format.frequency() * format.channels() * (format.sampleSize() / 8) * 160) / 1000;
+	const int buffer_size = (format.sampleRate() * format.channelCount() * (format.sampleSize() / 8) * 160) / 1000;
 
 	// initialise audio output
 	QAudioOutput *audio_output = new QAudioOutput(format, this);
