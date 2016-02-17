@@ -2,8 +2,8 @@
 #include "ui_voicecallwindow.h"
 
 // Qt
-#include <QAudioInput>
-#include <QAudioOutput>
+//#include <QAudioInput>
+//#include <QAudioOutput>
 
 // qxmpp
 #include <qxmpp/QXmppRtpChannel.h>
@@ -52,6 +52,7 @@ void VoiceCallWindow::callStateChanged(QXmppCall::State state) {
 }
 
 void VoiceCallWindow::handleConnection() {
+/*
 	QXmppCall *call = qobject_cast<QXmppCall*>(sender());
 	Q_ASSERT(call);
 
@@ -80,4 +81,5 @@ void VoiceCallWindow::handleConnection() {
 	audio_input->start(channel);
 
 	qDebug() << "initialized call!";
+*/
 }

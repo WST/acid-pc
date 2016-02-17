@@ -1,6 +1,6 @@
 TARGET      = acid-pc
 TEMPLATE    = app
-QT         += core gui multimedia network xml
+QT         += core gui network xml
 CONFIG     += qt warn_on
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

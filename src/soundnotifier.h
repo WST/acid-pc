@@ -2,7 +2,7 @@
 #define SOUNDNOTIFIER_H
 
 #include <QtWidgets>
-#include <QtMultimedia>
+//#include <QtMultimedia>
 
 class SoundNotifier : public QObject
 {
@@ -17,7 +17,7 @@ public slots:
     void changeSoundSet(const QString &sound_set);
     void incoming();
     void outgoing();
-    void finishedPlaying(QAudio::State state);
+    //void finishedPlaying(QAudio::State state);
 
 private:
     void unload();
@@ -27,8 +27,8 @@ private:
     QFile *incoming_audio_file;
     QFile *outgoing_audio_file;
 
-    QAudioOutput* audio;
-    QAudioFormat* format;
+    //QAudioOutput* audio;
+    //QAudioFormat* format;
 };
 
 #endif // SOUNDNOTIFIER_H
